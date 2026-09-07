@@ -85,101 +85,101 @@
 
 #!/usr/bin/env python3
 
-import os
-import stat
-import sys
-import subprocess
+# import os
+# import stat
+# import sys
+# import subprocess
 
 
-def mode_string(path):
-    try:
-        return stat.filemode(os.lstat(path).st_mode)
-    except Exception:
-        return "ERROR"
+# def mode_string(path):
+#     try:
+#         return stat.filemode(os.lstat(path).st_mode)
+#     except Exception:
+#         return "ERROR"
 
 
-def check_path(path):
-    print("\n" + "=" * 100)
-    print("PATH:", path)
-    print("MODE:", mode_string(path))
+# def check_path(path):
+#     print("\n" + "=" * 100)
+#     print("PATH:", path)
+#     print("MODE:", mode_string(path))
 
-    # Symlink
-    if os.path.islink(path):
-        try:
-            target = os.readlink(path)
-            real_target = os.path.realpath(path)
+#     # Symlink
+#     if os.path.islink(path):
+#         try:
+#             target = os.readlink(path)
+#             real_target = os.path.realpath(path)
 
-            print("TYPE: SYMLINK")
-            print("LINK :", target)
-            print("TARGET:", real_target)
-            print("TARGET MODE:", mode_string(real_target))
+#             print("TYPE: SYMLINK")
+#             print("LINK :", target)
+#             print("TARGET:", real_target)
+#             print("TARGET MODE:", mode_string(real_target))
 
-            if os.path.exists(real_target):
-                print("TARGET EXISTS: YES")
-            else:
-                print("TARGET EXISTS: NO")
+#             if os.path.exists(real_target):
+#                 print("TARGET EXISTS: YES")
+#             else:
+#                 print("TARGET EXISTS: NO")
 
-        except Exception as e:
-            print("SYMLINK ERROR:", e)
+#         except Exception as e:
+#             print("SYMLINK ERROR:", e)
 
-    # ACL
-    try:
-        result = subprocess.run(
-            ["getfacl", "-p", path],
-            capture_output=True,
-            text=True
-        )
+#     # ACL
+#     try:
+#         result = subprocess.run(
+#             ["getfacl", "-p", path],
+#             capture_output=True,
+#             text=True
+#         )
 
-        if result.returncode == 0:
-            print("\nACL:")
-            print(result.stdout)
+#         if result.returncode == 0:
+#             print("\nACL:")
+#             print(result.stdout)
 
-    except FileNotFoundError:
-        print("getfacl not installed")
-
-
-def scan(root):
-
-    root = os.path.abspath(root)
-
-    if not os.path.exists(root) and not os.path.islink(root):
-        print("ERROR: Path does not exist:")
-        print(root)
-        return
-
-    print("\nSCANNING:")
-    print(root)
-
-    # Root
-    check_path(root)
-
-    for current_root, dirs, files in os.walk(
-        root,
-        followlinks=False
-    ):
-
-        # Directories
-        for dirname in dirs:
-            path = os.path.join(current_root, dirname)
-            check_path(path)
-
-        # Files
-        for filename in files:
-            path = os.path.join(current_root, filename)
-            check_path(path)
-
-    print("\n" + "=" * 100)
-    print("SCAN COMPLETE")
-    print("=" * 100)
+#     except FileNotFoundError:
+#         print("getfacl not installed")
 
 
-if __name__ == "__main__":
+# def scan(root):
 
-    # if len(sys.argv) != 2:
-    #     print("Usage:")
-    #     print("python3 check_access.py /path/to/folder")
-    #     sys.exit(1)
+#     root = os.path.abspath(root)
 
-    path = "/home/ca/github_push/StandardSystem"
+#     if not os.path.exists(root) and not os.path.islink(root):
+#         print("ERROR: Path does not exist:")
+#         print(root)
+#         return
 
-    scan(path)
+#     print("\nSCANNING:")
+#     print(root)
+
+#     # Root
+#     check_path(root)
+
+#     for current_root, dirs, files in os.walk(
+#         root,
+#         followlinks=False
+#     ):
+
+#         # Directories
+#         for dirname in dirs:
+#             path = os.path.join(current_root, dirname)
+#             check_path(path)
+
+#         # Files
+#         for filename in files:
+#             path = os.path.join(current_root, filename)
+#             check_path(path)
+
+#     print("\n" + "=" * 100)
+#     print("SCAN COMPLETE")
+#     print("=" * 100)
+
+
+# if __name__ == "__main__":
+
+#     # if len(sys.argv) != 2:
+#     #     print("Usage:")
+#     #     print("python3 check_access.py /path/to/folder")
+#     #     sys.exit(1)
+
+#     path = "/home/ca/github_push/StandardSystem"
+
+#     scan(path)
