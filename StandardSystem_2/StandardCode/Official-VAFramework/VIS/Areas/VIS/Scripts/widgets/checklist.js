@@ -1,0 +1,513 @@
+﻿; VIS = window.VIS || {};
+
+(function (VIS, $) {
+
+    //Form Class function
+    VIS.VISPendingChecklist = function () {
+        /* Variables */
+        this.frame;
+        this.windowNo;
+        var $self = this;
+        var $root = $('<div class="vis-maindiv">');
+        var widgetContainer, pendingRecords = null;
+        var pageSize = 0;
+        var pageNo = 0;
+        var AssignedRecords = null;
+        var nextpage = null;
+        var prevPage = null;
+        var totalWindows = null;
+        var totalPages = null;
+        var recordListItem = null;
+        var getAll = true;
+        var allRecords = [];
+        var currentPage = 1;
+        var sizePage = 4;
+        var WindowName = null;
+        var WindowId = null;
+        var TableName = [];
+        var RecordIds = [];
+        var totalRecCount = 0;
+        var Table_ID = null;
+        var headerTab;
+        var totalPages, currentRecords = null;
+        var $popupContent;
+
+
+        /* Initialize the form design */
+        this.Initalize = function () {
+            widgetID = this.widgetInfo.AD_UserHomeWidgetID;
+            createBusyIndicator();
+            showBusy(true);
+            loadWidget();
+        };
+
+        function loadWidget() {
+            widgetContainer = $('<div class="VIS_widget-container" id="Vis_checklistWidget-container_' + $self.widgetInfo.AD_UserHomeWidgetID + '">');
+            checklistRecWidget = $('<div class="vis_checklistheader"><h4></h4></div><div class="vis-checklistrecord-col"></div>');
+            widgetContainer.append(checklistRecWidget);
+            $root.append(widgetContainer);
+            pendingRecords = widgetContainer.find('.vis-checklistrecord-col');
+            getpendingRecords();
+        };
+
+        //busy Indicator
+        function createBusyIndicator() {
+            $bsyDiv = $('<div id="busyDivId' + $self.widgetInfo.AD_UserHomeWidgetID + '" class="vis-busyindicatorouterwrap"><div id="busyDiv2Id' + $self.widgetInfo.AD_UserHomeWidgetID + '" class="vis-busyindicatorinnerwrap"><i class="vis_widgetloader"></i></div></div>');
+            $root.append($bsyDiv);
+        };
+
+        /*  show and hide busy indicator*/
+        function showBusy(show) {
+            if (show) {
+                $root.find("#busyDivId" + $self.widgetInfo.AD_UserHomeWidgetID).show();
+            }
+            else {
+                $root.find("#busyDivId" + $self.widgetInfo.AD_UserHomeWidgetID).hide();
+            }
+        };
+
+        function eventsHandling() {
+
+            // Pagination button events
+            widgetContainer.find('.vis_NxtPage').off('click')
+            widgetContainer.find('.vis_NxtPage').on('click', function () {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    updateUI();
+                };
+            });
+
+            // handling prev page
+            widgetContainer.find('.vis_prevpage').off('click')
+            widgetContainer.find('.vis_prevpage').on('click', function () {
+                if (currentPage > 1) {
+                    currentPage--;
+                    updateUI();
+                }
+            });
+
+            // Enable/Disable pagination buttons
+            widgetContainer.find('.vis_NxtPage').css({
+                'pointer-events': currentPage >= totalPages ? 'none' : 'auto',
+                'opacity': currentPage >= totalPages ? '0.6' : '1'
+            });
+
+            widgetContainer.find('.vis_prevpage').css({
+                'pointer-events': currentPage <= 1 ? 'none' : 'auto',
+                'opacity': currentPage <= 1 ? '0.6' : '1'
+            });
+
+
+            /*events for getting HeaderIDs*/
+            /*   pendingRecords.find('.vis-subheading').off('click')
+               pendingRecords.find('.vis-subheading').on('click', function () {
+                   WindowName = $(this).attr('visWindowname');
+                   WindowId = $(this).attr('visWindowId');
+                   TableName = $(this).attr('visTableName');
+                   Table_ID = $(this).attr('visTableId');
+                   Record_ID = $(this).attr('visRecordId');
+                   headerTab = $(this).attr('visHeaderTab');
+                   if (headerTab > 0) {
+                       getHeaderIDs();
+                   }
+                   else {
+                       primaryKey = TableName + '_ID';
+                       zoomWindow();
+                   }
+               });*/
+
+            //Popover for showing all records
+            widgetContainer.find('.vis-show-checklist').off('click')
+            widgetContainer.find('.vis-show-checklist').on('click', function () {
+                $popupContent = $(`
+                <div class="VIS_PopoverMaindiv">
+                <button class="VIS_popupClose" id="popup-close-btn" title="${VIS.Msg.getMsg('close')}">
+                <i class="fa fa-times" aria-hidden="true"></i>
+               </button>
+               <h3 class="VIS_popuptitle">${VIS.Msg.getMsg('VIS_PendingChecklist')} <span class="total-count">${totalRecCount}</span></h3>
+               <div class="VIS_popupRecordDetail"></div>
+               </div>
+             `);
+
+                var $recordDetail = $popupContent.find('.VIS_popupRecordDetail');
+                for (var i = 0; i < allRecords.length; i++) {
+
+                    var $checklistCard = $(`
+    <div class="vis-checklistcard">
+        <div class="vis-card-title vis-checklistrecord-box">
+            <div class="vis-title-count">
+                <span class="hoverable-text">${allRecords[i].windowname}</span>
+                <span class="VIS_checklistCount">${allRecords[i].count}</span>
+            </div>
+            <i class="glyphicon glyphicon-zoom-in vis-rec-zoom" 
+               title="${VIS.Msg.getMsg("VIS_Zoom")}" 
+               data-windowid="${allRecords[i].WindowID}"></i>
+        </div>
+        <div class="vis-Tabdropdown visWindowTabs"></div>
+    </div>
+`);
+
+                    var $dropdown = $checklistCard.find('.vis-Tabdropdown');
+                    console.log(allRecords)
+                    for (var k = 0; k < allRecords[i].TableRecordIds.length; k++) {
+                        var recordItem = allRecords[i].TableRecordIds[k];
+                        var parentIdAttr = recordItem.ParentIds ? `visParentId="${recordItem.ParentIds}"` : '';
+                        var headTableAttr = allRecords[i].HeadTable ? `vis_headTable="${allRecords[i].HeadTable}"` : '';
+                        $dropdown.append(`
+                      <div class="vis-subheading" 
+                      visRecordId="${allRecords[i].TableRecordIds[k].RecordIds}"  
+                      visTableName="${allRecords[i].TableRecordIds[k].TableName}"  
+                      visWindowname="${allRecords[i].windowname}"   
+                      visWindowId="${allRecords[i].WindowID}" 
+                      visTableId ="${allRecords[i].TableRecordIds[k].AD_table_ID}"
+                      visHeaderTab="${allRecords[i].TableRecordIds[k].TabLevel}"${parentIdAttr}" ${headTableAttr}>
+                    <span>${allRecords[i].TableRecordIds[k].TabName}</span>
+                    <span class="vis_innertabcount">${allRecords[i].TableRecordIds[k].RecordIds.length}</span>
+                </div>
+            `);
+                    }
+
+                    $recordDetail.append($checklistCard);
+                }
+
+                // Open the Popup
+                w2popup.open({
+                    title: '',
+                    body: $popupContent.prop('outerHTML'),
+                    width: 500,
+                    height: 500,
+                    showMax: true, // Disable maximize option
+                    showClose: true, // Ensure close button is shown
+                    modal: false,    // Modal behavior to disable interaction outside the popup
+                    style: 'background: linear-gradient(135deg, #6b8ce3, #8dc7f8);',
+                    buttons: '',
+                    onOpen: function () {
+                        setTimeout(function () {
+                            $('#popup-close-btn').on('click', function () {
+                                w2popup.close();
+                            });
+                            /* $('.w2ui-popup .vis-subheading').on('click', function () {
+                                 w2popup.close();
+                                 WindowName = $(this).attr('visWindowname');
+                                 WindowId = $(this).attr('visWindowId');
+                                 TableName = $(this).attr('visTableName');
+                                 Record_ID = $(this).attr('visRecordId');
+                                 Table_ID = $(this).attr('visTableId');
+                                 headerTab = $(this).attr('visHeaderTab');
+                                 if (headerTab > 0) {
+                                     getHeaderIDs();
+                                 }
+                                 else {
+                                     primaryKey = TableName + '_ID';
+                                     zoomWindow();
+                                 }
+                             });*/
+                            // ✅ Zoom button handler (your full logic here)
+                            $('.w2ui-popup .vis-rec-zoom').off('click').on('click', function () {
+                                let allParentIds = [];
+                                const $card = $(this).closest('.vis-checklistcard');
+                                $card.find('.vis-subheading').each(function () {
+                                    const parentIdAttr = $(this).attr('visParentId');
+                                    if (parentIdAttr) {
+                                        const parentIds = parentIdAttr.split(',').map(id => id.trim());
+                                        allParentIds.push(...parentIds);
+                                    }
+                                });
+                                const uniqueParentIds = [...new Set(allParentIds)];
+
+                                // Find the first .vis-subheading inside this card
+                                const $subheading = $card.find('.vis-subheading').first();
+                                if (!$subheading.length) return;
+
+                                // Extract required values
+                                const windowId = parseInt($subheading.attr('viswindowid'));
+                                const recordIds = $subheading.attr('visrecordid');
+                                const windowName = $subheading.attr('viswindowname');
+                                const tableName = $subheading.attr('vistablename');
+                                const tablabel = parseInt($subheading.attr('visheadertab'));
+                                const headTable = $subheading.attr('vis_headTable');
+                                WindowId = windowId;
+                                Record_ID = recordIds;
+                                Table_ID = $subheading.attr('vistableid');
+
+                                if (!windowId || !recordIds || !tableName) return;
+
+                                // Derive primary key from table name
+                                const primaryKey = tableName + "_ID";
+                                const idsToUse = (tablabel === 0) ? recordIds : uniqueParentIds.join(',');
+                                const pKeyUse = (tablabel === 0) ? primaryKey : headTable;
+
+                                // Build window parameter object
+                                const windowParam = {
+                                    "TabWhereClause": `(${pKeyUse}) IN (${idsToUse})`,
+                                    "TabLayout": "N",
+                                    "TabIndex": "0",
+                                    "ActionName": windowName,
+                                    "ActionType": "W"
+                                };
+                                w2popup.close();
+                                // Open the window
+                                VIS.viewManager.startWindow(windowId, null, windowParam);
+                            });
+
+
+                        }, 1000);
+                    }
+
+                });
+            });
+
+            pendingRecords.off('click', '.vis-rec-zoom').on('click', '.vis-rec-zoom', function () {
+                let allParentIds = [];
+                const $card = $(this).closest('.vis-checklistcard');
+                $card.find('.vis-subheading').each(function () {
+                    const parentIdAttr = $(this).attr('visParentId');
+                    if (parentIdAttr) {
+                        const parentIds = parentIdAttr.split(',').map(id => id.trim());
+                        allParentIds.push(...parentIds);
+                    }
+                });
+                const uniqueParentIds = [...new Set(allParentIds)];
+
+
+                // Find the first .vis-subheading inside this card
+                const $subheading = $card.find('.vis-subheading').first();
+
+                if (!$subheading.length) return;
+
+                // Extract required values
+                const windowId = parseInt($subheading.attr('viswindowid'));
+                const recordIds = $subheading.attr('visrecordid');
+                const windowName = $subheading.attr('viswindowname');
+                const tableName = $subheading.attr('vistablename');
+                const tablabel = parseInt($subheading.attr('visheadertab'));
+                const headTable = $subheading.attr('vis_headTable');
+                WindowId = windowId
+                Record_ID = recordIds
+                Table_ID = $subheading.attr('vistableid');
+                // getHeaderIDs();
+                if (!windowId || !recordIds || !tableName) return;
+
+                // Derive primary key from table name
+                const primaryKey = tableName + "_ID";
+                const idsToUse = (tablabel === 0) ? recordIds : uniqueParentIds.join(',');
+                const pKeyUse = (tablabel === 0) ? primaryKey : headTable;
+                // Build window parameter object
+                const windowParam = {
+                    "TabWhereClause": `(${pKeyUse}) IN (${idsToUse})`,
+                    "TabLayout": "N",
+                    "TabIndex": "0",
+                    "ActionName": windowName,
+                    "ActionType": "W"
+                };
+
+                // Open the window
+                VIS.viewManager.startWindow(windowId, null, windowParam);
+            });
+            $(document).on('mouseenter', '.hoverable-text, .visWindowTabs', function () {
+                const $card = $(this).closest('.vis-checklistcard');
+                const $tabs = $card.find('.visWindowTabs');
+
+                // Show tabs and add border-radius to both elements
+                $tabs.css({
+                    display: 'block',
+                    'border-radius': '0 0 12px 12px',
+                    /*'background': 'hsl(217, 79%, 76%)'*/
+                });
+                $card.css('border-radius', '12px 12px 0 0');
+            }).on('mouseleave', '.hoverable-text, .visWindowTabs', function () {
+                const $card = $(this).closest('.vis-checklistcard');
+
+                setTimeout(function () {
+                    if (
+                        !$card.find('.hoverable-text:hover').length &&
+                        !$card.find('.visWindowTabs:hover').length
+                    ) {
+                        $card.find('.visWindowTabs')
+                            .hide()
+                            .css('border-radius', '');
+                        $card.css('border-radius', ''); // Reset card border-radius
+                    }
+                }, 10);
+            });
+
+
+        };
+
+
+        // Create Widget
+        function getpendingRecords() {
+            $.ajax({
+                url: VIS.Application.contextUrl + "ChecklistPending/PendingCheckList",
+                dataType: 'json',
+                success: function (result) {
+                    showBusy(false);
+                    allRecords = result ? JSON.parse(result) : [];
+                    allRecords.sort(function (a, b) {
+                        return a.windowname.localeCompare(b.windowname);
+                    });
+                    totalRecCount = allRecords.reduce((sum, record) => sum + record.count, 0);
+                    // widgetContainer.find('h4').text(`${VIS.Msg.getMsg('VIS_PendingChecklist')}: ${totalRecCount}`);
+                    widgetContainer.find('h4').html(`${VIS.Msg.getMsg('VIS_PendingChecklist')}&nbsp; <span class="total-count">${totalRecCount}</span>`);
+                    updateUI();
+                },
+                error: function () {
+                    showBusy(false);
+                }
+
+            });
+        };
+
+        /*  update UI*/
+        function updateUI() {
+            pendingRecords.empty(); // Clear existing records
+            if (allRecords.length === 0) {
+                widgetContainer.find('h4').text('' + VIS.Msg.getMsg("VIS_PendingChecklist") + ': 0');
+                pendingRecords.text(VIS.Msg.getMsg('VIS_NoRecordFound')).addClass('vis-noRecordFound');
+                return;
+            }
+
+
+
+            // Calculate total pages
+            totalPages = Math.ceil(allRecords.length / sizePage);
+            // Get records for the current page
+            var start = (currentPage - 1) * sizePage;
+            var end = Math.min(start + sizePage, allRecords.length);
+            currentRecords = allRecords.slice(start, end);
+
+
+            currentRecords.forEach((record, i) => {
+
+                var $pendingChecklistItem = $(`
+  <div class="vis-checklistcard">
+    <div class="vis-card-title vis-checklistrecord-box">
+      <div class="vis-title-count">
+        <span class="hoverable-text">${record.windowname}</span>
+        <span class="VIS_checklistCount">${record.count}</span>
+      </div>
+      <i class="glyphicon glyphicon-zoom-in vis-rec-zoom" title="${VIS.Msg.getMsg("VIS_Zoom")}"></i>
+    </div>
+    <div class="vis-Tabdropdown visWindowTabs"></div>
+  </div>
+`);
+
+                pendingRecords.append($pendingChecklistItem);
+                var $dropdown = $pendingChecklistItem.find('.vis-Tabdropdown');
+                for (var k = 0; k < record.TableRecordIds.length; k++) {
+                    var recordItem = record.TableRecordIds[k];
+                    var parentIdAttr = recordItem.ParentIds ? ` visParentId="${recordItem.ParentIds}"` : '';
+                    var headTableAttr = record.HeadTable ? ` vis_headTable="${record.HeadTable}"` : '';
+
+                    $dropdown.append(`<div class="vis-subheading" visRecordId="${record.TableRecordIds[k].RecordIds}"  visTableName="${record.TableRecordIds[k].TableName}" 
+                    visWindowname="${record.windowname}"   visWindowId="${record.WindowID}" visTableId ="${record.TableRecordIds[k].AD_table_ID}"
+                     visHeaderTab="${recordItem.TabLevel}"${parentIdAttr}" ${headTableAttr}>
+                    <span>${record.TableRecordIds[k].TabName}</span><span class="vis_innertabcount">${record.TableRecordIds[k].RecordIds.length}</span></div>`);
+                }
+                //visHeaderTab="${record.TableRecordIds[k].TabLevel}">
+            });
+
+
+            // Add pagination UI
+            var paginationHtml = `
+            <div class="vis-tiles-checklistpage">
+             <div class="vis_checklistpageControls">
+             <div style="width: 1.9em;"></div>
+            <i class="fa fa-arrow-circle-up vis_prevpage" aria-hidden="true"></i>
+             <span class="vis-total-count" style="color: white;">${currentPage} / ${totalPages}</span>
+            <i class="fa fa-arrow-circle-down vis_NxtPage" aria-hidden="true"></i>
+              </div>
+             <i class="fa fa-list vis-show-checklist" aria-hidden="true" title="${VIS.Msg.getMsg('ShowAll')}"></i>
+            </div>`;
+            widgetContainer.find('.vis-tiles-checklistpage').remove(); // Remove old pagination
+            widgetContainer.append(paginationHtml);
+            eventsHandling();
+        };
+
+        /* getHeaderIDS Of particular window*/
+        function getHeaderIDs() {
+            $.ajax({
+                url: VIS.Application.contextUrl + "ChecklistPending/ZoomChildTabRecords",
+                type: "POST",
+                data: {
+                    AD_table_ID: Table_ID,
+                    AD_Window_ID: WindowId,
+                    RecordIds: Record_ID
+                },
+
+                dataType: 'json',
+                success: function (res) {
+                    showBusy(false);
+                    result = JSON.parse(res);
+                    Record_ID = result.RecordIds;
+                    primaryKey = result.LinkColumn;
+                    zoomWindow();
+
+                },
+                error: function () {
+                    showBusy(false);
+                }
+
+            });
+
+        };
+
+        /*  zoom the record*/
+        function zoomWindow() {
+            if (WindowId > 0) {
+                var windowParam = {
+                    "TabWhereClause": "(" + primaryKey + ") IN (" + Record_ID + ")",
+                    "TabLayout": "N",
+                    "TabIndex": "0",
+                    "ActionName": WindowName,
+                    "ActionType": 'W'
+                };
+                VIS.viewManager.startWindow(WindowId, null, windowParam);
+            }
+        }
+
+        /*this function is used to refresh the design and data of the widget*/
+        this.refreshWidget = function () {
+            showBusy(true);
+            const widgetContainerId = '#Vis_checklistWidget-container_' + $self.widgetInfo.AD_UserHomeWidgetID;
+            // Safely remove existing widget container
+            if ($root.find(widgetContainerId).length > 0) {
+                $root.find(widgetContainerId).remove();
+            }
+            // Reset pagination and reinitialize the widget
+            currentPage = 1;
+            totalRecCount = 0;
+            // refresh widget
+            loadWidget();
+        };
+
+        /* get design from root */
+        this.getRoot = function () {
+            return $root;
+        };
+
+        this.disposeComponent = function () {
+            $root.remove();
+        };
+    }
+
+    /* init method called on loading a form */
+    VIS.VISPendingChecklist.prototype.init = function (windowNo, frame) {
+        this.frame = frame;
+        this.widgetInfo = frame.widgetInfo;
+        this.windowNo = windowNo;
+        this.Initalize();
+        this.frame.getContentGrid().append(this.getRoot());
+    };
+
+    VIS.VISPendingChecklist.prototype.refreshWidget = function () {
+        this.refreshWidget();
+    };
+
+    VIS.VISPendingChecklist.prototype.dispose = function () {
+        this.disposeComponent();
+        if (this.frame)
+            this.frame.dispose();
+        this.frame = null;
+    };
+})(VIS, jQuery);

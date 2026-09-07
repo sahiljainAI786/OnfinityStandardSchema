@@ -1,0 +1,121 @@
+﻿; (function (VIS, $) {
+    function changeUserImage() {
+        // debugger;
+        var $txtChangeStatus = $("#vis-textStatus");
+        var $imgOkStatus = $("#vis-img-OKStatus");
+        var $imgCancelStatus = $("#vis-img-CancelStatus");
+        var $labelStatus = $("#vis-labelStatus");
+        $("#vis-file-input").change(function () {
+            var file = document.getElementById('vis-file-input').files[0];
+            if (file != null) {
+                // VIS0060: Validated only image file can be seelected
+                var type = file.type.split('/').pop().toLowerCase();
+                if (type != "jpeg" && type != "jpg" && type != "png" && type != "ico" && type != "webp" && type != "svg") {
+                    VIS.ADialog.info("SelectImageOnly");
+                    return false;
+                }
+                var xhr = new XMLHttpRequest();
+                var fd = new FormData();
+                fd.append("file", file);
+                xhr.open("POST", VIS.Application.contextUrl + "Home/SaveImageAsByte", true);
+                xhr.send(fd);
+                xhr.addEventListener("load", function (event) {
+                    var dd = event.target.response;
+                    var res = JSON.parse(dd);
+                    var a = JSON.parse(res);
+                    $('.vis-userAvatar-Container').find('i').remove().find('img').remove();
+                    $('.vis-userAvatar-Container').find('img').remove();
+                    $('.vis-userAvatar-Container').append('<img id="imgUsrImage" alt="User avatar" class="vis-userAvatar-Large"></img>');
+                    $("#imgUsrImage").attr('src', "data:image/jpg;base64," + a);
+                }, false);
+            }
+        });
+
+        $('#vis-file-input-remove').on("click", function () {
+            if ($('.vis-userAvatar-Container').find('img').length > 0) {
+                VIS.ADialog.confirm("ConfirmDeleteImage", true, "", "Confirm", function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: VIS.Application.contextUrl + "Home/DeleteUserImage",
+                            success: function (data) {
+                                $('.vis-userAvatar-Container').find('img').remove();
+                                $('.vis-userAvatar-Container').append('<i id="imgUsrImage" class="vis-userAvatar-Large vis vis-user"></i>');
+                                $('.vis-app-user-img-wrap').find('img').remove();
+                                document.getElementById('vis-file-input').value = null;
+                            },
+                            error: function (err) {
+                            }
+                        });
+                    }
+                });
+            }
+        });
+        function saveStatus() {
+            $txtChangeStatus = $("#vis-textStatus");
+            $.ajax(
+                {
+                    url: VIS.Application.contextUrl + "Home/SaveStatus",
+                    dataType: "json",
+                    type: "POST",
+                    async: false,
+                    data: { status: $txtChangeStatus.val() },
+                    success: function (data) {
+                        // debugger;
+                        if (JSON.parse(data).length > 0) {
+                            $txtChangeStatus.css("visibility", "hidden");
+                            $imgCancelStatus.css("visibility", "hidden");
+                            $imgOkStatus.css("visibility", "hidden");
+                            $labelStatus.css("visibility", "visible");
+                            $labelStatus.text(JSON.parse(data));
+                        }
+                        else {
+                            $txtChangeStatus.css("visibility", "visible");
+                            $imgCancelStatus.css("visibility", "hidden");
+                            $imgOkStatus.css("visibility", "hidden");
+                            $labelStatus.css("visibility", "visible");
+                            $labelStatus.text(JSON.parse(data));
+                        }
+                    }
+                });
+        }
+        $imgOkStatus.on("click", function () {
+            //debugger;
+            saveStatus();
+        });
+        $imgCancelStatus.on("click", function () {
+            // debugger;
+            $txtChangeStatus.css("visibility", "hidden");
+            $imgCancelStatus.css("visibility", "hidden");
+            $imgOkStatus.css("visibility", "hidden");
+            $labelStatus.css("visibility", "visible");
+        });
+        $txtChangeStatus.on("focus", function () {
+            //  debugger;
+            $imgCancelStatus.css("visibility", "visible");
+            $imgOkStatus.css("visibility", "visible");
+        });
+        $txtChangeStatus.on("keypress", function (e) {
+            //debugger;
+            var key = e.keyCode || e.which;
+            if (key == 13) {
+                saveStatus();
+            }
+        });
+        $txtChangeStatus.on("blur", function () {
+            // debugger;
+            //$("#vis-img-CancelStatus").css("visibility", "hidden");
+            //$("#vis-img-OKStatus").css("visibility", "hidden");
+        });
+        $labelStatus.on("click", function () {
+            $labelStatus.css("visibility", "hidden");
+            $txtChangeStatus.css("visibility", "visible");
+            //$imgCancelStatus.css("visibility", "visible");
+            //$imgOkStatus.css("visibility", "visible");
+
+            $txtChangeStatus.val($labelStatus.text());
+            $txtChangeStatus.focus();
+
+        });
+    };
+    VIS.changeUserImage = changeUserImage;
+})(VIS, jQuery);

@@ -1,0 +1,1858 @@
+﻿* {
+    box-sizing: border-box;
+}
+
+.vas-root {
+    height: 100%;
+    width: 100%;
+}
+
+    .vas-root label {
+        font-weight: 400;
+    }
+
+    .vas-root input[type='button'] {
+        background: rgba(var(--v-c-primary));
+    }
+
+.vas-add-label-content .vas-select-plus-btn .vas-add-btn {
+    color: rgba(var(--v-c-primary)) !important;
+    border: 1px solid rgba(var(--v-c-primary));
+    background-color: #fff;
+}
+
+.vas-select-plus-btn.vas-addsort-btn {
+    margin-top: 14px;
+}
+
+.vis-ad-w-p-actionpanel-r .vas-sql-btns {
+    padding: 13px 10px;
+    border-bottom: 1px solid rgba(var(--v-c-secondary),1);
+}
+
+    .vis-ad-w-p-actionpanel-r .vas-sql-btns input[type='button'] {
+        background: none;
+        border: 1px solid rgba(var(--v-c-primary));
+        border-radius: 3px;
+        float: none;
+        margin: 0 5px;
+        color: rgba(var(--v-c-primary)) !important;
+    }
+
+.vis-ad-w-p-actionpanel-r .vas-sql-generator .vas-sql-btn input[type='button']:not(.active) {
+    color: rgba(var(--v-c-primary));
+    background-color: rgba(var(--v-c-secondary),1);
+}
+
+.vis-ad-w-p-actionpanel-r .vas-sql-btns input[type='button'].active {
+    background-color: rgba(var(--v-c-primary)) !important;
+    color: rgba(var(--v-c-on-primary)) !important;
+}
+
+.vis-ad-w-p-actionpanel-r .vas-sql-btns input[type='button'].vas-test-sql {
+    float: right;
+    color: white !important;
+    background: linear-gradient(270deg, rgba(var(--v-c-on-secondary)) 0%, rgba(var(--v-c-primary)) 100%) !important;
+}
+
+.vis-ad-w-p-actionpanel-r .vas-content-area {
+    float: left;
+    width: 100%;
+    height: calc(100% - 70px);
+    position: relative;
+}
+
+.vis-ad-w-p-actionpanel-r .vas-sql-content {
+    padding: 10px 15px;
+    height: 100%;
+}
+
+    .vis-ad-w-p-actionpanel-r .vas-sql-content.vas-grid-height {
+        overflow-y: auto;
+    }
+
+    .vis-ad-w-p-actionpanel-r .vas-sql-content textarea {
+        width: 100%;
+        height: 100%;
+        font-size: 20px;
+    }
+
+.vis-ad-w-p-actionpanel-r .vas-sqlgenerator-column {
+    width: 50%;
+    float: left;
+    padding: 10px 15px;
+}
+
+    .vis-ad-w-p-actionpanel-r .vas-sqlgenerator-column.vas-sqlgenerator-column2 {
+        border-left: 1px solid rgba(var(--v-c-secondary),1);
+        height: 100%;
+    }
+
+        .vis-ad-w-p-actionpanel-r .vas-sqlgenerator-column.vas-sqlgenerator-column2 .vas-query-input {
+            height: calc(100% - 30px);
+        }
+
+.vis-ad-w-p-actionpanel-r .vas-sqlgenerator-column1 {
+    position: relative;
+    padding: 10px 15px 20px 10px;
+}
+
+.vis-ad-w-p-actionpanel-r .vis-ad-w-p-ap-tp-o-icorbar {
+    display: block;
+}
+
+    .vis-ad-w-p-actionpanel-r .vis-ad-w-p-ap-tp-o-icorbar i {
+        color: rgba(var(--v-c-primary));
+    }
+
+.vis-ad-w-p-ap-tp-o-icorbar li.vis-ad-w-p-ap-tp-o-li-selected {
+    border-color: rgba(var(--v-c-primary));
+}
+
+    .vis-ad-w-p-ap-tp-o-icorbar li.vis-ad-w-p-ap-tp-o-li-selected::before {
+        border-left-color: rgba(var(--v-c-primary));
+    }
+
+.vis-ad-w-p-actionpanel-r .vas-windowtab-label {
+    position: relative;
+}
+
+.vis-ad-w-p-actionpanel-r .vas-windowtab {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+    .vis-ad-w-p-actionpanel-r .vas-windowtab.vas-searchinput-block {
+        margin: 3px 0 0px;
+    }
+
+    .vis-ad-w-p-actionpanel-r .vas-windowtab.vas-sort-block {
+        margin: 4px 0 0;
+    }
+
+    .vis-ad-w-p-actionpanel-r .vas-windowtab label, .vis-ad-w-p-actionpanel-r .vas-windowtab.vas-columnval label {
+        font-size: 12px;
+        font-weight: 400;
+        position: absolute;
+        top: -8px;
+        left: 9px;
+        background: linear-gradient(#fff 50%, transparent 50%);
+        padding: 0 5px 0 3px;
+        z-index: 9;
+    }
+
+.vas-windowtab.vas-columnval.vas-reduceColValWidth {
+    width: 93%;
+}
+
+    .vas-windowtab.vas-columnval.vas-reduceColValWidth .vas-arrow-down {
+        right: -7%;
+        top: -9px;
+    }
+
+.vis-ad-w-p-actionpanel-r .vas-windowtab.vas-join-field label, .vis-ad-w-p-actionpanel-r .vas-windowtab.vas-filter-field label, .vis-ad-w-p-actionpanel-r .vas-windowtab.vas-operator label {
+    top: 2px;
+    background-color: rgba(var(--v-c-on-primary));
+}
+
+.vis-ad-w-p-actionpanel-r .vas-windowtab select {
+    width: 100%;
+    min-height: 35px;
+    border-radius: 2px;
+    font-size: 14px;
+    /*border-color: rgba(var(--v-c-secondary),1);*/
+}
+
+.vas-add-label label, .vas-add-filter label {
+    width: 100%;
+    border-bottom: 1px solid rgba(var(--v-c-primary));
+    padding-bottom: 10px;
+    position: relative;
+    cursor: pointer;
+}
+
+.vas-highlighted {
+    color: rgba(var(--v-c-primary));
+}
+
+.vas-add-label label::after, .vas-add-filter label::after {
+    content: '+';
+    font-size: 25px;
+    position: absolute;
+    right: 0;
+    top: 0px;
+    background: rgba(var(--v-c-secondary),1);
+    line-height: 16px;
+    width: 21px;
+    text-align: center;
+    height: 21px;
+    font-weight: bold;
+    border-radius: 5px;
+    color: rgba(var(--v-c-primary));
+}
+
+.vas-add-label.active label::after {
+    content: '-';
+}
+
+.vas-add-label-content {
+    display: none;
+}
+
+    .vas-add-label-content select {
+        width: 100%;
+        margin: 12px 0 15px;
+        min-height: 29px;
+    }
+
+.vas-add-label {
+    display: inline-block;
+    width: 100%;
+    margin-top: 10px;
+    pointer-events: none;
+}
+
+    .vas-add-label.active + .vas-add-label-content {
+        display: inline-block;
+        width: 100%;
+    }
+
+        .vas-add-label.active + .vas-add-label-content h4 {
+            font-size: 14px;
+        }
+
+.vas-select-plus-btn {
+    float: left;
+    width: 100%;
+    margin-top: 4px;
+}
+
+.vas-filter-val + .vas-select-plus-btn {
+    margin-top: 15px;
+}
+
+.vas-select-plus-btn select {
+    width: 30%;
+    float: left;
+}
+
+.vas-select-plus-btn input[type='button'] {
+    margin: 0px;
+}
+
+.vis-ad-w-p-actionpanel-r .vas-sqlgenerator-column2 textarea {
+    width: 100%;
+    height: 100%;
+    font-size: 20px;
+}
+
+.vas-sqlgenerator {
+    height: 100%;
+    width: 100%;
+}
+
+.vas-multiselect .vas-checkboxes, .vas-single-selection-dropdown {
+    display: none;
+    border-left: 1px solid rgba(var(--v-c-secondary),1);
+    border-right: 1px solid rgba(var(--v-c-secondary),1);
+    border-bottom: 1px solid rgba(var(--v-c-secondary),1);
+    float: left;
+    padding: 15px 10px 7px;
+    width: 100%;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.vas-windowfieldcol-select.vas-windowtab {
+    width: 100%;
+    float: left;
+    border: 1px solid rgba(var(--v-c-secondary),1);
+    min-height: 35px;
+    margin: 10px 0 0px;
+    position: relative;
+    background: none;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+.vas-filter-text-input {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.vas-queryresult-grid {
+    height: 100%;
+}
+
+    .vas-queryresult-grid .w2ui-grid-body {
+        height: 100% !important;
+    }
+
+.vas-join-multiselect {
+    float: left;
+    width: 100%;
+    min-height: 35px;
+    display: none;
+    border-left: 1px solid rgba(var(--v-c-secondary),1);
+    border-right: 1px solid rgba(var(--v-c-secondary),1);
+    border-bottom: 1px solid rgba(var(--v-c-secondary),1);
+    padding: 23px 10px 7px;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.vas-filters {
+    display: inline-block;
+    width: 100%;
+}
+
+    .vas-filters .vas-filter-item {
+        background: rgba(var(--v-c-secondary), .3);
+        /*padding: 5px;*/
+        border-radius: 3px;
+        margin-bottom: 10px;
+    }
+
+        .vas-filters .vas-filter-item:last-child {
+            margin-bottom: 0px;
+        }
+
+        .vas-filters .vas-filter-item .vas-filter-item-inner {
+            float: left;
+            width: 100%;
+            background: rgba(var(--v-c-on-primary));
+            padding: 10px 10px;
+        }
+
+    .vas-filters .vas-filter-item {
+        background: rgba(var(--v-c-on-primary));
+        float: left;
+        width: 100%;
+    }
+
+.vas-filters-editdelete-btns .vis-edit, .vas-sortBtns .vis-edit {
+    margin-right: 5px;
+}
+
+.vas-filters .vas-filter-item:last-child {
+    margin-bottom: 0px;
+}
+
+.vas-common-style {
+    float: left;
+    width: 100%;
+    min-height: 35px;
+}
+
+.vas-joins {
+    width: 100%;
+    margin-top: 10px;
+    display: inline-block;
+}
+
+    .vas-joins .vas-join-item {
+        border: 1px solid rgba(var(--v-c-on-secondary), 1);
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 3px;
+        background: rgba(var(--v-c-secondary), 0.3);
+        transition: all 0.3s ease-in-out;
+    }
+
+        .vas-joins .vas-join-item:hover {
+            border-color: rgba(var(--v-c-primary));
+        }
+
+.vas-joins-select {
+    border: 1px solid rgba(var(--v-c-secondary),1);
+}
+
+.vas-filters-block {
+    float: left;
+    width: calc(100% - 25%);
+    border-radius: 3px;
+    position: relative;
+    font-size: 83%;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+    .vas-filters-block div {
+        border-radius: 3px;
+        float: left;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+.vas-sql-result-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.vas-sql-content-div {
+    background: rgba(var(--v-c-secondary), 1);
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.vas-filters-editdelete-btns div {
+    float: left;
+}
+
+.vas-filters-editdelete-btns {
+    float: right;
+    width: auto;
+}
+
+.vas-column-list-item {
+    float: left;
+    margin-bottom: 10px;
+    white-space: nowrap;
+    width: 260px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+    .vas-column-list-item input[type="checkbox"] {
+        margin-right: 7px;
+        min-width: 15px;
+        min-height: 15px;
+        position: relative;
+        top: 3px;
+    }
+
+        .vas-column-list-item input[type="checkbox"]:checked {
+            border-color: rgba(var(--v-c-primary));
+        }
+
+            .vas-column-list-item input[type="checkbox"]:checked:before {
+                background-color: rgba(var(--v-c-primary));
+                transform: none;
+                border: none;
+                width: 10px;
+                height: 10px;
+                text-align: center;
+                left: 0;
+                right: 0;
+                margin: auto;
+                top: 0;
+                bottom: 0;
+            }
+
+.vas-multiselect {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.vas-fielddropdown {
+    position: relative;
+    cursor: pointer;
+}
+
+.vas-multiselect .vas-select-col, .vas-single-input .vas-select-col {
+    width: 100%;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    min-height: 35px;
+    font-size: 15px;
+}
+
+.vas-column1 .vas-join-select-col {
+    width: 100%;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    min-height: 35px;
+    font-size: 15px;
+}
+
+.vas-update-btn {
+    margin-right: 15px;
+}
+
+.vis-ad-w-p-actionpanel-r .vas-sqlgenerator-column1 input[type='button'], .vas-sqlgenerator-column2 input[type='button'] {
+    background-color: rgba(var(--v-c-primary));
+    color: white !important;
+    border: 1px solid rgba(var(--v-c-primary));
+}
+
+.vas-filter-whitebg {
+    border-radius: 3px;
+    float: left;
+    width: 100%;
+    padding: 7px;
+}
+
+.vas-sqlgenerator .VIS-AMTD-formData.VIS-AMTD-InputBtns {
+    padding-right: 0px;
+    margin-bottom: 15px;
+}
+
+.vis-ad-w-p-actionpanel-r .vas-sqlgenerator-column1 .vas-windowtab .VIS-AMTD-formData.VIS-AMTD-InputBtns {
+    margin-bottom: 5px;
+}
+
+.vis-ad-w-p-actionpanel-r .vas-sql-content .vas-save-btn {
+    margin: 0px;
+    background-color: rgba(var(--v-c-primary)) !important;
+    color: white !important;
+    border: 1px solid rgba(var(--v-c-primary));
+}
+
+.vas-query-input {
+    padding: 1em;
+    color: #000;
+    margin: 2px;
+    border: 1px solid rgba(var(--v-c-secondary),1);
+    border-radius: 3px;
+    width: 100%;
+    margin: auto;
+    overflow-y: auto;
+    font-size: 16px;
+    word-wrap: break-word;
+}
+
+    .vas-query-input.vas-sql-query-input {
+        height: calc(100% - 72px);
+    }
+
+.vas-sql-result-msg {
+    display: inline-block;
+    width: auto;
+    padding: 0 10px;
+    color: rgba(var(--v-c-primary));
+}
+
+    .vas-sql-result-msg.vas-sql-result-error {
+        color: #ff0000;
+    }
+
+.vas-alert-emailmsg {
+    margin-top: 15px;
+}
+
+.vas-grid-div1 {
+    width: 100%;
+    height: 90%;
+    margin-right: 15px;
+    margin-top: 1px;
+    border: 1px solid rgba(var(--v-c-on-secondary), 1);
+}
+
+.vas-grid-div2 {
+    width: 100%;
+    height: 100%;
+    margin-right: 15px;
+    margin-top: 1px;
+    border: 1px solid rgba(var(--v-c-on-secondary), 1);
+    display: none;
+    overflow-y: auto;
+}
+
+.vas-first-delete-icon .vas-filters-editdelete-btns .glyphicon-trash {
+    pointer-events: none;
+    color: rgba(var(--v-c-secondary),1);
+}
+
+.vas-root-main {
+    height: 100%;
+}
+
+.vas-control-wrap {
+    width: calc(100% - 70px);
+}
+
+.vas-sqlgenerator .VIS-AMTD-InputBtns input {
+    width: 100%;
+    min-height: 35px;
+}
+
+.vas-highlight {
+    color: rgba(var(--v-c-primary));
+}
+
+.vas-single-input {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+    .vas-single-input.vas-joiningtable-input {
+        margin: 14px 0 0;
+    }
+
+.vas-fielddropdown.vas-windowtab {
+    margin-top: 5px;
+}
+
+.vas-add-join-btn {
+    margin-top: 14px;
+}
+
+.vas-multiselect .vas-arrow-down, .vas-joinfielddropdown .vas-arrow-down, .vas-single-input .vas-arrow-down {
+    position: absolute;
+    right: 10px;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    height: 16px;
+    font-size: 8px;
+    border: 1px solid rgba(var(--v-c-primary));
+    border-radius: 50%;
+    line-height: 16px;
+    width: 16px;
+    text-align: center;
+    color: rgba(var(--v-c-primary));
+    cursor: pointer;
+}
+
+.vas-joins-bg {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+
+.vas-join-item .vas-selecttable:first-child {
+    float: none;
+}
+
+.vas-joins-block {
+    width: 100%;
+}
+
+.vas-delete-join-btn {
+    display: inline-block;
+    text-align: right;
+    position: absolute;
+    right: 0;
+}
+
+.vas-join-item .vas-selecttable {
+    font-size: 83%;
+    color: black;
+    border-radius: 3px;
+    float: left !important;
+    margin-right: 5px !important;
+    width: fit-content;
+    word-wrap: break-word;
+    margin-bottom: 5px;
+    margin-right: 12px;
+    padding: 1px 10px;
+}
+
+    .vas-join-item .vas-selecttable:nth-child(2n+1) {
+        margin-right: 0;
+    }
+
+.vas-selecttable.join-title {
+    text-align: center;
+}
+
+.vas-delete-join-btn i, .vas-filters-editdelete-btns i {
+    font-size: 16px;
+}
+
+.vis-ad-w-p-actionpanel-r .vas-windowtab .vis-ev-col-mandatory, .vis-ad-w-p-actionpanel-r .vas-multiselect .vis-ev-col-mandatory {
+    border-color: #ff0000;
+    background: none;
+}
+
+.vas-addfiltertext {
+    margin: 0 0 10px;
+}
+
+.vas-sqlquery-text {
+    margin-bottom: 10px;
+}
+
+.vas-column1 {
+    display: inline-block;
+    width: 100%;
+    padding: 5px 5px 0;
+    overflow-y: auto;
+}
+
+.vis-ad-w-p-actionpanel-r .vas-windowtab label.vas-label-space {
+    top: -3px;
+    left: 13px;
+}
+
+.vas-sqlgenerator-column .w2ui-grid .w2ui-grid-body table td.w2ui-grid-data, .vas-queryresult-grid .w2ui-grid .w2ui-grid-body table td.w2ui-grid-data {
+    padding: 0 7px;
+}
+
+.vas-joinfielddropdown {
+    display: inline-block;
+    width: 100%;
+    position: relative;
+}
+
+.vas-disabled-icon {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.vas-sortby-dropdown {
+    display: none;
+    border-left: 1px solid rgba(var(--v-c-secondary),1);
+    border-right: 1px solid rgba(var(--v-c-secondary),1);
+    border-bottom: 1px solid rgba(var(--v-c-secondary),1);
+    float: left;
+    padding: 15px 10px 7px;
+    width: 100%;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+    .vas-sortby-dropdown .vas-column-list-item:hover, .vas-single-selection-dropdown .vas-column-list-item:hover {
+        background-color: rgba(var(--v-c-primary));
+        color: rgba(var(--v-c-on-primary));
+    }
+
+.vas-add-isnulloption option:last-child, .vas-add-isnulloption option:nth-last-child(2) {
+    display: none;
+}
+
+.vas-add-isnulloption option:nth-child(1), .vas-add-isnulloption option:nth-child(2), .vas-add-isnulloption option:nth-last-child(4), .vas-add-isnulloption option:nth-last-child(3), .vas-add-isnulloption option:nth-last-child(2), .vas-add-isnulloption option:last-child {
+    display: block;
+}
+
+.vas-remove-likeoption option:nth-last-child(3), .vas-remove-likeoption option:nth-last-child(4) {
+    display: none;
+}
+
+.vas-indropdown-text-input {
+    width: 100%;
+    margin-bottom: 17px;
+    min-height: 35px;
+    display: inline-block;
+}
+
+.vas-indropdown-block {
+    display: none;
+}
+
+    .vas-indropdown-block.vas-single-input .vas-arrow-down {
+        top: -16px;
+    }
+
+.vas-checkboxoption-hidden option, .vas-add-isnulloption option, .vas-comparision-opeartor option {
+    display: none;
+}
+
+    .vas-checkboxoption-hidden option:nth-child(1), .vas-checkboxoption-hidden option:nth-child(2) {
+        display: block;
+    }
+
+    .vas-comparision-opeartor option:nth-child(1), .vas-comparision-opeartor option:nth-child(2),
+    .vas-comparision-opeartor option:nth-child(3), .vas-comparision-opeartor option:nth-child(4),
+    .vas-comparision-opeartor option:nth-child(5), .vas-comparision-opeartor option:nth-child(6) {
+        display: block;
+    }
+
+    .vas-add-isnulloption option:last-child, .vas-add-isnulloption option:nth-last-child(2) {
+        display: none;
+    }
+
+    .vas-add-isnulloption option:nth-child(1), .vas-add-isnulloption option:nth-child(2), .vas-likeoption option:nth-last-child(4), .vas-likeoption option:nth-last-child(3), .vas-add-isnulloption option:nth-last-child(2), .vas-add-isnulloption option:last-child {
+        display: block;
+    }
+
+.vas-likeoption option {
+    display: none;
+}
+
+.vas-filter-val {
+    display: none;
+    padding: 10px 10px;
+    max-height: 150px;
+    overflow-y: auto;
+    border-left: 1px solid rgba(var(--v-c-secondary), 1);
+    border-right: 1px solid rgba(var(--v-c-secondary), 1);
+    border-bottom: 1px solid rgba(var(--v-c-secondary), 1);
+    margin-bottom: 10px;
+}
+
+    .vas-filter-val .vas-filterValItem {
+        margin-bottom: 10px;
+        cursor: pointer;
+    }
+
+        .vas-filter-val .vas-filterValItem:last-child {
+            margin-bottom: 0px;
+        }
+
+.vas-filterValItem.vas-selected-filterVal, .vas-column-list-item.vas-selected-filterVal {
+    background-color: rgba(var(--v-c-primary));
+    color: #fff;
+}
+
+.vis-ad-w-p-actionpanel-r .vas-windowtab.vas-columnval {
+    display: flex;
+    position: relative;
+    /*margin-bottom: 10px;*/
+}
+
+.vas-filterofMultipleCols {
+    position: relative;
+}
+
+    .vas-filterofMultipleCols i.fa.fa-exchange {
+        transform: rotate(90deg);
+        width: 30px;
+        font-size: 18px;
+        height: 30px;
+        line-height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: rgba(var(--v-c-primary));
+        cursor: pointer;
+        position: absolute;
+        right: 0;
+        top: 0;
+        margin: auto;
+        z-index: 1;
+    }
+
+.vas-columnval input:not([type='checkbox']) {
+    width: calc(100% - 30px);
+    min-height: 39px;
+    margin-bottom: 0;
+}
+
+.vas-single-input.vas-windowtab.vas-searchinput-block.vas-filterCol2Block {
+    display: none;
+    width: calc(100% - 30px);
+}
+
+.vis-ad-w-p-actionpanel-r .vas-windowtab.vas-searchinput-block.vas-filterValBlock {
+    width: calc(100% - 30px);
+}
+
+.vas-filterValExchangeIconBlock {
+    display: flex;
+    align-items: center;
+}
+
+    .vas-filterValExchangeIconBlock i.fa.fa-exchange {
+        position: relative;
+    }
+
+.vas-single-input.vas-windowtab.vas-searchinput-block.vas-filterCol2Block + .vas-filter-val, .vas-filterofMultipleCols .vas-filterNewCol {
+    width: calc(100% - 30px);
+}
+
+html[dir="rtl"] .vis-ad-w-p-actionpanel-r .vas-sql-btns {
+    float: left;
+    width: 100%;
+}
+
+    html[dir="rtl"] .vis-ad-w-p-actionpanel-r .vas-sql-btns .vas-sql-btn, html[dir="rtl"] .vis-ad-w-p-actionpanel-r .vas-sql-btns .vas-sql-generator {
+        float: right !important;
+    }
+
+html[dir="rtl"] .vis-ad-w-p-actionpanel-r .vas-windowtab label {
+    right: 9px;
+    left: auto;
+}
+
+html[dir="rtl"] .vas-add-label label::after, .vas-add-filter label::after {
+    right: auto;
+    left: 0;
+}
+
+html[dir="rtl"] .vas-column-list-item input[type="checkbox"] {
+    margin-left: 7px;
+    margin-right: 0px;
+}
+
+html[dir="rtl"] .vas-sqlgenerator .VIS-AMTD-formData.VIS-AMTD-InputBtns {
+    padding-left: 0px;
+}
+
+html[dir="rtl"] .vas-multiselect {
+    float: none;
+}
+
+html[dir="rtl"] .vis-ad-w-p-actionpanel-r .vas-sqlgenerator-column1 input[type='button'] {
+    float: right !important;
+}
+
+html[dir="rtl"] .vas-multiselect .vas-arrow-down {
+    left: 10px;
+    right: auto;
+}
+
+html[dir="rtl"] .vas-grid-div2 {
+    margin-left: 15px;
+    margin-right: 0px;
+}
+
+html[dir="rtl"] .vas-grid-div1 {
+    margin-right: 0px;
+    margin-left: 15px;
+}
+
+html[dir="rtl"] .vis-ad-w-p-actionpanel-r .vas-sqlgenerator-column.vas-sqlgenerator-column2 {
+    border-right: 1px solid rgba(var(--v-c-secondary),1);
+    border-left: 0px;
+}
+
+html[dir="rtl"] .vas-sql-result-msg {
+    margin: 10px 0 0;
+}
+
+/*CSS of VAS_TimeSheetInvoice.js Form Starts*/
+.vas-icon-circle {
+    border: 1px solid rgba(var(--v-c-primary), 1);
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+    .vas-icon-circle i {
+        color: rgba(var(--v-c-primary), 1);
+        font-size: 18px;
+    }
+
+.vas-filter-flyout {
+    position: absolute;
+    top: 100%;
+    right: 0%;
+    z-index: 100;
+    border: 1px solid #e4e4e4;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    max-width: 450px;
+    min-width: 450px;
+    background: white;
+    Max-height: 474px;
+    overflow: auto;
+    margin-top: 10px;
+}
+
+.vas-flyout-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #dddddd;
+    padding-bottom: 8px;
+}
+
+    .vas-flyout-header h1 {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    .vas-flyout-header span {
+        color: rgba(var(--v-c-primary), 1);
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+.vas-from-row {
+    margin-top: 16px;
+}
+
+.vas-flyout-footer .btn {
+    margin: 0;
+    width: 100%;
+}
+
+.vas-tis-dropdown-lbl {
+    display: inline-block;
+    align-items: center;
+    margin-bottom: 16px;
+    gap: 0px;
+    max-height: 56px;
+    overflow: auto;
+}
+
+.vas-selected-lbl {
+    background-color: #8F8F8F;
+    color: #ffffff;
+    padding: 1px 6px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    border-radius: 3px;
+    float: left;
+    margin-right: 6px;
+    margin-bottom: 6px;
+}
+
+    .vas-selected-lbl .vis-cross {
+        font-size: 8px;
+        color: #ffffff;
+        cursor: pointer;
+        margin-left: 8px;
+    }
+
+.vas-RecordSelection {
+    display: inline-block;
+    padding: 0 10px;
+    width: 100%;
+}
+
+    .vas-RecordSelection.vas-tis-RecordArea {
+        width: calc(100% - 260px);
+    }
+
+.vas-filterIcon {
+    font-size: 30px;
+}
+
+.vas-decoration-style {
+    text-decoration: underline !important;
+    text-align: right !important;
+}
+
+.vas-BottomBtnDiv {
+    display: inline-block;
+    width: 34rem;
+    float: right;
+}
+
+.vas-tis-arInvLeftSide {
+    width: 330px;
+    border-right: 2px solid rgba(var(--v-c-secondary), 0.9);
+    padding: 0.75rem;
+    height: calc(100% - 0px);
+    overflow: auto;
+}
+
+.vas-tis-arInvlistItem {
+    background-color: rgba(var(--v-c-secondary), 0.9);
+    border: 1px solid rgba(var(--v-c-on-secondary), 0.3);
+    border-radius: 0.15rem;
+    display: flex;
+    padding: 0.65rem 0;
+}
+
+.vas-tis-arInvCompanyLogo span {
+    background-color: brown;
+    padding: 0.5rem;
+    color: #fff;
+    margin: 0 10px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.vas-tis-arInvDetailsDesc {
+    display: block;
+    width: 100%;
+    font-size: 0.9rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.vas-tis-arInvActive {
+    border: 1px solid rgba(var(--v-c-primary), 1);
+}
+
+.vas-pointdiv {
+    float: left;
+    width: 100%;
+    height: calc(100% - 40px);
+}
+
+.vas-tis-arInvRightSide {
+    width: calc(100% - 330px);
+    padding: 0.75rem;
+}
+
+.vas-tis-arInvViewer {
+    margin: -15px;
+    height: 100%
+}
+
+.vas-tis-arInvLeftSide {
+    background: rgba(var(--v-c-secondary), 0.4);
+}
+
+.vas-taskDesc_feildWrap {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.85rem;
+}
+
+.vas-taskdescTtl {
+    display: block;
+    font-size: 0.9rem;
+}
+
+.vas-taskDesc_feild {
+    flex: 1;
+}
+
+.vas-taskdescTtl {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: rgba(var(--v-c-on-secondary),0.65);
+    width: 100%;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.vas-taskdescValue {
+    font-size: 0.95rem;
+    width: 100%;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.vas-projectTimelineConatainer {
+    width: 100%;
+    height: 150px;
+    background-color: rgba(var(--v-c-secondary),1);
+}
+
+
+.pipeline {
+    display: flex;
+    align-items: center;
+    margin: 20px auto;
+    width: 80%;
+}
+
+.stage {
+    position: relative;
+    flex: 1;
+    text-align: center;
+    z-index: 1; /* Ensure stages are above connectors */
+}
+
+.connector {
+    flex: 1;
+    height: 15px; /* Thickness of the line */
+    background-color: #ccc; /* Color of the line */
+}
+
+.vas-tis-top-fields {
+    width: 100%;
+    min-height: calc(100% - 40px);
+}
+
+.vas-arinvroot {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+}
+
+.vas-SelectDiv {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    float: left;
+}
+
+.vas-RecordSelection.vas-tis-RecordArea {
+    width: calc(100% - 260px);
+}
+
+.vas-SpnSelect {
+    vertical-align: middle;
+    font-size: 28px;
+    color: rgba(var(--v-c-primary), 1);
+}
+
+.vas-searchbtn {
+    margin-top: 0px;
+    height: 35px;
+    padding: 5px 12px;
+}
+
+.vas-spacediv {
+    width: 310px;
+    height: 45px;
+    padding: 10px 10px 0 10px;
+    background-color: rgba(var(--v-c-secondary), .8);
+    background: rgb(235 235 235);
+}
+
+.vas-poptis-content {
+    height: 100%;
+}
+
+.vas-tis-filteroverlay {
+    background: rgba(0 0 0 / 2%);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 950;
+    display: none;
+}
+
+.vas-tis-paddingspn {
+    margin-left: 10px;
+}
+
+.vas-root-eventmain {
+    padding: 20px;
+}
+
+.vas-tis-gridimg {
+    display: flex;
+    /* justify-content: center; */
+    padding: 3px !important;
+    align-items: center;
+    gap: 6px;
+}
+
+.vas-tis-filterspn {
+    width: 35px;
+    border: 1px solid rgba(var(--v-c-on-secondary), .2);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    color: inherit;
+    font-size: 1.5rem;
+    float: right;
+}
+
+.vas-tis-filter .dropdown-toggle::after {
+    display: none;
+}
+
+.vas-tis-filter {
+    margin: -9px;
+    display: inline-block;
+    float: right;
+    margin: 0;
+    font-size: 20px;
+}
+
+.vas-tis-srm-filterIcon {
+    font-size: 1.2rem;
+}
+
+.vas-tis-filterPopupWrap {
+    padding-top: 40px;
+}
+
+.vas-tis-bpstyling {
+    display: block;
+    white-space: nowrap;
+    max-width: 72%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.vas-tis-leftsidewrap {
+    float: left;
+    max-width: 260px;
+    height: calc(100% - 52px);
+    padding-bottom: 10px;
+    padding-top: 10px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background: rgb(235 235 235);
+}
+
+.vas-tis-lablels {
+    background: rgb(235 235 235);
+}
+
+.vas-tis-leftbuttondiv {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.vas-tis-leftbtnInvdiv {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-bottom: 10px;
+}
+
+.vas-tis-subtotal {
+    width: calc(100% - 50%);
+    float: right;
+    padding: 4px 12px;
+    text-align: right;
+}
+
+.vas-tis-leftsidewrap .vas-tis-top-fields label.vas-tis-lablels {
+    background: rgb(235,235,235) !important;
+}
+
+.vas-tis-iconcolor {
+    display: inline-block;
+    font-size: 16px;
+}
+
+.vas-tis-prodicon {
+    padding: 15px 0 0 0px !important;
+    white-space: nowrap !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.w-25 {
+    width: 25%;
+}
+
+.w-33 {
+    width: 33.33333333333333%;
+}
+
+.vas-tis-roadmap-container {
+    width: 100%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    max-height: 130px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 5px 10%;
+    background-color: #f1f1f1;
+    min-height: 75px;
+}
+
+.vas-tis-requestsummary {
+    background-color: #f1f1f1;
+}
+
+.vas-tis-steps-col {
+    position: relative;
+    padding: 2px 0;
+    display: flex;
+    justify-content: flex-end;
+}
+
+    .vas-tis-steps-col:nth-child(3)::after {
+        content: " ";
+        position: absolute;
+        right: 0;
+        top: 50%;
+        width: 4px;
+        background-color: #b2b2b2;
+        height: 50%;
+    }
+
+    .vas-tis-steps-col:nth-child(3) .vas-tis-step-content {
+        opacity: 0;
+    }
+
+    .vas-tis-steps-col.vas-tis-step-inprogress:nth-child(3)::after {
+        background-color: #BC7C7A;
+    }
+
+    .vas-tis-steps-col.vas-tis-step-completed:nth-child(3)::after {
+        background-color: #9FC150;
+    }
+
+.vas-tis-reverse-row .vas-tis-steps-col:nth-child(3)::after {
+    top: 50%;
+    right: inherit;
+    left: 0;
+}
+
+.vas-tis-reverse-row .vas-tis-steps-col.vas-tis-step-inprogress::after {
+    background-color: #BC7C7A;
+}
+
+.vas-tis-steps-row {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.vas-tis-step-circle {
+    width: 22px;
+    height: 22px;
+    border-radius: 100%;
+    border: 1px solid #b2b2b2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+}
+
+    .vas-tis-step-circle .vis {
+        font-size: 11px;
+        display: none;
+    }
+
+.vas-tis-step-content {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    flex-direction: column;
+    width: 136px;
+    right: -68px;
+    position: relative;
+    z-index: 3;
+    top: 11px;
+}
+
+    .vas-tis-step-content span {
+        display: block;
+        width: 100%;
+        text-align: center;
+        font-size: 12px;
+        color: #b2b2b2;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+.vas-tis-step-start {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    flex-direction: column;
+    width: 136px;
+    left: -68px;
+    position: absolute;
+    z-index: 3;
+    top: 11px;
+}
+
+    .vas-tis-step-start span {
+        display: block;
+        width: 100%;
+        text-align: center;
+        font-size: 12px;
+        color: #b2b2b2;
+    }
+
+
+.vas-tis-steps-col::before {
+    content: " ";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translate(0, -50%);
+    height: 4px;
+    width: 100%;
+    background-color: #b2b2b2;
+}
+
+.vas-tis-reverse-row {
+    flex-direction: row-reverse;
+}
+
+    .vas-tis-reverse-row .vas-tis-steps-col:first-child::after {
+        content: " ";
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 4px;
+        background-color: #b2b2b2;
+        height: 50%;
+    }
+
+    .vas-tis-reverse-row .vas-tis-steps-col.vas-tis-step-inprogress:first-child::after {
+        background-color: #BC7C7A;
+    }
+
+    .vas-tis-reverse-row .vas-tis-steps-col.vas-tis-step-completed:first-child::after {
+        background-color: #9FC150;
+    }
+
+    .vas-tis-reverse-row .vas-tis-steps-col {
+        justify-content: flex-start;
+    }
+
+    .vas-tis-reverse-row .vas-tis-step-content {
+        left: -68px;
+        right: inherit;
+    }
+
+    .vas-tis-reverse-row .vas-tis-step-end .vas-tis-step-content {
+        opacity: 0;
+    }
+
+.vas-tis-step-end::after {
+    content: " ";
+    position: absolute;
+    right: 0;
+    top: 50%;
+    width: 4px;
+    background-color: #b2b2b2;
+    height: 50%;
+}
+
+.vas-tis-step-end .vas-tis-step-content {
+    opacity: 0;
+}
+
+.vas-tis-step-start::after {
+    right: inherit;
+    left: 0;
+}
+
+.vas-tis-step-start .vas-tis-step-content {
+    opacity: 0;
+}
+
+.vas-tis-next-row .vas-tis-steps-col:first-child::after {
+    content: " ";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 4px;
+    background-color: #b2b2b2;
+    height: 50%;
+}
+
+.vas-tis-next-row .vas-tis-steps-col.vas-tis-step-completed:first-child::after {
+    background-color: #9FC150;
+}
+
+.vas-tis-steps-col.vas-tis-last-line::before {
+    display: none;
+}
+
+.vas-tis-step-inprogress.vas-tis-steps-col::before {
+    background-color: #BC7C7A;
+}
+
+.vas-tis-step-inprogress .vas-tis-step-circle {
+    border-color: #9FC150;
+}
+
+.vas-tis-step-inprogress .vas-tis-step-start span {
+    color: #9FC150;
+}
+
+.vas-tis-step-inprogress .vas-tis-step-start .vis {
+    display: block;
+}
+
+.vas-tis-step-inprogress .vas-tis-step-content .vas-tis-step-circle {
+    border-color: #BC7C7A;
+}
+
+    .vas-tis-step-inprogress .vas-tis-step-content .vas-tis-step-circle .vis {
+        display: block;
+    }
+
+.vas-tis-step-inprogress .vas-tis-step-content span {
+    color: #BC7C7A;
+}
+
+.vas-tis-step-completed .vas-tis-step-circle {
+    border-color: #9FC150;
+}
+
+.vas-tis-step-completed .vas-tis-step-start span {
+    color: #9FC150;
+}
+
+.vas-tis-step-completed .vas-tis-step-start .vis {
+    display: block;
+}
+
+.vas-tis-step-completed.vas-tis-steps-col::before {
+    background-color: #9FC150;
+}
+
+.vas-tis-step-completed .vas-tis-step-content .vas-tis-step-circle {
+    border-color: #9FC150;
+}
+
+    .vas-tis-step-completed .vas-tis-step-content .vas-tis-step-circle .vis {
+        display: block;
+    }
+
+.vas-tis-step-completed .vas-tis-step-content span {
+    color: #9FC150;
+}
+/* Styles for drafted steps */
+.vas-tis-step-drafted .vas-tis-step-circle {
+    border-color: #d9a117a6; /* Yellow color */
+}
+
+.vas-tis-step-drafted .vas-tis-step-start span {
+    color: #d9a117a6; /* Yellow color */
+}
+
+.vas-tis-step-drafted .vas-tis-step-start .vis {
+    display: block;
+}
+
+.vas-tis-step-drafted.vas-tis-steps-col::before {
+    background-color: #d9a117a6; /* Yellow color */
+}
+
+.vas-tis-step-drafted .vas-tis-step-content .vas-tis-step-circle {
+    border-color: #d9a117a6; /* Yellow color */
+}
+
+    .vas-tis-step-drafted .vas-tis-step-content .vas-tis-step-circle .vis {
+        display: block;
+    }
+
+.vas-tis-step-drafted .vas-tis-step-content span {
+    /* Add specific styling for span elements here */
+    color: #d9a117a6; /* Yellow color */
+}
+/* Styles for null status steps */
+.vas-tis-step-null .vas-tis-step-circle {
+    border-color: #b2b2b2; /* Grey color */
+}
+
+.vas-tis-step-null .vas-tis-step-start span {
+    color: #b2b2b2; /* Grey color */
+}
+
+.vas-tis-step-null .vas-tis-step-start .vis {
+    display: block;
+}
+
+.vas-tis-step-null.vas-tis-steps-col::before {
+    background-color: #b2b2b2; /* Grey color */
+}
+
+.vas-tis-step-null .vas-tis-step-content .vas-tis-step-circle {
+    border-color: #b2b2b2; /* Grey color */
+}
+
+    .vas-tis-step-null .vas-tis-step-content .vas-tis-step-circle .vis {
+        display: block;
+    }
+
+.vas-tis-step-null .vas-tis-step-content span {
+    /* Add specific styling for span elements here */
+    color: #b2b2b2; /* Grey color */
+}
+
+.vas-tis-steps-col.vas-tis-step-drafted:nth-child(3)::after {
+    background-color: #d9a117a6;
+}
+
+.vas-tis-next-row .vas-tis-steps-col.vas-tis-step-drafted:first-child::after {
+    background-color: #d9a117a6;
+}
+
+.vas-tis-steps-col.vas-tis-step-null:nth-child(3)::after {
+    background-color: #b2b2b2;
+}
+
+.vas-tis-next-row .vas-tis-steps-col.vas-tis-step-null:first-child::after {
+    background-color: #b2b2b2;
+}
+
+.vas-tis-next-row .vas-tis-steps-col.vas-tis-step-inprogress:first-child::after {
+    background-color: #BC7C7A;
+}
+
+.vas-tis-reverse-row .vas-tis-steps-col.vas-tis-step-drafted:first-child::after {
+    background-color: #d9a117a6;
+}
+
+.vas-DocTyperDiv {
+    display: inline-block;
+    width: 19rem;
+    float: left;
+}
+
+.vas-tis-btnmargin {
+    margin-top: 0;
+}
+
+.vas-tis-refreshicon {
+    margin: 7px 10px 0 0;
+    display: inline-block;
+}
+
+.vas-tis-icondiv {
+    float: left;
+}
+
+.vas-dateBlock .vis-advancedSearchInput1 {
+    display: flex;
+    align-items: center;
+    float: none;
+    width: auto;
+}
+
+.vas-dateBlock .vis-advancedSearchInput {
+    flex-basis: 33%;
+    margin-right: 0;
+    padding-right: 10px;
+}
+
+.vas-dateBlock .vis-advancedSearchHorigontal {
+    display: flex;
+    position: relative;
+    width: 14%;
+}
+
+.vas-dateBlock .vis-advancedSearchInput1 input[name="IsDynamic"] {
+    margin-right: 4px;
+}
+
+    .vas-dateBlock .vis-advancedSearchInput1 input[name="IsDynamic"] + label {
+        margin-right: 7px;
+    }
+
+.vas-dateBlock .vis-advancedSearchInput select {
+    margin: 0;
+}
+
+.vas-sortCollection {
+    display: inline-block;
+    width: 100%;
+}
+
+.VAS-sortedItem {
+    margin-bottom: 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+    .VAS-sortedItem:last-child {
+        margin-bottom: 0;
+    }
+
+.vas-join-multiselect {
+    padding: 12px 10px 7px;
+}
+
+.vis-advanedSearch-InputsWrap.vis-advancedSearchMrgin {
+    margin-top: 15px;
+}
+
+.VAS-pagingDiv {
+    margin-top: 10px;
+    /*display: flex;
+    justify-content: space-between;
+    align-items: center;*/
+}
+
+    .VAS-pagingDiv li:first-child {
+        background: rgba(var(--v-c-common), 1);
+        border: 1px solid rgba(0, 0, 0, .18);
+        min-width: 24px;
+        justify-content: center;
+        border-bottom-left-radius: 5px;
+        border-top-left-radius: 5px;
+    }
+
+    .VAS-pagingDiv li:nth-child(2) {
+        margin: 0;
+        border-radius: 0;
+        border-left: 0;
+        padding: 0px;
+    }
+
+    .VAS-pagingDiv li i {
+        font-size: 12px;
+    }
+
+    .VAS-pagingDiv li select {
+        font-size: 15px;
+    }
+
+        .VAS-pagingDiv li select:focus {
+            border-color: transparent;
+        }
+
+    .VAS-pagingDiv li:last-child {
+        min-width: 24px;
+    }
+
+.vas-single-input .vas-select-col.vas-disable-filtercolumn {
+    background-color: #d3d3d342;    
+}
+
+.VAS-ticket-highlight {
+    border-color: rgba(var(--v-c-primary), .4);
+    box-shadow: 0 0 4px 2px rgba(var(--v-c-primary), .3);    
+}
+
+    .VAS-ticket-highlight .vis-w-feedTitleBar {
+        background-color: #B2E0FD;
+    }
+
+        .VAS-ticket-highlight .vis-w-feedTitleBar h3 {
+            font-weight: bold;
+        }
+
+.VAS-update-highlight {
+    border-color: #F9B41D;
+    /*box-shadow: 0 0 4px 2px #F9B41D;*/
+}
+
+    .VAS-update-highlight .vis-w-feedTitleBar {
+        background-color: #FFDC8F;
+    }
+
+        .VAS-update-highlight .vis-w-feedTitleBar h3 {
+            font-weight: bold;
+        }
+
+html[dir=rtl] .vas-filters-editdelete-btns {
+    float: left;
+}
+
+html[dir=rtl] .vas-filters-block {
+    float: right;
+}
+
+    html[dir=rtl] .vas-filters-block .vas-selecttable {
+        float: right;
+    }
+
+html[dir=rtl] .vas-multiselect .vas-arrow-down, html[dir=rtl] .vas-joinfielddropdown .vas-arrow-down, html[dir=rtl] .vas-single-input .vas-arrow-down {
+    right: auto;
+    left: 10px;
+}
+
+html[dir=rtl] .vas-filterofMultipleCols i.fa.fa-exchange {
+    right: auto;
+    left: 0;
+}
+
+html[dir=rtl] .vas-checkboxes .vas-column-list-item {
+    float: none;
+}
+
+html[dir=rtl] .vas-sortby-dropdown {
+    float: none;
+}
+
+html[dir=rtl] .vas-add-label-content.vas-sortByDropdown {
+    display: flex;
+    flex-direction: column;
+}
+
+html[dir=rtl] .vas-filter-text-input.vas-single-selection-dropdown .vas-column-list-item {
+    float: none;
+}
+
+html[dir=rtl] .vas-column-list-item {
+    float: none;
+}
+
+html[dir=rtl] .vas-dateBlock .vis-advancedSearchInput1 input[name="IsDynamic"] + label {
+    margin-left: 7px;
+}
+
+/*CSS of VAS_TimeSheetInvoice.js Form Ends*/

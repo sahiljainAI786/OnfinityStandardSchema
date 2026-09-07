@@ -1,0 +1,222 @@
+﻿
+/* RTL CSS*/
+html[dir="rtl"] .VA005-middle-left-main,
+html[dir="rtl"] .VA005-item-name,
+html[dir="rtl"] .VA005-item-name > input,
+html[dir="rtl"] .VA005-multiplier,
+html[dir="rtl"] .VA005-conversion-data,
+html[dir="rtl"] .VA005-icons,
+html[dir="rtl"] .VA005-pro-cat,
+html[dir="rtl"] .VA005-right-wrap-leftboxdiv,
+html[dir="rtl"] .VA005-divboxtarget-design-hover,
+html[dir="rtl"] .VA005-popup > span,
+html[dir="rtl"] .VA005-popup > input,
+html[dir="rtl"] .VA005-item-icons span,
+html[dir="rtl"] .VA005-uom-icons,
+html[dir="rtl"] .VA005-AttributesValuesDown span.VA005-vis-plus,
+html[dir="rtl"] .VA005-Add-Btn,
+html[dir="rtl"] .VA005-form-top,
+html[dir="rtl"] .VA005-form-data,
+html[dir="rtl"] .VA005-form-dataIcon,
+html[dir="rtl"] .VA005-form-data-other,
+html[dir="rtl"] .VA005-form-top-fields,
+html[dir="rtl"] .VA005-product-data {
+    float: right;
+}
+html[dir="rtl"] .VA005-attrValuesWraperDiv span.VA005-vis-plus {
+    float: right !important;
+}
+
+html[dir="rtl"] .VA005-selectedCartLblWrap,
+html[dir="rtl"] .VA005-item-icons,
+html[dir="rtl"] .VA005-Edit-UPC,
+html[dir="rtl"] .VA005-divide,
+html[dir="rtl"] .VA005-conversion-icons,
+html[dir="rtl"] .VA005-Image-panel-div,
+html[dir="rtl"] .VA005-right-wrap-div-setlisting-top,
+html[dir="rtl"] .VA005-left-wrap-div-openattributre,
+html[dir="rtl"] .VA005-Gen-Btn {
+    float: left;
+}
+html[dir="rtl"] .VA005-form-data.VA005-popup-head + div,
+html[dir="rtl"] .VA005-tree-list > div:first-child {
+    float: left !important;
+}
+
+html[dir="rtl"] .VA005-selectedCartLblWrap,
+html[dir="rtl"] .VA005-middle-left-main .vis-group-DataContainer,
+html[dir="rtl"] .VA005-right-head-btn,
+html[dir="rtl"] .VA005-conversion-data:first-child,
+html[dir="rtl"] .VA005-middle-icons,
+html[dir="rtl"] .VA005-right-head,
+html[dir="rtl"] .VA005-uom-list,
+html[dir="rtl"] .VA005-pro-cat,
+html[dir="rtl"] .VA005-form-top,
+html[dir="rtl"] .VA005-form-fullFields,
+html[dir="rtl"] .VA005-prodmgtrightfieldtop,
+html[dir="rtl"] .VA005-product-data:nth-child(odd),
+html[dir="rtl"] .VA005-tree-list {
+    padding-right: 0;
+}
+
+html[dir="rtl"] .VA005-middle-left-main,
+html[dir="rtl"] .VA005-productinfowrp,
+html[dir="rtl"] .VA005-conversion-data:last-child,
+html[dir="rtl"] .VA005-middle-right-main,
+html[dir="rtl"] .VA005-left-wrap,
+html[dir="rtl"] .VA005-form-wrap,
+html[dir="rtl"] .VA005-attListing-title,
+html[dir="rtl"] .VA005-product-data:nth-child(even) {
+    padding-left: 0;
+}
+
+html[dir="rtl"] .VA005-middle-left-main,
+html[dir="rtl"] .VA005-middle-right-main,
+html[dir="rtl"] .VA005-left-wrap,
+html[dir="rtl"] .VA005-form-wrap,
+html[dir="rtl"] .VA005-attListing-title {
+    padding-right: 15px;
+}
+
+html[dir="rtl"] .VA005-middle-icons,
+html[dir="rtl"] .VA005-selectedCartLblWrap,
+html[dir="rtl"] .VA005-right-head,
+html[dir="rtl"] .VA005-right-head-btn,
+html[dir="rtl"] .VA005-uom-list,
+html[dir="rtl"] .VA005-form-top,
+html[dir="rtl"] .VA005-form-fullFields,
+html[dir="rtl"] .VA005-tree-list {
+    padding-left: 15px;
+}
+
+html[dir="rtl"] .VA005-middle-left-main .vis-group-DataContainer,
+html[dir="rtl"] .VA005-prodmgtrightfieldtop {
+    padding-left: 12px;
+}
+
+html[dir="rtl"] .VA005-productinfowrp {
+    padding-right: 10px;
+}
+
+html[dir="rtl"] .VA005-conversion-data:last-child,
+html[dir="rtl"] .VA005-product-data:nth-child(even) {
+    padding-right: 7px;
+}
+
+html[dir="rtl"] .VA005-conversion-data:first-child,
+html[dir="rtl"] .VA005-product-data:nth-child(odd) {
+    padding-left: 7px;
+}
+
+html[dir="rtl"] .vis-group-add-btn,
+html[dir="rtl"] .VA005-Image-panel-div,
+html[dir="rtl"] .VA005-btn-Delete,
+html[dir="rtl"] .VA005-divboxtarget-design-hover,
+html[dir="rtl"] .va005-new-att-chkboxWrap label,
+html[dir="rtl"] .VA005-attrValuesWraperDiv span.VA005-vis-plus {
+    margin-right: 0;
+}
+
+html[dir="rtl"] .VA005-btn-Delete,
+html[dir="rtl"] .VA005-divboxtarget-design-hover {
+    margin-left: 10px;
+}
+
+html[dir="rtl"] .VA005-middle-icons > ul > li,
+html[dir="rtl"] .VA005-uom-icons,
+html[dir="rtl"] .VA005-icons,
+html[dir="rtl"] .VA005-GenVariantLabl,
+html[dir="rtl"] .VA005-Image-panel-div > span,
+html[dir="rtl"] .VA005-Image-panel-div > i,
+html[dir="rtl"] input.VA005-poupOkCancelBtn {
+    margin-left: 0;
+}
+
+html[dir="rtl"] .VA005-uom-icons,
+html[dir="rtl"] .VA005-middle-icons > ul > li,
+html[dir="rtl"] .VA005-GenVariantLabl,
+html[dir="rtl"] .VA005-Image-panel-div > span,
+html[dir="rtl"] .VA005-Image-panel-div > i,
+html[dir="rtl"] input.VA005-poupOkCancelBtn {
+    margin-right: 10px;
+}
+
+html[dir="rtl"] .vis-group-add-btn,
+html[dir="rtl"] .VA005-attrValuesWraperDiv span.VA005-vis-plus {
+    margin-left: 5px;
+}
+
+html[dir="rtl"] .VA005-Uom-span,
+html[dir="rtl"] .VA005-uom-icons {
+    text-align: left;
+}
+
+html[dir="rtl"] ul.VA005-tabs > li:last-child,
+html[dir="rtl"] .VA005-middle-left-main .vis-group-user-wrap .vis-group-user-right {
+    margin-left: unset;
+    margin-right: auto;
+}
+
+html[dir="rtl"] .VA005-icons {
+    margin-right: 15px;
+}
+
+html[dir="rtl"] .ui-dialog .ui-dialog-buttonpane button:last-child {
+    margin-right: 12px;
+}
+
+html[dir="rtl"] .VA005-Image-panel-div,
+html[dir="rtl"] .va005-new-att-chkboxWrap label {
+    margin-left: 15px;
+}
+
+html[dir="rtl"] .VA005-middle-left-main,
+html[dir="rtl"] .VA005-right-wrap-leftboxdiv {
+    border-right: none;
+    border-left: 1px solid rgba(var(--v-c-on-secondary), .2);
+}
+
+html[dir="rtl"] .VA005-doc_information {
+    right: auto;
+    left: 10px;
+}
+
+html[dir="rtl"] .VA005-div-left-main .k-treeview .k-item,
+html[dir="rtl"] .VA005-att-tree-div-showtree .k-treeview .k-item {
+    padding-left: 0;
+    padding-right: 16px;
+}
+
+html[dir="rtl"] .VA005-div-left-main .k-treeview .k-minus,
+html[dir="rtl"] .VA005-div-left-main .k-treeview .k-minus-disabled,
+html[dir="rtl"] .VA005-div-left-main .k-treeview .k-plus,
+html[dir="rtl"] .VA005-div-left-main .k-treeview .k-plus-disabled,
+html[dir="rtl"] .VA005-att-tree-div-showtree .k-treeview .k-minus,
+html[dir="rtl"] .VA005-att-tree-div-showtree .k-treeview .k-minus-disabled,
+html[dir="rtl"] .VA005-att-tree-div-showtree .k-treeview .k-plus,
+html[dir="rtl"] .VA005-att-tree-div-showtree .k-treeview .k-plus-disabled {
+    margin-left: 0;
+    margin-right: -16px;
+    transform: rotate(90deg);
+}
+
+html[dir="rtl"] .VA005-pro-cat {
+    /*padding-left: 20px;*/
+}
+html[dir="rtl"] .va005-imageupload-popupwrap .k-dropzone .k-upload-status {
+    right: auto;
+    left: 12px;
+}
+
+html[dir="rtl"] .va005-imageupload-popupwrap .k-upload-files .k-button,
+html[dir="rtl"] .va005-imageupload-popupwrap .k-upload-status-total .k-icon {
+    margin-left: 0;
+    margin-right: 8px;
+}
+html[dir="rtl"] .VA005-attListing-header {
+    right: auto;
+    left: 15px;
+}
+html[dir="rtl"] .VA005-large {
+    text-align: center;
+}

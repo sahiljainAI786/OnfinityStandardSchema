@@ -1,0 +1,554 @@
+﻿/********************************************************
+ * Project Name   : VAdvantage
+ * Class Name     : MRfQResponse
+ * Purpose        : RfQ Response Model
+ * Class Used     : X_C_RfQResponse
+ * Chronological    Development
+ * Raghunandan     10-Aug.-2009
+  ******************************************************/
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using VAdvantage.Classes;
+using VAdvantage.Common;
+using VAdvantage.Process;
+using System.Windows.Forms;
+using VAdvantage.Model;
+using VAdvantage.DataBase;
+using VAdvantage.SqlExec;
+using VAdvantage.Utility;
+using System.Data;
+using System.Data.SqlClient;
+using System.IO;
+using VAdvantage.Logging;
+namespace VAdvantage.Model
+{
+    public class MRfQResponse : X_C_RfQResponse
+    {
+        //	underlying RfQ				
+        private MRfQ _rfq = null;
+        // Lines						
+        private MRfQResponseLine[] _lines = null;
+
+        /// <summary>
+        /// Standard Constructor
+        /// </summary>
+        /// <param name="ctx"></param>
+        /// <param name="C_RfQResponse_ID"></param>
+        /// <param name="trxName"></param>
+        public MRfQResponse(Ctx ctx, int C_RfQResponse_ID, Trx trxName)
+            : base(ctx, C_RfQResponse_ID, trxName)
+        {
+            if (C_RfQResponse_ID == 0)
+            {
+                SetIsComplete(false);
+                SetIsSelectedWinner(false);
+                SetIsSelfService(false);
+                SetPrice(Env.ZERO);
+                SetProcessed(false);
+                SetProcessing(false);
+            }
+        }
+
+        /// <summary>
+        /// Load Constructor
+        /// </summary>
+        /// <param name="ctx"></param>
+        /// <param name="dr"></param>
+        /// <param name="trxName"></param>
+        public MRfQResponse(Ctx ctx, DataRow dr, Trx trxName)
+            : base(ctx, dr, trxName)
+        {
+
+        }
+
+        /// <summary>
+        /// Parent Constructor
+        /// </summary>
+        /// <param name="rfq"></param>
+        /// <param name="subscriber"></param>
+        /// <param name="VAS_Response_ID">RFQ Response Header</param>
+        public MRfQResponse(MRfQ rfq, MRfQTopicSubscriber subscriber, int VAS_Response_ID)
+            : this(rfq, subscriber,
+                subscriber.GetC_BPartner_ID(),
+                subscriber.GetC_BPartner_Location_ID(),
+                subscriber.GetAD_User_ID(), VAS_Response_ID)
+        {
+
+        }
+
+        /// <summary>
+        /// Parent Constructor
+        /// </summary>
+        /// <param name="rfq">rfq</param>
+        /// <param name="partner">web response</param>
+        public MRfQResponse(MRfQ rfq, MBPartner partner)
+            : this(rfq, null,
+                partner.GetC_BPartner_ID(),
+                partner.GetPrimaryC_BPartner_Location_ID(),
+                partner.GetPrimaryAD_User_ID(), 0)
+        {
+
+        }
+
+        /// <summary>
+        /// Parent Constructor.
+        /// Automatically saved if lines were created 
+        /// Saved automatically 
+        /// @param rfq 
+        /// </summary>
+        /// <param name="rfq">rfq</param>
+        /// <param name="subscriber">optional subscriber</param>
+        /// <param name="C_BPartner_ID">bpartner</param>
+        /// <param name="C_BPartner_Location_ID">bpartner location</param>
+        /// <param name="AD_User_ID">bpartner user</param>
+        /// <param name="VAS_Response_ID">RFQ Response Header</param>
+        public MRfQResponse(MRfQ rfq, MRfQTopicSubscriber subscriber,
+            int C_BPartner_ID, int C_BPartner_Location_ID, int AD_User_ID, int VAS_Response_ID)
+            : this(rfq.GetCtx(), 0, rfq.Get_TrxName())
+        {
+            SetClientOrg(rfq);
+            // VIS0060: Set Rfq Response header ID on Rfq Response
+            Set_ValueNoCheck("VAS_Response_ID", VAS_Response_ID);
+            SetC_RfQ_ID(rfq.GetC_RfQ_ID());
+            SetC_Currency_ID(rfq.GetC_Currency_ID());
+            SetName(rfq.GetName());
+            _rfq = rfq;
+            //	Subscriber info
+            if (Env.IsModuleInstalled("VA068_") && subscriber.Get_ValueAsInt("VA068_VendorRegistration_ID") > 0)
+            {
+                Set_Value("VA068_VendorRegistration_ID", subscriber.Get_ValueAsInt("VA068_VendorRegistration_ID"));
+                Set_Value("VA068_RegisteredLocation_ID", subscriber.Get_ValueAsInt("VA068_RegisteredLocation_ID"));
+                Set_Value("VA068_RegisteredUser_ID", subscriber.Get_ValueAsInt("VA068_RegisteredUser_ID"));
+            }
+            else if (Env.IsModuleInstalled("VA068_"))
+            {
+                Set_ValueNoCheck("C_BPartner_ID", C_BPartner_ID);
+                Set_ValueNoCheck("C_BPartner_Location_ID", C_BPartner_Location_ID);
+                Set_ValueNoCheck("AD_User_ID", AD_User_ID);
+            }
+            else
+            {
+                SetC_BPartner_ID(C_BPartner_ID);
+                SetC_BPartner_Location_ID(C_BPartner_Location_ID);
+                SetAD_User_ID(AD_User_ID);
+            }
+
+            //	Create Lines
+            MRfQLine[] lines = rfq.GetLines();
+            for (int i = 0; i < lines.Length; i++)
+            {
+                if (!lines[i].IsActive())
+                    continue;
+
+                //	Product on "Only" list
+                if (subscriber != null
+                    && !subscriber.IsIncluded(lines[i].GetM_Product_ID()))
+                {
+                    continue;
+                }
+                //
+                if (Get_ID() == 0)	//	save Response
+                {
+                    Save();
+                }
+
+                MRfQResponseLine line = new MRfQResponseLine(this, lines[i]);
+                //	line is not saved (dumped) if there are no Qtys 
+            }
+        }
+
+        /// <summary>
+        /// Get Response Lines
+        /// </summary>
+        /// <param name="requery">requery</param>
+        /// <returns>array of Response Lines</returns>
+        public MRfQResponseLine[] GetLines(bool requery)
+        {
+            if (_lines != null && !requery)
+            {
+                return _lines;
+            }
+            List<MRfQResponseLine> list = new List<MRfQResponseLine>();
+            String sql = "SELECT * FROM C_RfQResponseLine "
+                + "WHERE C_RfQResponse_ID=" + GetC_RfQResponse_ID() + " AND IsActive='Y'";
+            DataTable dt = null;
+            IDataReader idr = null;
+            try
+            {
+                idr = DataBase.DB.ExecuteReader(sql, null, Get_TrxName());
+                dt = new DataTable();
+                dt.Load(idr);
+                idr.Close();
+                foreach (DataRow dr in dt.Rows)
+                {
+                    list.Add(new MRfQResponseLine(GetCtx(), dr, Get_TrxName()));
+                }
+            }
+            catch (Exception e)
+            {
+                if (idr != null)
+                {
+                    idr.Close();
+                }
+                log.Log(Level.SEVERE, "getLines", e);
+            }
+            finally
+            {
+                if (idr != null)
+                {
+                    idr.Close();
+                }
+                dt = null;
+                idr.Close();
+            }
+
+            _lines = new MRfQResponseLine[list.Count];
+            _lines = list.ToArray();
+            return _lines;
+        }
+
+        /// <summary>
+        /// Get Response Lines (no requery)
+        /// </summary>
+        /// <returns>array of Response Lines</returns>
+        public MRfQResponseLine[] GetLines()
+        {
+            return GetLines(false);
+        }
+
+        /// <summary>
+        /// 	Get RfQ
+        /// </summary>
+        /// <returns>rfq</returns>
+        public MRfQ GetRfQ()
+        {
+            if (_rfq == null)
+            {
+                _rfq = MRfQ.Get(GetCtx(), GetC_RfQ_ID(), Get_TrxName());
+            }
+            return _rfq;
+        }
+
+        /// <summary>
+        /// String Representation
+        /// </summary>
+        /// <returns>info</returns>
+        public override String ToString()
+        {
+            StringBuilder sb = new StringBuilder("MRfQResponse[");
+            sb.Append(Get_ID())
+                .Append(",Complete=").Append(IsComplete())
+                .Append(",Winner=").Append(IsSelectedWinner())
+                .Append("]");
+            return sb.ToString();
+        }
+
+        /// <summary>
+        /// 	Send RfQ, mail subject and body from mail template 
+        /// </summary>
+        /// <returns>true if RfQ is sent per email.</returns>
+        public bool SendRfQ()
+        {
+            bool mailSent = false;
+            try
+            {
+                string NotificationType = null;
+                MUser to = MUser.Get(GetCtx(), GetAD_User_ID());
+                MClient client = MClient.Get(GetCtx());
+                MMailText mtext = new MMailText(GetCtx(), GetRfQ().GetR_MailText_ID(), Get_TrxName());
+
+                if (to.Get_ID() == 0 || to.GetEMail() == null || to.GetEMail().Length == 0)
+                {
+                    log.Log(Level.SEVERE, "No User or no EMail - " + to);
+                    return false;
+                }
+
+                // Check if mail template is set for RfQ window, if not then get from RfQ Topic window.
+                if (mtext.GetR_MailText_ID() == 0)
+                {
+                    MRfQTopic mRfQTopic = new MRfQTopic(GetCtx(), GetRfQ().GetC_RfQ_Topic_ID(), Get_TrxName());
+                    if (mRfQTopic.GetC_RfQ_Topic_ID() > 0)
+                    {
+                        mtext = new MMailText(GetCtx(), mRfQTopic.GetR_MailText_ID(), Get_TrxName());
+                    }
+                }
+
+                //Replace the email template constants with tables values.
+                StringBuilder message = new StringBuilder();
+                mtext.SetPO(GetRfQ(), true);
+                message.Append(mtext.GetMailText(true).Equals(string.Empty) ? "** No Email Body" : mtext.GetMailText(true));
+
+                String subject = String.IsNullOrEmpty(mtext.GetMailHeader()) ? "** No Subject" : mtext.GetMailHeader(); ;
+
+                EMail email = client.CreateEMail(to.GetEMail(), to.GetName(), subject, message.ToString());
+                if (email == null)
+                {
+                    return false;
+                }
+                email.AddAttachment(CreatePDF());
+                if (EMail.SENT_OK.Equals(email.Send()))
+                {
+                    mailSent = true;
+                    //SetDateInvited(new Timestamp(System.currentTimeMillis()));
+                    SetDateInvited(DateTime.Now);
+                    Save();
+                }
+
+                if (NotificationType == null)
+                    NotificationType = to.GetNotificationType();                
+
+                //	Send Note
+                if (X_AD_User.NOTIFICATIONTYPE_Notice.Equals(NotificationType)
+                    || X_AD_User.NOTIFICATIONTYPE_EMailPlusNotice.Equals(NotificationType))
+                {
+                    MNote note = new MNote(GetCtx(), "Response", to.GetAD_User_ID(), GetAD_Client_ID(), 0, Get_TrxName());
+                    note.SetRecord(X_C_RfQ.Table_ID, GetC_RfQ_ID());
+                    note.SetReference(subject);
+                    note.SetTextMsg(message.ToString());
+                    note.SetAD_Org_ID(0);
+                    note.Save();
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Severe(ex.ToString());
+                //MessageBox.Show("error--" + ex.ToString());
+            }
+            return mailSent;
+        }
+
+        /// <summary>
+        /// 	Send RfQ, mail subject and body from mail template 
+        /// </summary>
+        /// <returns>true if RfQ is sent per email.</returns>
+        public bool SendRfqToVendors()
+        {
+            string mail = "", name = "", notificationType = "";
+            int ad_user_ID = 0;
+            bool mailSent = false;
+            try
+            {
+                DataSet ds = DB.ExecuteDataset(@"SELECT ru.VA068_Email, ru.VA068_FirstName, au.AD_User_ID, au.NotificationType
+                    FROM VA068_RegisteredUser ru LEFT JOIN AD_User au ON (ru.AD_User_ID = au.AD_User_ID) 
+                    WHERE ru.VA068_RegisteredUser_ID = " + Get_ValueAsInt("VA068_RegisteredUser_ID"), null, Get_Trx());
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    mail = Util.GetValueOfString(ds.Tables[0].Rows[0]["VA068_Email"]);
+                    name = Util.GetValueOfString(ds.Tables[0].Rows[0]["VA068_FirstName"]);
+                    ad_user_ID = Util.GetValueOfInt(ds.Tables[0].Rows[0]["AD_User_ID"]);
+                    notificationType = Util.GetValueOfString(ds.Tables[0].Rows[0]["VA068_FirstName"]);
+                }
+
+                MClient client = MClient.Get(GetCtx());
+                MMailText mtext = new MMailText(GetCtx(), GetRfQ().GetR_MailText_ID(), Get_TrxName());
+
+                if (Get_ValueAsInt("VA068_RegisteredUser_ID") == 0 || string.IsNullOrEmpty(mail))
+                {
+                    log.Log(Level.SEVERE, "No User or no EMail - " + GetName());
+                    return false;
+                }
+
+                // Check if mail template is set for RfQ window, if not then get from RfQ Topic window.
+                if (mtext.GetR_MailText_ID() == 0)
+                {
+                    MRfQTopic mRfQTopic = new MRfQTopic(GetCtx(), GetRfQ().GetC_RfQ_Topic_ID(), Get_TrxName());
+                    if (mRfQTopic.GetC_RfQ_Topic_ID() > 0)
+                    {
+                        mtext = new MMailText(GetCtx(), mRfQTopic.GetR_MailText_ID(), Get_TrxName());
+                    }
+                }
+
+                //Replace the email template constants with tables values.
+                StringBuilder message = new StringBuilder();
+                mtext.SetPO(GetRfQ(), true);
+                message.Append(mtext.GetMailText(true).Equals(string.Empty) ? "** No Email Body" : mtext.GetMailText(true));
+
+                String subject = String.IsNullOrEmpty(mtext.GetMailHeader()) ? "** No Subject" : mtext.GetMailHeader(); ;
+
+                EMail email = client.CreateEMail(mail, name, subject, message.ToString());
+                if (email == null)
+                {
+                    return false;
+                }
+                email.AddAttachment(CreatePDF());
+                if (EMail.SENT_OK.Equals(email.Send()))
+                {
+                    mailSent = true;
+                    SetDateInvited(DateTime.Now);
+                    Save();
+                }
+                
+                //	Send Note
+                if (ad_user_ID > 0 && (X_AD_User.NOTIFICATIONTYPE_Notice.Equals(notificationType)
+                    || X_AD_User.NOTIFICATIONTYPE_EMailPlusNotice.Equals(notificationType)))
+                {
+                    MNote note = new MNote(GetCtx(), "Response", ad_user_ID, GetAD_Client_ID(), 0, Get_TrxName());
+                    note.SetRecord(X_C_RfQ.Table_ID, GetC_RfQ_ID());
+                    note.SetReference(subject);
+                    note.SetTextMsg(message.ToString());
+                    note.SetAD_Org_ID(0);
+                    note.Save();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                log.Severe(ex.ToString());
+                //MessageBox.Show("error--" + ex.ToString());
+            }
+            return mailSent;
+        }
+        /// <summary>
+        /// Create PDF file
+        /// </summary>
+        /// <returns>File or null</returns>
+        public FileInfo CreatePDF()
+        {
+            return CreatePDF(null);
+        }
+
+        /// <summary>
+        /// Create PDF file
+        /// </summary>
+        /// <param name="file">output file</param>
+        /// <returns>File or null</returns>
+        public FileInfo CreatePDF(FileInfo file)
+        {
+            //ReportEngine re = ReportEngine.get(getCtx(), ReportEngine.RFQ, getC_RfQResponse_ID());
+            //if (re == null)
+            //   return null;
+            //return re.getPDF(file);
+            return file;
+        }
+
+        /// <summary>
+        /// Check if Response is Complete
+        /// </summary>
+        /// <returns>null if complere - error message otherwise</returns>
+        public String CheckComplete()
+        {
+            if (IsComplete())
+            {
+                SetIsComplete(false);
+            }
+            MRfQ rfq = GetRfQ();
+
+            //	Is RfQ Total valid
+            String error = rfq.CheckQuoteTotalAmtOnly();
+            if (error != null && error.Length > 0)
+            {
+                return error;
+            }
+
+            //	Do we have Total Amount ?
+            if (rfq.IsQuoteTotalAmt() || rfq.IsQuoteTotalAmtOnly())
+            {
+                Decimal amt = GetPrice();
+                if (Env.ZERO.CompareTo(amt) >= 0)
+                {
+                    return "No Total Amount";
+                }
+            }
+
+            //	Do we have an amount/qty for all lines
+            if (rfq.IsQuoteAllLines())
+            {
+                MRfQResponseLine[] lines = GetLines(false);
+                for (int i = 0; i < lines.Length; i++)
+                {
+                    MRfQResponseLine line = lines[i];
+                    if (!line.IsActive())
+                        return "Line " + line.GetRfQLine().GetLine()
+                            + ": Not Active";
+                    bool validAmt = false;
+                    MRfQResponseLineQty[] qtys = line.GetQtys(false);
+                    for (int j = 0; j < qtys.Length; j++)
+                    {
+                        MRfQResponseLineQty qty = qtys[j];
+                        if (!qty.IsActive())
+                        {
+                            continue;
+                        }
+                        Decimal? amt = qty.GetNetAmt();
+                        if (Env.ZERO.CompareTo(amt) < 0)
+                        {
+                            validAmt = true;
+                            break;
+                        }
+                    }
+                    if (!validAmt)
+                    {
+                        return "Line " + line.GetRfQLine().GetLine()
+                            + ": No Amount";
+                    }
+                }
+            }
+
+            //	Do we have an amount for all line qtys
+            if (rfq.IsQuoteAllQty())
+            {
+                MRfQResponseLine[] lines = GetLines(false);
+                for (int i = 0; i < lines.Length; i++)
+                {
+                    MRfQResponseLine line = lines[i];
+                    MRfQResponseLineQty[] qtys = line.GetQtys(false);
+                    for (int j = 0; j < qtys.Length; j++)
+                    {
+                        MRfQResponseLineQty qty = qtys[j];
+                        if (!qty.IsActive())
+                            return "Line " + line.GetRfQLine().GetLine()
+                            + " Qty=" + qty.GetRfQLineQty().GetQty()
+                            + ": Not Active";
+                        Decimal? amt = qty.GetNetAmt();
+                        if (amt == null || Env.ZERO.CompareTo(amt) >= 0)
+                        {
+                            return "Line " + line.GetRfQLine().GetLine()
+                                 + " Qty=" + qty.GetRfQLineQty().GetQty()
+                                 + ": No Amount";
+                        }
+                    }
+                }
+            }
+
+            SetIsComplete(true);
+            return null;
+        }
+
+        /// <summary>
+        /// Is Quote Total Amt Only
+        /// </summary>
+        /// <returns>true if only Total</returns>
+        public bool IsQuoteTotalAmtOnly()
+        {
+            return GetRfQ().IsQuoteTotalAmtOnly();
+        }
+
+        /// <summary>
+        /// Before Save
+        /// </summary>
+        /// <param name="newRecord"></param>
+        /// <returns>true</returns>
+        protected override bool BeforeSave(bool newRecord)
+        {
+            //	Calculate Complete Date (also used to verify)
+            if (GetDateWorkStart() != null && GetDeliveryDays() != 0)
+            {
+                SetDateWorkComplete(TimeUtil.AddDays(GetDateWorkStart(), GetDeliveryDays()));
+            }
+            //	Calculate Delivery Days
+            else if (GetDateWorkStart() != null && GetDeliveryDays() == 0 && GetDateWorkComplete() != null)
+            {
+                SetDeliveryDays(TimeUtil.GetDaysBetween(GetDateWorkStart(), GetDateWorkComplete()));
+            }
+            //	Calculate Start Date
+            else if (GetDateWorkStart() == null && GetDeliveryDays() != 0 && GetDateWorkComplete() != null)
+            {
+                SetDateWorkStart(TimeUtil.AddDays(GetDateWorkComplete(), GetDeliveryDays() * -1));
+            }
+            return true;
+        }
+    }
+}

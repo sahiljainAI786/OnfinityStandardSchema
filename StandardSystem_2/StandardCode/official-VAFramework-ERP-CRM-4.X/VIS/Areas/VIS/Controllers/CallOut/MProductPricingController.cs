@@ -1,0 +1,71 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Newtonsoft.Json;
+using VAdvantage.Model;
+using VAdvantage.Utility;
+using VIS.Models;
+
+
+namespace VIS.Controllers
+{
+    public class MProductPricingController : Controller
+    {
+        public ActionResult Index()
+        {
+            return View();
+        }
+        public JsonResult GetProductPricing(string fields)
+        {
+
+            string retJSON = "";
+            if (Session["ctx"] != null)
+            {
+                Ctx ctx = Session["ctx"] as Ctx;
+                MProductPricingModel objProductPricing = new MProductPricingModel();
+                retJSON = JsonConvert.SerializeObject(objProductPricing.GetProductPricing(ctx, fields));
+            }
+            // return Json(new { result = retJSON, error = retError }, JsonRequestBehavior.AllowGet);
+            return Json(retJSON, JsonRequestBehavior.AllowGet);
+        }
+
+
+        /// <summary>
+        /// Get product std Price 
+        /// </summary>
+        /// <param name="fields">fields</param>
+        /// <returns>Data in JSON Format</returns>
+        public JsonResult GetProductdata(string fields)
+        {
+
+            string retJSON = "";
+            if (Session["ctx"] != null)
+            {
+                Ctx ctx = Session["ctx"] as Ctx;
+                MProductPricingModel objProductPricing = new MProductPricingModel();
+                retJSON = JsonConvert.SerializeObject(objProductPricing.GetProductdata(ctx, fields));
+            }
+            return Json(retJSON, JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// when we change QtyEntered, UOM or Attribute
+        /// </summary>
+        /// <param name="fields">List of Parameters</param>
+        /// <returns>Price Data</returns>
+        public JsonResult GetPricesOnChange(string fields)
+        {
+
+            String retJSON = "";
+            if (Session["ctx"] != null)
+            {
+                Ctx ctx = Session["ctx"] as Ctx;
+                MProductPricingModel objProductPricing = new MProductPricingModel();
+                retJSON = JsonConvert.SerializeObject(objProductPricing.GetPricesOnChange(ctx, fields));
+            }
+            return Json(retJSON, JsonRequestBehavior.AllowGet);
+        }
+    }
+}
