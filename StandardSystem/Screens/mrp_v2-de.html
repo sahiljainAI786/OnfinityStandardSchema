@@ -1,0 +1,1820 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Materialbedarfsplanung — Aura ERP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg-blue: #DCEEFF;
+  --bg-green: #E4F2DE;
+  --card-blue: #EAF4FF;
+  --card-green: #EAF5E2;
+  --card-white: #FFFFFF;
+  --text-dark: #1A2332;
+  --text-muted: #5C6B7F;
+  --text-light: #8A98AB;
+  --accent-blue: #1A8FE3;
+  --accent-teal: #0FB58F;
+  --accent-red: #FF3B30;
+  --accent-pink: #E94B7B;
+  --accent-amber: #F5A524;
+  --accent-purple: #8B7FE8;
+  --border-soft: rgba(26, 35, 50, 0.06);
+  --border-medium: rgba(26, 35, 50, 0.1);
+  --shadow-card: 0 1px 3px rgba(26, 35, 50, 0.04), 0 4px 12px rgba(26, 35, 50, 0.04);
+  --bottom-bar: #0E2545;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--text-dark);
+  background: linear-gradient(135deg, var(--bg-blue) 0%, #E8F0F8 50%, var(--bg-green) 100%);
+  overflow: hidden;
+}
+
+.app { display: flex; height: 100vh; position: relative; }
+
+/* ============ SIDEBAR ============ */
+.sidebar {
+  width: 64px;
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-right: 1px solid rgba(255, 255, 255, 0.6);
+  display: flex; flex-direction: column; align-items: center;
+  padding: 20px 0; gap: 8px; z-index: 10;
+}
+.menu-btn {
+  width: 38px; height: 38px;
+  background: var(--accent-blue); border: none; border-radius: 10px;
+  color: white; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 18px;
+  box-shadow: 0 4px 12px rgba(26, 143, 227, 0.3);
+}
+.expand-arrow {
+  width: 26px; height: 26px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--accent-blue); margin-bottom: 14px; cursor: pointer;
+}
+.sidebar-icon {
+  width: 38px; height: 38px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--accent-blue); cursor: pointer; border-radius: 10px;
+  transition: background 0.15s; position: relative;
+}
+.sidebar-icon:hover { background: rgba(26, 143, 227, 0.1); }
+.sidebar-icon.active::before {
+  content: ''; position: absolute; left: -14px; top: 8px; bottom: 8px;
+  width: 3px; background: var(--accent-blue); border-radius: 0 3px 3px 0;
+}
+.sidebar-bottom { margin-top: auto; display: flex; flex-direction: column; gap: 8px; }
+
+/* ============ MAIN ============ */
+.main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+
+.header {
+  height: 72px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 28px; flex-shrink: 0;
+}
+.header-title h1 {
+  font-size: 22px; font-weight: 700; color: var(--text-dark); letter-spacing: -0.4px;
+}
+.header-title p { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
+.header-right { display: flex; align-items: center; gap: 16px; }
+.header-icon-group {
+  display: flex; background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.9); border-radius: 10px;
+  padding: 6px; gap: 4px; box-shadow: var(--shadow-card);
+}
+.header-icon-btn {
+  width: 32px; height: 32px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 7px; color: var(--accent-blue); cursor: pointer;
+}
+.header-icon-btn:hover { background: rgba(26, 143, 227, 0.1); }
+.user-info { display: flex; align-items: center; gap: 12px; }
+.user-text { text-align: right; }
+.user-text .name { font-size: 14px; font-weight: 600; color: var(--text-dark); }
+.user-text .role { font-size: 12px; color: var(--text-muted); }
+.avatar {
+  width: 42px; height: 42px; border-radius: 50%;
+  background: linear-gradient(135deg, #4A90E2, #357ABD);
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-weight: 600; font-size: 15px;
+  border: 2px solid white; box-shadow: 0 2px 8px rgba(26, 35, 50, 0.12);
+}
+
+.content {
+  flex: 1; overflow-y: auto; padding: 0 28px 80px;
+}
+.content::-webkit-scrollbar { width: 8px; }
+.content::-webkit-scrollbar-track { background: transparent; }
+.content::-webkit-scrollbar-thumb { background: rgba(26, 35, 50, 0.15); border-radius: 4px; }
+
+/* ============ PLAN SELECTOR BAR ============ */
+.plan-bar {
+  background: linear-gradient(110deg, rgba(255,255,255,0.75) 0%, rgba(234,244,255,0.8) 55%, rgba(234,245,226,0.6) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 16px;
+  padding: 14px 20px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(8px);
+}
+
+.plan-select {
+  display: flex; align-items: center; gap: 14px;
+  flex: 1;
+  min-width: 0;
+}
+.plan-icon {
+  width: 44px; height: 44px; flex-shrink: 0;
+  background: linear-gradient(135deg, var(--accent-blue), #1376C5);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  color: white;
+  box-shadow: 0 4px 12px rgba(26, 143, 227, 0.3);
+}
+
+.plan-dropdown {
+  position: relative;
+  cursor: pointer;
+  flex: 1; min-width: 0;
+}
+.plan-dropdown-trigger {
+  display: flex; align-items: center; gap: 10px;
+  padding: 4px 0;
+}
+.plan-name-block {
+  display: flex; flex-direction: column; line-height: 1.2;
+  min-width: 0;
+}
+.plan-label {
+  font-size: 10px; font-weight: 700;
+  color: var(--accent-blue);
+  text-transform: uppercase; letter-spacing: 0.9px;
+  margin-bottom: 2px;
+}
+.plan-name {
+  font-size: 17px; font-weight: 700;
+  color: var(--text-dark);
+  letter-spacing: -0.3px;
+  display: flex; align-items: center; gap: 8px;
+}
+.plan-chevron {
+  width: 22px; height: 22px;
+  background: rgba(26, 143, 227, 0.1);
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--accent-blue);
+}
+
+.plan-meta-row {
+  display: flex; align-items: center; gap: 18px;
+  font-size: 11px; color: var(--text-muted);
+  margin-top: 4px;
+  flex-wrap: wrap;
+}
+.plan-meta-item {
+  display: flex; align-items: center; gap: 5px;
+  font-family: 'SF Mono', Monaco, monospace;
+}
+.plan-meta-item strong {
+  color: var(--text-dark); font-weight: 600; font-family: 'Plus Jakarta Sans';
+}
+
+.plan-status {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 3px 9px; border-radius: 12px;
+  font-size: 10px; font-weight: 700;
+  background: #FFEDD2; color: #6B3D05;
+  text-transform: uppercase; letter-spacing: 0.4px;
+  font-family: 'Plus Jakarta Sans';
+}
+.plan-status .dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--accent-amber);
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.plan-actions {
+  display: flex; align-items: center; gap: 8px;
+  flex-shrink: 0;
+}
+.plan-btn {
+  background: white;
+  border: 1px solid var(--border-medium);
+  border-radius: 9px;
+  padding: 8px 14px;
+  font-family: inherit; font-size: 12px; font-weight: 600;
+  color: var(--text-dark);
+  cursor: pointer;
+  display: flex; align-items: center; gap: 6px;
+  white-space: nowrap;
+  transition: all 0.15s;
+}
+.plan-btn:hover { background: #F1F4F9; }
+.plan-btn.primary {
+  background: linear-gradient(135deg, var(--accent-blue), #1376C5);
+  color: white; border-color: transparent;
+  box-shadow: 0 3px 10px rgba(26, 143, 227, 0.3);
+}
+.plan-btn.primary:hover { opacity: 0.92; }
+
+/* Dropdown menu (static mock open) */
+.plan-dropdown-menu {
+  position: absolute;
+  top: 52px;
+  left: -12px;
+  width: 440px;
+  background: white;
+  border-radius: 14px;
+  border: 1px solid var(--border-medium);
+  box-shadow: 0 12px 40px rgba(26, 35, 50, 0.15), 0 2px 8px rgba(26, 35, 50, 0.06);
+  padding: 8px;
+  z-index: 100;
+  display: none;
+}
+.plan-dropdown-menu.open { display: block; }
+.plan-dropdown-search {
+  padding: 8px;
+  border-bottom: 1px solid var(--border-soft);
+  margin-bottom: 6px;
+}
+.plan-dropdown-search input {
+  width: 100%;
+  padding: 8px 12px 8px 32px;
+  background: #F1F4F9;
+  border: none; border-radius: 8px;
+  font-family: inherit; font-size: 12px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%235C6B7F' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: 10px center;
+}
+.plan-option {
+  padding: 10px 12px;
+  border-radius: 9px;
+  cursor: pointer;
+  display: flex; align-items: center; gap: 12px;
+  transition: background 0.12s;
+}
+.plan-option:hover { background: #F4F7FB; }
+.plan-option.current { background: #EAF4FF; }
+.plan-option-icon {
+  width: 32px; height: 32px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.plan-option-icon.blue { background: #DCEEFF; color: var(--accent-blue); }
+.plan-option-icon.green { background: #DCF3EB; color: var(--accent-teal); }
+.plan-option-icon.gray { background: #EEF0F4; color: var(--text-muted); }
+.plan-option-info { flex: 1; min-width: 0; }
+.plan-option-name {
+  font-size: 13px; font-weight: 600; color: var(--text-dark);
+  display: flex; align-items: center; gap: 8px;
+}
+.plan-option-meta {
+  font-size: 11px; color: var(--text-muted);
+  font-family: 'SF Mono', Monaco, monospace; margin-top: 2px;
+}
+.plan-option-status {
+  font-size: 10px; font-weight: 600;
+  padding: 2px 7px; border-radius: 10px;
+}
+.plan-option-status.active { background: #FFEDD2; color: #6B3D05; }
+.plan-option-status.complete { background: #DCF3EB; color: #0A5A45; }
+.plan-option-status.draft { background: #EEF0F4; color: #5C6B7F; }
+
+.plan-dropdown-footer {
+  padding: 8px 12px;
+  border-top: 1px solid var(--border-soft);
+  margin-top: 6px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.plan-dropdown-new {
+  background: transparent; border: none;
+  color: var(--accent-blue);
+  font-family: inherit; font-size: 12px; font-weight: 600;
+  cursor: pointer;
+  display: flex; align-items: center; gap: 5px;
+}
+.plan-dropdown-link {
+  color: var(--text-muted); font-size: 11px;
+  cursor: pointer;
+}
+
+/* ============ FILTER ROW ============ */
+.filter-row {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr 1fr;
+  gap: 16px; margin-bottom: 16px;
+}
+.filter-card {
+  background: var(--card-blue); border-radius: 16px;
+  padding: 18px 22px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: var(--shadow-card);
+}
+.filter-card.green { background: var(--card-green); }
+.filter-card.white { background: var(--card-white); }
+.filter-card-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 14px;
+}
+.filter-card-header h3 {
+  font-size: 15px; font-weight: 700; color: var(--text-dark);
+  display: flex; align-items: center; gap: 8px;
+}
+.header-link {
+  font-size: 12px; color: var(--accent-blue); cursor: pointer; font-weight: 500;
+}
+.date-row { display: flex; align-items: center; gap: 10px; }
+.date-input {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 10px; padding: 10px 12px;
+  font-family: inherit; font-size: 13px; font-weight: 500; color: var(--text-dark);
+}
+.date-arrow { color: var(--text-muted); font-size: 16px; }
+.date-meta { margin-top: 10px; font-size: 11px; color: var(--text-muted); }
+
+.source-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.source-chip {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 10px; cursor: pointer; transition: all 0.15s;
+  user-select: none;
+}
+.source-chip:hover { background: rgba(255, 255, 255, 0.95); }
+.source-chip.off { opacity: 0.4; }
+.source-icon {
+  width: 32px; height: 32px; border-radius: 9px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.source-icon.sales { background: #DCEEFF; color: var(--accent-blue); }
+.source-icon.forecast { background: #E5E2FA; color: var(--accent-purple); }
+.source-icon.safety { background: #DCF3EB; color: var(--accent-teal); }
+.source-icon.reorder { background: #FFEDD2; color: var(--accent-amber); }
+.source-text { flex: 1; display: flex; flex-direction: column; line-height: 1.2; }
+.source-label { font-size: 12px; font-weight: 600; color: var(--text-dark); }
+.source-value {
+  font-size: 11px; color: var(--text-muted);
+  font-family: 'SF Mono', Monaco, monospace; margin-top: 1px;
+}
+.source-check {
+  width: 16px; height: 16px; border-radius: 4px;
+  background: var(--accent-blue); color: white;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; flex-shrink: 0;
+}
+.source-chip.off .source-check { background: rgba(0,0,0,0.1); color: transparent; }
+
+.strategy-row { display: flex; flex-direction: column; gap: 10px; }
+.select-input {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 10px; padding: 10px 12px;
+  font-family: inherit; font-size: 12px; font-weight: 500; color: var(--text-dark);
+  cursor: pointer; appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%235C6B7F' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 32px;
+}
+.run-btn {
+  margin-top: 4px;
+  background: linear-gradient(135deg, var(--accent-blue), #1376C5);
+  color: white; border: none; border-radius: 10px;
+  padding: 11px 18px;
+  font-family: inherit; font-size: 13px; font-weight: 600;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  box-shadow: 0 4px 14px rgba(26, 143, 227, 0.35);
+  transition: transform 0.1s;
+}
+.run-btn:active { transform: scale(0.97); }
+
+/* ============ KPI ROW ============ */
+.kpi-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 2fr;
+  gap: 16px; margin-bottom: 16px;
+}
+.kpi-card {
+  background: var(--card-white); border-radius: 16px;
+  padding: 18px 22px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: var(--shadow-card);
+  position: relative; overflow: hidden;
+}
+.kpi-card .kpi-label {
+  font-size: 13px; font-weight: 600; color: var(--text-dark); line-height: 1.25;
+}
+.kpi-card .kpi-sub { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+.kpi-value {
+  font-size: 44px; font-weight: 800; letter-spacing: -1.5px;
+  line-height: 1; margin-top: 18px; color: var(--text-dark);
+}
+.kpi-value.teal { color: var(--accent-teal); }
+.kpi-value.red { color: var(--accent-red); }
+.kpi-value .kpi-plus { font-size: 28px; font-weight: 700; margin-right: 2px; }
+
+.kpi-wide {
+  background: linear-gradient(125deg, #E94B7B 0%, #C2185B 100%);
+  color: white;
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: 16px 22px;
+}
+.kpi-wide .kpi-wide-title {
+  font-size: 13px; font-weight: 600; opacity: 0.95; margin-bottom: 14px;
+}
+.kpi-wide-stats {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+}
+.kpi-wide-stat .lbl {
+  font-size: 11px; font-weight: 500; opacity: 0.85; margin-bottom: 4px;
+}
+.kpi-wide-stat .val {
+  font-size: 24px; font-weight: 700; letter-spacing: -0.5px;
+}
+
+/* ============ MRP TABLE CARD ============ */
+.mrp-card {
+  background: var(--card-white);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+.mrp-header {
+  padding: 18px 22px;
+  display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 1px solid var(--border-soft);
+  gap: 16px; flex-wrap: wrap;
+}
+.mrp-header-left { display: flex; align-items: center; gap: 16px; }
+.mrp-header h3 {
+  font-size: 15px; font-weight: 700; color: var(--text-dark);
+  display: flex; align-items: center; gap: 8px;
+  white-space: nowrap;
+}
+.mrp-tabs {
+  display: flex; background: #F1F4F9; border-radius: 10px; padding: 3px; gap: 2px;
+}
+.mrp-tab {
+  background: transparent; border: none;
+  padding: 8px 14px;
+  font-family: inherit; font-size: 12px; font-weight: 600;
+  color: var(--text-muted);
+  border-radius: 7px; cursor: pointer;
+  display: flex; align-items: center; gap: 6px;
+  white-space: nowrap;
+}
+.mrp-tab.active {
+  background: white; color: var(--text-dark);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+.mrp-tab .tab-count {
+  background: #E5EAF2; color: var(--text-muted);
+  padding: 1px 6px; border-radius: 8px;
+  font-size: 10px; font-family: 'SF Mono', Monaco, monospace;
+}
+.mrp-tab.active .tab-count { background: var(--accent-blue); color: white; }
+
+.mrp-header-right { display: flex; align-items: center; gap: 8px; }
+.search-input {
+  background: #F1F4F9; border: none; border-radius: 8px;
+  padding: 8px 12px 8px 32px;
+  font-family: inherit; font-size: 12px;
+  color: var(--text-dark); width: 180px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%235C6B7F' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: 10px center;
+}
+.icon-btn {
+  width: 32px; height: 32px;
+  background: #F1F4F9; border: none; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: var(--text-muted);
+}
+.icon-btn:hover { background: #E5EAF2; color: var(--text-dark); }
+
+.action-bar {
+  padding: 10px 22px;
+  background: #EAF4FF;
+  border-bottom: 1px solid var(--border-soft);
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px;
+}
+.action-selected { font-size: 13px; color: var(--text-dark); font-weight: 600; }
+.action-selected span {
+  background: var(--accent-blue); color: white;
+  padding: 2px 8px; border-radius: 10px;
+  font-size: 11px; font-weight: 700; margin-right: 6px;
+  font-family: 'SF Mono', Monaco, monospace;
+}
+.action-buttons { display: flex; gap: 8px; }
+.action-btn {
+  background: white; border: 1px solid var(--border-medium);
+  border-radius: 8px; padding: 7px 12px;
+  font-family: inherit; font-size: 12px; font-weight: 600;
+  color: var(--text-dark); cursor: pointer;
+  display: flex; align-items: center; gap: 6px;
+}
+.action-btn:hover { background: #F1F4F9; }
+.action-btn.primary {
+  background: var(--accent-blue); color: white; border-color: var(--accent-blue);
+}
+.action-btn.primary:hover { background: #1376C5; }
+.action-btn.teal {
+  background: var(--accent-teal); color: white; border-color: var(--accent-teal);
+}
+.action-btn.teal:hover { background: #0C9A78; }
+
+.table-wrap { overflow-x: auto; }
+.table-wrap::-webkit-scrollbar { height: 8px; }
+.table-wrap::-webkit-scrollbar-track { background: transparent; }
+.table-wrap::-webkit-scrollbar-thumb { background: rgba(26, 35, 50, 0.15); border-radius: 4px; }
+
+table.mrp {
+  width: 100%; min-width: 1180px;
+  border-collapse: collapse; font-size: 13px;
+}
+table.mrp thead th {
+  text-align: left; padding: 12px 14px;
+  font-size: 11px; font-weight: 700; color: var(--text-muted);
+  text-transform: uppercase; letter-spacing: 0.5px;
+  border-bottom: 1px solid var(--border-soft);
+  background: #FAFBFD; white-space: nowrap;
+}
+table.mrp tbody td {
+  padding: 14px; border-bottom: 1px solid var(--border-soft);
+  vertical-align: middle;
+}
+table.mrp tbody tr { transition: background 0.12s; }
+table.mrp tbody tr:hover { background: rgba(220, 238, 255, 0.3); }
+table.mrp tbody tr.selected { background: rgba(220, 238, 255, 0.5); }
+
+table.mrp tbody tr.group-parent {
+  background: linear-gradient(90deg, rgba(255, 237, 210, 0.45), rgba(255, 237, 210, 0.15));
+  border-left: 3px solid var(--accent-amber);
+}
+table.mrp tbody tr.group-parent:hover {
+  background: linear-gradient(90deg, rgba(255, 237, 210, 0.6), rgba(255, 237, 210, 0.2));
+}
+table.mrp tbody tr.group-child td:first-child {
+  padding-left: 48px; position: relative;
+}
+table.mrp tbody tr.group-child td:first-child::before {
+  content: ''; position: absolute;
+  left: 22px; top: 0; bottom: 0;
+  width: 2px; background: rgba(245, 165, 36, 0.3);
+}
+
+.chk {
+  width: 16px; height: 16px;
+  border-radius: 4px; border: 1.5px solid var(--border-medium);
+  background: white; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.chk.checked { background: var(--accent-blue); border-color: var(--accent-blue); }
+.chk.checked::after {
+  content: '';
+  width: 8px; height: 4px;
+  border-left: 2px solid white; border-bottom: 2px solid white;
+  transform: rotate(-45deg) translateY(-1px);
+}
+
+.mat-cell { display: flex; align-items: center; gap: 10px; min-width: 220px; }
+.mat-icon {
+  width: 32px; height: 32px; border-radius: 9px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.mat-icon.make { background: #FDE5EE; color: var(--accent-pink); }
+.mat-icon.buy { background: #DCF3EB; color: var(--accent-teal); }
+.mat-info { display: flex; flex-direction: column; line-height: 1.2; min-width: 0; }
+.mat-code {
+  font-family: 'SF Mono', Monaco, monospace;
+  font-size: 11px; font-weight: 700; color: var(--text-dark);
+}
+.mat-desc { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+.group-icon {
+  width: 18px; height: 18px; border-radius: 5px;
+  background: var(--accent-amber); color: white;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; cursor: pointer;
+}
+
+.type-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 3px 8px; border-radius: 6px;
+  font-size: 11px; font-weight: 600; white-space: nowrap;
+}
+.type-badge.make { background: #FDE5EE; color: #8C1A45; }
+.type-badge.buy { background: #DCF3EB; color: #0A5A45; }
+
+.num {
+  font-family: 'SF Mono', Monaco, monospace;
+  font-weight: 600; font-size: 13px;
+  color: var(--text-dark); white-space: nowrap;
+}
+.num.muted { color: var(--text-muted); font-weight: 500; }
+.num.neg { color: var(--accent-red); }
+.num-unit {
+  font-size: 10px; font-weight: 500; color: var(--text-muted);
+  margin-left: 2px;
+}
+.num-sub {
+  font-size: 10px; color: var(--text-muted); font-weight: 500;
+  display: block; margin-top: 1px; font-family: 'Plus Jakarta Sans';
+}
+
+.supplier-cell { display: flex; align-items: center; gap: 8px; }
+.supplier-avatar {
+  width: 24px; height: 24px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; font-weight: 700; color: white;
+}
+.supplier-name { font-size: 12px; font-weight: 500; color: var(--text-dark); }
+
+.status {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 4px 9px; border-radius: 12px;
+  font-size: 11px; font-weight: 600; white-space: nowrap;
+}
+.status .status-dot { width: 6px; height: 6px; border-radius: 50%; }
+.status.draft { background: #EEF0F4; color: #5C6B7F; }
+.status.draft .status-dot { background: #5C6B7F; }
+.status.review { background: #FFEDD2; color: #6B3D05; }
+.status.review .status-dot { background: var(--accent-amber); }
+.status.complete { background: #DCF3EB; color: #0A5A45; }
+.status.complete .status-dot { background: var(--accent-teal); }
+
+.row-actions { display: flex; gap: 4px; justify-content: flex-end; }
+.row-action-btn {
+  width: 28px; height: 28px;
+  background: transparent; border: none; border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: var(--text-muted);
+}
+.row-action-btn:hover { background: #F1F4F9; color: var(--text-dark); }
+
+.table-footer {
+  padding: 12px 22px;
+  display: flex; align-items: center; justify-content: space-between;
+  border-top: 1px solid var(--border-soft);
+  background: #FAFBFD;
+  font-size: 12px; color: var(--text-muted);
+}
+.footer-left { display: flex; align-items: center; gap: 14px; }
+.footer-right { display: flex; align-items: center; gap: 6px; }
+.page-btn {
+  width: 28px; height: 28px;
+  background: white; border: 1px solid var(--border-medium);
+  border-radius: 6px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-muted);
+}
+.page-btn.active { background: var(--accent-blue); color: white; border-color: var(--accent-blue); }
+
+/* ============ DRAFT PRODUCTION ORDERS SECTION ============ */
+.po-section {
+  background: var(--card-white);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+.po-section-header {
+  padding: 18px 22px;
+  display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 1px solid var(--border-soft);
+  gap: 16px; flex-wrap: wrap;
+}
+.po-section-left { display: flex; align-items: center; gap: 14px; }
+.po-section-header h3 {
+  font-size: 15px; font-weight: 700; color: var(--text-dark);
+  display: flex; align-items: center; gap: 8px;
+}
+.po-filter-chips {
+  display: flex; gap: 6px;
+}
+.po-filter-chip {
+  background: #F1F4F9;
+  border: none; border-radius: 7px;
+  padding: 6px 10px;
+  font-family: inherit; font-size: 11px; font-weight: 600;
+  color: var(--text-muted); cursor: pointer;
+  display: flex; align-items: center; gap: 4px;
+}
+.po-filter-chip.active { background: var(--accent-blue); color: white; }
+.po-filter-chip .chip-count {
+  background: rgba(255,255,255,0.9); color: var(--text-muted);
+  padding: 0px 5px; border-radius: 8px;
+  font-size: 10px; font-family: 'SF Mono', Monaco, monospace;
+}
+.po-filter-chip.active .chip-count { background: rgba(255,255,255,0.25); color: white; }
+
+.po-grid {
+  padding: 16px 22px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.po-card {
+  border: 1px solid var(--border-medium);
+  border-radius: 14px;
+  padding: 16px;
+  background: linear-gradient(180deg, #FDFEFF 0%, #F8FAFC 100%);
+  transition: all 0.15s;
+  cursor: pointer;
+}
+.po-card:hover {
+  border-color: var(--accent-blue);
+  box-shadow: 0 6px 18px rgba(26, 143, 227, 0.1);
+  transform: translateY(-1px);
+}
+
+.po-card-top {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 12px; margin-bottom: 12px;
+}
+.po-card-title-block { flex: 1; min-width: 0; }
+.po-card-num-row {
+  display: flex; align-items: center; gap: 8px; margin-bottom: 6px;
+}
+.po-color-dot {
+  width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
+}
+.po-card-num {
+  font-family: 'SF Mono', Monaco, monospace;
+  font-size: 11px; font-weight: 700;
+  color: var(--accent-blue);
+  letter-spacing: 0.3px;
+}
+.po-card-product {
+  font-size: 14px; font-weight: 700; color: var(--text-dark);
+  letter-spacing: -0.2px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.po-card-product-sub {
+  font-size: 11px; color: var(--text-muted); margin-top: 2px;
+  font-family: 'SF Mono', Monaco, monospace;
+}
+
+.po-card-qty {
+  text-align: right;
+  flex-shrink: 0;
+}
+.po-card-qty-value {
+  font-size: 22px; font-weight: 800; letter-spacing: -0.8px;
+  color: var(--text-dark); line-height: 1;
+}
+.po-card-qty-unit {
+  font-size: 11px; font-weight: 500; color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* Operations strip */
+.op-strip {
+  display: flex; align-items: stretch;
+  gap: 0;
+  margin: 12px -2px 12px;
+  overflow-x: auto;
+  padding: 2px;
+}
+.op-strip::-webkit-scrollbar { display: none; }
+
+.op-step {
+  flex: 1; min-width: 0;
+  background: white;
+  border: 1px solid var(--border-medium);
+  border-radius: 8px;
+  padding: 6px 8px;
+  display: flex; flex-direction: column;
+  gap: 2px;
+  position: relative;
+  min-width: 74px;
+}
+.op-step + .op-step { margin-left: 6px; }
+.op-step::before {
+  content: '';
+  position: absolute;
+  left: -7px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px; height: 1.5px;
+  background: var(--border-medium);
+}
+.op-step:first-child::before { display: none; }
+
+.op-code {
+  font-size: 10px; font-weight: 700;
+  color: var(--text-dark);
+  font-family: 'SF Mono', Monaco, monospace;
+  letter-spacing: 0.3px;
+}
+.op-name {
+  font-size: 11px; font-weight: 600; color: var(--text-dark);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.op-wc {
+  font-size: 9px; color: var(--text-muted);
+  font-family: 'SF Mono', Monaco, monospace;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.op-time {
+  font-size: 9px; color: var(--accent-blue); font-weight: 600;
+}
+
+/* Per-order color accents on operation steps */
+.po-card[data-color="pink"] .op-step { border-left: 3px solid var(--accent-pink); }
+.po-card[data-color="teal"] .op-step { border-left: 3px solid var(--accent-teal); }
+.po-card[data-color="blue"] .op-step { border-left: 3px solid var(--accent-blue); }
+.po-card[data-color="amber"] .op-step { border-left: 3px solid var(--accent-amber); }
+.po-card[data-color="purple"] .op-step { border-left: 3px solid var(--accent-purple); }
+
+.po-card-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--border-soft);
+  margin-top: 2px;
+}
+.po-card-footer-left {
+  display: flex; align-items: center; gap: 14px;
+  flex-wrap: wrap;
+  font-size: 11px; color: var(--text-muted);
+}
+.po-card-footer-item {
+  display: flex; align-items: center; gap: 5px;
+}
+.po-card-footer-item strong {
+  color: var(--text-dark); font-weight: 600;
+  font-family: 'SF Mono', Monaco, monospace;
+}
+
+.material-status {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 2px 7px; border-radius: 10px;
+  font-size: 10px; font-weight: 600;
+}
+.material-status.ok { background: #DCF3EB; color: #0A5A45; }
+.material-status.short { background: #FFE0DC; color: #8B1A12; }
+.material-status.partial { background: #FFEDD2; color: #6B3D05; }
+
+.po-card-footer-actions { display: flex; gap: 6px; }
+.po-action-btn {
+  width: 26px; height: 26px;
+  background: transparent; border: 1px solid var(--border-medium);
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: var(--text-muted);
+}
+.po-action-btn:hover { background: white; color: var(--text-dark); border-color: var(--accent-blue); }
+
+/* ============ BOTTOM BAR ============ */
+.bottom-bar {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: 44px;
+  background: var(--bottom-bar);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 16px 0 76px;
+  z-index: 50;
+}
+.bottom-left { display: flex; align-items: center; gap: 14px; }
+.bottom-home {
+  width: 32px; height: 32px; background: white; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--accent-blue); cursor: pointer;
+}
+.bottom-breadcrumb { font-size: 12px; color: rgba(255,255,255,0.7); }
+.bottom-breadcrumb strong { color: white; font-weight: 600; margin: 0 4px; }
+.bottom-right { display: flex; align-items: center; gap: 10px; }
+.aura-input {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.6);
+  padding: 7px 14px; border-radius: 18px;
+  font-family: inherit; font-size: 12px; width: 220px;
+}
+.aura-input::placeholder { color: rgba(255,255,255,0.5); }
+.aura-bot {
+  width: 30px; height: 30px;
+  background: linear-gradient(135deg, #4FC3F7, #29B6F6);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+.aura-logo {
+  width: 30px; height: 30px;
+  background: linear-gradient(135deg, #66BB6A, #43A047);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-weight: 800; font-size: 13px;
+}
+
+svg { display: block; }
+
+/* Responsive: stack cards on narrow screens */
+@media (max-width: 1180px) {
+  .po-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="sidebar">
+    <button class="menu-btn">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <div class="expand-arrow">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+    </div>
+    <div class="sidebar-icon" title="Fertigung">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+    </div>
+    <div class="sidebar-icon active" title="Bedarfsplanung">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+    </div>
+    <div class="sidebar-icon" title="Kalender">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+    </div>
+    <div class="sidebar-icon" title="Aufgaben">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+    </div>
+    <div class="sidebar-icon" title="Lieferanten">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+    </div>
+    <div class="sidebar-icon" title="Dokumente">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+    </div>
+    <div class="sidebar-bottom">
+      <div class="sidebar-icon" title="Favoriten">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      </div>
+      <div class="sidebar-icon" title="Einstellungen">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ============ MAIN ============ -->
+  <main class="main">
+
+    <!-- HEADER -->
+    <header class="header">
+      <div class="header-title">
+        <h1>Materialbedarfsplanung</h1>
+        <p>MRP aus dem Bedarf ausführen und Fertigungs- &amp; Bestellvorschläge erzeugen</p>
+      </div>
+      <div class="header-right">
+        <div class="header-icon-group">
+          <div class="header-icon-btn" title="Historie">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+          </div>
+          <div class="header-icon-btn" title="Favoriten">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+        </div>
+        <div class="user-info">
+          <div class="user-text">
+            <div class="name">Thomas Weber</div>
+            <div class="role">Fertigungsplaner</div>
+          </div>
+          <div class="avatar">TW</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- CONTENT -->
+    <div class="content">
+
+      <!-- ============ PLAN SELECTOR BAR ============ -->
+      <div class="plan-bar">
+        <div class="plan-select">
+          <div class="plan-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>
+          </div>
+          <div class="plan-dropdown" id="planDropdown">
+            <div class="plan-dropdown-trigger">
+              <div class="plan-name-block">
+                <span class="plan-label">Aktiver Plan</span>
+                <span class="plan-name">
+                  PLN-2026-Q2-W18
+                  <span class="plan-chevron">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                  </span>
+                </span>
+                <div class="plan-meta-row">
+                  <span class="plan-meta-item"><strong>Erstellt</strong> 18.04.2026, 14:32</span>
+                  <span class="plan-meta-item"><strong>Verantw.</strong> T. Weber</span>
+                  <span class="plan-meta-item"><strong>Horizont</strong> 27.04. – 05.06.</span>
+                  <span class="plan-meta-item"><strong>Letzter Lauf</strong> vor 2 Std.</span>
+                  <span class="plan-status"><span class="dot"></span>In Prüfung</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Dropdown menu (click to open) -->
+            <div class="plan-dropdown-menu" id="planMenu">
+              <div class="plan-dropdown-search">
+                <input type="text" placeholder="Pläne suchen …">
+              </div>
+
+              <div class="plan-option current">
+                <div class="plan-option-icon blue">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                </div>
+                <div class="plan-option-info">
+                  <div class="plan-option-name">
+                    PLN-2026-Q2-W18
+                    <span class="plan-option-status active">● In Prüfung</span>
+                  </div>
+                  <div class="plan-option-meta">27.04. – 05.06. · 47 Positionen · 23 Vorschläge</div>
+                </div>
+              </div>
+
+              <div class="plan-option">
+                <div class="plan-option-icon green">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <div class="plan-option-info">
+                  <div class="plan-option-name">
+                    PLN-2026-Q2-W17
+                    <span class="plan-option-status complete">● Abgeschlossen</span>
+                  </div>
+                  <div class="plan-option-meta">20.04. – 29.05. · 42 Positionen · 19 freigegeben</div>
+                </div>
+              </div>
+
+              <div class="plan-option">
+                <div class="plan-option-icon green">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <div class="plan-option-info">
+                  <div class="plan-option-name">
+                    PLN-2026-Q2-W16
+                    <span class="plan-option-status complete">● Abgeschlossen</span>
+                  </div>
+                  <div class="plan-option-meta">13.04. – 22.05. · 38 Positionen · 17 freigegeben</div>
+                </div>
+              </div>
+
+              <div class="plan-option">
+                <div class="plan-option-icon gray">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                </div>
+                <div class="plan-option-info">
+                  <div class="plan-option-name">
+                    Szenario · Sommerspitze
+                    <span class="plan-option-status draft">● Entwurf</span>
+                  </div>
+                  <div class="plan-option-meta">01.06. – 31.08. · +15 % Prognose · Was-wäre-wenn</div>
+                </div>
+              </div>
+
+              <div class="plan-option">
+                <div class="plan-option-icon gray">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+                </div>
+                <div class="plan-option-info">
+                  <div class="plan-option-name">
+                    PLN-2026-Q1-W13
+                    <span class="plan-option-status complete">● Archiviert</span>
+                  </div>
+                  <div class="plan-option-meta">23.03. – 01.05. · 36 Positionen · Geschlossen</div>
+                </div>
+              </div>
+
+              <div class="plan-dropdown-footer">
+                <button class="plan-dropdown-new">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                  Neuen Plan anlegen
+                </button>
+                <span class="plan-dropdown-link">Alle Pläne durchsuchen →</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="plan-actions">
+          <button class="plan-btn">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Duplizieren
+          </button>
+          <button class="plan-btn">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+            Speichern
+          </button>
+          <button class="plan-btn primary">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Neuer Plan
+          </button>
+        </div>
+      </div>
+
+      <!-- ============ FILTER ROW ============ -->
+      <div class="filter-row">
+        <div class="filter-card">
+          <div class="filter-card-header">
+            <h3>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              Planungshorizont
+            </h3>
+            <span class="header-link">Zurücksetzen</span>
+          </div>
+          <div class="date-row">
+            <input type="date" value="2026-04-27" class="date-input">
+            <span class="date-arrow">→</span>
+            <input type="date" value="2026-06-05" class="date-input">
+          </div>
+          <div class="date-meta">6 Wochen · Wochenweise gestaffelt · Nächster Lauf in 22 Std.</div>
+        </div>
+
+        <div class="filter-card green">
+          <div class="filter-card-header">
+            <h3>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              Bedarfsquellen <span style="color:var(--text-muted);font-weight:500;font-size:12px;margin-left:6px">4 aktiv</span>
+            </h3>
+            <span class="header-link">Konfigurieren</span>
+          </div>
+          <div class="source-grid">
+            <div class="source-chip" data-src="sales">
+              <div class="source-icon sales">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              </div>
+              <div class="source-text">
+                <span class="source-label">Kundenaufträge</span>
+                <span class="source-value">38 Aufträge · 12.400 Stk</span>
+              </div>
+              <span class="source-check">✓</span>
+            </div>
+            <div class="source-chip" data-src="forecast">
+              <div class="source-icon forecast">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+              </div>
+              <div class="source-text">
+                <span class="source-label">Prognose</span>
+                <span class="source-value">Q2 · 8.600 Stk</span>
+              </div>
+              <span class="source-check">✓</span>
+            </div>
+            <div class="source-chip" data-src="safety">
+              <div class="source-icon safety">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </div>
+              <div class="source-text">
+                <span class="source-label">Sicherheitsbestand</span>
+                <span class="source-value">47 Positionen überwacht</span>
+              </div>
+              <span class="source-check">✓</span>
+            </div>
+            <div class="source-chip" data-src="reorder">
+              <div class="source-icon reorder">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+              </div>
+              <div class="source-text">
+                <span class="source-label">Meldebestand</span>
+                <span class="source-value">Min/Max-Regeln</span>
+              </div>
+              <span class="source-check">✓</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="filter-card white">
+          <div class="filter-card-header">
+            <h3>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 6v6m11-7h-6m-6 0H1"/></svg>
+              MRP-Einstellungen
+            </h3>
+          </div>
+          <div class="strategy-row">
+            <select class="select-input">
+              <option>Regenerativ (Komplettlauf)</option>
+              <option>Nur Nettoänderung</option>
+            </select>
+            <select class="select-input">
+              <option>Los-für-Los · Auto-Zusammenfassung</option>
+              <option>Feste Losgröße · Manuelle Prüfung</option>
+              <option>Optimale Losgröße</option>
+            </select>
+            <button class="run-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              MRP ausführen
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ KPI ROW ============ -->
+      <div class="kpi-row">
+        <div class="kpi-card">
+          <div class="kpi-label">Geplante<br>Positionen</div>
+          <div class="kpi-sub">Im MRP-Umfang</div>
+          <div class="kpi-value">47</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Netto-<br>fehlmenge</div>
+          <div class="kpi-sub">Beschaffung nötig</div>
+          <div class="kpi-value red">18</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Fertigungs-<br>aufträge</div>
+          <div class="kpi-sub">Vorschläge erzeugt</div>
+          <div class="kpi-value"><span class="kpi-plus">+</span>08</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Bestel-<br>lungen</div>
+          <div class="kpi-sub">Vorschläge erzeugt</div>
+          <div class="kpi-value teal"><span class="kpi-plus">+</span>15</div>
+        </div>
+        <div class="kpi-card kpi-wide">
+          <div class="kpi-wide-title">MRP-Lauf-Übersicht</div>
+          <div class="kpi-wide-stats">
+            <div class="kpi-wide-stat">
+              <div class="lbl">Gesamtwert</div>
+              <div class="val">248 Tsd. €</div>
+            </div>
+            <div class="kpi-wide-stat">
+              <div class="lbl">Zusammengefasst</div>
+              <div class="val">6 → 2</div>
+            </div>
+            <div class="kpi-wide-stat">
+              <div class="lbl">Einsparung</div>
+              <div class="val">12,4 Tsd. €</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ MRP TABLE ============ -->
+      <div class="mrp-card">
+        <div class="mrp-header">
+          <div class="mrp-header-left">
+            <h3>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+              MRP-Ergebnisse — Letzter Lauf 18.04., 14:32
+            </h3>
+            <div class="mrp-tabs">
+              <button class="mrp-tab active">Alle <span class="tab-count">23</span></button>
+              <button class="mrp-tab">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                Fertigung <span class="tab-count">08</span>
+              </button>
+              <button class="mrp-tab">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                Beschaffung <span class="tab-count">15</span>
+              </button>
+              <button class="mrp-tab">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg>
+                Zusammengefasst <span class="tab-count">02</span>
+              </button>
+            </div>
+          </div>
+          <div class="mrp-header-right">
+            <input type="text" class="search-input" placeholder="Material suchen …">
+            <button class="icon-btn" title="Filtern">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+            </button>
+            <button class="icon-btn" title="Exportieren">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="action-bar">
+          <div class="action-selected">
+            <span>3</span> Vorschläge ausgewählt · 2 vom selben Lieferanten (thyssenkrupp AG)
+          </div>
+          <div class="action-buttons">
+            <button class="action-btn">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/></svg>
+              Zusammenfassen (2)
+            </button>
+            <button class="action-btn">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              Zur Prüfung senden
+            </button>
+            <button class="action-btn teal">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Abschließen (3)
+            </button>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table class="mrp">
+            <thead>
+              <tr>
+                <th style="width:32px"></th>
+                <th>Material</th>
+                <th>Art</th>
+                <th style="text-align:right">Bedarf</th>
+                <th style="text-align:right">Bestand</th>
+                <th style="text-align:right">Nettobedarf</th>
+                <th style="text-align:right">Vorschlagsmenge</th>
+                <th>Quelle</th>
+                <th>Termin</th>
+                <th>Status</th>
+                <th style="width:80px;text-align:right">Aktionen</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <tr>
+                <td><div class="chk"></div></td>
+                <td><div class="mat-cell"><div class="mat-icon make"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div><div class="mat-info"><span class="mat-code">FG-HYD-PMP-01</span><span class="mat-desc">Hydraulikpumpengehäuse — Grauguss</span></div></div></td>
+                <td><span class="type-badge make">◆ Eigen</span></td>
+                <td style="text-align:right"><span class="num">25</span><span class="num-unit">Stk</span><span class="num-sub">Kundenauftrag</span></td>
+                <td style="text-align:right"><span class="num muted">4</span></td>
+                <td style="text-align:right"><span class="num neg">21</span></td>
+                <td style="text-align:right"><span class="num">25</span><span class="num-unit">Stk</span><span class="num-sub">Losgröße 25</span></td>
+                <td><div class="supplier-cell"><div class="supplier-avatar" style="background:linear-gradient(135deg,#E94B7B,#C2185B)">ZE</div><span class="supplier-name">Zerspanung</span></div></td>
+                <td><span class="num muted">01.05.2026</span></td>
+                <td><span class="status complete"><span class="status-dot"></span>Abgeschlossen</span></td>
+                <td><div class="row-actions"><button class="row-action-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button><button class="row-action-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button></div></td>
+              </tr>
+
+              <tr class="selected">
+                <td><div class="chk checked"></div></td>
+                <td><div class="mat-cell"><div class="mat-icon make"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div><div class="mat-info"><span class="mat-code">SA-BRKT-ASY</span><span class="mat-desc">Stahlkonsolen-Baugruppe</span></div></div></td>
+                <td><span class="type-badge make">◆ Eigen</span></td>
+                <td style="text-align:right"><span class="num">80</span><span class="num-unit">Stk</span><span class="num-sub">KA + Prognose</span></td>
+                <td style="text-align:right"><span class="num muted">12</span></td>
+                <td style="text-align:right"><span class="num neg">68</span></td>
+                <td style="text-align:right"><span class="num">80</span><span class="num-unit">Stk</span><span class="num-sub">Aufgerundet</span></td>
+                <td><div class="supplier-cell"><div class="supplier-avatar" style="background:linear-gradient(135deg,#0FB58F,#0C9A78)">FL</div><span class="supplier-name">Fertigungslinie</span></div></td>
+                <td><span class="num muted">30.04.2026</span></td>
+                <td><span class="status review"><span class="status-dot"></span>In Prüfung</span></td>
+                <td><div class="row-actions"><button class="row-action-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button><button class="row-action-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button></div></td>
+              </tr>
+
+              <tr class="group-parent selected">
+                <td><div class="chk checked"></div></td>
+                <td><div class="mat-cell"><div class="group-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div><div class="mat-info"><span class="mat-code">ZUSAMMENGEFASST · PO-DRAFT-00412</span><span class="mat-desc">2 Positionen von thyssenkrupp AG gruppiert</span></div></div></td>
+                <td><span class="type-badge buy">● Kauf</span></td>
+                <td style="text-align:right"><span class="num">—</span></td>
+                <td style="text-align:right"><span class="num">—</span></td>
+                <td style="text-align:right"><span class="num neg">—</span></td>
+                <td style="text-align:right"><span class="num">18.240 €</span><span class="num-sub">Mengenrabatt 8 %</span></td>
+                <td><div class="supplier-cell"><div class="supplier-avatar" style="background:linear-gradient(135deg,#1A8FE3,#0E5BA0)">TK</div><span class="supplier-name">thyssenkrupp AG</span></div></td>
+                <td><span class="num muted">02.05.2026</span></td>
+                <td><span class="status review"><span class="status-dot"></span>In Prüfung</span></td>
+                <td><div class="row-actions"><button class="row-action-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg></button></div></td>
+              </tr>
+
+              <tr class="group-child">
+                <td><div class="chk checked" style="opacity:0.5"></div></td>
+                <td><div class="mat-cell"><div class="mat-icon buy"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></div><div class="mat-info"><span class="mat-code">RM-PLT-S235-06</span><span class="mat-desc">Stahlblech S235 · 6 mm · 2,5×1,25 m</span></div></div></td>
+                <td><span class="type-badge buy">● Kauf</span></td>
+                <td style="text-align:right"><span class="num">45</span><span class="num-unit">Tfl</span><span class="num-sub">Stücklistenauflösung</span></td>
+                <td style="text-align:right"><span class="num muted">8</span></td>
+                <td style="text-align:right"><span class="num neg">37</span></td>
+                <td style="text-align:right"><span class="num">40</span><span class="num-unit">Tfl</span><span class="num-sub">Gebindemenge</span></td>
+                <td><div class="supplier-cell"><div class="supplier-avatar" style="background:linear-gradient(135deg,#1A8FE3,#0E5BA0)">TK</div><span class="supplier-name">thyssenkrupp AG</span></div></td>
+                <td><span class="num muted">02.05.2026</span></td>
+                <td><span class="status review"><span class="status-dot"></span>In Prüfung</span></td>
+                <td><div class="row-actions"><button class="row-action-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button></div></td>
+              </tr>
+
+              <tr class="group-child">
+                <td><div class="chk checked" style="opacity:0.5"></div></td>
+                <td><div class="mat-cell"><div class="mat-icon buy"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></div><div class="mat-info"><span class="mat-code">RM-TUB-CHS-40</span><span class="mat-desc">U-Profil 40×40 Baustahl · 6 m</span></div></div></td>
+                <td><span class="type-badge buy">● Kauf</span></td>
+                <td style="text-align:right"><span class="num">28</span><span class="num-unit">Stg</span><span class="num-sub">Stücklistenauflösung</span></td>
+                <td style="text-align:right"><span class="num muted">3</span></td>
+                <td style="text-align:right"><span class="num neg">25</span></td>
+                <td style="text-align:right"><span class="num">30</span><span class="num-unit">Stg</span><span class="num-sub">Bund 10</span></td>
+                <td><div class="supplier-cell"><div class="supplier-avatar" style="background:linear-gradient(135deg,#1A8FE3,#0E5BA0)">TK</div><span class="supplier-name">thyssenkrupp AG</span></div></td>
+                <td><span class="num muted">02.05.2026</span></td>
+                <td><span class="status review"><span class="status-dot"></span>In Prüfung</span></td>
+                <td><div class="row-actions"><button class="row-action-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button></div></td>
+              </tr>
+
+              <tr class="selected">
+                <td><div class="chk checked"></div></td>
+                <td><div class="mat-cell"><div class="mat-icon buy"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></div><div class="mat-info"><span class="mat-code">CMP-BRG-6205</span><span class="mat-desc">Rillenkugellager 6205-2RS</span></div></div></td>
+                <td><span class="type-badge buy">● Kauf</span></td>
+                <td style="text-align:right"><span class="num">120</span><span class="num-unit">Stk</span><span class="num-sub">Montage-Stückliste</span></td>
+                <td style="text-align:right"><span class="num muted">45</span></td>
+                <td style="text-align:right"><span class="num neg">75</span></td>
+                <td style="text-align:right"><span class="num">100</span><span class="num-unit">Stk</span><span class="num-sub">Mindestmenge · Karton</span></td>
+                <td><div class="supplier-cell"><div class="supplier-avatar" style="background:linear-gradient(135deg,#F5A524,#D97706)">SK</div><span class="supplier-name">SKF Deutschland</span></div></td>
+                <td><span class="num muted">05.05.2026</span></td>
+                <td><span class="status draft"><span class="status-dot"></span>Entwurf</span></td>
+                <td><div class="row-actions"><button class="row-action-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button><button class="row-action-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button></div></td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+
+        <div class="table-footer">
+          <div class="footer-left">
+            <span>1–6 von 23 Vorschlägen</span>
+            <select class="select-input" style="padding:4px 26px 4px 8px;font-size:11px">
+              <option>8 pro Seite</option>
+              <option>25 pro Seite</option>
+              <option>50 pro Seite</option>
+            </select>
+          </div>
+          <div class="footer-right">
+            <button class="page-btn"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+            <button class="page-btn active">1</button>
+            <button class="page-btn">2</button>
+            <button class="page-btn">3</button>
+            <button class="page-btn"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ DRAFT PRODUCTION ORDERS SECTION ============ -->
+      <div class="po-section">
+        <div class="po-section-header">
+          <div class="po-section-left">
+            <h3>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+              Fertigungsauftrags-Vorschläge <span style="color:var(--text-muted);font-weight:500;font-size:12px;margin-left:4px">8 aus diesem Plan erzeugt</span>
+            </h3>
+            <div class="po-filter-chips">
+              <button class="po-filter-chip active">Alle <span class="chip-count">8</span></button>
+              <button class="po-filter-chip">Entwurf <span class="chip-count">5</span></button>
+              <button class="po-filter-chip">Prüfung <span class="chip-count">2</span></button>
+              <button class="po-filter-chip">Abgeschlossen <span class="chip-count">1</span></button>
+            </div>
+          </div>
+          <div class="mrp-header-right">
+            <button class="icon-btn" title="Alle im Gantt planen">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            </button>
+            <button class="action-btn primary">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              An Planung senden
+            </button>
+          </div>
+        </div>
+
+        <div class="po-grid">
+
+          <!-- PO Card 1 — Hydraulic pump body (pink) — COMPLETED -->
+          <div class="po-card" data-color="pink">
+            <div class="po-card-top">
+              <div class="po-card-title-block">
+                <div class="po-card-num-row">
+                  <span class="po-color-dot" style="background:#E94B7B"></span>
+                  <span class="po-card-num">PO-DRAFT-00087</span>
+                  <span class="status complete"><span class="status-dot"></span>Abgeschlossen</span>
+                </div>
+                <div class="po-card-product">Hydraulikpumpengehäuse</div>
+                <div class="po-card-product-sub">FG-HYD-PMP-01 · Rev C</div>
+              </div>
+              <div class="po-card-qty">
+                <div class="po-card-qty-value">25</div>
+                <div class="po-card-qty-unit">Stk</div>
+              </div>
+            </div>
+
+            <div class="op-strip">
+              <div class="op-step"><span class="op-code">OP10</span><span class="op-name">Fräsen</span><span class="op-wc">CNC-01</span><span class="op-time">4 Std.</span></div>
+              <div class="op-step"><span class="op-code">OP20</span><span class="op-name">Bohren</span><span class="op-wc">CNC-01</span><span class="op-time">3 Std.</span></div>
+              <div class="op-step"><span class="op-code">OP30</span><span class="op-name">Schweißen</span><span class="op-wc">WELD-02</span><span class="op-time">3 Std.</span></div>
+              <div class="op-step"><span class="op-code">OP40</span><span class="op-name">Montage</span><span class="op-wc">ASSY-01</span><span class="op-time">4 Std.</span></div>
+              <div class="op-step"><span class="op-code">OP50</span><span class="op-name">Lackieren</span><span class="op-wc">PAINT-01</span><span class="op-time">2 Std.</span></div>
+              <div class="op-step"><span class="op-code">OP60</span><span class="op-name">QS</span><span class="op-wc">QC-01</span><span class="op-time">1 Std.</span></div>
+            </div>
+
+            <div class="po-card-footer">
+              <div class="po-card-footer-left">
+                <span class="po-card-footer-item"><strong>27.04.</strong>→<strong>01.05.</strong></span>
+                <span class="po-card-footer-item">Komp.: <strong>3</strong></span>
+                <span class="material-status ok">● Material verfügbar</span>
+              </div>
+              <div class="po-card-footer-actions">
+                <button class="po-action-btn" title="Anzeigen"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+                <button class="po-action-btn" title="Mehr"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button>
+              </div>
+            </div>
+          </div>
+
+          <!-- PO Card 2 — Steel bracket (teal) — UNDER REVIEW -->
+          <div class="po-card" data-color="teal">
+            <div class="po-card-top">
+              <div class="po-card-title-block">
+                <div class="po-card-num-row">
+                  <span class="po-color-dot" style="background:#0FB58F"></span>
+                  <span class="po-card-num">PO-DRAFT-00088</span>
+                  <span class="status review"><span class="status-dot"></span>In Prüfung</span>
+                </div>
+                <div class="po-card-product">Stahlkonsolen-Baugruppe</div>
+                <div class="po-card-product-sub">SA-BRKT-ASY · Rev B</div>
+              </div>
+              <div class="po-card-qty">
+                <div class="po-card-qty-value">80</div>
+                <div class="po-card-qty-unit">Stk</div>
+              </div>
+            </div>
+
+            <div class="op-strip">
+              <div class="op-step"><span class="op-code">OP10</span><span class="op-name">CNC</span><span class="op-wc">CNC-02</span><span class="op-time">6 Std.</span></div>
+              <div class="op-step"><span class="op-code">OP20</span><span class="op-name">WIG-Schw.</span><span class="op-wc">WELD-02</span><span class="op-time">5 Std.</span></div>
+              <div class="op-step"><span class="op-code">OP30</span><span class="op-name">Lackieren</span><span class="op-wc">PAINT-01</span><span class="op-time">3 Std.</span></div>
+              <div class="op-step"><span class="op-code">OP40</span><span class="op-name">QS</span><span class="op-wc">QC-01</span><span class="op-time">1 Std.</span></div>
+            </div>
+
+            <div class="po-card-footer">
+              <div class="po-card-footer-left">
+                <span class="po-card-footer-item"><strong>27.04.</strong>→<strong>30.04.</strong></span>
+                <span class="po-card-footer-item">Komp.: <strong>5</strong></span>
+                <span class="material-status partial">● Teilweise — 2 Fehlmengen</span>
+              </div>
+              <div class="po-card-footer-actions">
+                <button class="po-action-btn" title="Anzeigen"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+                <button class="po-action-btn" title="Mehr"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button>
+              </div>
+            </div>
+          </div>
+
+          <!-- PO Card 3 — Control panel (amber) — DRAFT -->
+          <div class="po-card" data-color="amber">
+            <div class="po-card-top">
+              <div class="po-card-title-block">
+                <div class="po-card-num-row">
+                  <span class="po-color-dot" style="background:#F5A524"></span>
+                  <span class="po-card-num">PO-DRAFT-00089</span>
+                  <span class="status draft"><span class="status-dot"></span>Entwurf</span>
+                </div>
+                <div class="po-card-product">Schaltschrank-Gehäuse</div>
+                <div class="po-card-product-sub">FG-ENC-CPN-02 · Rev A</div>
+              </div>
+              <div class="po-card-qty">
+                <div class="po-card-qty-value">12</div>
+                <div class="po-card-qty-unit">Stk</div>
+              </div>
+            </div>
+
+            <div class="op-strip">
+              <div class="op-step"><span class="op-code">OP10</span><span class="op-name">Schneiden</span><span class="op-wc">CNC-02</span><span class="op-time">4 Std.</span></div>
+              <div class="op-step"><span class="op-code">OP20</span><span class="op-name">Abkanten</span><span class="op-wc">BEND-01</span><span class="op-time">2 Std.</span></div>
+              <div class="op-step"><span class="op-code">OP30</span><span class="op-name">Montage</span><span class="op-wc">ASSY-02</span><span class="op-time">5 Std.</span></div>
+              <div class="op-step"><span class="op-code">OP40</span><span class="op-name">Lackieren</span><span class="op-wc">PAINT-01</span><span class="op-time">2 Std.</span></div>
+              <div class="op-step"><span class="op-code">OP50</span><span class="op-name">QS</span><span class="op-wc">QC-01</span><span class="op-time">1 Std.</span></div>
+            </div>
+
+            <div class="po-card-footer">
+              <div class="po-card-footer-left">
+                <span class="po-card-footer-item"><strong>28.04.</strong>→<strong>02.05.</strong></span>
+                <span class="po-card-footer-item">Komp.: <strong>7</strong></span>
+                <span class="material-status short">● Fehlmenge — 4 Positionen</span>
+              </div>
+              <div class="po-card-footer-actions">
+                <button class="po-action-btn" title="Anzeigen"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+                <button class="po-action-btn" title="Mehr"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button>
+              </div>
+            </div>
+          </div>
+
+          <!-- PO Card 4 — Motor mount (blue) — DRAFT -->
+          <div class="po-card" data-color="blue">
+            <div class="po-card-top">
+              <div class="po-card-title-block">
+                <div class="po-card-num-row">
+                  <span class="po-color-dot" style="background:#1A8FE3"></span>
+                  <span class="po-card-num">PO-DRAFT-00090</span>
+                  <span class="status draft"><span class="status-dot"></span>Entwurf</span>
+                </div>
+                <div class="po-card-product">Motorhalterung-Schweißteil · Typ A</div>
+                <div class="po-card-product-sub">SA-MNT-MOT-A · Rev D</div>
+              </div>
+              <div class="po-card-qty">
+                <div class="po-card-qty-value">40</div>
+                <div class="po-card-qty-unit">Stk</div>
+              </div>
+            </div>
+
+            <div class="op-strip">
+              <div class="op-step"><span class="op-code">OP10</span><span class="op-name">CNC</span><span class="op-wc">CNC-02</span><span class="op-time">5 Std.</span></div>
+              <div class="op-step"><span class="op-code">OP20</span><span class="op-name">Schweißen</span><span class="op-wc">WELD-01</span><span class="op-time">6 Std.</span></div>
+              <div class="op-step"><span class="op-code">OP30</span><span class="op-name">Lackieren</span><span class="op-wc">PAINT-01</span><span class="op-time">2 Std.</span></div>
+              <div class="op-step"><span class="op-code">OP40</span><span class="op-name">QS</span><span class="op-wc">QC-01</span><span class="op-time">1 Std.</span></div>
+            </div>
+
+            <div class="po-card-footer">
+              <div class="po-card-footer-left">
+                <span class="po-card-footer-item"><strong>28.04.</strong>→<strong>02.05.</strong></span>
+                <span class="po-card-footer-item">Komp.: <strong>4</strong></span>
+                <span class="material-status ok">● Material verfügbar</span>
+              </div>
+              <div class="po-card-footer-actions">
+                <button class="po-action-btn" title="Anzeigen"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+                <button class="po-action-btn" title="Mehr"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button>
+              </div>
+            </div>
+          </div>
+
+          <!-- PO Card 5 — Pressure valve (purple) — UNDER REVIEW -->
+          <div class="po-card" data-color="purple">
+            <div class="po-card-top">
+              <div class="po-card-title-block">
+                <div class="po-card-num-row">
+                  <span class="po-color-dot" style="background:#8B7FE8"></span>
+                  <span class="po-card-num">PO-DRAFT-00091</span>
+                  <span class="status review"><span class="status-dot"></span>In Prüfung</span>
+                </div>
+                <div class="po-card-product">Druckventil-Gehäuse · 3"</div>
+                <div class="po-card-product-sub">FG-VLV-HSG-03 · Rev A</div>
+              </div>
+              <div class="po-card-qty">
+                <div class="po-card-qty-value">20</div>
+                <div class="po-card-qty-unit">Stk</div>
+              </div>
+            </div>
+
+            <div class="op-strip">
+              <div class="op-step"><span class="op-code">OP10</span><span class="op-name">Drehen</span><span class="op-wc">CNC-03</span><span class="op-time">4 Std.</span></div>
+              <div class="op-step"><span class="op-code">OP20</span><span class="op-name">Fräsen</span><span class="op-wc">CNC-02</span><span class="op-time">3 Std.</span></div>
+              <div class="op-step"><span class="op-code">OP30</span><span class="op-name">Schweißen</span><span class="op-wc">WELD-02</span><span class="op-time">3 Std.</span></div>
+              <div class="op-step"><span class="op-code">OP40</span><span class="op-name">Montage</span><span class="op-wc">ASSY-01</span><span class="op-time">4 Std.</span></div>
+              <div class="op-step"><span class="op-code">OP50</span><span class="op-name">QS</span><span class="op-wc">QC-01</span><span class="op-time">2 Std.</span></div>
+            </div>
+
+            <div class="po-card-footer">
+              <div class="po-card-footer-left">
+                <span class="po-card-footer-item"><strong>29.04.</strong>→<strong>04.05.</strong></span>
+                <span class="po-card-footer-item">Komp.: <strong>6</strong></span>
+                <span class="material-status ok">● Material verfügbar</span>
+              </div>
+              <div class="po-card-footer-actions">
+                <button class="po-action-btn" title="Anzeigen"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+                <button class="po-action-btn" title="Mehr"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button>
+              </div>
+            </div>
+          </div>
+
+          <!-- PO Card 6 — Gearbox cover (pink) — DRAFT -->
+          <div class="po-card" data-color="pink">
+            <div class="po-card-top">
+              <div class="po-card-title-block">
+                <div class="po-card-num-row">
+                  <span class="po-color-dot" style="background:#E94B7B"></span>
+                  <span class="po-card-num">PO-DRAFT-00092</span>
+                  <span class="status draft"><span class="status-dot"></span>Entwurf</span>
+                </div>
+                <div class="po-card-product">Getriebedeckel</div>
+                <div class="po-card-product-sub">FG-GBX-CVR-01 · Rev B</div>
+              </div>
+              <div class="po-card-qty">
+                <div class="po-card-qty-value">60</div>
+                <div class="po-card-qty-unit">Stk</div>
+              </div>
+            </div>
+
+            <div class="op-strip">
+              <div class="op-step"><span class="op-code">OP10</span><span class="op-name">Gießen</span><span class="op-wc">CAST-01</span><span class="op-time">8 Std.</span></div>
+              <div class="op-step"><span class="op-code">OP20</span><span class="op-name">Fräsen</span><span class="op-wc">CNC-02</span><span class="op-time">5 Std.</span></div>
+              <div class="op-step"><span class="op-code">OP30</span><span class="op-name">Bohren</span><span class="op-wc">CNC-01</span><span class="op-time">3 Std.</span></div>
+              <div class="op-step"><span class="op-code">OP40</span><span class="op-name">QS</span><span class="op-wc">QC-01</span><span class="op-time">1 Std.</span></div>
+            </div>
+
+            <div class="po-card-footer">
+              <div class="po-card-footer-left">
+                <span class="po-card-footer-item"><strong>02.05.</strong>→<strong>07.05.</strong></span>
+                <span class="po-card-footer-item">Komp.: <strong>2</strong></span>
+                <span class="material-status partial">● Teilweise — 1 Fehlmenge</span>
+              </div>
+              <div class="po-card-footer-actions">
+                <button class="po-action-btn" title="Anzeigen"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+                <button class="po-action-btn" title="Mehr"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="table-footer">
+          <div class="footer-left">
+            <span>1–6 von 8 Fertigungsauftrags-Vorschlägen</span>
+          </div>
+          <div class="footer-right">
+            <button class="page-btn"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+            <button class="page-btn active">1</button>
+            <button class="page-btn">2</button>
+            <button class="page-btn"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ============ BOTTOM BAR ============ -->
+  <div class="bottom-bar">
+    <div class="bottom-left">
+      <div class="bottom-home">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      </div>
+      <div class="bottom-breadcrumb">
+        Fertigung <strong>›</strong> Planung <strong>›</strong> <strong style="color:white">Materialbedarf</strong>
+      </div>
+    </div>
+    <div class="bottom-right">
+      <input type="text" class="aura-input" placeholder="Frage? Aura fragen …">
+      <div class="aura-bot">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="0.5"><path d="M12 2a3 3 0 0 0-3 3v1H7a4 4 0 0 0-4 4v6a4 4 0 0 0 4 4h10a4 4 0 0 0 4-4v-6a4 4 0 0 0-4-4h-2V5a3 3 0 0 0-3-3zm-3 9a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm6 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg>
+      </div>
+      <div class="aura-logo">A</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// Plan dropdown toggle
+const planDropdown = document.getElementById('planDropdown');
+const planMenu = document.getElementById('planMenu');
+if (planDropdown && planMenu) {
+  planDropdown.addEventListener('click', (e) => {
+    e.stopPropagation();
+    planMenu.classList.toggle('open');
+  });
+  document.addEventListener('click', () => planMenu.classList.remove('open'));
+  planMenu.addEventListener('click', (e) => e.stopPropagation());
+}
+
+// Plan option select
+document.querySelectorAll('.plan-option').forEach(opt => {
+  opt.addEventListener('click', () => {
+    document.querySelectorAll('.plan-option').forEach(o => o.classList.remove('current'));
+    opt.classList.add('current');
+    const name = opt.querySelector('.plan-option-name')?.childNodes[0]?.nodeValue?.trim();
+    const nameEl = document.querySelector('.plan-name');
+    if (name && nameEl) {
+      nameEl.innerHTML = name + ' <span class="plan-chevron"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>';
+    }
+    planMenu.classList.remove('open');
+  });
+});
+
+// Source chip toggle
+document.querySelectorAll('.source-chip').forEach(chip => {
+  chip.addEventListener('click', () => chip.classList.toggle('off'));
+});
+
+// MRP tabs
+document.querySelectorAll('.mrp-tab').forEach(t => {
+  t.addEventListener('click', () => {
+    document.querySelectorAll('.mrp-tab').forEach(x => x.classList.remove('active'));
+    t.classList.add('active');
+  });
+});
+
+// PO filter chips
+document.querySelectorAll('.po-filter-chip').forEach(t => {
+  t.addEventListener('click', () => {
+    document.querySelectorAll('.po-filter-chip').forEach(x => x.classList.remove('active'));
+    t.classList.add('active');
+  });
+});
+
+// Checkbox toggle
+document.querySelectorAll('table.mrp tbody .chk').forEach(c => {
+  c.addEventListener('click', (e) => {
+    e.stopPropagation();
+    c.classList.toggle('checked');
+    const row = c.closest('tr');
+    if (row) row.classList.toggle('selected');
+  });
+});
+</script>
+
+</body>
+</html>

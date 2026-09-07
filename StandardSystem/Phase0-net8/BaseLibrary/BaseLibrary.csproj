@@ -1,0 +1,47 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>VAdvantage</RootNamespace>
+    <AssemblyName>BaseLibrary</AssemblyName>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <NoWarn>$(NoWarn);NU1701;CS0618;SYSLIB0;CA1416</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- references the net8 CoreLibrary we built in Phase 0 -->
+    <ProjectReference Include="..\CoreLibrary\CoreLibrary.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Phase 0 finding: Login/Language.cs needs paper-size DATA types (MediaSize cluster).
+         These 5 are clean (ICloneable, no WinForms) but live inside GDI-heavy VAPrintLib.
+         Real fix: relocate them to a shared lib; GDI rendering stays in the Windows reporting
+         assembly. Included here (from _printtypes/) to prove BaseLibrary compiles. -->
+    <!-- VTreeNode now extends managed VTreeNodeBase (VTreeNodeBase.cs) instead of WinForms
+         TreeNode → included in the headless build. -->
+
+    <!-- Deferred: the CloudService WCF *client* (isolated, 0 internal refs). WCF client works on
+         net8 (proved: adding System.ServiceModel.* cleared ~2,100 errors) but the generated proxy
+         uses config-name constructors that need programmatic Binding/EndpointAddress on net8.
+         Not required by the engine core → deferred. -->
+    <Compile Remove="Classes\ServerEndPoint.cs" />
+    <Compile Remove="Connected Services\**\*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
+    <PackageReference Include="System.Drawing.Common" Version="8.0.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="SecureEngineUtility">
+      <HintPath>_lib\SecureEngineUtility.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

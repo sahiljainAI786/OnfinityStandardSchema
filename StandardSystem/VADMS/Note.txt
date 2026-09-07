@@ -1,0 +1,6 @@
+It contains XMLs for these modules.
+
+1. VADMS	Document Management System
+	
+
+

@@ -1,0 +1,23 @@
+{
+  "entity": "PriceList",
+  "table": "M_PriceList",
+  "pk": "M_PriceList_ID",
+  "key": { "api": "key", "column": "Name", "label": "Price List Name" },
+  "identifierColumns": ["Name"],
+  "includeStandardCols": true,
+
+  "_note": "Price list = M_PriceList (no Value; keyed by Name, what 'priceList' refs resolve). The actual prices live in price-list versions (M_PriceList_Version) + M_ProductPrice, set up separately.",
+
+  "fields": [
+    { "api": "key",            "column": "Name",          "type": "string",  "required": true, "isKey": true, "maxLen": 60 },
+    { "api": "isSOPriceList",  "column": "IsSOPriceList", "type": "boolean", "default": true, "help": "sales (true) or purchase (false)" },
+    { "api": "isTaxIncluded",  "column": "IsTaxIncluded", "type": "boolean", "default": false },
+    { "api": "enforcePriceLimit","column": "EnforcePriceLimit","type": "boolean", "default": false },
+    { "api": "pricePrecision", "column": "PricePrecision","type": "number",  "default": 2 },
+    { "api": "isDefault",      "column": "IsDefault",     "type": "boolean", "default": false },
+    { "api": "isActive",       "column": "IsActive",      "type": "boolean", "default": true },
+
+    { "api": "currency", "column": "C_Currency_ID", "type": "ref", "required": true,
+      "ref": { "table": "C_Currency", "matchOn": "ISO_Code", "returns": "C_Currency_ID" } }
+  ]
+}

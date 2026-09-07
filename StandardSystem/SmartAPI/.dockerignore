@@ -1,0 +1,12 @@
+# keep the build context small + never leak secrets/artifacts into the image
+**/bin/
+**/obj/
+publish/
+publish-linux/
+.erplive.env
+*.secret
+*.user
+.vs/
+README.md
+DEPLOY*.md
+iis-setup.ps1

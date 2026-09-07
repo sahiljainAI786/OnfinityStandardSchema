@@ -1,0 +1,195 @@
+﻿/********************************************************
+ * Module Name    : 
+ * Purpose        : 
+ * Class Used     : X_AD_OrgInfo
+ * Chronological Development
+ * Veena Pandey     
+ ******************************************************/
+
+using System;
+using System.Collections.Generic;
+//using System.Linq;
+using System.Text;
+using System.Data;
+using VAdvantage.Classes;
+using VAdvantage.DataBase;
+using VAdvantage.Logging;
+using VAdvantage.Utility;
+
+namespace VAdvantage.Model
+{
+    public class MOrgInfo : X_AD_OrgInfo
+    {
+        // Static Logger					
+         private static VLogger _log = VLogger.GetVLogger(typeof(MOrgInfo).FullName);
+        //Account Schema				
+        private MAcctSchema _acctSchema = null;
+
+        //New Record
+        private bool _createNew = false;
+
+        // STateCode with Business Partner Location
+        private static CCache<int, string> s_cache_Org_Statecode = new CCache<int, string>("VA106_Org_StateCode", 30);
+
+        /// <summary>
+        /// Standard Constructor
+        /// </summary>
+        /// <param name="ctx">context</param>
+        /// <param name="AD_Org_ID">id</param>
+        /// <param name="trxName">transaction</param>
+        public MOrgInfo(Ctx ctx, int AD_Org_ID, Trx trxName)
+            : base(ctx, AD_Org_ID, trxName)
+        {
+        }
+
+        /// <summary>
+        /// Load Constructor
+        /// </summary>
+        /// <param name="ctx">context</param>
+        /// <param name="dr">data row</param>
+        /// <param name="trxName">transaction</param>
+        public MOrgInfo(Ctx ctx, DataRow dr, Trx trxName)
+            : base(ctx, dr, trxName)
+        {
+        }
+
+        /// <summary>
+        /// Organization constructor
+        /// </summary>
+        /// <param name="org">org</param>
+        public MOrgInfo(MOrg org)
+            : base(org.GetCtx(), 0, org.Get_TrxName())
+        {
+            SetClientOrg(org);
+            SetDUNS("?");
+            SetTaxID("?");
+        }
+
+        /// <summary>
+        /// Organization constructor
+        /// </summary>
+        /// <param name="org">org</param>
+        /// <param name="CreateNew">Create New</param>
+        public MOrgInfo(MOrg org, bool CreateNew)
+           : base(org.GetCtx(), 0, org.Get_TrxName())
+        {
+            SetClientOrg(org);
+            SetDUNS("?");
+            SetTaxID("?");
+            _createNew = CreateNew;
+        }
+
+        /// <summary>
+        /// Load Constructor
+        /// </summary>
+        /// <param name="ctx">context</param>
+        /// <param name="AD_Org_ID">id</param>
+        /// <param name="trx">transaction</param>
+        /// <returns>Org Info</returns>
+        public static MOrgInfo Get(Ctx ctx, int AD_Org_ID, Trx trxName)
+        {
+            MOrgInfo retValue = null;
+            String sql = "SELECT * FROM AD_OrgInfo WHERE AD_Org_ID=" + AD_Org_ID;
+            try
+            {
+                DataSet ds = DataBase.DB.ExecuteDataset(sql, null, trxName);
+                if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    DataRow dr = ds.Tables[0].Rows[0];
+                    retValue = new MOrgInfo(ctx, dr, null);
+                }
+            }
+            catch (Exception e)
+            {
+                _log.Log(Level.SEVERE, sql, e);
+            }
+            return retValue;
+        }
+
+        /// <summary>
+        ///Get primary Acct Schema
+        /// </summary>
+        /// <returns>acct schema</returns>
+        public MAcctSchema GetMAcctSchema()
+        {
+            if (_acctSchema == null && GetC_AcctSchema_ID() != 0)
+                _acctSchema = new MAcctSchema(GetCtx(), GetC_AcctSchema_ID(), null);
+            return _acctSchema;
+        }
+
+        /// <summary>
+        ///Get Default Accounting Currency
+        /// </summary>
+        /// <returns>currency or 0</returns>
+        public int GetC_Currency_ID()
+        {
+            if (_acctSchema == null)
+                GetMAcctSchema();
+            if (_acctSchema != null)
+                return _acctSchema.GetC_Currency_ID();
+            return 0;
+        }	//	getC_Currency_ID
+
+        /// <summary>
+        /// Get Default Org Warehouse
+        /// </summary>
+        /// <returns>warehouse</returns>
+        public new int GetM_Warehouse_ID()
+        {
+            int M_Warehouse_ID = base.GetM_Warehouse_ID();
+            if (M_Warehouse_ID != 0)
+                return M_Warehouse_ID;
+            //
+            MWarehouse[] whss = MWarehouse.GetForOrg(GetCtx(), GetAD_Org_ID());
+            if (whss.Length > 0)
+            {
+                M_Warehouse_ID = whss[0].GetM_Warehouse_ID();
+                SetM_Warehouse_ID(M_Warehouse_ID);
+                return M_Warehouse_ID;
+            }
+            log.Warning("No Warehouse for AD_Org_ID=" + GetAD_Org_ID());
+            return 0;
+        }
+
+        /// <summary>
+        /// Overwrite Save
+        /// </summary>
+        /// <returns>true if saved</returns>
+        public override bool Save()
+        {
+            // vis0008 handled case of update on OrgInfo tab
+            if (_createNew)
+                return base.Save();
+            return SaveUpdate();
+        }   //	save
+
+        /// <summary>
+        /// This function is used to get the Statecode of selected region on Location field
+        /// </summary>
+        /// <param name="AD_Org_ID">Organization ID</param>
+        /// <returns>State Code</returns>
+        /// <author>VIS_045, 12-June-2025</author>
+        public static string GetStateCode(int AD_Org_ID)
+        {
+            string stateCode = string.Empty;
+            if (s_cache_Org_Statecode.Count == 0 || (string.IsNullOrEmpty(s_cache_Org_Statecode[AD_Org_ID])))
+            {
+                string sql = $@"SELECT cr.VA106_StateCode FROM AD_OrgInfo cbl 
+                                INNER JOIN C_Location cl ON (cl.C_Location_ID = cbl.C_Location_ID) 
+                                INNER JOIN C_Region cr ON (cr.C_Region_ID = cl.C_Region_ID) 
+                                WHERE cbl.AD_Org_ID = {AD_Org_ID}";
+                stateCode = Util.GetValueOfString(DB.ExecuteScalar(sql, null, null));
+                if (!string.IsNullOrEmpty(stateCode))
+                {
+                    s_cache_Org_Statecode.Add(AD_Org_ID, stateCode);
+                }
+            }
+            else
+            {
+                stateCode = s_cache_Org_Statecode[AD_Org_ID];
+            }
+            return stateCode;
+        }
+
+    }
+}

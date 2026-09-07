@@ -1,0 +1,20 @@
+{
+  "entity": "City",
+  "table": "C_City",
+  "pk": "C_City_ID",
+  "key": { "api": "key", "column": "Name", "label": "City Name" },
+  "identifierColumns": ["Name"],
+  "keyScope": ["country"],
+  "includeStandardCols": true,
+
+  "_note": "City = C_City (no Value; keyed by Name). City names are not globally unique, so the key is scoped by country - pass 'country' to disambiguate.",
+
+  "fields": [
+    { "api": "key",     "column": "Name",   "type": "string", "required": true, "isKey": true, "maxLen": 60 },
+    { "api": "postal",  "column": "Postal", "type": "string", "maxLen": 10 },
+    { "api": "isActive","column": "IsActive","type": "boolean", "default": true },
+
+    { "api": "country", "column": "C_Country_ID", "type": "ref",
+      "ref": { "table": "C_Country", "matchOn": "CountryCode", "returns": "C_Country_ID" } }
+  ]
+}

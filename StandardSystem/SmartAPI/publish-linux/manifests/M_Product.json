@@ -1,0 +1,60 @@
+{
+  "entity": "Product",
+  "table": "M_Product",
+  "pk": "M_Product_ID",
+  "key": { "api": "key", "column": "Value", "label": "Search Key" },
+  "identifierColumns": ["Value", "Name"],
+  "includeStandardCols": true,
+
+  "_note": "v1 curated subset of M_Product (201 cols). Generated from Wiki/Tables/M_Product.md. M_Product has MANY NN (NOT NULL) Yes-No flags; defaults are supplied so a real insert satisfies the constraints. ProductType codes (I/S/E/R) are the standard VA values — VERIFY against the AD_Ref_List for this install. ref.matchOn assumed business keys — verify vs each table's IsIdentifier (C_UOM may key on X12DE355/UOMSymbol rather than Name).",
+
+  "fields": [
+    { "api": "key",         "column": "Value",       "type": "string",  "required": true, "isKey": true, "maxLen": 40 },
+    { "api": "name",        "column": "Name",        "type": "string",  "required": true, "maxLen": 255 },
+    { "api": "description", "column": "Description", "type": "string",  "maxLen": 500 },
+    { "api": "help",        "column": "Help",        "type": "string",  "maxLen": 2000 },
+    { "api": "sku",         "column": "SKU",         "type": "string",  "maxLen": 30 },
+    { "api": "upc",         "column": "UPC",         "type": "string",  "maxLen": 30 },
+    { "api": "make",        "column": "Make",        "type": "string",  "maxLen": 60 },
+    { "api": "model",       "column": "Model",       "type": "string",  "maxLen": 60 },
+    { "api": "isActive",    "column": "IsActive",    "type": "boolean", "default": true },
+
+    { "api": "productType", "column": "ProductType", "type": "list", "required": true,
+      "list": { "Item": "I", "Service": "S", "Expense": "E", "Resource": "R" } },
+
+    { "api": "category", "column": "M_Product_Category_ID", "type": "ref", "required": true,
+      "ref": { "table": "M_Product_Category", "matchOn": "Value", "returns": "M_Product_Category_ID" },
+      "help": "NN in M_Product" },
+
+    { "api": "uom", "column": "C_UOM_ID", "type": "ref", "required": true,
+      "ref": { "table": "C_UOM", "matchOn": "Name", "returns": "C_UOM_ID" },
+      "help": "NN in M_Product; e.g. 'Each'" },
+
+    { "api": "taxCategory", "column": "C_TaxCategory_ID", "type": "ref",
+      "ref": { "table": "C_TaxCategory", "matchOn": "Name", "returns": "C_TaxCategory_ID" } },
+
+    { "api": "brand", "column": "M_Brand_ID", "type": "ref",
+      "ref": { "table": "M_Brand", "matchOn": "Name", "returns": "M_Brand_ID" } },
+
+    { "api": "isSold",      "column": "IsSold",      "type": "boolean", "default": true },
+    { "api": "isPurchased", "column": "IsPurchased", "type": "boolean", "default": true },
+    { "api": "isStocked",   "column": "IsStocked",   "type": "boolean", "default": true },
+
+    { "_comment": "NN flags below default to N/0 to satisfy NOT NULL on insert; rarely set by callers.",
+      "api": "isBOM",            "column": "IsBOM",                "type": "boolean", "default": false },
+    { "api": "isBasedOnRollup",  "column": "IsBasedOnRollup",      "type": "boolean", "default": false },
+    { "api": "isDropShip",       "column": "IsDropShip",           "type": "boolean", "default": false },
+    { "api": "isExcludeAutoDelivery", "column": "IsExcludeAutoDelivery", "type": "boolean", "default": false },
+    { "api": "isInvoicePrintDetails", "column": "IsInvoicePrintDetails", "type": "boolean", "default": false },
+    { "api": "isManufactured",   "column": "IsManufactured",       "type": "boolean", "default": false },
+    { "api": "isPermitRequired", "column": "IsPermitRequired",     "type": "boolean", "default": false },
+    { "api": "isPickListPrintDetails", "column": "IsPickListPrintDetails", "type": "boolean", "default": false },
+    { "api": "isPlannedItem",    "column": "IsPlannedItem",        "type": "boolean", "default": false },
+    { "api": "isPurchasedToOrder","column": "IsPurchasedToOrder",  "type": "boolean", "default": false },
+    { "api": "isSelfService",    "column": "IsSelfService",        "type": "boolean", "default": false },
+    { "api": "isSummary",        "column": "IsSummary",            "type": "boolean", "default": false },
+    { "api": "isVerified",       "column": "IsVerified",           "type": "boolean", "default": false },
+    { "api": "isWebStoreFeatured","column": "IsWebStoreFeatured",  "type": "boolean", "default": false },
+    { "api": "qtyTolerance",     "column": "QtyTolerance",         "type": "number",  "default": 0 }
+  ]
+}

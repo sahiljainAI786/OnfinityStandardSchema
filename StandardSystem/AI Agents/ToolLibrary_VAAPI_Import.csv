@@ -1,0 +1,23 @@
+API_Name,API_Value,API_BaseUrl,API_Protocol,API_AuthType,API_IsInternal,Method_Name,Method_Path,Method_HTTP,Method_AuthRequired,Method_RequestFormat,Method_ResponseFormat,Param_Name,Param_DataType,Param_Location,Param_Required
+VAAPI Core Service,VAAPI_CORE,https://<HOST>/api/VAAPI/Service,HTTPS,AK,Y,GetRecordV2,/GetRecordV2,P,Y,JSON,JSON,tableName,STR,B,Y
+VAAPI Core Service,VAAPI_CORE,https://<HOST>/api/VAAPI/Service,HTTPS,AK,Y,GetRecordV2,/GetRecordV2,P,Y,JSON,JSON,selectQuery,STR,B,Y
+VAAPI Core Service,VAAPI_CORE,https://<HOST>/api/VAAPI/Service,HTTPS,AK,Y,GetParameters,/GetParameters,P,Y,JSON,JSON,processValue,STR,B,Y
+VAAPI Core Service,VAAPI_CORE,https://<HOST>/api/VAAPI/Service,HTTPS,AK,Y,GetParameters,/GetParameters,P,Y,JSON,JSON,AD_Client_ID,INT,B,Y
+VAAPI Core Service,VAAPI_CORE,https://<HOST>/api/VAAPI/Service,HTTPS,AK,Y,GetParameters,/GetParameters,P,Y,JSON,JSON,AD_Org_ID,INT,B,Y
+VAAPI Core Service,VAAPI_CORE,https://<HOST>/api/VAAPI/Service,HTTPS,AK,Y,InsertRecordM3,/InsertRecordM3,P,Y,JSON,JSON,colName,STA,B,Y
+VAAPI Core Service,VAAPI_CORE,https://<HOST>/api/VAAPI/Service,HTTPS,AK,Y,InsertRecordM3,/InsertRecordM3,P,Y,JSON,JSON,tableName,STR,B,Y
+VAAPI Core Service,VAAPI_CORE,https://<HOST>/api/VAAPI/Service,HTTPS,AK,Y,InsertRecordM3,/InsertRecordM3,P,Y,JSON,JSON,values,OBA,B,Y
+VAAPI Core Service,VAAPI_CORE,https://<HOST>/api/VAAPI/Service,HTTPS,AK,Y,InsertRecordM3,/InsertRecordM3,P,Y,JSON,JSON,includeStandardCols,BOL,B,Y
+VAAPI Core Service,VAAPI_CORE,https://<HOST>/api/VAAPI/Service,HTTPS,AK,Y,InsertRecordM3,/InsertRecordM3,P,Y,JSON,JSON,fileName,STR,B,N
+VAAPI Core Service,VAAPI_CORE,https://<HOST>/api/VAAPI/Service,HTTPS,AK,Y,InsertRecordM3,/InsertRecordM3,P,Y,JSON,JSON,saveFileInDisk,BOL,B,N
+VAAPI Core Service,VAAPI_CORE,https://<HOST>/api/VAAPI/Service,HTTPS,AK,Y,UpdateRecordM2,/UpdateRecordM2,P,Y,JSON,JSON,tableName,STR,B,Y
+VAAPI Core Service,VAAPI_CORE,https://<HOST>/api/VAAPI/Service,HTTPS,AK,Y,UpdateRecordM2,/UpdateRecordM2,P,Y,JSON,JSON,colName,STA,B,Y
+VAAPI Core Service,VAAPI_CORE,https://<HOST>/api/VAAPI/Service,HTTPS,AK,Y,UpdateRecordM2,/UpdateRecordM2,P,Y,JSON,JSON,values,STA,B,Y
+VAAPI Core Service,VAAPI_CORE,https://<HOST>/api/VAAPI/Service,HTTPS,AK,Y,UpdateRecordM2,/UpdateRecordM2,P,Y,JSON,JSON,sqlWhere,STR,B,Y
+VAAPI Core Service,VAAPI_CORE,https://<HOST>/api/VAAPI/Service,HTTPS,AK,Y,UpdateRecordM3,/UpdateRecordM3,P,Y,JSON,JSON,tableName,STR,B,Y
+VAAPI Core Service,VAAPI_CORE,https://<HOST>/api/VAAPI/Service,HTTPS,AK,Y,UpdateRecordM3,/UpdateRecordM3,P,Y,JSON,JSON,colName,STA,B,Y
+VAAPI Core Service,VAAPI_CORE,https://<HOST>/api/VAAPI/Service,HTTPS,AK,Y,UpdateRecordM3,/UpdateRecordM3,P,Y,JSON,JSON,values,OBA,B,Y
+VAAPI Core Service,VAAPI_CORE,https://<HOST>/api/VAAPI/Service,HTTPS,AK,Y,UpdateRecordM3,/UpdateRecordM3,P,Y,JSON,JSON,record_ID,INT,B,Y
+VAAPI Core Service,VAAPI_CORE,https://<HOST>/api/VAAPI/Service,HTTPS,AK,Y,RunProcess,/RunProcess,P,Y,JSON,JSON,AD_Process_ID,INT,B,Y
+VAAPI Core Service,VAAPI_CORE,https://<HOST>/api/VAAPI/Service,HTTPS,AK,Y,RunProcess,/RunProcess,P,Y,JSON,JSON,Record_ID,INT,B,Y
+VAAPI Core Service,VAAPI_CORE,https://<HOST>/api/VAAPI/Service,HTTPS,AK,Y,RunProcess,/RunProcess,P,Y,JSON,JSON,Param,OBA,B,N

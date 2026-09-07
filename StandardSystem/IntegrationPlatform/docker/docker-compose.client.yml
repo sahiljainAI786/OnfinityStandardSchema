@@ -1,0 +1,78 @@
+# Per-client stack TEMPLATE — one fully isolated instance per customer.
+# The control plane renders this per client, e.g.:
+#   docker compose -p ap-${CLIENT_ID} \
+#     -f docker/docker-compose.client.yml \
+#     --env-file clients/${CLIENT_ID}.env up -d
+#
+# app + postgres + redis are ALL dedicated to one client. Nothing is shared across clients:
+# the credential vault lives in this client's own postgres, encrypted with this client's own key.
+
+services:
+  app:
+    # Our rebranded Activepieces CE image, built from the fork (see ../REBRAND.md).
+    image: ${BRAND_IMAGE}
+    restart: unless-stopped
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      # --- edition: community only. NEVER enable EE features (licensing + the rebrand decision). ---
+      AP_EDITION: ce
+      AP_ENVIRONMENT: prod
+      AP_FRONTEND_URL: https://${CLIENT_DOMAIN}
+      # per-client secrets — distinct per client, generated and stored by the control plane
+      AP_JWT_SECRET: ${AP_JWT_SECRET}
+      AP_ENCRYPTION_KEY: ${AP_ENCRYPTION_KEY}      # this client's vault key
+      AP_QUEUE_MODE: REDIS
+      # UNSANDBOXED for reliability across hosts; revisit SANDBOXED (needs isolate caps) for hardening.
+      AP_EXECUTION_MODE: UNSANDBOXED
+      AP_POSTGRES_HOST: postgres
+      AP_POSTGRES_PORT: "5432"
+      AP_POSTGRES_DATABASE: ${POSTGRES_DB}
+      AP_POSTGRES_USERNAME: ${POSTGRES_USER}
+      AP_POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      AP_REDIS_HOST: redis
+      AP_REDIS_PORT: "6379"
+      # this client's own executor (reachable only inside the client network)
+      ONFINITY_EXECUTOR_URL: http://executor:3070
+      # load the native "Onfinity Connectors" piece (baked into the branded image, thin client to executor)
+      AP_DEV_PIECES: onfinity-connectors
+    ports:
+      # bound to localhost — a host reverse proxy maps CLIENT_DOMAIN → this port (Docker+ufw safety)
+      - "127.0.0.1:${APP_PORT}:80"
+    networks: [client]
+
+  # per-client executor — runs connector manifests; isolated to this client's network
+  executor:
+    image: ${EXECUTOR_IMAGE:-onfinity/executor:0.1.0}
+    restart: unless-stopped
+    environment:
+      EXECUTOR_HOST: "0.0.0.0"
+      EXECUTOR_PORT: "3070"
+    networks: [client]
+
+  postgres:
+    image: postgres:14
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks: [client]
+
+  redis:
+    image: redis:7
+    restart: unless-stopped
+    volumes:
+      - redisdata:/data
+    networks: [client]
+
+volumes:
+  pgdata:
+  redisdata:
+
+networks:
+  client:
+    name: ap-${CLIENT_ID}

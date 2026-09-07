@@ -1,0 +1,18 @@
+{
+  "entity": "Greeting",
+  "table": "C_Greeting",
+  "pk": "C_Greeting_ID",
+  "key": { "api": "key", "column": "Name", "label": "Greeting Name" },
+  "identifierColumns": ["Name"],
+  "includeStandardCols": true,
+
+  "_note": "Greeting = C_Greeting (no Value; keyed by Name; what 'greeting' refs resolve).",
+
+  "fields": [
+    { "api": "key",             "column": "Name",     "type": "string",  "required": true, "isKey": true, "maxLen": 60 },
+    { "api": "greeting",        "column": "Greeting", "type": "string",  "maxLen": 60, "help": "text printed on correspondence, e.g. 'Dear'" },
+    { "api": "isFirstNameOnly", "column": "IsFirstNameOnly", "type": "boolean", "default": false },
+    { "api": "isDefault",       "column": "IsDefault", "type": "boolean", "default": false },
+    { "api": "isActive",        "column": "IsActive",  "type": "boolean", "default": true }
+  ]
+}

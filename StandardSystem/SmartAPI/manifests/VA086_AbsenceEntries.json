@@ -1,0 +1,21 @@
+{
+  "entity": "LeaveEntry",
+  "table": "VA086_AbsenceEntries",
+  "pk": "VA086_AbsenceEntries_ID",
+  "key": { "api": "startDate", "column": "VA086_StartDate", "label": "Start Date" },
+  "keyScope": ["businessPartner", "absenceType"],
+  "includeStandardCols": true,
+  "_note": "Leave / absence entry (VA086), transactional. Idempotency key = start date per employee + leave type.",
+  "fields": [
+    { "api": "startDate", "column": "VA086_StartDate", "type": "string", "required": true, "isKey": true, "help": "ISO date" },
+    { "api": "businessPartner", "column": "C_BPartner_ID", "type": "ref", "required": true,
+      "ref": { "table": "C_BPartner", "matchOn": "Value", "returns": "C_BPartner_ID" } },
+    { "api": "absenceType", "column": "VA086_AbsenceType_ID", "type": "ref", "required": true,
+      "ref": { "table": "VA086_AbsenceType", "matchOn": "VA086_Type", "returns": "VA086_AbsenceType_ID" } },
+    { "api": "endDate", "column": "VA086_EndDate", "type": "string", "help": "ISO date" },
+    { "api": "duration", "column": "VA086_Duration", "type": "number", "help": "applied duration (days)" },
+    { "api": "approvedDuration", "column": "VA086_ApprovedDuration", "type": "number" },
+    { "api": "comments", "column": "VA086_Comments", "type": "string", "maxLen": 2000 },
+    { "api": "isActive", "column": "IsActive", "type": "boolean", "default": true }
+  ]
+}

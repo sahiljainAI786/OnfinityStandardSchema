@@ -1,0 +1,304 @@
+<?xml version="1.0"?>
+<Tables>
+  <Table>
+    <Export_ID>VA027_20000706</Export_ID>
+    <AD_Table_ID>1001258</AD_Table_ID>
+    <TableName>VA027_PostDatedCheck</TableName>
+    <Columns>
+      <Column>
+        <ColumnName>DocStatus</ColumnName>
+        <ReferenceName>_Document Status</ReferenceName>
+        <LOVValues>
+          <LOV>
+            <Value>??</Value>
+            <Name>Unknown</Name>
+          </LOV>
+          <LOV>
+            <Value>AP</Value>
+            <Name>Approved</Name>
+          </LOV>
+          <LOV>
+            <Value>CL</Value>
+            <Name>Closed</Name>
+          </LOV>
+          <LOV>
+            <Value>CO</Value>
+            <Name>Completed</Name>
+          </LOV>
+          <LOV>
+            <Value>DR</Value>
+            <Name>Drafted</Name>
+          </LOV>
+          <LOV>
+            <Value>IN</Value>
+            <Name>Invalid</Name>
+          </LOV>
+          <LOV>
+            <Value>IP</Value>
+            <Name>In Progress</Name>
+          </LOV>
+          <LOV>
+            <Value>NA</Value>
+            <Name>Not Approved</Name>
+          </LOV>
+          <LOV>
+            <Value>RE</Value>
+            <Name>Reversed</Name>
+          </LOV>
+          <LOV>
+            <Value>VO</Value>
+            <Name>Voided</Name>
+          </LOV>
+          <LOV>
+            <Value>WC</Value>
+            <Name>Waiting Confirmation</Name>
+          </LOV>
+          <LOV>
+            <Value>WP</Value>
+            <Name>Waiting Payment</Name>
+          </LOV>
+        </LOVValues>
+      </Column>
+      <Column>
+        <ColumnName>PDCType</ColumnName>
+        <ReferenceName>PDCType</ReferenceName>
+        <LOVValues>
+          <LOV>
+            <Value>N</Value>
+            <Name>Normal PDC</Name>
+          </LOV>
+          <LOV>
+            <Value>D</Value>
+            <Name>Direct PDC</Name>
+          </LOV>
+        </LOVValues>
+      </Column>
+      <Column>
+        <ColumnName>VA027_PaymentStatus</ColumnName>
+        <ReferenceName>VA027_PaymentStatus</ReferenceName>
+        <LOVValues>
+          <LOV>
+            <Value>0</Value>
+            <Name>PDC Received</Name>
+          </LOV>
+          <LOV>
+            <Value>1</Value>
+            <Name>Realization In-Progress</Name>
+          </LOV>
+          <LOV>
+            <Value>4</Value>
+            <Name>Replaced</Name>
+          </LOV>
+          <LOV>
+            <Value>2</Value>
+            <Name>PDC Realized</Name>
+          </LOV>
+          <LOV>
+            <Value>3</Value>
+            <Name>Bounced</Name>
+          </LOV>
+        </LOVValues>
+      </Column>
+    </Columns>
+  </Table>
+  <Table>
+    <Export_ID>VA027_20000713</Export_ID>
+    <AD_Table_ID>1001266</AD_Table_ID>
+    <TableName>VA027_PDC_V</TableName>
+    <Columns>
+      <Column>
+        <ColumnName>VA027_PaymentStatus</ColumnName>
+        <ReferenceName>VA027_PaymentStatus</ReferenceName>
+        <LOVValues>
+          <LOV>
+            <Value>0</Value>
+            <Name>PDC Received</Name>
+          </LOV>
+          <LOV>
+            <Value>1</Value>
+            <Name>Realization In-Progress</Name>
+          </LOV>
+          <LOV>
+            <Value>4</Value>
+            <Name>Replaced</Name>
+          </LOV>
+          <LOV>
+            <Value>2</Value>
+            <Name>PDC Realized</Name>
+          </LOV>
+          <LOV>
+            <Value>3</Value>
+            <Name>Bounced</Name>
+          </LOV>
+        </LOVValues>
+      </Column>
+    </Columns>
+  </Table>
+  <Table>
+    <Export_ID>VA027_20000712</Export_ID>
+    <AD_Table_ID>1001263</AD_Table_ID>
+    <TableName>VA027_PDC_Temp</TableName>
+    <Columns>
+      <Column>
+        <ColumnName>DocStatus</ColumnName>
+        <ReferenceName>_Document Status</ReferenceName>
+        <LOVValues>
+          <LOV>
+            <Value>??</Value>
+            <Name>Unknown</Name>
+          </LOV>
+          <LOV>
+            <Value>AP</Value>
+            <Name>Approved</Name>
+          </LOV>
+          <LOV>
+            <Value>CL</Value>
+            <Name>Closed</Name>
+          </LOV>
+          <LOV>
+            <Value>CO</Value>
+            <Name>Completed</Name>
+          </LOV>
+          <LOV>
+            <Value>DR</Value>
+            <Name>Drafted</Name>
+          </LOV>
+          <LOV>
+            <Value>IN</Value>
+            <Name>Invalid</Name>
+          </LOV>
+          <LOV>
+            <Value>IP</Value>
+            <Name>In Progress</Name>
+          </LOV>
+          <LOV>
+            <Value>NA</Value>
+            <Name>Not Approved</Name>
+          </LOV>
+          <LOV>
+            <Value>RE</Value>
+            <Name>Reversed</Name>
+          </LOV>
+          <LOV>
+            <Value>VO</Value>
+            <Name>Voided</Name>
+          </LOV>
+          <LOV>
+            <Value>WC</Value>
+            <Name>Waiting Confirmation</Name>
+          </LOV>
+          <LOV>
+            <Value>WP</Value>
+            <Name>Waiting Payment</Name>
+          </LOV>
+        </LOVValues>
+      </Column>
+      <Column>
+        <ColumnName>VA027_PaymentStatus</ColumnName>
+        <ReferenceName>VA027_PaymentStatus</ReferenceName>
+        <LOVValues>
+          <LOV>
+            <Value>0</Value>
+            <Name>PDC Received</Name>
+          </LOV>
+          <LOV>
+            <Value>1</Value>
+            <Name>Realization In-Progress</Name>
+          </LOV>
+          <LOV>
+            <Value>2</Value>
+            <Name>PDC Realized</Name>
+          </LOV>
+          <LOV>
+            <Value>3</Value>
+            <Name>Bounced</Name>
+          </LOV>
+          <LOV>
+            <Value>4</Value>
+            <Name>Replaced</Name>
+          </LOV>
+        </LOVValues>
+      </Column>
+      <Column>
+        <ColumnName>VA027_ShowCreate</ColumnName>
+        <ReferenceName>VA027_ShowCreate</ReferenceName>
+        <LOVValues>
+          <LOV>
+            <Value>C</Value>
+            <Name>Create</Name>
+          </LOV>
+          <LOV>
+            <Value>S</Value>
+            <Name>Show</Name>
+          </LOV>
+        </LOVValues>
+      </Column>
+    </Columns>
+  </Table>
+  <Table>
+    <Export_ID>VA027_20000717</Export_ID>
+    <AD_Table_ID>1001272</AD_Table_ID>
+    <TableName>VA027_ChequeDetails</TableName>
+    <Columns>
+      <Column>
+        <ColumnName>VA027_PaymentStatus</ColumnName>
+        <ReferenceName>VA027_PaymentStatus</ReferenceName>
+        <LOVValues>
+          <LOV>
+            <Value>0</Value>
+            <Name>PDC Received</Name>
+          </LOV>
+          <LOV>
+            <Value>1</Value>
+            <Name>Realization In-Progress</Name>
+          </LOV>
+          <LOV>
+            <Value>2</Value>
+            <Name>PDC Realized</Name>
+          </LOV>
+          <LOV>
+            <Value>3</Value>
+            <Name>Bounced</Name>
+          </LOV>
+          <LOV>
+            <Value>4</Value>
+            <Name>Replaced</Name>
+          </LOV>
+        </LOVValues>
+      </Column>
+    </Columns>
+  </Table>
+  <Table>
+    <Export_ID>VA027_20000718</Export_ID>
+    <AD_Table_ID>1001274</AD_Table_ID>
+    <TableName>VA027_ChequeDetail_V</TableName>
+    <Columns>
+      <Column>
+        <ColumnName>VA027_PaymentStatus</ColumnName>
+        <ReferenceName>VA027_PaymentStatus</ReferenceName>
+        <LOVValues>
+          <LOV>
+            <Value>0</Value>
+            <Name>PDC Received</Name>
+          </LOV>
+          <LOV>
+            <Value>1</Value>
+            <Name>Realization In-Progress</Name>
+          </LOV>
+          <LOV>
+            <Value>2</Value>
+            <Name>PDC Realized</Name>
+          </LOV>
+          <LOV>
+            <Value>3</Value>
+            <Name>Bounced</Name>
+          </LOV>
+          <LOV>
+            <Value>4</Value>
+            <Name>Replaced</Name>
+          </LOV>
+        </LOVValues>
+      </Column>
+    </Columns>
+  </Table>
+</Tables>

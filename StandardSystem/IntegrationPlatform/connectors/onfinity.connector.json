@@ -1,0 +1,357 @@
+{
+  "$schema": "../schema/connector-manifest.schema.json",
+  "manifestVersion": "1.0",
+  "key": "onfinity",
+  "name": "Onfinity",
+  "version": "0.1.0",
+  "description": "Onfinity (ViennaAdvantage) ERP/CRM via VAAPI. The platform's home hub: insert records, run processes/jobs (workflows), read data, and (provisionally) invoke AI agents. Onfinity's outbound event calls are modeled as a webhook trigger. Built from VAAPI Services doc v2.0.",
+  "vendor": "ViennaAdvantage / Onfinity",
+  "categories": ["erp", "crm"],
+  "docsUrl": "https://viennaadvantage.atlassian.net/wiki/spaces/VA",
+
+  "source": {
+    "type": "manual",
+    "specVersion": "VAAPI Services v2.0",
+    "generatedBy": "hand-authored from VAAPI Services Document v2.0",
+    "reviewed": false
+  },
+
+  "connection": {
+    "baseUrl": "{{connection.base_url}}",
+    "variables": [
+      {
+        "id": "base_url",
+        "label": "Onfinity base URL",
+        "type": "url",
+        "required": true,
+        "help": "Your Onfinity instance root, replacing the doc's https://OnfinitySample.com. No trailing /api.",
+        "placeholder": "https://erp.yourcompany.com"
+      },
+      {
+        "id": "ad_client_id",
+        "label": "Client ID (AD_Client_ID)",
+        "type": "number",
+        "required": true,
+        "help": "Tenant/client id used when building insert SQL. From GetClients."
+      },
+      {
+        "id": "ad_org_id",
+        "label": "Organization ID (AD_Org_ID)",
+        "type": "number",
+        "required": true,
+        "help": "Org id used when building insert SQL. From GetOrgs."
+      },
+      {
+        "id": "ad_role_id",
+        "label": "Role ID (AD_Role_ID)",
+        "type": "number",
+        "required": false,
+        "help": "Role the integration acts as. From Login."
+      },
+      {
+        "id": "ad_user_id",
+        "label": "User ID (AD_User_ID)",
+        "type": "number",
+        "required": false,
+        "help": "User the integration acts as. From Login."
+      }
+    ],
+    "defaultHeaders": {
+      "Content-Type": "application/json",
+      "accessKey": "{{auth.fields.access_key}}",
+      "secretKey": "{{auth.fields.secret_key}}"
+    }
+  },
+
+  "auth": {
+    "type": "custom",
+    "fields": [
+      {
+        "id": "access_key",
+        "label": "Access key",
+        "type": "password",
+        "secret": true,
+        "required": true,
+        "help": "Provided by Onfinity Support. Sent as the accessKey header."
+      },
+      {
+        "id": "secret_key",
+        "label": "Secret key",
+        "type": "password",
+        "secret": true,
+        "required": true,
+        "help": "API Secret Key created in Onfinity admin (Creating an API Secret Key). Sent as the secretKey header. If your deployment requires a session token instead, mint one with the get_api_token action and use it here."
+      }
+    ],
+    "test": {
+      "action": "get_record",
+      "input": { "tableName": "AD_System", "selectQuery": "SELECT Name FROM AD_System" }
+    }
+  },
+
+  "actions": {
+    "insert_record": {
+      "title": "Insert record",
+      "description": "Insert a row via an INSERT SQL statement. Use @pk where the primary key goes; Onfinity generates it and returns it. POST /Service/InsertRecord.",
+      "request": {
+        "method": "POST",
+        "path": "/api/VAAPI/Service/InsertRecord",
+        "bodyType": "json",
+        "body": {
+          "tableName": "{{input.tableName}}",
+          "selectQuery": "{{input.selectQuery}}"
+        }
+      },
+      "input": {
+        "type": "object",
+        "required": ["tableName", "selectQuery"],
+        "properties": {
+          "tableName": { "type": "string", "description": "Target table, e.g. C_BPartner." },
+          "selectQuery": {
+            "type": "string",
+            "description": "INSERT statement. Include @pk for the primary key and reference {{connection.ad_client_id}} / {{connection.ad_org_id}} for tenant context."
+          }
+        }
+      },
+      "output": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "description": "Generated primary key." },
+          "identifier": { "type": "string" },
+          "code": { "type": "integer" },
+          "result": { "type": "string" },
+          "data": { "type": "integer" }
+        }
+      },
+      "errors": [
+        { "whenStatus": [401, 403], "outcome": "reauth", "messagePath": "result" },
+        { "whenStatus": [400, 500], "outcome": "fail", "messagePath": "result" }
+      ],
+      "sample": {
+        "input": {
+          "tableName": "CM_ChatEntry",
+          "selectQuery": "INSERT INTO CM_ChatEntry (AD_Client_ID, AD_Org_ID, AD_User_ID, CM_ChatEntry_ID, CM_Chat_ID, CharacterData, CreatedBy, UpdatedBy, IsActive, ConfidentialType) VALUES (1000005,1000008,1005338,@pk,1000033,'Hello',1005338,1005338,'Y','A')"
+        },
+        "output": { "id": 1000324, "identifier": "1000324", "code": 200, "result": "Success", "data": 1000324 }
+      }
+    },
+
+    "get_record": {
+      "title": "Get records",
+      "description": "Read rows with a SELECT query. POST /Service/GetRecordV2 (POST variant, body-safe).",
+      "request": {
+        "method": "POST",
+        "path": "/api/VAAPI/Service/GetRecordV2",
+        "bodyType": "json",
+        "body": {
+          "tableName": "{{input.tableName}}",
+          "selectQuery": "{{input.selectQuery}}"
+        }
+      },
+      "input": {
+        "type": "object",
+        "required": ["tableName", "selectQuery"],
+        "properties": {
+          "tableName": { "type": "string" },
+          "selectQuery": { "type": "string", "description": "SELECT statement." }
+        }
+      },
+      "output": {
+        "type": "object",
+        "properties": {
+          "code": { "type": "integer" },
+          "result": { "type": "string" },
+          "data": { "type": "array", "items": { "type": "object" } }
+        }
+      },
+      "sample": {
+        "input": { "tableName": "C_BPartner", "selectQuery": "SELECT Name, Value FROM C_BPartner" },
+        "output": { "code": 200, "result": "Success", "data": [ { "name": "Johan Martin", "value": "JohanMartin" } ] }
+      }
+    },
+
+    "run_process": {
+      "title": "Run process (workflow/job)",
+      "description": "Execute an Onfinity job/process by AD_Process_ID. This is how a workflow triggers Onfinity logic. POST /Service/RunProcess.",
+      "request": {
+        "method": "POST",
+        "path": "/api/VAAPI/Service/RunProcess",
+        "bodyType": "json",
+        "body": {
+          "AD_Process_ID": "{{input.process_id}}",
+          "Record_ID": "{{input.record_id}}",
+          "Param": "{{input.params}}"
+        }
+      },
+      "input": {
+        "type": "object",
+        "required": ["process_id"],
+        "properties": {
+          "process_id": { "type": "integer", "description": "AD_Process_ID provided by Onfinity for the validated job." },
+          "record_id": { "type": "integer", "default": 0, "description": "0 for a menu job; otherwise the record to run against." },
+          "params": {
+            "type": "array",
+            "description": "Job parameters as Name/Value pairs.",
+            "items": { "type": "object", "required": ["Name", "Value"], "properties": { "Name": { "type": "string" }, "Value": {} } }
+          }
+        }
+      },
+      "output": {
+        "type": "object",
+        "properties": { "code": { "type": "integer" }, "result": { "type": "string" }, "data": { "type": "string" } }
+      },
+      "sample": {
+        "input": { "process_id": 1000733, "record_id": 1000798, "params": [ { "Name": "C_BPartner_ID", "Value": 1007094 } ] },
+        "output": { "code": 200, "result": "Success", "data": "Process executed successfully" }
+      }
+    },
+
+    "run_process_by_search_key": {
+      "title": "Run process by search key",
+      "description": "Same as run_process but addresses the job by its portable SearchKey instead of a per-install AD_Process_ID. Prefer this for connectors shared across installs. POST /Service/RunProcessBySearchKey.",
+      "request": {
+        "method": "POST",
+        "path": "/api/VAAPI/Service/RunProcessBySearchKey",
+        "bodyType": "json",
+        "body": {
+          "SearchKey": "{{input.search_key}}",
+          "Record_ID": "{{input.record_id}}",
+          "Param": "{{input.params}}"
+        }
+      },
+      "input": {
+        "type": "object",
+        "required": ["search_key"],
+        "properties": {
+          "search_key": { "type": "string", "description": "Job search key from the Job & Report screen, e.g. VA075_UpdateFSRStatus." },
+          "record_id": { "type": "integer", "default": 0 },
+          "params": { "type": "array", "items": { "type": "object", "properties": { "Name": { "type": "string" }, "Value": {} } } }
+        }
+      },
+      "output": {
+        "type": "object",
+        "properties": { "code": { "type": "integer" }, "result": { "type": "string" }, "data": { "type": "string" } }
+      },
+      "sample": {
+        "input": { "search_key": "VA075_UpdateFSRStatus", "record_id": 1000031, "params": [ { "Name": "TaskStatus", "Value": "09" } ] },
+        "output": { "code": 200, "result": "Success", "data": "Process executed successfully" }
+      }
+    },
+
+    "call_ai_agent": {
+      "title": "Call AI agent (provisional)",
+      "description": "PROVISIONAL — VAAPI v2.0 exposes no dedicated AI-agent endpoint. Modeled as running the agent's orchestration job by search key. Replace with the real Onfinity AI runtime endpoint (VAI01) once available. See the ai-orchestration notes.",
+      "request": {
+        "method": "POST",
+        "path": "/api/VAAPI/Service/RunProcessBySearchKey",
+        "bodyType": "json",
+        "body": {
+          "SearchKey": "{{input.agent_search_key}}",
+          "Record_ID": "{{input.record_id}}",
+          "Param": "{{input.params}}"
+        }
+      },
+      "input": {
+        "type": "object",
+        "required": ["agent_search_key"],
+        "properties": {
+          "agent_search_key": { "type": "string", "description": "Search key of the agent's orchestration job/blueprint." },
+          "record_id": { "type": "integer", "default": 0 },
+          "params": {
+            "type": "array",
+            "description": "Agent inputs as Name/Value pairs (e.g. a prompt or context record).",
+            "items": { "type": "object", "properties": { "Name": { "type": "string" }, "Value": {} } }
+          }
+        }
+      },
+      "output": {
+        "type": "object",
+        "properties": { "code": { "type": "integer" }, "result": { "type": "string" }, "data": {} }
+      }
+    },
+
+    "get_api_token": {
+      "title": "Get API token",
+      "description": "Mint a time-boxed API token (used as secret_key on subsequent calls if your deployment requires a session token rather than the static secret key). POST /Service/GetApiToken.",
+      "request": {
+        "method": "POST",
+        "path": "/api/VAAPI/Service/GetApiToken",
+        "bodyType": "json",
+        "body": {
+          "AD_CLIENT_ID": "{{connection.ad_client_id}}",
+          "AD_ORG_ID": "{{connection.ad_org_id}}",
+          "AD_Role_ID": "{{connection.ad_role_id}}",
+          "AD_User_ID": "{{connection.ad_user_id}}",
+          "TokenExpireTimeInMinutes": "{{input.expire_minutes}}",
+          "Password": "{{input.password}}"
+        }
+      },
+      "input": {
+        "type": "object",
+        "required": ["password"],
+        "properties": {
+          "password": { "type": "string", "description": "Onfinity user password." },
+          "expire_minutes": { "type": "integer", "default": 1440 }
+        }
+      },
+      "output": {
+        "type": "object",
+        "properties": {
+          "code": { "type": "integer" },
+          "result": { "type": "string" },
+          "data": { "type": "object", "properties": { "token": { "type": "string" }, "tokenExpireOn": { "type": "string" } } }
+        }
+      }
+    }
+  },
+
+  "triggers": {
+    "record_event": {
+      "title": "Onfinity record event (outbound)",
+      "description": "Fires when Onfinity emits an outbound event call (record created/updated/deleted, or a process completing). Onfinity is configured to POST events to this trigger's delivery URL; there is no VAAPI register endpoint, so subscription is set up inside Onfinity pointing at {{webhook.url}}.",
+      "type": "webhook",
+      "input": {
+        "type": "object",
+        "properties": {
+          "tableName": { "type": "string", "description": "Optional filter — only emit for this table, e.g. C_BPartner." },
+          "events": {
+            "type": "array",
+            "items": { "type": "string", "enum": ["created", "updated", "deleted", "process_completed"] },
+            "default": ["created", "updated"]
+          }
+        }
+      },
+      "output": {
+        "type": "object",
+        "properties": {
+          "event": { "type": "string", "description": "created | updated | deleted | process_completed." },
+          "tableName": { "type": "string" },
+          "AD_Table_ID": { "type": "integer" },
+          "Record_ID": { "type": "integer" },
+          "AD_Client_ID": { "type": "integer" },
+          "AD_Org_ID": { "type": "integer" },
+          "data": { "type": "object", "description": "Changed record payload as JSON." }
+        }
+      },
+      "dedupeKeyPath": "Record_ID",
+      "webhook": {
+        "eventTypePath": "event",
+        "verification": {
+          "type": "hmac",
+          "header": "X-Onfinity-Signature",
+          "algorithm": "sha256",
+          "secretField": "webhook_signing_secret"
+        }
+      },
+      "sample": {
+        "event": "created",
+        "tableName": "C_BPartner",
+        "AD_Table_ID": 291,
+        "Record_ID": 1007094,
+        "AD_Client_ID": 1000005,
+        "AD_Org_ID": 1000008,
+        "data": { "Name": "Johan Martin", "Value": "JohanMartin" }
+      }
+    }
+  }
+}

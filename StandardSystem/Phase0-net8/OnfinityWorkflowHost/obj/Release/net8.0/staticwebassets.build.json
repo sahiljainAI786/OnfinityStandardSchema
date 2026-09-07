@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "PW31XsGi0CQnI8nDj7+xW7QWRWya0HmZ3qTr/YL0LdM=",
+  "Source": "OnfinityWorkflowHost",
+  "BasePath": "_content/OnfinityWorkflowHost",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

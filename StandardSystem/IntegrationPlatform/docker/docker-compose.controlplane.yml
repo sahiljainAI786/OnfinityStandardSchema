@@ -1,0 +1,49 @@
+# Shared control plane — run ONCE. Provisions/deprovisions the per-client stacks above,
+# holds the client registry, and distributes the connector catalog.
+
+services:
+  control-plane:
+    build:
+      context: ..
+      dockerfile: packages/control-plane/Dockerfile
+    restart: unless-stopped
+    depends_on:
+      - cp-postgres
+    environment:
+      CP_PORT: "8080"
+      CP_DATABASE_URL: postgres://cp:cp@cp-postgres:5432/controlplane
+      # paths the provisioner uses to stamp out client stacks
+      CP_CLIENT_COMPOSE_FILE: /workspace/docker/docker-compose.client.yml
+      CP_CLIENTS_DIR: /workspace/clients
+      CP_CONNECTORS_DIR: /workspace/connectors
+      CP_SCHEMA_FILE: /workspace/schema/connector-manifest.schema.json
+      # defaults applied to new client stacks
+      CP_BRAND_IMAGE: ${BRAND_IMAGE}
+      CP_BASE_DOMAIN: ${BASE_DOMAIN}
+    volumes:
+      # DEV ONLY: mounting the docker socket lets the control plane drive `docker compose`
+      # on this host. In production, replace DockerComposeProvisioner with a Kubernetes/Nomad
+      # provisioner and DROP this mount — handing out the docker socket is a privileged grant.
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ..:/workspace
+    ports:
+      - "8080:8080"
+    networks: [controlplane]
+
+  cp-postgres:
+    image: postgres:14
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: controlplane
+      POSTGRES_USER: cp
+      POSTGRES_PASSWORD: cp
+    volumes:
+      - cpdata:/var/lib/postgresql/data
+    networks: [controlplane]
+
+volumes:
+  cpdata:
+
+networks:
+  controlplane:
+    name: controlplane

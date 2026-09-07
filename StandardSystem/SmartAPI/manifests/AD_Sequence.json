@@ -1,0 +1,21 @@
+{
+  "entity": "Sequence",
+  "table": "AD_Sequence",
+  "pk": "AD_Sequence_ID",
+  "key": { "api": "key", "column": "Name", "label": "Sequence Name" },
+  "identifierColumns": ["Name"],
+  "includeStandardCols": true,
+
+  "_note": "Document number sequence = AD_Sequence (keyed by Name). NN counter fields (CurrentNextSys, FADOC_*) are left to model defaults.",
+
+  "fields": [
+    { "api": "key",           "column": "Name",          "type": "string",  "required": true, "isKey": true, "maxLen": 60 },
+    { "api": "description",   "column": "Description",   "type": "string",  "maxLen": 255 },
+    { "api": "prefix",        "column": "Prefix",        "type": "string",  "maxLen": 60 },
+    { "api": "suffix",        "column": "Suffix",        "type": "string",  "maxLen": 60 },
+    { "api": "currentNext",   "column": "CurrentNext",   "type": "number",  "default": 1000000, "help": "next number to assign" },
+    { "api": "incrementNo",   "column": "IncrementNo",   "type": "number",  "default": 1 },
+    { "api": "isAutoSequence","column": "IsAutoSequence","type": "boolean", "default": true },
+    { "api": "isActive",      "column": "IsActive",      "type": "boolean", "default": true }
+  ]
+}

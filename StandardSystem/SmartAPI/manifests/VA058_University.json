@@ -1,0 +1,15 @@
+{
+  "entity": "University",
+  "table": "VA058_University",
+  "pk": "VA058_University_ID",
+  "key": { "api": "key", "column": "Value", "label": "Search Key" },
+  "includeStandardCols": true,
+  "_note": "HR university / institution (VA058).",
+  "fields": [
+    { "api": "key", "column": "Value", "type": "string", "required": true, "isKey": true, "maxLen": 50 },
+    { "api": "name", "column": "Name", "type": "string", "required": true, "maxLen": 100 },
+    { "api": "country", "column": "C_Country_ID", "type": "ref",
+      "ref": { "table": "C_Country", "matchOn": "CountryCode", "returns": "C_Country_ID" } },
+    { "api": "isActive", "column": "IsActive", "type": "boolean", "default": true }
+  ]
+}

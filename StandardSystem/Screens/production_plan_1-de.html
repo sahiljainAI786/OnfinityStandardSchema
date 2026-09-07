@@ -1,0 +1,1451 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Produktionsplanung — Aura ERP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg-blue: #DCEEFF;
+  --bg-green: #E4F2DE;
+  --card-blue: #EAF4FF;
+  --card-green: #EAF5E2;
+  --card-white: #FFFFFF;
+  --text-dark: #1A2332;
+  --text-muted: #5C6B7F;
+  --text-light: #8A98AB;
+  --accent-blue: #1A8FE3;
+  --accent-teal: #0FB58F;
+  --accent-red: #FF3B30;
+  --accent-pink: #E94B7B;
+  --accent-amber: #F5A524;
+  --accent-purple: #8B7FE8;
+  --border-soft: rgba(26, 35, 50, 0.06);
+  --shadow-card: 0 1px 3px rgba(26, 35, 50, 0.04), 0 4px 12px rgba(26, 35, 50, 0.04);
+  --bottom-bar: #0E2545;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--text-dark);
+  background: linear-gradient(135deg, var(--bg-blue) 0%, #E8F0F8 50%, var(--bg-green) 100%);
+  overflow: hidden;
+}
+
+.app {
+  display: flex;
+  height: 100vh;
+  position: relative;
+}
+
+/* ============ SIDEBAR ============ */
+.sidebar {
+  width: 64px;
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-right: 1px solid rgba(255, 255, 255, 0.6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0;
+  gap: 8px;
+  z-index: 10;
+}
+
+.menu-btn {
+  width: 38px;
+  height: 38px;
+  background: var(--accent-blue);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+  box-shadow: 0 4px 12px rgba(26, 143, 227, 0.3);
+}
+
+.expand-arrow {
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-blue);
+  margin-bottom: 14px;
+  cursor: pointer;
+}
+
+.sidebar-icon {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-blue);
+  cursor: pointer;
+  border-radius: 10px;
+  transition: background 0.15s;
+  position: relative;
+}
+
+.sidebar-icon:hover { background: rgba(26, 143, 227, 0.1); }
+
+.sidebar-icon.active::before {
+  content: '';
+  position: absolute;
+  left: -14px;
+  top: 8px;
+  bottom: 8px;
+  width: 3px;
+  background: var(--accent-blue);
+  border-radius: 0 3px 3px 0;
+}
+
+.sidebar-bottom {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ============ MAIN ============ */
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ============ HEADER ============ */
+.header {
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+  background: transparent;
+  flex-shrink: 0;
+}
+
+.header-title h1 {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-dark);
+  letter-spacing: -0.4px;
+}
+
+.header-title p {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.header-icon-group {
+  display: flex;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  padding: 6px;
+  gap: 4px;
+  box-shadow: var(--shadow-card);
+}
+
+.header-icon-btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 7px;
+  color: var(--accent-blue);
+  cursor: pointer;
+}
+
+.header-icon-btn:hover { background: rgba(26, 143, 227, 0.1); }
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-text {
+  text-align: right;
+}
+
+.user-text .name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.user-text .role {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #4A90E2, #357ABD);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+  font-size: 15px;
+  border: 2px solid white;
+  box-shadow: 0 2px 8px rgba(26, 35, 50, 0.12);
+}
+
+/* ============ CONTENT ============ */
+.content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 28px 80px;
+}
+
+.content::-webkit-scrollbar { width: 8px; }
+.content::-webkit-scrollbar-track { background: transparent; }
+.content::-webkit-scrollbar-thumb { background: rgba(26, 35, 50, 0.15); border-radius: 4px; }
+
+/* ============ FILTER ROW ============ */
+.filter-row {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.filter-card {
+  background: var(--card-blue);
+  border-radius: 16px;
+  padding: 18px 22px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: var(--shadow-card);
+}
+
+.filter-card.green { background: var(--card-green); }
+.filter-card.white { background: var(--card-white); }
+
+.filter-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.filter-card-header h3 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-dark);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.header-link {
+  font-size: 12px;
+  color: var(--accent-blue);
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.date-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.date-input {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-dark);
+}
+
+.date-arrow {
+  color: var(--text-muted);
+  font-size: 16px;
+}
+
+.date-meta {
+  margin-top: 10px;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.po-chips {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 130px;
+  overflow-y: auto;
+}
+
+.po-chip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.15s;
+  user-select: none;
+}
+
+.po-chip:hover { background: rgba(255, 255, 255, 0.95); }
+.po-chip.off { opacity: 0.4; }
+
+.po-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.po-chip-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.po-id {
+  font-family: 'SF Mono', Monaco, 'Courier New', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.po-name {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.po-check {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  background: var(--accent-blue);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  flex-shrink: 0;
+}
+
+.po-chip.off .po-check { background: rgba(0,0,0,0.1); color: transparent; }
+
+.strategy-row {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.select-input {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-dark);
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%235C6B7F' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 32px;
+}
+
+.run-btn {
+  margin-top: 4px;
+  background: linear-gradient(135deg, var(--accent-blue), #1376C5);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 11px 18px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 14px rgba(26, 143, 227, 0.35);
+  transition: transform 0.1s;
+}
+
+.run-btn:active { transform: scale(0.97); }
+
+/* ============ KPI ROW ============ */
+.kpi-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 2fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.kpi-card {
+  background: var(--card-white);
+  border-radius: 16px;
+  padding: 18px 22px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: var(--shadow-card);
+  position: relative;
+  overflow: hidden;
+}
+
+.kpi-card .kpi-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-dark);
+  line-height: 1.25;
+}
+
+.kpi-card .kpi-sub {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.kpi-value {
+  font-size: 44px;
+  font-weight: 800;
+  letter-spacing: -1.5px;
+  line-height: 1;
+  margin-top: 18px;
+  color: var(--text-dark);
+}
+
+.kpi-value.teal { color: var(--accent-teal); }
+.kpi-value.red { color: var(--accent-red); }
+
+.kpi-unit {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-left: 4px;
+}
+
+/* Wide gradient KPI card */
+.kpi-wide {
+  background: linear-gradient(125deg, #E94B7B 0%, #C2185B 100%);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 16px 22px;
+}
+
+.kpi-wide .kpi-wide-title {
+  font-size: 13px;
+  font-weight: 600;
+  opacity: 0.95;
+  margin-bottom: 14px;
+}
+
+.kpi-wide-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.kpi-wide-stat .lbl {
+  font-size: 11px;
+  font-weight: 500;
+  opacity: 0.85;
+  margin-bottom: 4px;
+}
+
+.kpi-wide-stat .val {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+/* ============ GANTT CARD ============ */
+.gantt-card {
+  background: var(--card-white);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.gantt-header {
+  padding: 18px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.gantt-header h3 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-dark);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.gantt-toolbar {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.toolbar-toggle {
+  display: flex;
+  background: #F1F4F9;
+  border-radius: 8px;
+  padding: 3px;
+  gap: 2px;
+}
+
+.toolbar-toggle button {
+  background: transparent;
+  border: none;
+  padding: 6px 12px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.toolbar-toggle button.active {
+  background: white;
+  color: var(--text-dark);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+.icon-btn {
+  width: 32px;
+  height: 32px;
+  background: #F1F4F9;
+  border: none;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text-muted);
+}
+
+.icon-btn:hover { background: #E5EAF2; color: var(--text-dark); }
+
+/* ============ GANTT BODY ============ */
+.gantt-body {
+  display: flex;
+  min-height: 460px;
+}
+
+.resource-col {
+  flex: 0 0 200px;
+  border-right: 1px solid var(--border-soft);
+}
+
+.timeline-col {
+  flex: 1;
+  overflow-x: auto;
+  position: relative;
+}
+
+.timeline-col::-webkit-scrollbar { height: 8px; }
+.timeline-col::-webkit-scrollbar-track { background: transparent; }
+.timeline-col::-webkit-scrollbar-thumb { background: rgba(26, 35, 50, 0.15); border-radius: 4px; }
+
+.col-header {
+  height: 56px;
+  padding: 0 18px;
+  display: flex;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.resource-group {
+  height: 28px;
+  padding: 0 18px;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(90deg, rgba(220, 238, 255, 0.6), rgba(220, 238, 255, 0.2));
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--accent-blue);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.resource-row {
+  height: 48px;
+  padding: 0 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.res-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  background: #EEF4FB;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-blue);
+  flex-shrink: 0;
+}
+
+.res-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.res-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.res-meta {
+  font-size: 10px;
+  color: var(--text-muted);
+  margin-top: 1px;
+}
+
+.res-load {
+  font-family: 'SF Mono', Monaco, monospace;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 3px 7px;
+  border-radius: 5px;
+  background: #EEF4FB;
+  color: var(--accent-blue);
+}
+
+.res-load.high { background: #FFF1E5; color: var(--accent-amber); }
+
+/* ============ TIMELINE ============ */
+.timeline-grid {
+  display: grid;
+  grid-template-columns: repeat(50, 28px);
+  width: 1400px;
+  position: relative;
+}
+
+.day-header {
+  grid-row: 1;
+  height: 56px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid var(--border-soft);
+  border-right: 1px solid rgba(26, 35, 50, 0.08);
+  background: rgba(234, 245, 226, 0.25);
+}
+
+.day-header.today {
+  background: rgba(220, 238, 255, 0.4);
+}
+
+.day-header .dn {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.day-header .dd {
+  font-size: 10px;
+  color: var(--text-muted);
+  font-family: 'SF Mono', Monaco, monospace;
+  margin-top: 2px;
+}
+
+.timeline-group-row {
+  grid-column: 1 / -1;
+  height: 28px;
+  background: linear-gradient(90deg, rgba(220, 238, 255, 0.3), rgba(220, 238, 255, 0.05));
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.timeline-row {
+  grid-column: 1 / -1;
+  height: 48px;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.day-divider {
+  position: absolute;
+  top: 56px;
+  bottom: 0;
+  width: 1px;
+  background: rgba(26, 35, 50, 0.06);
+  pointer-events: none;
+}
+
+.now-line {
+  position: absolute;
+  top: 56px;
+  bottom: 0;
+  width: 2px;
+  background: var(--accent-red);
+  pointer-events: none;
+  z-index: 5;
+}
+
+.now-line::before {
+  content: 'JETZT';
+  position: absolute;
+  top: -8px;
+  left: -20px;
+  background: var(--accent-red);
+  color: white;
+  font-size: 9px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+}
+
+/* ============ OPERATION BLOCKS ============ */
+.op {
+  height: 36px;
+  margin-top: 6px;
+  margin-right: 2px;
+  border-radius: 9px;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.18s;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+
+.op:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+  z-index: 4;
+}
+
+.op.hidden { display: none; }
+
+.op .op-bar {
+  width: 4px;
+  height: 22px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.op .op-text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+  overflow: hidden;
+}
+
+.op .op-code {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+.op .op-meta {
+  font-size: 9px;
+  font-family: 'SF Mono', Monaco, monospace;
+  opacity: 0.85;
+}
+
+/* FA color themes — pastel fills with darker accents */
+.po-pink { background: #FDE5EE; color: #8C1A45; }
+.po-pink .op-bar { background: #E94B7B; }
+
+.po-teal { background: #DCF3EB; color: #0A5A45; }
+.po-teal .op-bar { background: #0FB58F; }
+
+.po-blue { background: #DCEEFF; color: #0E3F66; }
+.po-blue .op-bar { background: #1A8FE3; }
+
+.po-amber { background: #FFEDD2; color: #6B3D05; }
+.po-amber .op-bar { background: #F5A524; }
+
+.po-purple { background: #E5E2FA; color: #2E2966; }
+.po-purple .op-bar { background: #8B7FE8; }
+
+/* ============ BOTTOM BAR ============ */
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 44px;
+  background: var(--bottom-bar);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px 0 76px;
+  z-index: 50;
+}
+
+.bottom-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.bottom-home {
+  width: 32px;
+  height: 32px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-blue);
+  cursor: pointer;
+}
+
+.bottom-breadcrumb {
+  font-size: 12px;
+  color: rgba(255,255,255,0.7);
+}
+
+.bottom-breadcrumb strong {
+  color: white;
+  font-weight: 600;
+  margin: 0 4px;
+}
+
+.bottom-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.aura-input {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.6);
+  padding: 7px 14px;
+  border-radius: 18px;
+  font-family: inherit;
+  font-size: 12px;
+  width: 220px;
+}
+
+.aura-input::placeholder { color: rgba(255,255,255,0.5); }
+
+.aura-bot {
+  width: 30px;
+  height: 30px;
+  background: linear-gradient(135deg, #4FC3F7, #29B6F6);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.aura-logo {
+  width: 30px;
+  height: 30px;
+  background: linear-gradient(135deg, #66BB6A, #43A047);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 800;
+  font-size: 13px;
+}
+
+/* SVG icon defaults */
+svg { display: block; }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="sidebar">
+    <button class="menu-btn">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <div class="expand-arrow">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+    </div>
+    <div class="sidebar-icon active" title="Produktion">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+    </div>
+    <div class="sidebar-icon" title="Ressourcen">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+    </div>
+    <div class="sidebar-icon" title="Kalender">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+    </div>
+    <div class="sidebar-icon" title="Aufgaben">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+    </div>
+    <div class="sidebar-icon" title="Personal">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+    </div>
+    <div class="sidebar-icon" title="Dokumente">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+    </div>
+    <div class="sidebar-bottom">
+      <div class="sidebar-icon" title="Favoriten">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      </div>
+      <div class="sidebar-icon" title="Einstellungen">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ============ MAIN ============ -->
+  <main class="main">
+
+    <!-- HEADER -->
+    <header class="header">
+      <div class="header-title">
+        <h1>Produktionsplanung</h1>
+        <p>Arbeitsgänge der ausgewählten Aufträge auf Ressourcen einplanen</p>
+      </div>
+      <div class="header-right">
+        <div class="header-icon-group">
+          <div class="header-icon-btn" title="Berichte">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <div class="header-icon-btn" title="Favoriten">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+        </div>
+        <div class="user-info">
+          <div class="user-text">
+            <div class="name">Thomas Weber</div>
+            <div class="role">Fertigungsplaner</div>
+          </div>
+          <div class="avatar">TW</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- CONTENT -->
+    <div class="content">
+
+      <!-- ============ FILTER ROW ============ -->
+      <div class="filter-row">
+
+        <!-- Planungszeitraum-Karte -->
+        <div class="filter-card">
+          <div class="filter-card-header">
+            <h3>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              Planungszeitraum
+            </h3>
+            <span class="header-link">Zurücksetzen</span>
+          </div>
+          <div class="date-row">
+            <input type="date" value="2026-04-27" class="date-input">
+            <span class="date-arrow">→</span>
+            <input type="date" value="2026-05-01" class="date-input">
+          </div>
+          <div class="date-meta">Mo–Fr · 08:00–18:00 · 1 Schicht/Tag · 50 Arbeitsstunden</div>
+        </div>
+
+        <!-- Fertigungsaufträge-Karte -->
+        <div class="filter-card green">
+          <div class="filter-card-header">
+            <h3>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>
+              Fertigungsaufträge <span style="color:var(--text-muted);font-weight:500;font-size:12px;margin-left:6px">5 ausgewählt</span>
+            </h3>
+            <span class="header-link">Alle anzeigen</span>
+          </div>
+          <div class="po-chips">
+            <div class="po-chip" data-po="pink">
+              <span class="po-dot" style="background:#E94B7B"></span>
+              <div class="po-chip-text">
+                <span class="po-id">FA-2026-0142</span>
+                <span class="po-name">Hydraulikpumpen-Gehäuse · Menge 25 · Fällig 01.05.</span>
+              </div>
+              <span class="po-check">✓</span>
+            </div>
+            <div class="po-chip" data-po="teal">
+              <span class="po-dot" style="background:#0FB58F"></span>
+              <div class="po-chip-text">
+                <span class="po-id">FA-2026-0156</span>
+                <span class="po-name">Stahlkonsolen-Baugruppe · Menge 80 · Fällig 30.04.</span>
+              </div>
+              <span class="po-check">✓</span>
+            </div>
+            <div class="po-chip" data-po="amber">
+              <span class="po-dot" style="background:#F5A524"></span>
+              <div class="po-chip-text">
+                <span class="po-id">FA-2026-0167</span>
+                <span class="po-name">Schaltschrank-Gehäuse · Menge 12 · Fällig 02.05.</span>
+              </div>
+              <span class="po-check">✓</span>
+            </div>
+            <div class="po-chip" data-po="blue">
+              <span class="po-dot" style="background:#1A8FE3"></span>
+              <div class="po-chip-text">
+                <span class="po-id">FA-2026-0171</span>
+                <span class="po-name">Motorhalterung (Schweißbaugruppe) · Menge 40 · Fällig 02.05.</span>
+              </div>
+              <span class="po-check">✓</span>
+            </div>
+            <div class="po-chip" data-po="purple">
+              <span class="po-dot" style="background:#8B7FE8"></span>
+              <div class="po-chip-text">
+                <span class="po-id">FA-2026-0183</span>
+                <span class="po-name">Druckventil-Gehäuse · Menge 18 · Fällig 04.05.</span>
+              </div>
+              <span class="po-check">✓</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Terminierungs-Karte -->
+        <div class="filter-card white">
+          <div class="filter-card-header">
+            <h3>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+              Terminierung
+            </h3>
+          </div>
+          <div class="strategy-row">
+            <select class="select-input">
+              <option>Vorwärtsterminierung</option>
+              <option>Rückwärtsterminierung</option>
+              <option>Just-in-time</option>
+            </select>
+            <select class="select-input">
+              <option>Begrenzte Kapazität · Priorität Liefertermin</option>
+              <option>Unbegrenzte Kapazität · Auftragsrang</option>
+              <option>Begrenzte Kapazität · Rüstzeitminimierung</option>
+            </select>
+            <button class="run-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              Plan erstellen
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ============ KPI ROW ============ -->
+      <div class="kpi-row">
+        <div class="kpi-card">
+          <div class="kpi-label">Eingeplante<br>Aufträge</div>
+          <div class="kpi-sub">Im aktuellen Plan</div>
+          <div class="kpi-value">05</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Arbeitsgänge<br>gesamt</div>
+          <div class="kpi-sub">Über alle Ressourcen</div>
+          <div class="kpi-value">22</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Termingerechte<br>Aufträge</div>
+          <div class="kpi-sub">Liefertermin erfüllt</div>
+          <div class="kpi-value teal">04</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Kapazitäts-<br>konflikte</div>
+          <div class="kpi-sub">Zu prüfen</div>
+          <div class="kpi-value red">02</div>
+        </div>
+        <div class="kpi-card kpi-wide">
+          <div class="kpi-wide-title">Plan-Kennzahlen</div>
+          <div class="kpi-wide-stats">
+            <div class="kpi-wide-stat">
+              <div class="lbl">Gesamtlast</div>
+              <div class="val">70<span style="font-size:14px;font-weight:500;opacity:0.85;margin-left:2px">Std.</span></div>
+            </div>
+            <div class="kpi-wide-stat">
+              <div class="lbl">Auslastung</div>
+              <div class="val">82 %</div>
+            </div>
+            <div class="kpi-wide-stat">
+              <div class="lbl">Planende</div>
+              <div class="val">Fr 11:00</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ GANTT CARD ============ -->
+      <div class="gantt-card">
+
+        <div class="gantt-header">
+          <h3>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+            Ressourcenbelegung — KW 18 · 2026
+          </h3>
+          <div class="gantt-toolbar">
+            <div class="toolbar-toggle">
+              <button>Tag</button>
+              <button class="active">Woche</button>
+              <button>Monat</button>
+            </div>
+            <button class="icon-btn" title="Verkleinern">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </button>
+            <button class="icon-btn" title="Vergrößern">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </button>
+            <button class="icon-btn" title="Exportieren">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="gantt-body">
+
+          <!-- Ressourcen-Spalte -->
+          <div class="resource-col">
+            <div class="col-header">Ressource</div>
+            <div class="resource-group">CNC-Zerspanung</div>
+            <div class="resource-row">
+              <div class="res-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><line x1="6" y1="10" x2="6" y2="14"/><line x1="18" y1="10" x2="18" y2="14"/></svg>
+              </div>
+              <div class="res-info">
+                <div class="res-name">CNC-01</div>
+                <div class="res-meta">3-Achs-Fräse</div>
+              </div>
+              <div class="res-load">7 Std.</div>
+            </div>
+            <div class="resource-row">
+              <div class="res-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><line x1="6" y1="10" x2="6" y2="14"/><line x1="18" y1="10" x2="18" y2="14"/></svg>
+              </div>
+              <div class="res-info">
+                <div class="res-name">CNC-02</div>
+                <div class="res-meta">5-Achs-Fräse</div>
+              </div>
+              <div class="res-load high">11 Std.</div>
+            </div>
+            <div class="resource-row">
+              <div class="res-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg>
+              </div>
+              <div class="res-info">
+                <div class="res-name">CNC-03</div>
+                <div class="res-meta">Drehmaschine</div>
+              </div>
+              <div class="res-load">4 Std.</div>
+            </div>
+
+            <div class="resource-group">Schweißen</div>
+            <div class="resource-row">
+              <div class="res-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              </div>
+              <div class="res-info">
+                <div class="res-name">SCHW-01</div>
+                <div class="res-meta">MAG-Anlage</div>
+              </div>
+              <div class="res-load">6 Std.</div>
+            </div>
+            <div class="resource-row">
+              <div class="res-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              </div>
+              <div class="res-info">
+                <div class="res-name">SCHW-02</div>
+                <div class="res-meta">WIG-Anlage</div>
+              </div>
+              <div class="res-load high">8 Std.</div>
+            </div>
+
+            <div class="resource-group">Montage</div>
+            <div class="resource-row">
+              <div class="res-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+              </div>
+              <div class="res-info">
+                <div class="res-name">MONT-01</div>
+                <div class="res-meta">Platz A</div>
+              </div>
+              <div class="res-load">9 Std.</div>
+            </div>
+            <div class="resource-row">
+              <div class="res-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+              </div>
+              <div class="res-info">
+                <div class="res-name">MONT-02</div>
+                <div class="res-meta">Platz B</div>
+              </div>
+              <div class="res-load">5 Std.</div>
+            </div>
+
+            <div class="resource-group">Endbearbeitung</div>
+            <div class="resource-row">
+              <div class="res-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r="2.5"/><circle cx="19" cy="13" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="10" cy="20" r="2.5"/></svg>
+              </div>
+              <div class="res-info">
+                <div class="res-name">LACK-01</div>
+                <div class="res-meta">Lackierkabine</div>
+              </div>
+              <div class="res-load">7 Std.</div>
+            </div>
+
+            <div class="resource-group">Qualität</div>
+            <div class="resource-row">
+              <div class="res-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div class="res-info">
+                <div class="res-name">QS-01</div>
+                <div class="res-meta">Prüfung</div>
+              </div>
+              <div class="res-load">5 Std.</div>
+            </div>
+          </div>
+
+          <!-- Zeitachsen-Spalte -->
+          <div class="timeline-col">
+            <div class="timeline-grid">
+
+              <!-- Tages-Kopfzeilen -->
+              <div class="day-header today" style="grid-column: 1 / span 10"><span class="dn">Montag</span><span class="dd">27.04.</span></div>
+              <div class="day-header" style="grid-column: 11 / span 10"><span class="dn">Dienstag</span><span class="dd">28.04.</span></div>
+              <div class="day-header" style="grid-column: 21 / span 10"><span class="dn">Mittwoch</span><span class="dd">29.04.</span></div>
+              <div class="day-header" style="grid-column: 31 / span 10"><span class="dn">Donnerstag</span><span class="dd">30.04.</span></div>
+              <div class="day-header" style="grid-column: 41 / span 10"><span class="dn">Freitag</span><span class="dd">01.05.</span></div>
+
+              <!-- Tagestrenner -->
+              <div class="day-divider" style="left: 280px"></div>
+              <div class="day-divider" style="left: 560px"></div>
+              <div class="day-divider" style="left: 840px"></div>
+              <div class="day-divider" style="left: 1120px"></div>
+
+              <!-- Jetzt-Linie bei Di 11:00 (Spalte 14) -->
+              <div class="now-line" style="left: 392px"></div>
+
+              <!-- Leerzeilen passend zur Ressourcenspalte -->
+              <div class="timeline-group-row" style="grid-row: 2"></div>
+              <div class="timeline-row" style="grid-row: 3"></div>
+              <div class="timeline-row" style="grid-row: 4"></div>
+              <div class="timeline-row" style="grid-row: 5"></div>
+              <div class="timeline-group-row" style="grid-row: 6"></div>
+              <div class="timeline-row" style="grid-row: 7"></div>
+              <div class="timeline-row" style="grid-row: 8"></div>
+              <div class="timeline-group-row" style="grid-row: 9"></div>
+              <div class="timeline-row" style="grid-row: 10"></div>
+              <div class="timeline-row" style="grid-row: 11"></div>
+              <div class="timeline-group-row" style="grid-row: 12"></div>
+              <div class="timeline-row" style="grid-row: 13"></div>
+              <div class="timeline-group-row" style="grid-row: 14"></div>
+              <div class="timeline-row" style="grid-row: 15"></div>
+
+              <!-- ============ ARBEITSGANG-BLÖCKE ============ -->
+
+              <!-- FA-0142 Pink (Hydraulikpumpen-Gehäuse) -->
+              <div class="op po-pink" data-po="pink" style="grid-row:3; grid-column:1 / span 4" title="FA-0142 · AG10 Fräsen · Mo 08:00–12:00">
+                <div class="op-bar"></div>
+                <div class="op-text"><span class="op-code">AG10 Fräsen</span><span class="op-meta">FA-0142 · 4 Std.</span></div>
+              </div>
+              <div class="op po-pink" data-po="pink" style="grid-row:5; grid-column:6 / span 3" title="FA-0142 · AG20 Bohren · Mo 13:00–16:00">
+                <div class="op-bar"></div>
+                <div class="op-text"><span class="op-code">AG20 Bohren</span><span class="op-meta">FA-0142 · 3 Std.</span></div>
+              </div>
+              <div class="op po-pink" data-po="pink" style="grid-row:7; grid-column:11 / span 3" title="FA-0142 · AG30 Schweißen · Di 08:00–11:00">
+                <div class="op-bar"></div>
+                <div class="op-text"><span class="op-code">AG30 Schw.</span><span class="op-meta">FA-0142 · 3 Std.</span></div>
+              </div>
+              <div class="op po-pink" data-po="pink" style="grid-row:10; grid-column:16 / span 4" title="FA-0142 · AG40 Montage · Di 13:00–17:00">
+                <div class="op-bar"></div>
+                <div class="op-text"><span class="op-code">AG40 Mont.</span><span class="op-meta">FA-0142 · 4 Std.</span></div>
+              </div>
+              <div class="op po-pink" data-po="pink" style="grid-row:13; grid-column:22 / span 2" title="FA-0142 · AG50 Lackieren · Mi 09:00–11:00">
+                <div class="op-bar"></div>
+                <div class="op-text"><span class="op-code">AG50</span><span class="op-meta">2 Std.</span></div>
+              </div>
+              <div class="op po-pink" data-po="pink" style="grid-row:15; grid-column:27 / span 1" title="FA-0142 · AG60 QS · Mi 14:00–15:00">
+                <div class="op-bar"></div>
+                <div class="op-text"><span class="op-code">60</span></div>
+              </div>
+
+              <!-- FA-0156 Teal (Stahlkonsole) -->
+              <div class="op po-teal" data-po="teal" style="grid-row:4; grid-column:1 / span 6" title="FA-0156 · AG10 CNC · Mo 08:00–14:00">
+                <div class="op-bar"></div>
+                <div class="op-text"><span class="op-code">AG10 CNC</span><span class="op-meta">FA-0156 · 6 Std.</span></div>
+              </div>
+              <div class="op po-teal" data-po="teal" style="grid-row:8; grid-column:8 / span 3" title="FA-0156 · AG20 WIG-Schweißen · Mo 15:00–18:00">
+                <div class="op-bar"></div>
+                <div class="op-text"><span class="op-code">AG20 WIG</span><span class="op-meta">FA-0156 · 3 Std.</span></div>
+              </div>
+              <div class="op po-teal" data-po="teal" style="grid-row:8; grid-column:11 / span 2" title="FA-0156 · AG20 (Forts.) · Di 08:00–10:00">
+                <div class="op-bar"></div>
+                <div class="op-text"><span class="op-code">AG20</span><span class="op-meta">Forts. · 2 Std.</span></div>
+              </div>
+              <div class="op po-teal" data-po="teal" style="grid-row:13; grid-column:16 / span 3" title="FA-0156 · AG30 Lackieren · Di 13:00–16:00">
+                <div class="op-bar"></div>
+                <div class="op-text"><span class="op-code">AG30 Lack.</span><span class="op-meta">3 Std.</span></div>
+              </div>
+              <div class="op po-teal" data-po="teal" style="grid-row:15; grid-column:21 / span 1" title="FA-0156 · AG40 QS · Mi 08:00–09:00">
+                <div class="op-bar"></div>
+                <div class="op-text"><span class="op-code">40</span></div>
+              </div>
+
+              <!-- FA-0167 Amber (Schaltschrank) -->
+              <div class="op po-amber" data-po="amber" style="grid-row:3; grid-column:6 / span 4" title="FA-0167 · AG10 Fräsen · Mo 13:00–17:00">
+                <div class="op-bar"></div>
+                <div class="op-text"><span class="op-code">AG10 Fräsen</span><span class="op-meta">FA-0167 · 4 Std.</span></div>
+              </div>
+              <div class="op po-amber" data-po="amber" style="grid-row:11; grid-column:11 / span 5" title="FA-0167 · AG20 Montage · Di 08:00–13:00">
+                <div class="op-bar"></div>
+                <div class="op-text"><span class="op-code">AG20 Mont.</span><span class="op-meta">FA-0167 · 5 Std.</span></div>
+              </div>
+              <div class="op po-amber" data-po="amber" style="grid-row:13; grid-column:31 / span 2" title="FA-0167 · AG30 Lackieren · Do 08:00–10:00">
+                <div class="op-bar"></div>
+                <div class="op-text"><span class="op-code">AG30</span><span class="op-meta">2 Std.</span></div>
+              </div>
+              <div class="op po-amber" data-po="amber" style="grid-row:15; grid-column:36 / span 1" title="FA-0167 · AG40 QS · Do 13:00–14:00">
+                <div class="op-bar"></div>
+                <div class="op-text"><span class="op-code">40</span></div>
+              </div>
+
+              <!-- FA-0171 Blue (Motorhalterung) -->
+              <div class="op po-blue" data-po="blue" style="grid-row:4; grid-column:11 / span 5" title="FA-0171 · AG10 CNC · Di 08:00–13:00">
+                <div class="op-bar"></div>
+                <div class="op-text"><span class="op-code">AG10 CNC</span><span class="op-meta">FA-0171 · 5 Std.</span></div>
+              </div>
+              <div class="op po-blue" data-po="blue" style="grid-row:7; grid-column:17 / span 3" title="FA-0171 · AG20 Schweißen · Di 14:00–17:00">
+                <div class="op-bar"></div>
+                <div class="op-text"><span class="op-code">AG20 Schw.</span><span class="op-meta">FA-0171 · 3 Std.</span></div>
+              </div>
+              <div class="op po-blue" data-po="blue" style="grid-row:7; grid-column:21 / span 3" title="FA-0171 · AG20 (Forts.) · Mi 08:00–11:00">
+                <div class="op-bar"></div>
+                <div class="op-text"><span class="op-code">AG20</span><span class="op-meta">Forts. · 3 Std.</span></div>
+              </div>
+              <div class="op po-blue" data-po="blue" style="grid-row:13; grid-column:36 / span 2" title="FA-0171 · AG30 Lackieren · Do 13:00–15:00">
+                <div class="op-bar"></div>
+                <div class="op-text"><span class="op-code">AG30</span><span class="op-meta">2 Std.</span></div>
+              </div>
+              <div class="op po-blue" data-po="blue" style="grid-row:15; grid-column:41 / span 1" title="FA-0171 · AG40 QS · Fr 08:00–09:00">
+                <div class="op-bar"></div>
+                <div class="op-text"><span class="op-code">40</span></div>
+              </div>
+
+              <!-- FA-0183 Purple (Druckventil) -->
+              <div class="op po-purple" data-po="purple" style="grid-row:5; grid-column:11 / span 4" title="FA-0183 · AG10 Drehen · Di 08:00–12:00">
+                <div class="op-bar"></div>
+                <div class="op-text"><span class="op-code">AG10 Drehen</span><span class="op-meta">FA-0183 · 4 Std.</span></div>
+              </div>
+              <div class="op po-purple" data-po="purple" style="grid-row:8; grid-column:26 / span 3" title="FA-0183 · AG20 WIG-Schweißen · Mi 13:00–16:00">
+                <div class="op-bar"></div>
+                <div class="op-text"><span class="op-code">AG20 WIG</span><span class="op-meta">FA-0183 · 3 Std.</span></div>
+              </div>
+              <div class="op po-purple" data-po="purple" style="grid-row:10; grid-column:31 / span 4" title="FA-0183 · AG30 Montage · Do 08:00–12:00">
+                <div class="op-bar"></div>
+                <div class="op-text"><span class="op-code">AG30 Mont.</span><span class="op-meta">FA-0183 · 4 Std.</span></div>
+              </div>
+              <div class="op po-purple" data-po="purple" style="grid-row:15; grid-column:43 / span 1" title="FA-0183 · AG40 QS · Fr 10:00–11:00">
+                <div class="op-bar"></div>
+                <div class="op-text"><span class="op-code">40</span></div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ============ BOTTOM BAR ============ -->
+  <div class="bottom-bar">
+    <div class="bottom-left">
+      <div class="bottom-home">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      </div>
+      <div class="bottom-breadcrumb">
+        Fertigung <strong>›</strong> Produktion <strong>›</strong> <strong style="color:white">Planung</strong>
+      </div>
+    </div>
+    <div class="bottom-right">
+      <input type="text" class="aura-input" placeholder="Frage? Aura fragen …">
+      <div class="aura-bot">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="0.5"><path d="M12 2a3 3 0 0 0-3 3v1H7a4 4 0 0 0-4 4v6a4 4 0 0 0 4 4h10a4 4 0 0 0 4-4v-6a4 4 0 0 0-4-4h-2V5a3 3 0 0 0-3-3zm-3 9a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm6 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg>
+      </div>
+      <div class="aura-logo">A</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// FA-Chip umschalten
+document.querySelectorAll('.po-chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    const po = chip.dataset.po;
+    chip.classList.toggle('off');
+    document.querySelectorAll('.op[data-po="' + po + '"]').forEach(op => op.classList.toggle('hidden'));
+    // Zähler aktualisieren
+    const aktiv = document.querySelectorAll('.po-chip:not(.off)').length;
+    const counter = document.querySelector('.filter-card.green h3 span');
+    if (counter) counter.textContent = aktiv + ' ausgewählt';
+  });
+});
+
+// Werkzeugleiste umschalten
+document.querySelectorAll('.toolbar-toggle button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    btn.parentElement.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+</script>
+
+</body>
+</html>

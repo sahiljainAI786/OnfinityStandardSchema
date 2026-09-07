@@ -1,0 +1,251 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:MainDataTable="VA058_Global" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="VA058_Global" msprop:SqlHash="1084003343" msprop:BaseTable.0="VA058_GLOBAL">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="AD_CLIENT_ID" msprop:BaseColumn="AD_CLIENT_ID" msprop:OraDbType="113" type="xs:long" minOccurs="0" />
+                <xs:element name="AD_ORG_ID" msprop:BaseColumn="AD_ORG_ID" msprop:OraDbType="113" type="xs:long" minOccurs="0" />
+                <xs:element name="AD_REF_LIST_ID" msprop:BaseColumn="AD_REF_LIST_ID" msprop:OraDbType="113" type="xs:long" minOccurs="0" />
+                <xs:element name="AD_REFERENCE_ID" msprop:BaseColumn="AD_REFERENCE_ID" msprop:OraDbType="113" type="xs:long" minOccurs="0" />
+                <xs:element name="AMOUNT" msprop:BaseColumn="AMOUNT" msprop:OraDbType="107" type="xs:decimal" minOccurs="0" />
+                <xs:element name="C_COUNTRY_ID" msprop:BaseColumn="C_COUNTRY_ID" msprop:OraDbType="113" type="xs:long" minOccurs="0" />
+                <xs:element name="CREATED" msprop:BaseColumn="CREATED" msprop:OraDbType="106" type="xs:dateTime" minOccurs="0" />
+                <xs:element name="CREATEDBY" msprop:BaseColumn="CREATEDBY" msprop:OraDbType="113" type="xs:long" minOccurs="0" />
+                <xs:element name="DESCRIPTION" msprop:BaseColumn="DESCRIPTION" msprop:OraDbType="119" type="xs:string" minOccurs="0" />
+                <xs:element name="EXPORT_ID" msprop:BaseColumn="EXPORT_ID" msprop:OraDbType="119" type="xs:string" minOccurs="0" />
+                <xs:element name="ISACTIVE" msprop:BaseColumn="ISACTIVE" msprop:OraDbType="104" type="xs:string" minOccurs="0" />
+                <xs:element name="NAME" msprop:BaseColumn="NAME" msprop:OraDbType="119" type="xs:string" minOccurs="0" />
+                <xs:element name="UPDATED" msprop:BaseColumn="UPDATED" msprop:OraDbType="106" type="xs:dateTime" minOccurs="0" />
+                <xs:element name="UPDATEDBY" msprop:BaseColumn="UPDATEDBY" msprop:OraDbType="113" type="xs:long" minOccurs="0" />
+                <xs:element name="VA058_DATE" msprop:BaseColumn="VA058_DATE" msprop:OraDbType="106" type="xs:dateTime" minOccurs="0" />
+                <xs:element name="VA058_ENDDATE" msprop:BaseColumn="VA058_ENDDATE" msprop:OraDbType="106" type="xs:dateTime" minOccurs="0" />
+                <xs:element name="VA058_GLOBALDATE" msprop:BaseColumn="VA058_GLOBALDATE" msprop:OraDbType="106" type="xs:dateTime" minOccurs="0" />
+                <xs:element name="VA058_GLOBALNAME" msprop:BaseColumn="VA058_GLOBALNAME" msprop:OraDbType="119" type="xs:string" minOccurs="0" />
+                <xs:element name="VA058_GLOBAL_ID" msprop:BaseColumn="VA058_GLOBAL_ID" msprop:OraDbType="113" type="xs:long" minOccurs="0" />
+                <xs:element name="VA058_STARTDATE" msprop:BaseColumn="VA058_STARTDATE" msprop:OraDbType="106" type="xs:dateTime" minOccurs="0" />
+                <xs:element name="VA058_STRING" msprop:BaseColumn="VA058_STRING" msprop:OraDbType="119" type="xs:string" minOccurs="0" />
+                <xs:element name="VA058_TYPE" msprop:BaseColumn="VA058_TYPE" msprop:OraDbType="104" type="xs:string" minOccurs="0" />
+                <xs:element name="VALUE" msprop:BaseColumn="VALUE" msprop:OraDbType="119" type="xs:string" minOccurs="0" />
+                <xs:element name="VA058_LABEL" msprop:BaseColumn="VA058_LABEL" msprop:OraDbType="119" type="xs:string" minOccurs="0" />
+                <xs:element name="VA058_ISTAXDECLIMIT" msprop:BaseColumn="VA058_ISTAXDECLIMIT" msprop:OraDbType="104" type="xs:string" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <VA058_Global>
+    <AD_CLIENT_ID>11</AD_CLIENT_ID>
+    <AD_ORG_ID>0</AD_ORG_ID>
+    <AMOUNT>0.75</AMOUNT>
+    <C_COUNTRY_ID>208</C_COUNTRY_ID>
+    <CREATED>2024-12-25T12:02:07+05:30</CREATED>
+    <CREATEDBY>1005442</CREATEDBY>
+    <EXPORT_ID>VA096_1000002</EXPORT_ID>
+    <ISACTIVE>Y</ISACTIVE>
+    <NAME>ESI Employee Percent</NAME>
+    <UPDATED>2024-12-25T12:02:07+05:30</UPDATED>
+    <UPDATEDBY>1005442</UPDATEDBY>
+    <VA058_GLOBALNAME>ESI Employee Percent</VA058_GLOBALNAME>
+    <VA058_GLOBAL_ID>1000004</VA058_GLOBAL_ID>
+    <VA058_STARTDATE>1111-01-01T00:00:00+05:30</VA058_STARTDATE>
+    <VA058_TYPE>N</VA058_TYPE>
+    <VALUE>1000004</VALUE>
+    <VA058_ISTAXDECLIMIT>N</VA058_ISTAXDECLIMIT>
+  </VA058_Global>
+  <VA058_Global>
+    <AD_CLIENT_ID>11</AD_CLIENT_ID>
+    <AD_ORG_ID>0</AD_ORG_ID>
+    <AMOUNT>50</AMOUNT>
+    <C_COUNTRY_ID>208</C_COUNTRY_ID>
+    <CREATED>2024-12-25T12:03:45+05:30</CREATED>
+    <CREATEDBY>1005442</CREATEDBY>
+    <EXPORT_ID>VA096_1000003</EXPORT_ID>
+    <ISACTIVE>Y</ISACTIVE>
+    <NAME>HRA Percentage Metro</NAME>
+    <UPDATED>2024-12-25T12:03:45+05:30</UPDATED>
+    <UPDATEDBY>1005442</UPDATEDBY>
+    <VA058_GLOBALNAME>HRA Percentage Metro</VA058_GLOBALNAME>
+    <VA058_GLOBAL_ID>1000007</VA058_GLOBAL_ID>
+    <VA058_STARTDATE>1111-01-01T00:00:00+05:30</VA058_STARTDATE>
+    <VA058_TYPE>N</VA058_TYPE>
+    <VALUE>1000007</VALUE>
+    <VA058_ISTAXDECLIMIT>N</VA058_ISTAXDECLIMIT>
+  </VA058_Global>
+  <VA058_Global>
+    <AD_CLIENT_ID>11</AD_CLIENT_ID>
+    <AD_ORG_ID>0</AD_ORG_ID>
+    <AMOUNT>12</AMOUNT>
+    <C_COUNTRY_ID>208</C_COUNTRY_ID>
+    <CREATED>2024-12-25T12:07:39+05:30</CREATED>
+    <CREATEDBY>1005442</CREATEDBY>
+    <EXPORT_ID>VA096_1000004</EXPORT_ID>
+    <ISACTIVE>Y</ISACTIVE>
+    <NAME>EPF Percent</NAME>
+    <UPDATED>2024-12-25T12:07:39+05:30</UPDATED>
+    <UPDATEDBY>1005442</UPDATEDBY>
+    <VA058_GLOBALNAME>EPF Percent</VA058_GLOBALNAME>
+    <VA058_GLOBAL_ID>1000012</VA058_GLOBAL_ID>
+    <VA058_STARTDATE>1111-01-01T00:00:00+05:30</VA058_STARTDATE>
+    <VA058_TYPE>N</VA058_TYPE>
+    <VALUE>1000012</VALUE>
+    <VA058_ISTAXDECLIMIT>N</VA058_ISTAXDECLIMIT>
+  </VA058_Global>
+  <VA058_Global>
+    <AD_CLIENT_ID>11</AD_CLIENT_ID>
+    <AD_ORG_ID>0</AD_ORG_ID>
+    <AMOUNT>3.25</AMOUNT>
+    <C_COUNTRY_ID>208</C_COUNTRY_ID>
+    <CREATED>2024-12-25T12:02:38+05:30</CREATED>
+    <CREATEDBY>1005442</CREATEDBY>
+    <EXPORT_ID>VA096_1000005</EXPORT_ID>
+    <ISACTIVE>Y</ISACTIVE>
+    <NAME>ESI Employer Percent</NAME>
+    <UPDATED>2024-12-25T12:02:38+05:30</UPDATED>
+    <UPDATEDBY>1005442</UPDATEDBY>
+    <VA058_GLOBALNAME>ESI Employer Percent</VA058_GLOBALNAME>
+    <VA058_GLOBAL_ID>1000005</VA058_GLOBAL_ID>
+    <VA058_STARTDATE>1111-01-01T00:00:00+05:30</VA058_STARTDATE>
+    <VA058_TYPE>N</VA058_TYPE>
+    <VALUE>1000005</VALUE>
+    <VA058_ISTAXDECLIMIT>N</VA058_ISTAXDECLIMIT>
+  </VA058_Global>
+  <VA058_Global>
+    <AD_CLIENT_ID>11</AD_CLIENT_ID>
+    <AD_ORG_ID>0</AD_ORG_ID>
+    <AMOUNT>15000</AMOUNT>
+    <C_COUNTRY_ID>208</C_COUNTRY_ID>
+    <CREATED>2024-12-25T12:07:07+05:30</CREATED>
+    <CREATEDBY>1005442</CREATEDBY>
+    <EXPORT_ID>VA096_1000006</EXPORT_ID>
+    <ISACTIVE>Y</ISACTIVE>
+    <NAME>EPF Calculation Amount</NAME>
+    <UPDATED>2024-12-25T12:07:07+05:30</UPDATED>
+    <UPDATEDBY>1005442</UPDATEDBY>
+    <VA058_GLOBALNAME>EPF Calculation Amount</VA058_GLOBALNAME>
+    <VA058_GLOBAL_ID>1000011</VA058_GLOBAL_ID>
+    <VA058_STARTDATE>1111-01-01T00:00:00+05:30</VA058_STARTDATE>
+    <VA058_TYPE>N</VA058_TYPE>
+    <VALUE>1000011</VALUE>
+    <VA058_ISTAXDECLIMIT>N</VA058_ISTAXDECLIMIT>
+  </VA058_Global>
+  <VA058_Global>
+    <AD_CLIENT_ID>11</AD_CLIENT_ID>
+    <AD_ORG_ID>0</AD_ORG_ID>
+    <AMOUNT>50000</AMOUNT>
+    <C_COUNTRY_ID>208</C_COUNTRY_ID>
+    <CREATED>2025-05-07T12:18:12+05:30</CREATED>
+    <CREATEDBY>1005366</CREATEDBY>
+    <EXPORT_ID>VA096_1000011</EXPORT_ID>
+    <ISACTIVE>Y</ISACTIVE>
+    <NAME>Old Regime Standard Deduction</NAME>
+    <UPDATED>2025-05-07T12:18:12+05:30</UPDATED>
+    <UPDATEDBY>1005366</UPDATEDBY>
+    <VA058_GLOBALNAME>Old Regime Standard Deduction</VA058_GLOBALNAME>
+    <VA058_GLOBAL_ID>1000014</VA058_GLOBAL_ID>
+    <VA058_STARTDATE>1111-01-01T00:00:00+05:30</VA058_STARTDATE>
+    <VA058_TYPE>N</VA058_TYPE>
+    <VALUE>1000014</VALUE>
+    <VA058_ISTAXDECLIMIT>N</VA058_ISTAXDECLIMIT>
+  </VA058_Global>
+  <VA058_Global>
+    <AD_CLIENT_ID>11</AD_CLIENT_ID>
+    <AD_ORG_ID>0</AD_ORG_ID>
+    <AMOUNT>40</AMOUNT>
+    <C_COUNTRY_ID>208</C_COUNTRY_ID>
+    <CREATED>2024-12-25T12:03:14+05:30</CREATED>
+    <CREATEDBY>1005442</CREATEDBY>
+    <EXPORT_ID>VA096_1000007</EXPORT_ID>
+    <ISACTIVE>Y</ISACTIVE>
+    <NAME>GrossSalPercentage</NAME>
+    <UPDATED>2024-12-25T12:03:14+05:30</UPDATED>
+    <UPDATEDBY>1005442</UPDATEDBY>
+    <VA058_GLOBALNAME>GrossSalPercentage</VA058_GLOBALNAME>
+    <VA058_GLOBAL_ID>1000006</VA058_GLOBAL_ID>
+    <VA058_STARTDATE>1111-01-01T00:00:00+05:30</VA058_STARTDATE>
+    <VA058_TYPE>N</VA058_TYPE>
+    <VALUE>1000006</VALUE>
+    <VA058_ISTAXDECLIMIT>N</VA058_ISTAXDECLIMIT>
+  </VA058_Global>
+  <VA058_Global>
+    <AD_CLIENT_ID>11</AD_CLIENT_ID>
+    <AD_ORG_ID>0</AD_ORG_ID>
+    <AMOUNT>40</AMOUNT>
+    <C_COUNTRY_ID>208</C_COUNTRY_ID>
+    <CREATED>2024-12-25T12:04:10+05:30</CREATED>
+    <CREATEDBY>1005442</CREATEDBY>
+    <EXPORT_ID>VA096_1000008</EXPORT_ID>
+    <ISACTIVE>Y</ISACTIVE>
+    <NAME>HRA Percentage Non-Metro</NAME>
+    <UPDATED>2024-12-25T12:04:10+05:30</UPDATED>
+    <UPDATEDBY>1005442</UPDATEDBY>
+    <VA058_GLOBALNAME>HRA Percentage Non-Metro</VA058_GLOBALNAME>
+    <VA058_GLOBAL_ID>1000008</VA058_GLOBAL_ID>
+    <VA058_STARTDATE>1111-01-01T00:00:00+05:30</VA058_STARTDATE>
+    <VA058_TYPE>N</VA058_TYPE>
+    <VALUE>1000008</VALUE>
+    <VA058_ISTAXDECLIMIT>N</VA058_ISTAXDECLIMIT>
+  </VA058_Global>
+  <VA058_Global>
+    <AD_CLIENT_ID>11</AD_CLIENT_ID>
+    <AD_ORG_ID>0</AD_ORG_ID>
+    <AMOUNT>75000</AMOUNT>
+    <C_COUNTRY_ID>208</C_COUNTRY_ID>
+    <CREATED>2025-05-07T12:18:48+05:30</CREATED>
+    <CREATEDBY>1005366</CREATEDBY>
+    <EXPORT_ID>VA096_1000012</EXPORT_ID>
+    <ISACTIVE>Y</ISACTIVE>
+    <NAME>New Regime Standard Deduction</NAME>
+    <UPDATED>2025-05-07T12:18:48+05:30</UPDATED>
+    <UPDATEDBY>1005366</UPDATEDBY>
+    <VA058_GLOBALNAME>New Regime Standard Deduction</VA058_GLOBALNAME>
+    <VA058_GLOBAL_ID>1000015</VA058_GLOBAL_ID>
+    <VA058_STARTDATE>1111-01-01T00:00:00+05:30</VA058_STARTDATE>
+    <VA058_TYPE>N</VA058_TYPE>
+    <VALUE>1000015</VALUE>
+    <VA058_ISTAXDECLIMIT>N</VA058_ISTAXDECLIMIT>
+  </VA058_Global>
+  <VA058_Global>
+    <AD_CLIENT_ID>11</AD_CLIENT_ID>
+    <AD_ORG_ID>0</AD_ORG_ID>
+    <AMOUNT>21000</AMOUNT>
+    <C_COUNTRY_ID>208</C_COUNTRY_ID>
+    <CREATED>2025-02-17T10:04:44+05:30</CREATED>
+    <CREATEDBY>1005347</CREATEDBY>
+    <EXPORT_ID>VA096_1000010</EXPORT_ID>
+    <ISACTIVE>Y</ISACTIVE>
+    <NAME>ESI Calculation Amount</NAME>
+    <UPDATED>2025-02-17T10:04:44+05:30</UPDATED>
+    <UPDATEDBY>1005347</UPDATEDBY>
+    <VA058_GLOBALNAME>ESI Calculation Amount</VA058_GLOBALNAME>
+    <VA058_GLOBAL_ID>1000013</VA058_GLOBAL_ID>
+    <VA058_STARTDATE>1111-01-01T00:00:00+05:30</VA058_STARTDATE>
+    <VA058_TYPE>N</VA058_TYPE>
+    <VALUE>1000013</VALUE>
+    <VA058_ISTAXDECLIMIT>N</VA058_ISTAXDECLIMIT>
+  </VA058_Global>
+  <VA058_Global>
+    <AD_CLIENT_ID>11</AD_CLIENT_ID>
+    <AD_ORG_ID>0</AD_ORG_ID>
+    <AMOUNT>200</AMOUNT>
+    <C_COUNTRY_ID>208</C_COUNTRY_ID>
+    <CREATED>2024-12-25T12:04:34+05:30</CREATED>
+    <CREATEDBY>1005442</CREATEDBY>
+    <EXPORT_ID>VA096_1000009</EXPORT_ID>
+    <ISACTIVE>Y</ISACTIVE>
+    <NAME>Professional Tax Amount</NAME>
+    <UPDATED>2024-12-25T12:04:34+05:30</UPDATED>
+    <UPDATEDBY>1005442</UPDATEDBY>
+    <VA058_GLOBALNAME>Professional Tax Amount</VA058_GLOBALNAME>
+    <VA058_GLOBAL_ID>1000009</VA058_GLOBAL_ID>
+    <VA058_STARTDATE>1111-01-01T00:00:00+05:30</VA058_STARTDATE>
+    <VA058_TYPE>N</VA058_TYPE>
+    <VALUE>1000009</VALUE>
+    <VA058_ISTAXDECLIMIT>N</VA058_ISTAXDECLIMIT>
+  </VA058_Global>
+</NewDataSet>

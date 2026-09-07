@@ -1,0 +1,21 @@
+{
+  "entity": "EmployeeStatutoryInfo",
+  "table": "VA096_StatInfo",
+  "pk": "VA096_StatInfo_ID",
+  "key": { "api": "businessPartner", "column": "C_BPartner_ID", "label": "Employee" },
+  "includeStandardCols": true,
+  "_note": "India statutory info (VA096), 1:1 with an employee. Keyed BY the employee (ref key) - one statutory record per business partner. ResidentStatus/TaxRegime lists omitted pending codes.",
+  "fields": [
+    { "api": "businessPartner", "column": "C_BPartner_ID", "type": "ref", "required": true, "isKey": true,
+      "ref": { "table": "C_BPartner", "matchOn": "Value", "returns": "C_BPartner_ID" } },
+    { "api": "contributingToEPF", "column": "VA096_IsContributingToEPF", "type": "boolean", "default": false },
+    { "api": "uanNumber", "column": "VA096_UANNumber", "type": "string", "maxLen": 60 },
+    { "api": "epfNumber", "column": "VA096_EPFNumber", "type": "string", "maxLen": 60 },
+    { "api": "contributingToTax", "column": "VA096_ContToTax", "type": "boolean", "default": false },
+    { "api": "incomeTaxNo", "column": "VA096_IncTaxNo", "type": "string", "maxLen": 60 },
+    { "api": "contributingToESI", "column": "VA096_ControESI", "type": "boolean", "default": false },
+    { "api": "esiNumber", "column": "VA096_ESINum", "type": "string", "maxLen": 60 },
+    { "api": "labourWelfareFund", "column": "VA096_LWF", "type": "string", "maxLen": 60 },
+    { "api": "isActive", "column": "IsActive", "type": "boolean", "default": true }
+  ]
+}

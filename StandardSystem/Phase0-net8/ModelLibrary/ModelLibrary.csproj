@@ -1,0 +1,72 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>VAdvantage</RootNamespace>
+    <AssemblyName>ModelLibrary</AssemblyName>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <NoWarn>$(NoWarn);NU1701;CS0618;SYSLIB0;SYSLIB0011;CA1416</NoWarn>
+    <EnableUnsafeBinaryFormatterSerialization>true</EnableUnsafeBinaryFormatterSerialization>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- peripheral web/mail utilities (Windows/heavy deps) — excluded from the headless model core -->
+    <Compile Remove="Process\AlertTestMailAttachment.cs" />  <!-- ClosedXML -->
+    <Compile Remove="BundleCollection\ModuleBundles.cs" />   <!-- System.Web.Optimization bundling -->
+    <Compile Remove="Process\AttachMailToBP.cs" />           <!-- Limilabs IMAP mail-fetch -->
+    <Compile Remove="Process\CreateInviteeList.cs" />        <!-- HttpApplication/FormsAuth, web-only, 0 cascade -->
+    <Compile Remove="CRM\Process\CreateInviteeList.cs" />    <!-- HttpApplication/FormsAuth, web-only, 0 cascade -->
+    <Compile Remove="Model\MWikiToken.cs" />                 <!-- java.util.regex Matcher (wiki/CM), 0 cascade; needs Regex de-Java when CM ported -->
+    <Compile Remove="Service References\**\*.cs" />          <!-- WCF AcctService generated proxy (config-name ctor) -->
+    <Compile Remove="Connected Services\**\*.cs" />
+    <!-- peripheral reporting / accounting-service / client-setup processes (use the GDI report
+         models or the WCF AcctService); NOT on VAWorkflow's model path (MClient cluster). -->
+    <Compile Remove="**\MSetup.cs" />
+    <Compile Remove="**\MCloudSetup.cs" />
+    <Compile Remove="**\FinReport.cs" />
+    <Compile Remove="**\FinBalance.cs" />
+    <Compile Remove="**\FinStatement.cs" />
+    <Compile Remove="**\InvoicePrint.cs" />
+    <Compile Remove="**\CreateConversionEntries.cs" />
+    <Compile Remove="**\CreateCurrencySourceEntries.cs" />
+    <Compile Remove="**\AccoutingReport.cs" />
+    <Compile Remove="**\BalanceReport.cs" />
+    <Compile Remove="**\ProfitLossReport.cs" />
+    <Compile Remove="**\DunningPrint.cs" />
+    <!-- (MForecastLine/MCashbookLine had only stale 'using System.Windows' — kept, using stripped) -->
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CoreLibrary\CoreLibrary.csproj" />
+    <ProjectReference Include="..\BaseLibrary\BaseLibrary.csproj" />
+    <ProjectReference Include="..\XModel\XModel.csproj" />
+    <ProjectReference Include="..\VAModelAD\VAModelAD.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
+    <PackageReference Include="System.Drawing.Common" Version="8.0.7" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.0" />
+    <PackageReference Include="System.Runtime.Serialization.Formatters" Version="8.0.0" />
+    <PackageReference Include="QRCoder" Version="1.4.3" />
+    <PackageReference Include="System.Data.OleDb" Version="8.0.0" />
+    <!-- WCF client (same as BaseLibrary) -->
+    <PackageReference Include="System.ServiceModel.Primitives" Version="8.1.2" />
+    <PackageReference Include="System.ServiceModel.Http" Version="8.1.2" />
+    <PackageReference Include="System.ServiceModel.NetTcp" Version="8.1.2" />
+    <!-- dropped (dead/UI/Framework-only): IKVM*, Interop.Excel, VISLogic, WebGrease,
+         Microsoft.Web.*, Antlr, Mail, ClosedXML, DocumentFormat.OpenXml, WPF (Presentation*) -->
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="SecureEngineUtility">
+      <HintPath>_lib\SecureEngineUtility.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

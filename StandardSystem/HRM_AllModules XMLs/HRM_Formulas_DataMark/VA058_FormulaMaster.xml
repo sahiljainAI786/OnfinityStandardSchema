@@ -1,0 +1,598 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:MainDataTable="VA058_FormulaMaster" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="VA058_FormulaMaster" msprop:SqlHash="920490642" msprop:BaseTable.0="VA058_FORMULAMASTER">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="AD_CLIENT_ID" msprop:BaseColumn="AD_CLIENT_ID" msprop:OraDbType="113" type="xs:long" minOccurs="0" />
+                <xs:element name="AD_ORG_ID" msprop:BaseColumn="AD_ORG_ID" msprop:OraDbType="113" type="xs:long" minOccurs="0" />
+                <xs:element name="CREATED" msprop:BaseColumn="CREATED" msprop:OraDbType="106" type="xs:dateTime" minOccurs="0" />
+                <xs:element name="CREATEDBY" msprop:BaseColumn="CREATEDBY" msprop:OraDbType="113" type="xs:long" minOccurs="0" />
+                <xs:element name="ERRORMSG" msprop:BaseColumn="ERRORMSG" msprop:OraDbType="119" type="xs:string" minOccurs="0" />
+                <xs:element name="EXPORT_ID" msprop:BaseColumn="EXPORT_ID" msprop:OraDbType="119" type="xs:string" minOccurs="0" />
+                <xs:element name="ISACTIVE" msprop:BaseColumn="ISACTIVE" msprop:OraDbType="104" type="xs:string" minOccurs="0" />
+                <xs:element name="NAME" msprop:BaseColumn="NAME" msprop:OraDbType="119" type="xs:string" minOccurs="0" />
+                <xs:element name="UPDATED" msprop:BaseColumn="UPDATED" msprop:OraDbType="106" type="xs:dateTime" minOccurs="0" />
+                <xs:element name="UPDATEDBY" msprop:BaseColumn="UPDATEDBY" msprop:OraDbType="113" type="xs:long" minOccurs="0" />
+                <xs:element name="VA058_COMPILEFORMULA" msprop:BaseColumn="VA058_COMPILEFORMULA" msprop:OraDbType="104" type="xs:string" minOccurs="0" />
+                <xs:element name="VA058_FORMULAMASTER_ID" msprop:BaseColumn="VA058_FORMULAMASTER_ID" msprop:OraDbType="113" type="xs:long" minOccurs="0" />
+                <xs:element name="VA058_FORMULATEXT" msprop:BaseColumn="VA058_FORMULATEXT" msprop:OraDbType="105" type="xs:string" minOccurs="0" />
+                <xs:element name="VA058_LABEL" msprop:BaseColumn="VA058_LABEL" msprop:OraDbType="119" type="xs:string" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <VA058_FormulaMaster>
+    <AD_CLIENT_ID>11</AD_CLIENT_ID>
+    <AD_ORG_ID>0</AD_ORG_ID>
+    <CREATED>2024-12-27T05:05:48+05:30</CREATED>
+    <CREATEDBY>1005442</CREATEDBY>
+    <EXPORT_ID>VA096_1000000</EXPORT_ID>
+    <ISACTIVE>Y</ISACTIVE>
+    <NAME>BasicSalaryV4</NAME>
+    <UPDATED>2025-06-13T13:03:28+05:30</UPDATED>
+    <UPDATEDBY>1005442</UPDATEDBY>
+    <VA058_COMPILEFORMULA>N</VA058_COMPILEFORMULA>
+    <VA058_FORMULAMASTER_ID>1000005</VA058_FORMULAMASTER_ID>
+    <VA058_FORMULATEXT>// Use Helper Classes
+using System;
+using VAdvantage.Utility;
+using VA058Svc.HelperClass;
+using VAdvantage.DataBase;
+using System.Collections.Generic;
+
+class BasicSalaryV4
+{
+    // Variables to hold salary calculations and relevant data
+    decimal CalendarDays = 0;
+    decimal BSal = 0;  // Basic salary
+    decimal Gross = 0;  // Gross salary
+    decimal ActualGrossAmount = 0;  // Actual gross salary (before any adjustments)
+    decimal GrossSalPercent = 0;  // Percentage of gross salary used for basic salary calculation
+    bool prorate = false;  // Indicates if salary needs to be prorated (due to join/leave mid-period)
+    string calculationBasis = "C"; // "C" for Calendar days, "W" for Working days
+    decimal WorkingDays = 0;  // Total working days for the period
+    decimal SalDays = 0;  // Total days in the salary period (calendar days or working days)
+    decimal absentDays = 0;  // Total absent days
+    decimal unpaidLeaves = 0;  // Total unpaid leave days
+    decimal paidLeaves = 0;  // Total unpaid leave days
+
+    // Method to get the salary calculation
+    public string Get(DBItem DBI)
+    {
+        // Fetch the gross salary amount and initialize actual gross salary
+        Gross = DBI.getDBItem("Gross Salary Amount", 0);
+        ActualGrossAmount = Gross;
+
+        // Fetch basic salary from the input
+        BSal = DBI.getInputValue("Pay_Value", false);
+
+        // Initialize DateTime variables
+        DateTime CalStartDate = new DateTime();
+        DateTime CalEndDate = new DateTime();
+
+        // Get Date of Joining (DOJ) and start &amp; end dates for the current salary period
+        DateTime DOJ = DBI.getDBItem("Employee Date Of Joining", "");
+        DateTime startDate = new DateTime(DBI.PR_VA064_FromDate.Value.Year, DBI.PR_VA064_FromDate.Value.Month, DBI.PR_VA064_FromDate.Value.Day);
+        DateTime todate = new DateTime(DBI.PR_VA064_ToDate.Value.Year, DBI.PR_VA064_ToDate.Value.Month, DBI.PR_VA064_ToDate.Value.Day);
+
+        // Calculate Terminate Date using a custom database function
+        DateTime TerminateDate = DBI.ExecuteDBFunction("VA058_GETENDOFSERVICE", DBI.C_BPartner_ID.ToString() + "," + DBI.PR_VA064_FromDate.ToString() + "," + DBI.PR_VA064_ToDate.ToString());
+
+        // Set calendar start and end date for the period
+        CalStartDate = startDate;
+        CalEndDate = todate;
+
+        // Check if the employee joined or terminated mid-period, and set prorate flag accordingly
+        if ((DOJ &gt; startDate) || (TerminateDate &gt; startDate &amp;&amp; TerminateDate &lt; todate))
+        {
+            prorate = true;
+        }
+
+        // Calculate the total number of salary days (based on the calculation basis: calendar or working days)
+        SalDays = GetDaysForCal(startDate, DBI.PR_VA064_ToDate, calculationBasis);
+
+        // Handle prorating based on joining and termination conditions
+        if (prorate)
+        {
+            // Joined mid-period but did not leave
+            if (DOJ &gt; startDate &amp;&amp; TerminateDate &gt; todate)
+            {
+                WorkingDays = (todate.Day - DOJ.Day) + 1;
+                CalStartDate = DOJ;
+            }
+            // Joined before the period but terminated mid-period
+            else if (DOJ &lt;= startDate &amp;&amp; TerminateDate &lt; todate)
+            {
+                WorkingDays = (TerminateDate.Day - startDate.Day) + 1;
+                CalEndDate = TerminateDate;
+            }
+            // Joined and terminated mid-period
+            else
+            {
+                WorkingDays = (TerminateDate.Day - DOJ.Day) + 1;
+                CalStartDate = DOJ;
+                CalEndDate = TerminateDate;
+            }
+        }
+        else
+        {
+            // If no prorate, calculate total working days for the period
+            WorkingDays = (todate.Day - startDate.Day) + 1;
+        }
+
+        // Get the number of absent days and unpaid leave days during the period using custom DB functions
+        absentDays = Util.GetValueOfDecimal(DBI.ExecuteDBFunction("VA069_GETABSENT", DBI.C_BPartner_ID.ToString() + "," + CalStartDate.ToLocalTime().ToString() + "," + CalEndDate.ToLocalTime().ToString()));
+        unpaidLeaves = Util.GetValueOfDecimal(DBI.ExecuteDBFunction("VA086_GETLEAVES", DBI.C_BPartner_ID.ToString() + "," + CalStartDate.ToLocalTime().ToString() + "," + CalEndDate.ToLocalTime().ToString() + ",'UP'"));
+        paidLeaves = Util.GetValueOfDecimal(DBI.ExecuteDBFunction("VA086_GETLEAVES", DBI.C_BPartner_ID.ToString() + "," + CalStartDate.ToLocalTime().ToString() + "," + CalEndDate.ToLocalTime().ToString() + ",'PA'"));
+
+        // If there are absences or unpaid leaves, adjust the prorate flag and working days
+        if (absentDays &gt; 0 || unpaidLeaves &gt; 0)
+        {
+            prorate = true;
+            WorkingDays = WorkingDays - absentDays - unpaidLeaves;
+        }
+
+        // Basic Salary Calculation
+        if (BSal &gt; 0)
+        {
+            // If basic salary exists and prorate is true, adjust it based on working days
+            if (prorate)
+            {
+                BSal = (BSal / SalDays) * WorkingDays;
+                BSal = Math.Round(BSal);  // Round to nearest integer
+            }
+        }
+        else
+        {
+            // If no basic salary is provided, calculate it based on gross salary percentage
+            GrossSalPercent = Util.GetValueOfDecimal(DBI.getDBItem("GrossSalPercentage", 40));
+            if (GrossSalPercent &gt; 0)
+            {
+                // If prorate is true, adjust the gross salary based on working days
+                if (prorate)
+                {
+                    Gross = (Gross / SalDays) * WorkingDays;
+                }
+
+                // Calculate basic salary as a percentage of gross salary
+                BSal = (GrossSalPercent * Gross) / 100;
+                BSal = Math.Round(BSal);  // Round to nearest integer
+            }
+        }
+        decimal workingDaysWithoutPaidLeaves = WorkingDays - paidLeaves;
+        // Return the results as a string (Basic Salary, Gross Salary, Actual Gross Salary)
+        return BSal.ToString() + "," + Gross.ToString() + "," + ActualGrossAmount.ToString()+ "," + workingDaysWithoutPaidLeaves.ToString()+ "," + absentDays.ToString()+ "," + unpaidLeaves.ToString()+ "," + paidLeaves.ToString();
+    }
+
+    // Method to calculate the number of days between two dates based on the calculation basis (working or calendar days)
+    public decimal GetDaysForCal(DateTime? JoiningDate, DateTime? EndDate, string calculationBasis)
+    {
+        decimal days = 0;
+
+        // If calculation basis is 'W' (working days), exclude weekends (Saturday and Sunday)
+        if (calculationBasis.Equals("W"))
+        {
+            while (JoiningDate &lt;= EndDate)
+            {
+                // Skip weekends (Saturday and Sunday)
+                if (JoiningDate.Value.DayOfWeek == DayOfWeek.Saturday || JoiningDate.Value.DayOfWeek == DayOfWeek.Sunday)
+                {
+                    JoiningDate = JoiningDate.Value.AddDays(1);
+                    continue;
+                }
+                else
+                {
+                    days++;  // Increment days count for weekdays
+                    JoiningDate = JoiningDate.Value.AddDays(1);
+                }
+            }
+        }
+        else
+        {
+            // If calculation basis is 'C' (calendar days), simply count all days
+            days = (EndDate.Value.Day - JoiningDate.Value.Day) + 1;
+        }
+        return days;
+    }
+}</VA058_FORMULATEXT>
+  </VA058_FormulaMaster>
+  <VA058_FormulaMaster>
+    <AD_CLIENT_ID>11</AD_CLIENT_ID>
+    <AD_ORG_ID>0</AD_ORG_ID>
+    <CREATED>2024-12-27T05:05:00+05:30</CREATED>
+    <CREATEDBY>1005442</CREATEDBY>
+    <EXPORT_ID>VA096_1000001</EXPORT_ID>
+    <ISACTIVE>Y</ISACTIVE>
+    <NAME>EPF</NAME>
+    <UPDATED>2024-12-27T05:05:00+05:30</UPDATED>
+    <UPDATEDBY>1005442</UPDATEDBY>
+    <VA058_COMPILEFORMULA>N</VA058_COMPILEFORMULA>
+    <VA058_FORMULAMASTER_ID>1000004</VA058_FORMULAMASTER_ID>
+    <VA058_FORMULATEXT>// Use Helper Classes
+using System;
+using VAdvantage.Utility;
+using VA058Svc.HelperClass;
+using VAdvantage.DataBase;
+
+class EPF
+{
+    // Variables
+
+    decimal EPFEmployee = 0, EPFEmployer = 0;
+    decimal EPfCalAmount = 0;
+
+    decimal EpfEePercent = 0;
+    decimal EpfErPercent = 0;
+    decimal ProvFund = 0;
+    decimal BSal = 0;
+
+    public string Get(DBItem DBI)
+    {
+        BSal = DBI.getDBItem("EPF Balance ASG DR", 0);
+        EPfCalAmount = DBI.getDBItem("EPF Calculation Amount", 0);
+        if (BSal &lt; EPfCalAmount)
+        {
+            EPfCalAmount = BSal;
+        }
+        EpfErPercent = DBI.getDBItem("EPF Percent", 0);
+        EpfEePercent = DBI.getInputValue("Percentage", false);
+        if (EpfEePercent == 0)
+        {
+            EpfEePercent = EpfErPercent;
+        }
+
+        if (EPfCalAmount &gt; 0)
+        {
+            EPFEmployee = Util.GetValueOfDecimal((EpfEePercent * EPfCalAmount) / 100);
+            EPFEmployer = Util.GetValueOfDecimal((EpfErPercent * EPfCalAmount) / 100);
+            ProvFund = EPFEmployee + EPFEmployer;
+        }
+        EPFEmployer = Math.Round(EPFEmployer);
+        ProvFund = Math.Round(ProvFund);
+
+
+        // Returns Results
+        return EPFEmployer.ToString() + "," + ProvFund.ToString();
+    }
+}
+</VA058_FORMULATEXT>
+  </VA058_FormulaMaster>
+  <VA058_FormulaMaster>
+    <AD_CLIENT_ID>11</AD_CLIENT_ID>
+    <AD_ORG_ID>0</AD_ORG_ID>
+    <CREATED>2024-12-27T05:04:40+05:30</CREATED>
+    <CREATEDBY>1005442</CREATEDBY>
+    <EXPORT_ID>VA096_1000002</EXPORT_ID>
+    <ISACTIVE>Y</ISACTIVE>
+    <NAME>ESIV3</NAME>
+    <UPDATED>2025-02-17T13:06:36+05:30</UPDATED>
+    <UPDATEDBY>1005347</UPDATEDBY>
+    <VA058_COMPILEFORMULA>N</VA058_COMPILEFORMULA>
+    <VA058_FORMULAMASTER_ID>1000003</VA058_FORMULAMASTER_ID>
+    <VA058_FORMULATEXT>// Use Helper Classes
+using System;
+using VAdvantage.Utility;
+using VA058Svc.HelperClass;
+using VAdvantage.DataBase;
+class ESIV3
+{
+    // Variables
+    decimal ESIEmployee = 0, ESIEmployer = 0;
+    decimal EPfCalAmount = 0;
+    decimal ESIEePercent = 0;
+    decimal ESIErPercent = 0;
+    decimal ESIAmt = 0;
+    decimal EarnedGross = 0;
+    decimal Gross = 0;
+    DateTime? FromDate = null;
+    DateTime? ToDate = null;
+    int CountSalChange = 0;
+    public string Get(DBItem DBI)
+    {
+        Gross = DBI.getDBItem("Gross Salary Amount", 0);
+        EarnedGross = DBI.getDBItem("Gross Balance ASG DR", 0);
+        //EarnedGross = Gross;
+        if (Gross &lt;= 21000)
+        {
+            //ESIErPercent = Util.GetValueOfDecimal(DBI.getTableValue("ESI Contribution", "ESI Contribution", "ESI Employer"));
+            //ESIEePercent = Util.GetValueOfDecimal(DBI.getTableValue("ESI Contribution", "ESI Contribution", "ESI Employee"));
+            ESIErPercent = DBI.getDBItem("ESI Employer Percent", 0);
+            ESIEePercent = DBI.getDBItem("ESI Employee Percent", 0);
+            ESIEmployer = Util.GetValueOfDecimal((EarnedGross * ESIErPercent) / 100);
+            ESIEmployee = Util.GetValueOfDecimal((EarnedGross * ESIEePercent) / 100);
+            ESIAmt = ESIEmployee + ESIEmployer;
+        }
+        else
+        {
+            if (DBI.PR_VA064_FromDate.Value.Month &gt; 3 &amp;&amp; DBI.PR_VA064_FromDate.Value.Month &lt;= 9)
+
+            {
+                FromDate = new DateTime(DBI.PR_VA064_FromDate.Value.Year, 4, 1);
+                ToDate = DBI.PR_VA064_ToDate;
+            }
+            else
+            {
+                if (DBI.PR_VA064_FromDate.Value.Month &gt;= 1 &amp;&amp; DBI.PR_VA064_FromDate.Value.Month &lt;= 3)
+                {
+                    FromDate = new DateTime(DBI.PR_VA064_FromDate.Value.Year - 1, 10, 1);
+                    ToDate = DBI.PR_VA064_ToDate;
+                }
+                if (DBI.PR_VA064_FromDate.Value.Month &gt;= 10 &amp;&amp; DBI.PR_VA064_FromDate.Value.Month &lt;= 12)
+                {
+                    FromDate = new DateTime(DBI.PR_VA064_FromDate.Value.Year, 10, 1);
+                    ToDate = DBI.PR_VA064_ToDate;
+                }
+            }
+            CountSalChange = DBI.ExecuteDBFunction("VA064_CHECKSALCHANGE", DBI.Assign_ID.ToString() + "," + FromDate.ToString() + "," + ToDate.ToString() + "," + "'Gross Salary'");
+
+            if (CountSalChange &gt; 0)
+            {
+                ESIErPercent = DBI.getDBItem("ESI Employer Percent", 0);
+                ESIEePercent = DBI.getDBItem("ESI Employee Percent", 0);
+                ESIEmployer = Util.GetValueOfDecimal((21000 * ESIErPercent) / 100);
+                ESIEmployee = Util.GetValueOfDecimal((21000 * ESIEePercent) / 100);
+            }
+
+            ESIAmt = ESIEmployee + ESIEmployer;
+        }
+
+        decimal ESI = ESIEmployer + ESIEmployee;
+        return ESIEmployer.ToString() + "," + ESI.ToString();
+        ESIEmployer = Math.Round(ESIEmployer);
+        ESIEmployee = Math.Round(ESIEmployee);
+        ESIAmt = Math.Round(ESIAmt);
+        // Returns Results
+        return ESIEmployer.ToString() + "," + ESIEmployee.ToString();
+    }
+}
+</VA058_FORMULATEXT>
+  </VA058_FormulaMaster>
+  <VA058_FormulaMaster>
+    <AD_CLIENT_ID>11</AD_CLIENT_ID>
+    <AD_ORG_ID>0</AD_ORG_ID>
+    <CREATED>2024-12-27T05:03:50+05:30</CREATED>
+    <CREATEDBY>1005442</CREATEDBY>
+    <EXPORT_ID>VA096_1000003</EXPORT_ID>
+    <ISACTIVE>Y</ISACTIVE>
+    <NAME>ProfessionalTax</NAME>
+    <UPDATED>2024-12-27T05:03:50+05:30</UPDATED>
+    <UPDATEDBY>1005442</UPDATEDBY>
+    <VA058_COMPILEFORMULA>N</VA058_COMPILEFORMULA>
+    <VA058_FORMULAMASTER_ID>1000001</VA058_FORMULAMASTER_ID>
+    <VA058_FORMULATEXT>// Use Helper Classes
+using System;
+using VAdvantage.Utility;
+using VA058Svc.HelperClass;
+using VAdvantage.DataBase;
+
+class ProfessionalTax
+{
+    // Variables
+
+    decimal Gross = 0;
+    decimal PTax = 0;
+
+    public string Get(DBItem DBI)
+    {
+        //Gross = DBI.getDBItem("Gross Salary Amount", 0);
+        //if (Gross &gt; 0)
+     
+                PTax = DBI.getDBItem("Professional Tax Amount", 0);
+         
+
+        // Returns Results
+        return PTax.ToString();
+    }
+}
+</VA058_FORMULATEXT>
+  </VA058_FormulaMaster>
+  <VA058_FormulaMaster>
+    <AD_CLIENT_ID>11</AD_CLIENT_ID>
+    <AD_ORG_ID>0</AD_ORG_ID>
+    <CREATED>2024-12-27T05:04:17+05:30</CREATED>
+    <CREATEDBY>1005442</CREATEDBY>
+    <EXPORT_ID>VA096_1000004</EXPORT_ID>
+    <ISACTIVE>Y</ISACTIVE>
+    <NAME>HouseRentAllowanceV1</NAME>
+    <UPDATED>2025-01-13T16:00:34+05:30</UPDATED>
+    <UPDATEDBY>1005442</UPDATEDBY>
+    <VA058_COMPILEFORMULA>N</VA058_COMPILEFORMULA>
+    <VA058_FORMULAMASTER_ID>1000002</VA058_FORMULAMASTER_ID>
+    <VA058_FORMULATEXT>// Use Helper Classes
+using System;
+using VAdvantage.Utility;
+using VA058Svc.HelperClass;
+using VAdvantage.DataBase;
+
+class HouseRentAllowanceV1
+{
+    // Variables
+
+    decimal HRA = 0;
+    decimal BSal = 0;
+    decimal Gross = 0;
+
+    string CityType = "M";
+    decimal HRAPercent = 0;
+
+    public string Get(DBItem DBI)
+    {
+        CityType = DBI.getDBItem("Employee City Type", "N");
+        BSal = DBI.getDBItem("Basic Salary Balance ASG DR", 0);
+        Gross = DBI.getDBItem("Gross Salary Amount", 0);//Get Actual Gross salary.
+        if (BSal &gt; 0)
+        {
+            if (CityType.Equals("M"))
+            {
+                HRAPercent = DBI.getDBItem("HRA Percentage Metro", 50);
+            }
+            if (CityType.Equals("N"))
+            {
+                HRAPercent = DBI.getDBItem("HRA Percentage Non-Metro", 40);
+            }
+            HRA = Util.GetValueOfDecimal((HRAPercent * BSal) / 100);
+        }
+
+        HRA = Math.Round(HRA);
+
+        // Returns Results
+        return HRA.ToString();
+    }
+}
+</VA058_FORMULATEXT>
+  </VA058_FormulaMaster>
+  <VA058_FormulaMaster>
+    <AD_CLIENT_ID>11</AD_CLIENT_ID>
+    <AD_ORG_ID>0</AD_ORG_ID>
+    <CREATED>2025-04-17T08:35:05+05:30</CREATED>
+    <CREATEDBY>1005347</CREATEDBY>
+    <EXPORT_ID>VA096_1000006</EXPORT_ID>
+    <ISACTIVE>Y</ISACTIVE>
+    <NAME>DearnessAllowance</NAME>
+    <UPDATED>2025-04-17T08:35:05+05:30</UPDATED>
+    <UPDATEDBY>1005347</UPDATEDBY>
+    <VA058_COMPILEFORMULA>N</VA058_COMPILEFORMULA>
+    <VA058_FORMULAMASTER_ID>1000008</VA058_FORMULAMASTER_ID>
+    <VA058_FORMULATEXT>
+using System;
+using VAdvantage.Utility;
+using VA058Svc.HelperClass;
+using VAdvantage.DataBase;
+using System.Collections.Generic;
+
+// Class to calculate and return the Dearness Allowance based on certain database item values
+class DearnessAllowance
+{
+    // Declare private fields for storing necessary values
+    decimal value = 0;  // Holds the value for Dearness Allowance pay value
+    decimal workingDays = 0;  // Holds the number of working days
+    decimal calendarDay = 0;  // Holds the total number of days in the calendar period
+    decimal DNllowance = 0;  // Holds the calculated Dearness allowance
+
+    // Method to get the Dearness allowance based on a given database item
+    public string Get(DBItem DBI)
+    {
+        // Retrieve the "Dearness Allowance Pay_Value" from the database item. Default is 0 if not found.
+        value = DBI.getDBItem("Dearness Allowance Pay_Value", 0);
+
+        // If the value of the Dearness allowance is greater than 0, calculate the travel allowance.
+        if (value &gt; 0)
+        {
+            // Retrieve the number of working days balance from the database item.
+            workingDays = DBI.getDBItem("Working Day Balance ASG DR", 0);
+
+            // Calculate the total number of calendar days by subtracting the from-date from the to-date
+            calendarDay = (DBI.PR_VA064_ToDate.Value.Day - DBI.PR_VA064_FromDate.Value.Day) + 1;
+
+            // Calculate the total allowance: (Dearness value / total calendar days) * working days
+            DNllowance = Math.Round((value / calendarDay * workingDays), 2);
+        }
+
+        // Return the calculated Dearness allowance as a string
+        return DNllowance.ToString();
+    }
+}</VA058_FORMULATEXT>
+  </VA058_FormulaMaster>
+  <VA058_FormulaMaster>
+    <AD_CLIENT_ID>11</AD_CLIENT_ID>
+    <AD_ORG_ID>11</AD_ORG_ID>
+    <CREATED>2025-04-17T08:32:26+05:30</CREATED>
+    <CREATEDBY>1005347</CREATEDBY>
+    <EXPORT_ID>VA096_1000007</EXPORT_ID>
+    <ISACTIVE>Y</ISACTIVE>
+    <NAME>TravelAllowance</NAME>
+    <UPDATED>2025-04-17T08:32:26+05:30</UPDATED>
+    <UPDATEDBY>1005347</UPDATEDBY>
+    <VA058_COMPILEFORMULA>N</VA058_COMPILEFORMULA>
+    <VA058_FORMULAMASTER_ID>1000007</VA058_FORMULAMASTER_ID>
+    <VA058_FORMULATEXT>
+using System;
+using VAdvantage.Utility;
+using VA058Svc.HelperClass;
+using VAdvantage.DataBase;
+using System.Collections.Generic;
+
+// Class to calculate and return the TravelAllowance based on certain database item values
+class TravelAllowance
+{
+    // Declare private fields for storing necessary values
+    decimal value = 0;  // Holds the value for TravelAllowance  pay value
+    decimal workingDays = 0;  // Holds the number of working days
+    decimal calendarDay = 0;  // Holds the total number of days in the calendar period
+    decimal TAllowance = 0;  // Holds the calculated TravelAllowance 
+
+    // Method to get the TravelAllowance based on a given database item
+    public string Get(DBItem DBI)
+    {
+        // Retrieve the "Travel Allowance Pay_Value" from the database item. Default is 0 if not found.
+        value = DBI.getDBItem("Travelling Allowance Pay_Value", 0);
+
+        // If the value of the Travel allowance is greater than 0, calculate the travel allowance.
+        if (value &gt; 0)
+        {
+            // Retrieve the number of working days balance from the database item.
+            workingDays = DBI.getDBItem("Working Day Balance ASG DR", 0);
+
+            // Calculate the total number of calendar days by subtracting the from-date from the to-date
+            calendarDay = (DBI.PR_VA064_ToDate.Value.Day - DBI.PR_VA064_FromDate.Value.Day) + 1;
+
+            // Calculate the total allowance: (Travel value / total calendar days) * working days
+            TAllowance = Math.Round((value / calendarDay * workingDays), 2);
+        }
+
+        // Return the calculated Travel allowance as a string
+        return TAllowance.ToString();
+    }
+}</VA058_FORMULATEXT>
+  </VA058_FormulaMaster>
+  <VA058_FormulaMaster>
+    <AD_CLIENT_ID>11</AD_CLIENT_ID>
+    <AD_ORG_ID>0</AD_ORG_ID>
+    <CREATED>2024-12-27T05:06:33+05:30</CREATED>
+    <CREATEDBY>1005442</CREATEDBY>
+    <EXPORT_ID>VA096_1000005</EXPORT_ID>
+    <ISACTIVE>Y</ISACTIVE>
+    <NAME>SpecialAllowance</NAME>
+    <UPDATED>2024-12-27T05:06:33+05:30</UPDATED>
+    <UPDATEDBY>1005442</UPDATEDBY>
+    <VA058_COMPILEFORMULA>N</VA058_COMPILEFORMULA>
+    <VA058_FORMULAMASTER_ID>1000006</VA058_FORMULAMASTER_ID>
+    <VA058_FORMULATEXT>// Use Helper Classes
+using System;
+using VAdvantage.Utility;
+using VA058Svc.HelperClass;
+using VAdvantage.DataBase;
+
+class SpecialAllowance
+{
+    // Variables
+
+    decimal GrossBalance = 0, SpecialAllBalance = 0;
+    decimal SpecialAllow = 0;
+
+
+    public string Get(DBItem DBI)
+    {
+        GrossBalance = DBI.getDBItem("Gross Balance ASG DR", 0);
+        SpecialAllBalance = DBI.getDBItem("Balance Special Allowance ASG DR", 0);
+
+        if (GrossBalance &gt; SpecialAllBalance)
+        {
+            SpecialAllow = GrossBalance - SpecialAllBalance;
+        }
+        //SpecialAllow = Math.Round(SpecialAllow);
+
+        // Returns Results
+        return SpecialAllow.ToString();
+    }
+}
+</VA058_FORMULATEXT>
+  </VA058_FormulaMaster>
+</NewDataSet>

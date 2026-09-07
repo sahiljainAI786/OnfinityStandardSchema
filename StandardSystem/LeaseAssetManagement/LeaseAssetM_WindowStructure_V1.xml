@@ -1,0 +1,2423 @@
+<Windows>
+  <Window>
+    <WindowDisplayName>Lease Agreement</WindowDisplayName>
+    <WindowName>VA080_LeaseAgreement</WindowName>
+    <ad_window_id>1000488</ad_window_id>
+    <export_id>VA080_20000300</export_id>
+    <IsActive>Y</IsActive>
+    <Tab>
+      <TabSeqNo>10</TabSeqNo>
+      <TabName>Lease Agreement</TabName>
+      <TableName>VA080_LeaseAgreement</TableName>
+      <AD_Tab_ID>1001283</AD_Tab_ID>
+      <IsActive>Y</IsActive>
+      <IsDisplayed>Y</IsDisplayed>
+      <IsReadOnly>N</IsReadOnly>
+      <IsAdvancedTab>N</IsAdvancedTab>
+      <Field>
+        <ColumnName>VA080_LeaseAgreement_ID</ColumnName>
+        <FieldName>Lease Agreement</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Lease Agreement</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_RefLeaseAgreementSL_ID</ColumnName>
+        <FieldName>Original Lease</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA080_SubLeasePer</ColumnName>
+        <FieldName>Sub Lease %</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Sub-lease % out of Total Head Lease</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_ROUAssetbeginninofSubLease</ColumnName>
+        <FieldName>Right of Use Asset given at the beginning of Sub-Lease</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Sub-Lease % part out of total Right of Use asset at the beginning of the Sub-Lease 
+ (Rightofuse asset at the beginning of Year * %of sub-Lease)</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_LeaseReceivable</ColumnName>
+        <FieldName>Lease Receivable</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The lease receivable is calculated as the present value of the lease receipts expected during the lease term.
+</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_IsLease</ColumnName>
+        <FieldName>Is Lease</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Is Lease</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_GainOnSubLease</ColumnName>
+        <FieldName>Gain/Loss On Lease/Sub-Lease</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Lease Receivable minus Right of Use asset</Help>
+      </Field>
+      <Field>
+        <ColumnName>A_Asset_ID</ColumnName>
+        <FieldName>Right of Use Asset</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>N</IsCentrallyMaintained>
+        <Help>User has to select the asset which user has taken on Lease.</Help>
+      </Field>
+      <Field>
+        <ColumnName>Export_ID</ColumnName>
+        <FieldName>Export</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>AD_Client_ID</ColumnName>
+        <FieldName>Tenant</FieldName>
+        <FieldSeqNo>10</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>A Client is a company or a legal entity. You cannot share data between Clients. Tenant is a synonym for Client.</Help>
+      </Field>
+      <Field>
+        <ColumnName>AD_Org_ID</ColumnName>
+        <FieldName>Organization</FieldName>
+        <FieldSeqNo>20</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>An organization is a unit of your Tenant or legal entity - examples are store, department. You can share data between organizations.</Help>
+      </Field>
+      <Field>
+        <ColumnName>Value</ColumnName>
+        <FieldName>Agreement Number</FieldName>
+        <FieldSeqNo>30</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>N</IsCentrallyMaintained>
+        <Help>A search key allows you a fast method of finding a particular record.
+If you leave the search key empty, the system automatically creates a numeric number.  The document sequence used for this fallback number is defined in the &quot;Maintain Sequence&quot; window with the name &quot;DocumentNo_&lt;TableName&gt;&quot;, where TableName is the actual name of the table (e.g. C_Order).</Help>
+      </Field>
+      <Field>
+        <ColumnName>AD_OrgTrx_ID</ColumnName>
+        <FieldName>Profit Center/Cost Center</FieldName>
+        <FieldSeqNo>40</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>N</IsCentrallyMaintained>
+        <Help>The organization which performs or initiates this transaction (for another organization).  The owning Organization may not be the transaction organization in a service bureau environment, with centralized services, and inter-organization transactions.</Help>
+      </Field>
+      <Field>
+        <ColumnName>C_BPartner_ID</ColumnName>
+        <FieldName>Vendor</FieldName>
+        <FieldSeqNo>50</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA080_LeaseType</ColumnName>
+        <FieldName>Lease</FieldName>
+        <FieldSeqNo>60</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>N</IsCentrallyMaintained>
+        <Help>Define the type of lease agreement done with the business partner</Help>
+      </Field>
+      <Field>
+        <ColumnName>Description</ColumnName>
+        <FieldName>Description</FieldName>
+        <FieldSeqNo>70</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>A description is limited to 255 characters.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_LeaseCases</ColumnName>
+        <FieldName>Lease Type</FieldName>
+        <FieldSeqNo>80</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>N</IsCentrallyMaintained>
+        <Help>Original Lease, renewal, Sales and Lease Back</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_TPVYearlyLease</ColumnName>
+        <FieldName>Total Present Value of Yearly Lease Liability</FieldName>
+        <FieldSeqNo>90</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Total Present Value of Yearly Lease Liability</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_ActualLeaseLiability</ColumnName>
+        <FieldName>Actual Lease Liability</FieldName>
+        <FieldSeqNo>100</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Deduction of Financial Liability from Total Present Value of Yearly Lease Liability</Help>
+      </Field>
+      <Field>
+        <ColumnName>IsActive</ColumnName>
+        <FieldName>Active</FieldName>
+        <FieldSeqNo>110</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>There are two methods of making records unavailable in the system: One is to delete the record, the other is to de-activate the record. A de-activated record is not available for selection, but available for reports.
+There are two reasons for de-activating and not deleting records:
+(1) The system requires the record for audit purposes.
+(2) The record is referenced by other records. E.g., you cannot delete a Account, if there are invoices for this Account record existing. You de-activate the Account and prevent that this record is used for future entries.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_SLBAsset_Ref_ID</ColumnName>
+        <FieldName>Sales and Lease Back Asset</FieldName>
+        <FieldSeqNo>120</FieldSeqNo>
+        <DisplayLogic>@VA080_LeaseCases@=&apos;S&apos;</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Asset which is sold and leased back from the buyer
+</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_SaleValue</ColumnName>
+        <FieldName>Sale Value</FieldName>
+        <FieldSeqNo>130</FieldSeqNo>
+        <DisplayLogic>@VA080_LeaseCases@=&apos;S&apos;</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Sale value of asset leased back. 
+</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_FairValue</ColumnName>
+        <FieldName>Fair Value</FieldName>
+        <FieldSeqNo>140</FieldSeqNo>
+        <DisplayLogic>@VA080_LeaseCases@=&apos;S&apos;</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Fair Value will be the Market Value.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_BookValue</ColumnName>
+        <FieldName>Book Value</FieldName>
+        <FieldSeqNo>150</FieldSeqNo>
+        <DisplayLogic>@VA080_LeaseCases@=&apos;S&apos;</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Book value of asset leased back. 
+</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_FinancialLiability</ColumnName>
+        <FieldName>Financial Liability</FieldName>
+        <FieldSeqNo>160</FieldSeqNo>
+        <DisplayLogic>@VA080_LeaseCases@=&apos;S&apos;</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Sales Price minus Fair value</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_PrePayment</ColumnName>
+        <FieldName>Pre Payment </FieldName>
+        <FieldSeqNo>170</FieldSeqNo>
+        <DisplayLogic>@VA080_LeaseCases@=&apos;S&apos;</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA080_RefLeaseAgreement_ID</ColumnName>
+        <FieldName>Original Lease</FieldName>
+        <FieldSeqNo>180</FieldSeqNo>
+        <DisplayLogic>@VA080_LeaseCases@=&apos;R&apos;</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>In case of Renewal, Original Closed Lease will come in Search.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_InterestRate</ColumnName>
+        <FieldName>Annualized Interest Rate</FieldName>
+        <FieldSeqNo>190</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The rate of interest that causes the present value of lease payments or unguaranteed residual value.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_FixedLeaseAmount</ColumnName>
+        <FieldName>Fixed Lease Amount</FieldName>
+        <FieldSeqNo>200</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Lease payment to be made to lessor at the end of each period.</Help>
+      </Field>
+      <Field>
+        <ColumnName>C_Currency_ID</ColumnName>
+        <FieldName>Currency</FieldName>
+        <FieldSeqNo>210</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Indicates the Currency to be used when processing or reporting on this record</Help>
+      </Field>
+      <Field>
+        <ColumnName>C_ConversionType_ID</ColumnName>
+        <FieldName>Currency Rate Type</FieldName>
+        <FieldSeqNo>220</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Currency Conversion Rate Type lets you define different type of rates, e.g. Spot, Corporate and/or Sell/Buy rates.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_Commencementdate</ColumnName>
+        <FieldName>Contractual Start Date</FieldName>
+        <FieldSeqNo>230</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>N</IsCentrallyMaintained>
+        <Help>Date on which the lease payment commenced.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_ContractualEndDate</ColumnName>
+        <FieldName>Contractual End Date</FieldName>
+        <FieldSeqNo>240</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Date on which the lease agreement ends.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_FirstPaymentDate</ColumnName>
+        <FieldName>First Payment Date</FieldName>
+        <FieldSeqNo>250</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Date on which first payment to be made under the lease agreement.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_Enddate</ColumnName>
+        <FieldName>Payment End Date</FieldName>
+        <FieldSeqNo>260</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>N</IsCentrallyMaintained>
+        <Help>Date on which the lease payments ends.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_PaymentsPerYear</ColumnName>
+        <FieldName>Payments Per Year</FieldName>
+        <FieldSeqNo>270</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Number of payments to be made in a financial year.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_NoOfYears</ColumnName>
+        <FieldName>Number of Years</FieldName>
+        <FieldSeqNo>280</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Number of Years</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_PaymentDay</ColumnName>
+        <FieldName>Payment Day</FieldName>
+        <FieldSeqNo>290</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Day of the month on which payment is to be made.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_DateofContract</ColumnName>
+        <FieldName>Contract Sign Date</FieldName>
+        <FieldSeqNo>300</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>N</IsCentrallyMaintained>
+        <Help>Date on which party agree to contract on lease</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_IsPaymentAtBegining</ColumnName>
+        <FieldName>Is Payment at the Begining</FieldName>
+        <FieldSeqNo>310</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Is Payment at the Begining</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_UpfrontPayment</ColumnName>
+        <FieldName>Lease payment made upfront</FieldName>
+        <FieldSeqNo>320</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Lease payments made on or before the commencement of lease agreement.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_InitialDirectCost</ColumnName>
+        <FieldName>Initial Direct Cost</FieldName>
+        <FieldSeqNo>330</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Indirect Cost incurred for the lease agreement.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_DismantlingCost</ColumnName>
+        <FieldName>Estimated Cost for dismantling/ restoring the asset</FieldName>
+        <FieldSeqNo>340</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Estimated cost to be incurred at the end of the lease period for dismantling or restoring the asset.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_IncentivesReceived</ColumnName>
+        <FieldName>Incentives Received</FieldName>
+        <FieldSeqNo>350</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Lease incentives received under the lease agreement.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_ROU</ColumnName>
+        <FieldName>ROU</FieldName>
+        <FieldSeqNo>360</FieldSeqNo>
+        <DisplayLogic>@VA080_LeaseCases@=&apos;S&apos;</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Actual lease liability/Fair value*Book value. ROU Amount includes prepayment amount in case of asset sale and lease back is at Sale Value less than Fair Value.
+</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_PriceIncreaseIntervals</ColumnName>
+        <FieldName>Price Increase Intervals (Months)</FieldName>
+        <FieldSeqNo>370</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Intervals with the no. of months at which lease amount will be increased (If the information is known at the time of agreement).</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_IncreaseAmount</ColumnName>
+        <FieldName>Negotiated Price Increase Amount</FieldName>
+        <FieldSeqNo>380</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Amount to be increased at the intervals defined.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_IncreasePercentage</ColumnName>
+        <FieldName>Negotiated Price Increase %</FieldName>
+        <FieldSeqNo>390</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Percentage to be increase at the intervals defined.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_GenerateSchedule</ColumnName>
+        <FieldName>Generate Schedule and Calculate Lease flows</FieldName>
+        <FieldSeqNo>400</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+    </Tab>
+    <Tab>
+      <TabSeqNo>20</TabSeqNo>
+      <TabName>Statistics</TabName>
+      <TableName>VA080_LeaseDetail</TableName>
+      <AD_Tab_ID>1001434</AD_Tab_ID>
+      <IsActive>Y</IsActive>
+      <IsDisplayed>Y</IsDisplayed>
+      <IsReadOnly>N</IsReadOnly>
+      <IsAdvancedTab>N</IsAdvancedTab>
+      <Field>
+        <ColumnName>VA080_LeaseDetail_ID</ColumnName>
+        <FieldName>VA080_LeaseDetail_ID</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>Export_ID</ColumnName>
+        <FieldName>Export</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>AD_Client_ID</ColumnName>
+        <FieldName>Tenant</FieldName>
+        <FieldSeqNo>10</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>A Client is a company or a legal entity. You cannot share data between Clients. Tenant is a synonym for Client.</Help>
+      </Field>
+      <Field>
+        <ColumnName>AD_Org_ID</ColumnName>
+        <FieldName>Organization</FieldName>
+        <FieldSeqNo>20</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>An organization is a unit of your Tenant or legal entity - examples are store, department. You can share data between organizations.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_LeaseAgreement_ID</ColumnName>
+        <FieldName>Lease Agreement</FieldName>
+        <FieldSeqNo>30</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Lease Agreement</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_FixedLeaseAmount</ColumnName>
+        <FieldName>Fixed Lease Amount</FieldName>
+        <FieldSeqNo>40</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Lease payment to be made to lessor at the end of each period.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_InterestRate</ColumnName>
+        <FieldName>Annualized Interest Rate</FieldName>
+        <FieldSeqNo>50</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The rate of interest that causes the present value of lease payments or unguaranteed residual value.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_PaymentsPerYear</ColumnName>
+        <FieldName>Payments Per Year</FieldName>
+        <FieldSeqNo>60</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Number of payments to be made in a financial year.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_NoOfYears</ColumnName>
+        <FieldName>Number of Years</FieldName>
+        <FieldSeqNo>70</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Number of Years</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_EffectiveDate</ColumnName>
+        <FieldName>Date Effective</FieldName>
+        <FieldSeqNo>80</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>IsActive</ColumnName>
+        <FieldName>Active</FieldName>
+        <FieldSeqNo>90</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>There are two methods of making records unavailable in the system: One is to delete the record, the other is to de-activate the record. A de-activated record is not available for selection, but available for reports.
+There are two reasons for de-activating and not deleting records:
+(1) The system requires the record for audit purposes.
+(2) The record is referenced by other records. E.g., you cannot delete a Account, if there are invoices for this Account record existing. You de-activate the Account and prevent that this record is used for future entries.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_IncreasePercentage</ColumnName>
+        <FieldName>Negotiated Price Increase %</FieldName>
+        <FieldSeqNo>100</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Percentage to be increase at the intervals defined.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_IncreaseAmount</ColumnName>
+        <FieldName>Negotiated Price Increase Amount</FieldName>
+        <FieldSeqNo>110</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Amount to be increased at the intervals defined.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_PriceIncreaseIntervals</ColumnName>
+        <FieldName>Price Increase Intervals (Months)</FieldName>
+        <FieldSeqNo>120</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Intervals with the no. of months at which lease amount will be increased (If the information is known at the time of agreement).</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_GenerateSchedule</ColumnName>
+        <FieldName>Generate Schedule and Calculate Lease flows</FieldName>
+        <FieldSeqNo>130</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+    </Tab>
+    <Tab>
+      <TabSeqNo>30</TabSeqNo>
+      <TabName>Lease Flow</TabName>
+      <TableName>VA080_LeaseFlow</TableName>
+      <AD_Tab_ID>1001284</AD_Tab_ID>
+      <IsActive>Y</IsActive>
+      <IsDisplayed>Y</IsDisplayed>
+      <IsReadOnly>N</IsReadOnly>
+      <IsAdvancedTab>N</IsAdvancedTab>
+      <Field>
+        <ColumnName>VA080_LeaseFlow_ID</ColumnName>
+        <FieldName>Lease Flow</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Lease/Sub lease Flow
+</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_LeaseDetail_ID</ColumnName>
+        <FieldName>VA080_LeaseDetail_ID</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA080_SubLeaseIDs</ColumnName>
+        <FieldName>VA080_SubLeaseIDs</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA080_ROUOpeningOrig</ColumnName>
+        <FieldName>Original ROU Opening Balance</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA080_TrxProcessed</ColumnName>
+        <FieldName>Trx Processed</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA080_PaymentDate</ColumnName>
+        <FieldName>Account Date</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Date on which the lease amount is due for payment.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_DiscountedAmount</ColumnName>
+        <FieldName>Discounted amount of fixed asset</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Discounted amount of each lease payment.</Help>
+      </Field>
+      <Field>
+        <ColumnName>Export_ID</ColumnName>
+        <FieldName>Export</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>AD_Client_ID</ColumnName>
+        <FieldName>Tenant</FieldName>
+        <FieldSeqNo>10</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>A Client is a company or a legal entity. You cannot share data between Clients. Tenant is a synonym for Client.</Help>
+      </Field>
+      <Field>
+        <ColumnName>AD_Org_ID</ColumnName>
+        <FieldName>Organization</FieldName>
+        <FieldSeqNo>20</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>An organization is a unit of your Tenant or legal entity - examples are store, department. You can share data between organizations.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_LeaseAgreement_ID</ColumnName>
+        <FieldName>Lease Agreement</FieldName>
+        <FieldSeqNo>30</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Lease Agreement</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_LeasePayment</ColumnName>
+        <FieldName>Lease Payment</FieldName>
+        <FieldSeqNo>40</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Yearly Total Lease amount (without Discounted) due for the payment</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_InterestStartDate</ColumnName>
+        <FieldName>Interest Calculation Start Date</FieldName>
+        <FieldSeqNo>50</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Date from which the interest amount calculation starts.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_InterestEndDate</ColumnName>
+        <FieldName>Interest Calculation End Date</FieldName>
+        <FieldSeqNo>60</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Date upto which the interest amount calculation ends.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_LeaseOpeningBalance</ColumnName>
+        <FieldName>Lease liability opening balance</FieldName>
+        <FieldSeqNo>70</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Opening balance of lease liability amount for the particular lease flow.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_InterestCost</ColumnName>
+        <FieldName>Interest Cost</FieldName>
+        <FieldSeqNo>80</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Finance cost on lease liability for the period defined in Interest calculation start and End date.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_LeaseClosingBalance</ColumnName>
+        <FieldName>Lease Liability Closing Balance</FieldName>
+        <FieldSeqNo>90</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Closing balance of lease liability for the period defined in lease flows. 
+(Opening Lease Liability minus Capital Part of Lease Liability)</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_CapitalPartofLeaseLiability</ColumnName>
+        <FieldName>Capital Part of Lease Liability</FieldName>
+        <FieldSeqNo>100</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Capital payment out of Total Lease Liability (Yearly Total Lease Payment minus Interest Cost)</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_YearlyFinancialLiability</ColumnName>
+        <FieldName>Yearly Financial Liability</FieldName>
+        <FieldSeqNo>110</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The seller-lessee accounts for proceeds from the sale and leaseback as a financial liability in accordance with IFRS 9. Proportionate: Capital part of Total Lease Liability *Financial Liability/ Total Present Value of Yearly Lease Liability.
+</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_CapitalLeaseExcluded</ColumnName>
+        <FieldName>Capital Part of Lease Excluded Financial Liability</FieldName>
+        <FieldSeqNo>120</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Capital Part of Lease Liability minus Yearly Financial Liability</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_LeaseLiabilityVariance</ColumnName>
+        <FieldName>Lease Liability Variance</FieldName>
+        <FieldSeqNo>125</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA080_ROUOpeningBalance</ColumnName>
+        <FieldName>Right-of-Use Opening balance</FieldName>
+        <FieldSeqNo>130</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Opening balance of ROU asset for the period
+</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_ROUDepreciation</ColumnName>
+        <FieldName>Depreciation</FieldName>
+        <FieldSeqNo>140</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Depreciation to be charged on the right of use asset for the period.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_ROUClosingBalance</ColumnName>
+        <FieldName>Right-of-Use closing Balance</FieldName>
+        <FieldSeqNo>150</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Right of use closing balance for the period after charging depreciation.</Help>
+      </Field>
+      <Field>
+        <ColumnName>IsActive</ColumnName>
+        <FieldName>Active</FieldName>
+        <FieldSeqNo>160</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>There are two methods of making records unavailable in the system: One is to delete the record, the other is to de-activate the record. A de-activated record is not available for selection, but available for reports.
+There are two reasons for de-activating and not deleting records:
+(1) The system requires the record for audit purposes.
+(2) The record is referenced by other records. E.g., you cannot delete a Account, if there are invoices for this Account record existing. You de-activate the Account and prevent that this record is used for future entries.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_GeneratePayment</ColumnName>
+        <FieldName>Generate Payment</FieldName>
+        <FieldSeqNo>170</FieldSeqNo>
+        <DisplayLogic>@VA080_InitialRecognise@=&apos;N&apos;</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA080_IsTrxCreated</ColumnName>
+        <FieldName>Is Transaction Created</FieldName>
+        <FieldSeqNo>180</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA080_InitialRecognise</ColumnName>
+        <FieldName>Initial Recognise</FieldName>
+        <FieldSeqNo>190</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+    </Tab>
+    <Tab>
+      <TabSeqNo>40</TabSeqNo>
+      <TabName>Default Accounting</TabName>
+      <TableName>VA080_Lease_Acct</TableName>
+      <AD_Tab_ID>1001285</AD_Tab_ID>
+      <IsActive>Y</IsActive>
+      <IsDisplayed>Y</IsDisplayed>
+      <IsReadOnly>N</IsReadOnly>
+      <IsAdvancedTab>N</IsAdvancedTab>
+      <Field>
+        <ColumnName>VA080_Lease_Acct_ID</ColumnName>
+        <FieldName>VA080_Lease_Acct_ID</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>Export_ID</ColumnName>
+        <FieldName>Export</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>AD_Client_ID</ColumnName>
+        <FieldName>Tenant</FieldName>
+        <FieldSeqNo>10</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>A Client is a company or a legal entity. You cannot share data between Clients. Tenant is a synonym for Client.</Help>
+      </Field>
+      <Field>
+        <ColumnName>AD_Org_ID</ColumnName>
+        <FieldName>Organization</FieldName>
+        <FieldSeqNo>20</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>An organization is a unit of your Tenant or legal entity - examples are store, department. You can share data between organizations.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_LeaseAgreement_ID</ColumnName>
+        <FieldName>Lease Agreement</FieldName>
+        <FieldSeqNo>30</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Lease Agreement</Help>
+      </Field>
+      <Field>
+        <ColumnName>FRPT_AcctDefault_ID</ColumnName>
+        <FieldName>Accounting Default</FieldName>
+        <FieldSeqNo>40</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>C_AcctSchema_ID</ColumnName>
+        <FieldName>Accounting Schema</FieldName>
+        <FieldSeqNo>50</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>N</IsCentrallyMaintained>
+        <Help>An Accounting Schema defines the rules used in accounting such as costing method, currency and calendar</Help>
+      </Field>
+      <Field>
+        <ColumnName>C_ValidCombination_ID</ColumnName>
+        <FieldName>Parameter Combination</FieldName>
+        <FieldSeqNo>60</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Combination identifies a valid combination of element which represent a GL account.</Help>
+      </Field>
+      <Field>
+        <ColumnName>IsActive</ColumnName>
+        <FieldName>Active</FieldName>
+        <FieldSeqNo>70</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>There are two methods of making records unavailable in the system: One is to delete the record, the other is to de-activate the record. A de-activated record is not available for selection, but available for reports.
+There are two reasons for de-activating and not deleting records:
+(1) The system requires the record for audit purposes.
+(2) The record is referenced by other records. E.g., you cannot delete a Account, if there are invoices for this Account record existing. You de-activate the Account and prevent that this record is used for future entries.</Help>
+      </Field>
+    </Tab>
+  </Window>
+  <Window>
+    <WindowDisplayName>Lease Transaction </WindowDisplayName>
+    <WindowName>VA080_LeaseTransaction </WindowName>
+    <ad_window_id>1000490</ad_window_id>
+    <export_id>VA080_20000301</export_id>
+    <IsActive>Y</IsActive>
+    <Tab>
+      <TabSeqNo>10</TabSeqNo>
+      <TabName>Lease Transaction</TabName>
+      <TableName>VA080_Lease</TableName>
+      <AD_Tab_ID>1001286</AD_Tab_ID>
+      <IsActive>Y</IsActive>
+      <IsDisplayed>Y</IsDisplayed>
+      <IsReadOnly>N</IsReadOnly>
+      <IsAdvancedTab>N</IsAdvancedTab>
+      <Field>
+        <ColumnName>VA080_Lease_ID</ColumnName>
+        <FieldName>VA080_Lease_ID</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Lease Transaction</Help>
+      </Field>
+      <Field>
+        <ColumnName>IsReversed</ColumnName>
+        <FieldName>Reversed</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>Processing</ColumnName>
+        <FieldName>Process Now</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>Export_ID</ColumnName>
+        <FieldName>Export</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>AD_Client_ID</ColumnName>
+        <FieldName>Tenant</FieldName>
+        <FieldSeqNo>10</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>A Client is a company or a legal entity. You cannot share data between Clients. Tenant is a synonym for Client.</Help>
+      </Field>
+      <Field>
+        <ColumnName>AD_Org_ID</ColumnName>
+        <FieldName>Organization</FieldName>
+        <FieldSeqNo>20</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>An organization is a unit of your Tenant or legal entity - examples are store, department. You can share data between organizations.</Help>
+      </Field>
+      <Field>
+        <ColumnName>C_DocType_ID</ColumnName>
+        <FieldName>Document Type</FieldName>
+        <FieldSeqNo>30</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Document Type determines document sequence and processing rules</Help>
+      </Field>
+      <Field>
+        <ColumnName>DocumentNo</ColumnName>
+        <FieldName>Document No.</FieldName>
+        <FieldSeqNo>40</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Document number is usually automatically generated by the system and determined by the document type of the document. If the document is not saved, the preliminary number is displayed between greater than and less than symbols
+
+If the document type of your document has no automatic document sequence defined, the field is empty if you create a new document. This is for documents which usually have an external number (like vendor invoice).  If you leave the field empty, the system will generate a document number for you. The document sequence used for this fallback number is defined in the &quot;Maintain Sequence&quot; window with the name &quot;DocumentNo_&lt;TableName&gt;&quot;, where TableName is the actual name of the table (e.g. C_Order).</Help>
+      </Field>
+      <Field>
+        <ColumnName>DateTrx</ColumnName>
+        <FieldName>Transaction Date</FieldName>
+        <FieldSeqNo>50</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Transaction Date indicates the date of the transaction.</Help>
+      </Field>
+      <Field>
+        <ColumnName>DateAcct</ColumnName>
+        <FieldName>Account Date</FieldName>
+        <FieldSeqNo>60</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Account Date indicates the date to be used on the General Ledger account entries generated from this document. It is also used for any currency conversion.</Help>
+      </Field>
+      <Field>
+        <ColumnName>C_Currency_ID</ColumnName>
+        <FieldName>Currency</FieldName>
+        <FieldSeqNo>70</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Indicates the Currency to be used when processing or reporting on this record</Help>
+      </Field>
+      <Field>
+        <ColumnName>C_ConversionType_ID</ColumnName>
+        <FieldName>Currency Rate Type</FieldName>
+        <FieldSeqNo>80</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Currency Conversion Rate Type lets you define different type of rates, e.g. Spot, Corporate and/or Sell/Buy rates.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_InitialRecognise</ColumnName>
+        <FieldName>Initial Recognise</FieldName>
+        <FieldSeqNo>90</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>Processed</ColumnName>
+        <FieldName>Processed</FieldName>
+        <FieldSeqNo>100</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Processed checkbox indicates that a document has been processed.</Help>
+      </Field>
+      <Field>
+        <ColumnName>DocStatus</ColumnName>
+        <FieldName>Document Status</FieldName>
+        <FieldSeqNo>110</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Document Status indicates the status of a document at this time.  If you want to change the document status, use the Document Action field</Help>
+      </Field>
+      <Field>
+        <ColumnName>FRPT_ReviewPosting</ColumnName>
+        <FieldName>Review Posting</FieldName>
+        <FieldSeqNo>120</FieldSeqNo>
+        <DisplayLogic>@Processed@=N &amp; @#ShowAcct@=Y</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>DocAction</ColumnName>
+        <FieldName>Document Action</FieldName>
+        <FieldSeqNo>130</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>You find the current status in the Document Status field. The options are listed in a popup</Help>
+      </Field>
+      <Field>
+        <ColumnName>Posted</ColumnName>
+        <FieldName>Posted</FieldName>
+        <FieldSeqNo>140</FieldSeqNo>
+        <DisplayLogic>@Processed@=Y &amp; @#ShowAcct@=Y</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Posted field indicates the status of the Generation of General Ledger Accounting Lines </Help>
+      </Field>
+      <Field>
+        <ColumnName>IsActive</ColumnName>
+        <FieldName>Active</FieldName>
+        <FieldSeqNo>150</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>There are two methods of making records unavailable in the system: One is to delete the record, the other is to de-activate the record. A de-activated record is not available for selection, but available for reports.
+There are two reasons for de-activating and not deleting records:
+(1) The system requires the record for audit purposes.
+(2) The record is referenced by other records. E.g., you cannot delete a Account, if there are invoices for this Account record existing. You de-activate the Account and prevent that this record is used for future entries.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_ReversedDoc</ColumnName>
+        <FieldName>Reversed Document</FieldName>
+        <FieldSeqNo>160</FieldSeqNo>
+        <DisplayLogic>@DocStatus@=&apos;RE&apos;</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+    </Tab>
+    <Tab>
+      <TabSeqNo>20</TabSeqNo>
+      <TabName>Lease Transaction Line</TabName>
+      <TableName>VA080_LeaseLine</TableName>
+      <AD_Tab_ID>1001287</AD_Tab_ID>
+      <IsActive>Y</IsActive>
+      <IsDisplayed>Y</IsDisplayed>
+      <IsReadOnly>N</IsReadOnly>
+      <IsAdvancedTab>N</IsAdvancedTab>
+      <Field>
+        <ColumnName>VA080_LeaseLine_ID</ColumnName>
+        <FieldName>VA080_LeaseLine_ID</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>Export_ID</ColumnName>
+        <FieldName>Export</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>AD_Client_ID</ColumnName>
+        <FieldName>Tenant</FieldName>
+        <FieldSeqNo>10</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>A Client is a company or a legal entity. You cannot share data between Clients. Tenant is a synonym for Client.</Help>
+      </Field>
+      <Field>
+        <ColumnName>AD_Org_ID</ColumnName>
+        <FieldName>Organization</FieldName>
+        <FieldSeqNo>20</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>An organization is a unit of your Tenant or legal entity - examples are store, department. You can share data between organizations.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_Lease_ID</ColumnName>
+        <FieldName>Lease Transaction </FieldName>
+        <FieldSeqNo>30</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>N</IsCentrallyMaintained>
+        <Help>Lease Transaction</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_LeaseAgreement_ID</ColumnName>
+        <FieldName>Lease Agreement</FieldName>
+        <FieldSeqNo>40</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Lease Agreement</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_LeaseFlow_ID</ColumnName>
+        <FieldName>Lease/Sub Lease Flow</FieldName>
+        <FieldSeqNo>50</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>N</IsCentrallyMaintained>
+        <Help>Lease/Sub lease Flow
+</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_PVofLeaseLiability</ColumnName>
+        <FieldName>Present Value of Lease Liability</FieldName>
+        <FieldSeqNo>60</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA080_ROUAmount</ColumnName>
+        <FieldName>Right of use Amount</FieldName>
+        <FieldSeqNo>70</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA080_CapitalLeaseExcluded</ColumnName>
+        <FieldName>Capital Part of Lease Excluded Financial Liability</FieldName>
+        <FieldSeqNo>80</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Capital Part of Lease Liability minus Yearly Financial Liability</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_CapitalPartofLeaseLiability</ColumnName>
+        <FieldName>Capital Part of Lease Liability/Receivable</FieldName>
+        <FieldSeqNo>90</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>N</IsCentrallyMaintained>
+        <Help>Capital payment out of Total Lease Liability (Yearly Total Lease Payment minus Interest Cost)</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_ActualLeaseLiability</ColumnName>
+        <FieldName>Actual Lease Liability</FieldName>
+        <FieldSeqNo>100</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Deduction of Financial Liability from Total Present Value of Yearly Lease Liability</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_ROUDepreciation</ColumnName>
+        <FieldName>Depreciation</FieldName>
+        <FieldSeqNo>110</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Depreciation to be charged on the right of use asset for the period.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_InterestAmount</ColumnName>
+        <FieldName>Interest Value</FieldName>
+        <FieldSeqNo>120</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Finance cost on lease liability for the period defined in Interest calculation start and End date.
+</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_PrePayment</ColumnName>
+        <FieldName>Pre Payment </FieldName>
+        <FieldSeqNo>130</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>N</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA080_YearlyFinancialLiability</ColumnName>
+        <FieldName>Financial Liability</FieldName>
+        <FieldSeqNo>140</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>N</IsCentrallyMaintained>
+        <Help>The seller-lessee accounts for proceeds from the sale and leaseback as a financial liability in accordance with IFRS 9. Proportionate: Capital part of Total Lease Liability *Financial Liability/ Total Present Value of Yearly Lease Liability.
+</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_BookValue</ColumnName>
+        <FieldName>Book Value</FieldName>
+        <FieldSeqNo>150</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>N</IsCentrallyMaintained>
+        <Help>Book value of asset leased back. 
+</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_SaleValue</ColumnName>
+        <FieldName>Sale Value</FieldName>
+        <FieldSeqNo>160</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>N</IsCentrallyMaintained>
+        <Help>Sale value of asset leased back. 
+</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_GainOnSubLease</ColumnName>
+        <FieldName>Gain/Loss On Lease/Sub-Lease</FieldName>
+        <FieldSeqNo>170</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>N</IsCentrallyMaintained>
+        <Help>Gain/Loss on Lease/Sublease</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_DiffofSVandBV</ColumnName>
+        <FieldName>Difference of Sale and Book Value</FieldName>
+        <FieldSeqNo>180</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA080_LeaseLiabilityVariance</ColumnName>
+        <FieldName>Lease Liability Variance</FieldName>
+        <FieldSeqNo>190</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>Amount</ColumnName>
+        <FieldName>Amount</FieldName>
+        <FieldSeqNo>200</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Amount indicates the amount for this document line.</Help>
+      </Field>
+      <Field>
+        <ColumnName>IsActive</ColumnName>
+        <FieldName>Active</FieldName>
+        <FieldSeqNo>210</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>There are two methods of making records unavailable in the system: One is to delete the record, the other is to de-activate the record. A de-activated record is not available for selection, but available for reports.
+There are two reasons for de-activating and not deleting records:
+(1) The system requires the record for audit purposes.
+(2) The record is referenced by other records. E.g., you cannot delete a Account, if there are invoices for this Account record existing. You de-activate the Account and prevent that this record is used for future entries.</Help>
+      </Field>
+    </Tab>
+  </Window>
+  <Window>
+    <WindowDisplayName>Sub-Lease Agreement</WindowDisplayName>
+    <WindowName>VA080_SubLeaseAgreement</WindowName>
+    <ad_window_id>1000491</ad_window_id>
+    <export_id>VA080_20000302</export_id>
+    <IsActive>Y</IsActive>
+    <Tab>
+      <TabSeqNo>10</TabSeqNo>
+      <TabName>Sub-Lease Agreement</TabName>
+      <TableName>VA080_LeaseAgreement</TableName>
+      <AD_Tab_ID>1001288</AD_Tab_ID>
+      <IsActive>Y</IsActive>
+      <IsDisplayed>Y</IsDisplayed>
+      <IsReadOnly>N</IsReadOnly>
+      <IsAdvancedTab>N</IsAdvancedTab>
+      <Field>
+        <ColumnName>VA080_LeaseAgreement_ID</ColumnName>
+        <FieldName>Lease Agreement</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Lease Agreement</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_PrePayment</ColumnName>
+        <FieldName>Pre Payment </FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA080_UpfrontPayment</ColumnName>
+        <FieldName>Lease payment made upfront</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Lease payments made on or before the commencement of lease agreement.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_TPVYearlyLease</ColumnName>
+        <FieldName>Total Present Value of Yearly Lease Liability</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Total Present Value of Yearly Lease Liability</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_SaleValue</ColumnName>
+        <FieldName>Sale Value</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Sale value of asset leased back. 
+</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_SLBAsset_Ref_ID</ColumnName>
+        <FieldName>Sales and Lease Back Asset</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Asset which is sold and leased back from the buyer
+</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_RefLeaseAgreement_ID</ColumnName>
+        <FieldName>Original Lease</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>In case of Renewal, Original Closed Lease will come in Search.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_ROU</ColumnName>
+        <FieldName>ROU</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Actual lease liability/Fair value*Book value. ROU Amount includes prepayment amount in case of asset sale and lease back is at Sale Value less than Fair Value.
+</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_LeaseCases</ColumnName>
+        <FieldName>Lease Cases</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Original Lease, renewal, Sales and Lease Back</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_IsLease</ColumnName>
+        <FieldName>Is Lease</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Is Lease</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_InitialDirectCost</ColumnName>
+        <FieldName>Initial Direct Cost</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Indirect Cost incurred for the lease agreement.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_IncentivesReceived</ColumnName>
+        <FieldName>Incentives Received</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Lease incentives received under the lease agreement.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_FinancialLiability</ColumnName>
+        <FieldName>Financial Liability</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Sales Price minus Fair value</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_FairValue</ColumnName>
+        <FieldName>Fair Value</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Fair Value will be the Market Value.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_DismantlingCost</ColumnName>
+        <FieldName>Estimated Cost for dismantling/ restoring the asset</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Estimated cost to be incurred at the end of the lease period for dismantling or restoring the asset.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_BookValue</ColumnName>
+        <FieldName>Book Value</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Book value of asset leased back. 
+</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_ActualLeaseLiability</ColumnName>
+        <FieldName>Actual Lease Liability</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Deduction of Financial Liability from Total Present Value of Yearly Lease Liability</Help>
+      </Field>
+      <Field>
+        <ColumnName>A_Asset_ID</ColumnName>
+        <FieldName>Right of Use Asset</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>N</IsCentrallyMaintained>
+        <Help>User has to select the asset which user has taken on Lease.</Help>
+      </Field>
+      <Field>
+        <ColumnName>Export_ID</ColumnName>
+        <FieldName>Export</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>AD_Client_ID</ColumnName>
+        <FieldName>Tenant</FieldName>
+        <FieldSeqNo>10</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>A Client is a company or a legal entity. You cannot share data between Clients. Tenant is a synonym for Client.</Help>
+      </Field>
+      <Field>
+        <ColumnName>AD_Org_ID</ColumnName>
+        <FieldName>Organization</FieldName>
+        <FieldSeqNo>20</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>An organization is a unit of your Tenant or legal entity - examples are store, department. You can share data between organizations.</Help>
+      </Field>
+      <Field>
+        <ColumnName>Value</ColumnName>
+        <FieldName>Agreement Number</FieldName>
+        <FieldSeqNo>30</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>N</IsCentrallyMaintained>
+        <Help>A search key allows you a fast method of finding a particular record.
+If you leave the search key empty, the system automatically creates a numeric number.  The document sequence used for this fallback number is defined in the &quot;Maintain Sequence&quot; window with the name &quot;DocumentNo_&lt;TableName&gt;&quot;, where TableName is the actual name of the table (e.g. C_Order).</Help>
+      </Field>
+      <Field>
+        <ColumnName>C_BPartner_ID</ColumnName>
+        <FieldName>Business Partner</FieldName>
+        <FieldSeqNo>40</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>A Customer/Prospect is anyone with whom you transact.  This can include Vendor, Customer, Employee or Salesperson</Help>
+      </Field>
+      <Field>
+        <ColumnName>AD_OrgTrx_ID</ColumnName>
+        <FieldName>Profit Center/Cost Center</FieldName>
+        <FieldSeqNo>50</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>N</IsCentrallyMaintained>
+        <Help>The organization which performs or initiates this transaction (for another organization).  The owning Organization may not be the transaction organization in a service bureau environment, with centralized services, and inter-organization transactions.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_DateofContract</ColumnName>
+        <FieldName>Date</FieldName>
+        <FieldSeqNo>60</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Date on which party agree to contract on lease</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_RefLeaseAgreementSL_ID</ColumnName>
+        <FieldName>Original Lease</FieldName>
+        <FieldSeqNo>70</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA080_LeaseType</ColumnName>
+        <FieldName>Lease Type</FieldName>
+        <FieldSeqNo>80</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Define the type of lease agreement done with the business partner</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_SubLeasePer</ColumnName>
+        <FieldName>Sub Lease %</FieldName>
+        <FieldSeqNo>90</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Sub-lease % out of Total Head Lease</Help>
+      </Field>
+      <Field>
+        <ColumnName>Description</ColumnName>
+        <FieldName>Description</FieldName>
+        <FieldSeqNo>100</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>A description is limited to 255 characters.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_FixedLeaseAmount</ColumnName>
+        <FieldName>Fixed Lease Amount</FieldName>
+        <FieldSeqNo>110</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Lease payment to be made to lessor at the end of each period.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_InterestRate</ColumnName>
+        <FieldName>Annualized Interest Rate</FieldName>
+        <FieldSeqNo>120</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The rate of interest that causes the present value of lease payments or unguaranteed residual value.</Help>
+      </Field>
+      <Field>
+        <ColumnName>C_Currency_ID</ColumnName>
+        <FieldName>Currency</FieldName>
+        <FieldSeqNo>130</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Indicates the Currency to be used when processing or reporting on this record</Help>
+      </Field>
+      <Field>
+        <ColumnName>C_ConversionType_ID</ColumnName>
+        <FieldName>Currency Rate Type</FieldName>
+        <FieldSeqNo>140</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Currency Conversion Rate Type lets you define different type of rates, e.g. Spot, Corporate and/or Sell/Buy rates.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_Commencementdate</ColumnName>
+        <FieldName>Commencement Date</FieldName>
+        <FieldSeqNo>150</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Date on which the lease payment commenced.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_ContractualEndDate</ColumnName>
+        <FieldName>Contractual End Date</FieldName>
+        <FieldSeqNo>160</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Date on which the lease agreement ends.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_FirstPaymentDate</ColumnName>
+        <FieldName>First Payment Date</FieldName>
+        <FieldSeqNo>170</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Date on which first payment to be made under the lease agreement.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_Enddate</ColumnName>
+        <FieldName>Payment End Date</FieldName>
+        <FieldSeqNo>180</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Date on which the lease payments ends.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_PaymentsPerYear</ColumnName>
+        <FieldName>Payments Per Year</FieldName>
+        <FieldSeqNo>190</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Number of payments to be made in a financial year.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_PaymentDay</ColumnName>
+        <FieldName>Payment Day</FieldName>
+        <FieldSeqNo>200</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Day of the month on which payment is to be made.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_NoOfYears</ColumnName>
+        <FieldName>Number of Years</FieldName>
+        <FieldSeqNo>210</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Number of Years</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_IsPaymentAtBegining</ColumnName>
+        <FieldName>Is Payment at the Begining</FieldName>
+        <FieldSeqNo>220</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Is Payment at the Begining</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_LeaseReceivable</ColumnName>
+        <FieldName>Lease Receivable</FieldName>
+        <FieldSeqNo>230</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The lease receivable is calculated as the present value of the lease receipts expected during the lease term.
+</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_ROUAssetbeginninofSubLease</ColumnName>
+        <FieldName>Right of Use Asset given at the beginning of Sub-Lease</FieldName>
+        <FieldSeqNo>240</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Sub-Lease % part out of total Right of Use asset at the beginning of the Sub-Lease 
+ (Rightofuse asset at the beginning of Year * %of sub-Lease)</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_GainOnSubLease</ColumnName>
+        <FieldName>Gain/Loss On Lease/Sub-Lease</FieldName>
+        <FieldSeqNo>250</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Lease Receivable minus Right of Use asset</Help>
+      </Field>
+      <Field>
+        <ColumnName>IsActive</ColumnName>
+        <FieldName>Active</FieldName>
+        <FieldSeqNo>260</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>There are two methods of making records unavailable in the system: One is to delete the record, the other is to de-activate the record. A de-activated record is not available for selection, but available for reports.
+There are two reasons for de-activating and not deleting records:
+(1) The system requires the record for audit purposes.
+(2) The record is referenced by other records. E.g., you cannot delete a Account, if there are invoices for this Account record existing. You de-activate the Account and prevent that this record is used for future entries.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_PriceIncreaseIntervals</ColumnName>
+        <FieldName>Price Increase Intervals (Months)</FieldName>
+        <FieldSeqNo>270</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Intervals with the no. of months at which lease amount will be increased (If the information is known at the time of agreement).</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_IncreaseAmount</ColumnName>
+        <FieldName>Negotiated Price Increase Amount</FieldName>
+        <FieldSeqNo>280</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Amount to be increased at the intervals defined.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_IncreasePercentage</ColumnName>
+        <FieldName>Negotiated Price Increase %</FieldName>
+        <FieldSeqNo>290</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Percentage to be increase at the intervals defined.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_GenerateSchedule</ColumnName>
+        <FieldName>Generate Schedule and Calculate Lease flows</FieldName>
+        <FieldSeqNo>300</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+    </Tab>
+    <Tab>
+      <TabSeqNo>20</TabSeqNo>
+      <TabName>Sub-Lease Flow</TabName>
+      <TableName>VA080_LeaseFlow</TableName>
+      <AD_Tab_ID>1001289</AD_Tab_ID>
+      <IsActive>Y</IsActive>
+      <IsDisplayed>Y</IsDisplayed>
+      <IsReadOnly>N</IsReadOnly>
+      <IsAdvancedTab>N</IsAdvancedTab>
+      <Field>
+        <ColumnName>VA080_LeaseFlow_ID</ColumnName>
+        <FieldName>Lease Flow</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Lease/Sub lease Flow
+</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_LeaseDetail_ID</ColumnName>
+        <FieldName>VA080_LeaseDetail_ID</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA080_SubLeaseIDs</ColumnName>
+        <FieldName>VA080_SubLeaseIDs</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA080_ROUOpeningOrig</ColumnName>
+        <FieldName>Original ROU Opening Balance</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA080_TrxProcessed</ColumnName>
+        <FieldName>Trx Processed</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA080_YearlyFinancialLiability</ColumnName>
+        <FieldName>Yearly Financial Liability</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The seller-lessee accounts for proceeds from the sale and leaseback as a financial liability in accordance with IFRS 9. Proportionate: Capital part of Total Lease Liability *Financial Liability/ Total Present Value of Yearly Lease Liability.
+</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_ROUOpeningBalance</ColumnName>
+        <FieldName>Right-of-Use Opening balance</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Opening balance of ROU asset for the period
+</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_ROUDepreciation</ColumnName>
+        <FieldName>Depreciation</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Depreciation to be charged on the right of use asset for the period.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_ROUClosingBalance</ColumnName>
+        <FieldName>Right-of-Use closing Balance</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Right of use closing balance for the period after charging depreciation.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_PaymentDate</ColumnName>
+        <FieldName>Account Date</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Date on which the lease amount is due for payment.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_DiscountedAmount</ColumnName>
+        <FieldName>Discounted amount of fixed asset</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Discounted amount of each lease payment.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_CapitalLeaseExcluded</ColumnName>
+        <FieldName>Capital Part of Lease Excluded Financial Liability</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Capital Part of Lease Liability minus Yearly Financial Liability</Help>
+      </Field>
+      <Field>
+        <ColumnName>Export_ID</ColumnName>
+        <FieldName>Export</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>AD_Client_ID</ColumnName>
+        <FieldName>Tenant</FieldName>
+        <FieldSeqNo>10</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>A Client is a company or a legal entity. You cannot share data between Clients. Tenant is a synonym for Client.</Help>
+      </Field>
+      <Field>
+        <ColumnName>AD_Org_ID</ColumnName>
+        <FieldName>Organization</FieldName>
+        <FieldSeqNo>20</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>An organization is a unit of your Tenant or legal entity - examples are store, department. You can share data between organizations.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_LeaseAgreement_ID</ColumnName>
+        <FieldName>Sub Lease Agreement</FieldName>
+        <FieldSeqNo>30</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>N</IsCentrallyMaintained>
+        <Help>Sub Lease Agreement</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_LeasePayment</ColumnName>
+        <FieldName>Lease Payment</FieldName>
+        <FieldSeqNo>40</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Yearly Total Lease amount (without Discounted) due for the payment</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_InterestStartDate</ColumnName>
+        <FieldName>Interest Calculation Start Date</FieldName>
+        <FieldSeqNo>50</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Date from which the interest amount calculation starts.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_InterestEndDate</ColumnName>
+        <FieldName>Interest Calculation End Date</FieldName>
+        <FieldSeqNo>60</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Date upto which the interest amount calculation ends.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_LeaseOpeningBalance</ColumnName>
+        <FieldName>Sub Lease Receivable Opening Balance</FieldName>
+        <FieldSeqNo>70</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>N</IsCentrallyMaintained>
+        <Help>Opening balance of lease liability amount for the particular lease flow.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_InterestCost</ColumnName>
+        <FieldName>Interest Income</FieldName>
+        <FieldSeqNo>80</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>N</IsCentrallyMaintained>
+        <Help>Finance cost on lease liability for the period defined in Interest calculation start and End date.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_LeaseClosingBalance</ColumnName>
+        <FieldName>Sub Lease Receivable Closing Balance</FieldName>
+        <FieldSeqNo>90</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>N</IsCentrallyMaintained>
+        <Help>Closing balance of lease liability for the period defined in lease flows. 
+(Opening Lease Liability minus Capital Part of Lease Liability)</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_CapitalPartofLeaseLiability</ColumnName>
+        <FieldName>Capital Part of Lease Receivable</FieldName>
+        <FieldSeqNo>100</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>N</IsCentrallyMaintained>
+        <Help>Capital payment out of Total Lease Liability (Yearly Total Lease Payment minus Interest Cost)</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_GeneratePayment</ColumnName>
+        <FieldName>Generate Payment</FieldName>
+        <FieldSeqNo>110</FieldSeqNo>
+        <DisplayLogic>@VA080_InitialRecognise@=&apos;N&apos;</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>IsActive</ColumnName>
+        <FieldName>Active</FieldName>
+        <FieldSeqNo>120</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>There are two methods of making records unavailable in the system: One is to delete the record, the other is to de-activate the record. A de-activated record is not available for selection, but available for reports.
+There are two reasons for de-activating and not deleting records:
+(1) The system requires the record for audit purposes.
+(2) The record is referenced by other records. E.g., you cannot delete a Account, if there are invoices for this Account record existing. You de-activate the Account and prevent that this record is used for future entries.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_IsTrxCreated</ColumnName>
+        <FieldName>Is Transaction Created</FieldName>
+        <FieldSeqNo>130</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA080_InitialRecognise</ColumnName>
+        <FieldName>Initial Recognise</FieldName>
+        <FieldSeqNo>140</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+    </Tab>
+    <Tab>
+      <TabSeqNo>30</TabSeqNo>
+      <TabName>Default Accounting</TabName>
+      <TableName>VA080_Lease_Acct</TableName>
+      <AD_Tab_ID>1001290</AD_Tab_ID>
+      <IsActive>Y</IsActive>
+      <IsDisplayed>Y</IsDisplayed>
+      <IsReadOnly>N</IsReadOnly>
+      <IsAdvancedTab>N</IsAdvancedTab>
+      <Field>
+        <ColumnName>VA080_Lease_Acct_ID</ColumnName>
+        <FieldName>VA080_Lease_Acct_ID</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>Export_ID</ColumnName>
+        <FieldName>Export</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>AD_Client_ID</ColumnName>
+        <FieldName>Tenant</FieldName>
+        <FieldSeqNo>10</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>A Client is a company or a legal entity. You cannot share data between Clients. Tenant is a synonym for Client.</Help>
+      </Field>
+      <Field>
+        <ColumnName>AD_Org_ID</ColumnName>
+        <FieldName>Organization</FieldName>
+        <FieldSeqNo>20</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>An organization is a unit of your Tenant or legal entity - examples are store, department. You can share data between organizations.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA080_LeaseAgreement_ID</ColumnName>
+        <FieldName>Lease Agreement</FieldName>
+        <FieldSeqNo>30</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Lease Agreement</Help>
+      </Field>
+      <Field>
+        <ColumnName>FRPT_AcctDefault_ID</ColumnName>
+        <FieldName>Accounting Default</FieldName>
+        <FieldSeqNo>40</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>C_AcctSchema_ID</ColumnName>
+        <FieldName>Accounting Schema</FieldName>
+        <FieldSeqNo>50</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>N</IsCentrallyMaintained>
+        <Help>An Accounting Schema defines the rules used in accounting such as costing method, currency and calendar</Help>
+      </Field>
+      <Field>
+        <ColumnName>C_ValidCombination_ID</ColumnName>
+        <FieldName>Parameter Combination</FieldName>
+        <FieldSeqNo>60</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Combination identifies a valid combination of element which represent a GL account.</Help>
+      </Field>
+      <Field>
+        <ColumnName>IsActive</ColumnName>
+        <FieldName>Active</FieldName>
+        <FieldSeqNo>70</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>There are two methods of making records unavailable in the system: One is to delete the record, the other is to de-activate the record. A de-activated record is not available for selection, but available for reports.
+There are two reasons for de-activating and not deleting records:
+(1) The system requires the record for audit purposes.
+(2) The record is referenced by other records. E.g., you cannot delete a Account, if there are invoices for this Account record existing. You de-activate the Account and prevent that this record is used for future entries.</Help>
+      </Field>
+    </Tab>
+  </Window>
+</Windows>

@@ -1,0 +1,65 @@
+{
+  "entity": "BusinessPartner",
+  "table": "C_BPartner",
+  "pk": "C_BPartner_ID",
+  "key": { "api": "key", "column": "Value", "label": "Search Key" },
+  "identifierColumns": ["Value", "Name"],
+  "includeStandardCols": true,
+
+  "_note": "v1 curated subset of C_BPartner (420 cols total). Generated from Wiki/Tables/C_BPartner.md. 'ref.matchOn' values are the assumed business key of each referenced table — VERIFY against each table's IsIdentifier column before go-live (see README open item 3). 'list' maps are human-label -> stored code; DeliveryRule/InvoiceRule codes are confirmed from the table doc, others marked TODO to populate from the LOV.",
+
+  "fields": [
+    { "api": "key",          "column": "Value",        "type": "string",  "required": true, "isKey": true, "maxLen": 80 },
+    { "api": "name",         "column": "Name",         "type": "string",  "required": true, "maxLen": 80 },
+    { "api": "name2",        "column": "Name2",        "type": "string",  "maxLen": 60 },
+    { "api": "description",  "column": "Description",  "type": "string",  "maxLen": 255 },
+    { "api": "isActive",     "column": "IsActive",     "type": "boolean", "default": true },
+
+    { "api": "isCustomer",   "column": "IsCustomer",   "type": "boolean", "default": false },
+    { "api": "isVendor",     "column": "IsVendor",     "type": "boolean", "default": false },
+    { "api": "isProspect",   "column": "IsProspect",   "type": "boolean", "default": false },
+    { "api": "isEmployee",   "column": "IsEmployee",   "type": "boolean", "default": false },
+    { "api": "isSalesRep",   "column": "IsSalesRep",   "type": "boolean", "default": false },
+
+    { "api": "taxId",        "column": "TaxID",        "type": "string",  "maxLen": 20 },
+    { "api": "duns",         "column": "DUNS",         "type": "string",  "maxLen": 12 },
+    { "api": "referenceNo",  "column": "ReferenceNo",  "type": "string",  "maxLen": 40 },
+    { "api": "url",          "column": "URL",          "type": "string",  "maxLen": 120 },
+    { "api": "email",        "column": "EMail",        "type": "string",  "maxLen": 50 },
+    { "api": "phone",        "column": "Phone",        "type": "string",  "maxLen": 40 },
+    { "api": "mobile",       "column": "Mobile",       "type": "string",  "maxLen": 25 },
+    { "api": "fax",          "column": "Fax",          "type": "string",  "maxLen": 50 },
+
+    { "api": "creditLimit",  "column": "SO_CreditLimit", "type": "number", "default": 0 },
+    { "api": "flatDiscount", "column": "FlatDiscount",   "type": "number" },
+
+    { "api": "group", "column": "C_BP_Group_ID", "type": "ref", "required": true,
+      "ref": { "table": "C_BP_Group", "matchOn": "Value", "returns": "C_BP_Group_ID" },
+      "help": "Customer/Prospect Category (NN in C_BPartner)" },
+
+    { "api": "priceList", "column": "M_PriceList_ID", "type": "ref",
+      "ref": { "table": "M_PriceList", "matchOn": "Name", "returns": "M_PriceList_ID" } },
+
+    { "api": "paymentTerm", "column": "C_PaymentTerm_ID", "type": "ref",
+      "ref": { "table": "C_PaymentTerm", "matchOn": "Value", "returns": "C_PaymentTerm_ID" } },
+
+    { "api": "greeting", "column": "C_Greeting_ID", "type": "ref",
+      "ref": { "table": "C_Greeting", "matchOn": "Name", "returns": "C_Greeting_ID" } },
+
+    { "api": "country", "column": "C_Country_ID", "type": "ref",
+      "ref": { "table": "C_Country", "matchOn": "CountryCode", "returns": "C_Country_ID" },
+      "help": "ISO 3166 alpha-2, e.g. DE, US" },
+
+    { "api": "salesRegion", "column": "C_SalesRegion_ID", "type": "ref",
+      "ref": { "table": "C_SalesRegion", "matchOn": "Value", "returns": "C_SalesRegion_ID" } },
+
+    { "api": "deliveryRule", "column": "DeliveryRule", "type": "list",
+      "list": { "Availability": "A", "Force": "F", "Complete Line": "L", "Manual": "M", "Complete Order": "O" } },
+
+    { "api": "invoiceRule", "column": "InvoiceRule", "type": "list",
+      "list": { "After Partial Delivery": "D", "Immediate": "I", "After Full Order Delivery": "O", "Customer Schedule after Delivery": "S" } },
+
+    { "api": "paymentRule", "column": "PaymentRule", "type": "list",
+      "list": { "_TODO": "populate 9 codes from C_BPartner.md > List values > PaymentRule" } }
+  ]
+}

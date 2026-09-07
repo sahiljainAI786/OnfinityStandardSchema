@@ -1,0 +1,23 @@
+{
+  "entity": "ProductCategory",
+  "table": "M_Product_Category",
+  "pk": "M_Product_Category_ID",
+  "key": { "api": "key", "column": "Value", "label": "Search Key" },
+  "identifierColumns": ["Value", "Name"],
+  "includeStandardCols": true,
+
+  "_note": "Product category = M_Product_Category (keyed by Value; what 'category' refs resolve). MMPolicy (material movement) NN -> defaulted by model if omitted.",
+
+  "fields": [
+    { "api": "key",       "column": "Value", "type": "string",  "required": true, "isKey": true, "maxLen": 40 },
+    { "api": "name",      "column": "Name",  "type": "string",  "required": true, "maxLen": 60 },
+    { "api": "isDefault", "column": "IsDefault", "type": "boolean", "default": false },
+    { "api": "isPurchasedToOrder", "column": "IsPurchasedToOrder", "type": "boolean", "default": false },
+    { "api": "isActive",  "column": "IsActive", "type": "boolean", "default": true },
+
+    { "api": "mmPolicy", "column": "MMPolicy", "type": "list",
+      "list": { "FiFo": "F", "LiFo": "L" } },
+    { "api": "taxCategory", "column": "C_TaxCategory_ID", "type": "ref",
+      "ref": { "table": "C_TaxCategory", "matchOn": "Name", "returns": "C_TaxCategory_ID" } }
+  ]
+}

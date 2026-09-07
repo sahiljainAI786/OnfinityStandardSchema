@@ -1,0 +1,14 @@
+C:\VA Standard\StandardSystem\Phase0-net8\BaseLibrary\obj\Release\net8.0\BaseLibrary.csproj.AssemblyReference.cache
+C:\VA Standard\StandardSystem\Phase0-net8\BaseLibrary\obj\Release\net8.0\BaseLibrary.GeneratedMSBuildEditorConfig.editorconfig
+C:\VA Standard\StandardSystem\Phase0-net8\BaseLibrary\obj\Release\net8.0\BaseLibrary.csproj.CoreCompileInputs.cache
+C:\VA Standard\StandardSystem\Phase0-net8\BaseLibrary\bin\Release\net8.0\BaseLibrary.deps.json
+C:\VA Standard\StandardSystem\Phase0-net8\BaseLibrary\bin\Release\net8.0\BaseLibrary.dll
+C:\VA Standard\StandardSystem\Phase0-net8\BaseLibrary\bin\Release\net8.0\BaseLibrary.pdb
+C:\VA Standard\StandardSystem\Phase0-net8\BaseLibrary\bin\Release\net8.0\CoreLibrary.dll
+C:\VA Standard\StandardSystem\Phase0-net8\BaseLibrary\bin\Release\net8.0\SecureEngineUtility.dll
+C:\VA Standard\StandardSystem\Phase0-net8\BaseLibrary\bin\Release\net8.0\CoreLibrary.pdb
+C:\VA Standard\StandardSystem\Phase0-net8\BaseLibrary\obj\Release\net8.0\BaseLibr.6395AA90.Up2Date
+C:\VA Standard\StandardSystem\Phase0-net8\BaseLibrary\obj\Release\net8.0\BaseLibrary.dll
+C:\VA Standard\StandardSystem\Phase0-net8\BaseLibrary\obj\Release\net8.0\refint\BaseLibrary.dll
+C:\VA Standard\StandardSystem\Phase0-net8\BaseLibrary\obj\Release\net8.0\BaseLibrary.pdb
+C:\VA Standard\StandardSystem\Phase0-net8\BaseLibrary\obj\Release\net8.0\ref\BaseLibrary.dll

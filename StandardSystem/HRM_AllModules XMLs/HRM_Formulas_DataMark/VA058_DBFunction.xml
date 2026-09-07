@@ -1,0 +1,57 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:MainDataTable="VA058_DBFunction" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="VA058_DBFunction" msprop:SqlHash="-61920693" msprop:BaseTable.0="VA058_DBFUNCTION">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="AD_CLIENT_ID" msprop:BaseColumn="AD_CLIENT_ID" msprop:OraDbType="113" type="xs:long" minOccurs="0" />
+                <xs:element name="AD_ORG_ID" msprop:BaseColumn="AD_ORG_ID" msprop:OraDbType="113" type="xs:long" minOccurs="0" />
+                <xs:element name="CREATED" msprop:BaseColumn="CREATED" msprop:OraDbType="106" type="xs:dateTime" minOccurs="0" />
+                <xs:element name="CREATEDBY" msprop:BaseColumn="CREATEDBY" msprop:OraDbType="113" type="xs:long" minOccurs="0" />
+                <xs:element name="DESCRIPTION" msprop:BaseColumn="DESCRIPTION" msprop:OraDbType="119" type="xs:string" minOccurs="0" />
+                <xs:element name="EXPORT_ID" msprop:BaseColumn="EXPORT_ID" msprop:OraDbType="119" type="xs:string" minOccurs="0" />
+                <xs:element name="ISACTIVE" msprop:BaseColumn="ISACTIVE" msprop:OraDbType="104" type="xs:string" minOccurs="0" />
+                <xs:element name="NAME" msprop:BaseColumn="NAME" msprop:OraDbType="119" type="xs:string" minOccurs="0" />
+                <xs:element name="UPDATED" msprop:BaseColumn="UPDATED" msprop:OraDbType="106" type="xs:dateTime" minOccurs="0" />
+                <xs:element name="UPDATEDBY" msprop:BaseColumn="UPDATEDBY" msprop:OraDbType="113" type="xs:long" minOccurs="0" />
+                <xs:element name="VA058_DBFUNCTION_ID" msprop:BaseColumn="VA058_DBFUNCTION_ID" msprop:OraDbType="113" type="xs:long" minOccurs="0" />
+                <xs:element name="VA058_DBRETURNTYPE" msprop:BaseColumn="VA058_DBRETURNTYPE" msprop:OraDbType="104" type="xs:string" minOccurs="0" />
+                <xs:element name="VA058_DBTYPE" msprop:BaseColumn="VA058_DBTYPE" msprop:OraDbType="104" type="xs:string" minOccurs="0" />
+                <xs:element name="VA058_LABEL" msprop:BaseColumn="VA058_LABEL" msprop:OraDbType="119" type="xs:string" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <VA058_DBFunction>
+    <AD_CLIENT_ID>11</AD_CLIENT_ID>
+    <AD_ORG_ID>0</AD_ORG_ID>
+    <CREATED>2024-12-27T08:00:22+05:30</CREATED>
+    <CREATEDBY>1005442</CREATEDBY>
+    <EXPORT_ID>VA096_1000001</EXPORT_ID>
+    <ISACTIVE>Y</ISACTIVE>
+    <NAME>VA064_CHECKSALCHANGE</NAME>
+    <UPDATED>2024-12-27T08:00:22+05:30</UPDATED>
+    <UPDATEDBY>1005442</UPDATEDBY>
+    <VA058_DBFUNCTION_ID>1000004</VA058_DBFUNCTION_ID>
+    <VA058_DBRETURNTYPE>IN</VA058_DBRETURNTYPE>
+  </VA058_DBFunction>
+  <VA058_DBFunction>
+    <AD_CLIENT_ID>11</AD_CLIENT_ID>
+    <AD_ORG_ID>0</AD_ORG_ID>
+    <CREATED>2024-12-27T07:58:12+05:30</CREATED>
+    <CREATEDBY>1005442</CREATEDBY>
+    <EXPORT_ID>VA096_1000002</EXPORT_ID>
+    <ISACTIVE>Y</ISACTIVE>
+    <NAME>VA058_GETENDOFSERVICE</NAME>
+    <UPDATED>2024-12-27T07:58:12+05:30</UPDATED>
+    <UPDATEDBY>1005442</UPDATEDBY>
+    <VA058_DBFUNCTION_ID>1000003</VA058_DBFUNCTION_ID>
+    <VA058_DBRETURNTYPE>DT</VA058_DBRETURNTYPE>
+  </VA058_DBFunction>
+</NewDataSet>

@@ -1,0 +1,16 @@
+C:\VA Standard\StandardSystem\Phase0-net8\XModel\bin\Release\net8.0\XModel.deps.json
+C:\VA Standard\StandardSystem\Phase0-net8\XModel\bin\Release\net8.0\XModel.dll
+C:\VA Standard\StandardSystem\Phase0-net8\XModel\bin\Release\net8.0\XModel.pdb
+C:\VA Standard\StandardSystem\Phase0-net8\XModel\bin\Release\net8.0\BaseLibrary.dll
+C:\VA Standard\StandardSystem\Phase0-net8\XModel\bin\Release\net8.0\CoreLibrary.dll
+C:\VA Standard\StandardSystem\Phase0-net8\XModel\bin\Release\net8.0\BaseLibrary.pdb
+C:\VA Standard\StandardSystem\Phase0-net8\XModel\bin\Release\net8.0\CoreLibrary.pdb
+C:\VA Standard\StandardSystem\Phase0-net8\XModel\obj\Release\net8.0\XModel.csproj.AssemblyReference.cache
+C:\VA Standard\StandardSystem\Phase0-net8\XModel\obj\Release\net8.0\XModel.GeneratedMSBuildEditorConfig.editorconfig
+C:\VA Standard\StandardSystem\Phase0-net8\XModel\obj\Release\net8.0\XModel.csproj.CoreCompileInputs.cache
+C:\VA Standard\StandardSystem\Phase0-net8\XModel\obj\Release\net8.0\XModel.csproj.Up2Date
+C:\VA Standard\StandardSystem\Phase0-net8\XModel\obj\Release\net8.0\XModel.dll
+C:\VA Standard\StandardSystem\Phase0-net8\XModel\obj\Release\net8.0\refint\XModel.dll
+C:\VA Standard\StandardSystem\Phase0-net8\XModel\obj\Release\net8.0\XModel.pdb
+C:\VA Standard\StandardSystem\Phase0-net8\XModel\obj\Release\net8.0\ref\XModel.dll
+C:\VA Standard\StandardSystem\Phase0-net8\XModel\bin\Release\net8.0\SecureEngineUtility.dll

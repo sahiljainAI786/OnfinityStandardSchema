@@ -1,0 +1,31 @@
+{
+  "entity": "Tenant",
+  "table": "AD_Client",
+  "pk": "AD_Client_ID",
+  "key": { "api": "key", "column": "Name", "label": "Tenant Name" },
+  "identifierColumns": ["Name"],
+  "includeStandardCols": true,
+
+  "_note": "Tenant = AD_Client (no Value column; keyed by Name). IMPORTANT: a raw insert creates only the AD_Client row - it does NOT perform the full 'Initial Client Setup' (which also creates the * organisation, roles, accounting schema, calendar and document sequences). Use this for a registry-style tenant record; full provisioning is a separate Onfinity process. Many NN config flags (AutoArchive, MMPolicy, IsPostImmediate, ...) are left to model defaults.",
+
+  "fields": [
+    { "api": "key",         "column": "Name",        "type": "string",  "required": true, "isKey": true, "maxLen": 60 },
+    { "api": "description", "column": "Description",  "type": "string",  "maxLen": 255 },
+    { "api": "isActive",    "column": "IsActive",    "type": "boolean", "default": true }
+  ],
+
+  "actions": {
+    "initialSetup": {
+      "searchKey": "InitialClientSetup",
+      "menu": true,
+      "label": "Initial Client Setup - fully provisions a new tenant (client + organisation + admin & org users + roles + accounting schema + calendar + sequences) in one transaction via MSetup.CreateClient.",
+      "params": [
+        { "name": "ClientName",     "type": "string", "required": true, "help": "new tenant / client name" },
+        { "name": "OrgName",        "type": "string", "required": true, "help": "first organisation name" },
+        { "name": "AdminUserName",  "type": "string", "required": true, "help": "client administrator user (userClient)" },
+        { "name": "NormalUserName", "type": "string", "required": true, "help": "organisation user (userOrg)" }
+      ],
+      "_pending": "NOT YET EXECUTABLE: Initial Client Setup is a UI-wizard model method (MSetup.CreateClient), not a registered AD_Process, so VAAPI RunProcess cannot call it. Requires a thin server-side wrapper - register an AD_Process whose class calls MSetup.CreateClient(ClientName, OrgName, AdminUserName, NormalUserName), with search key 'InitialClientSetup' and these 4 parameters. Once registered, POST /v1/Tenant/actions/initialSetup activates with no further API change."
+    }
+  }
+}

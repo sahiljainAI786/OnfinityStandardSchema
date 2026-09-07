@@ -1,0 +1,584 @@
+<Windows>
+  <Window>
+    <WindowDisplayName>Access Log</WindowDisplayName>
+    <WindowName>VAAPI_AccessLog</WindowName>
+    <ad_window_id>1000778</ad_window_id>
+    <export_id>VAAPI_20000719</export_id>
+    <IsActive>Y</IsActive>
+    <Tab>
+      <TabSeqNo>10</TabSeqNo>
+      <TabName>Access Log</TabName>
+      <TableName>VAAPI_AccessLog</TableName>
+      <AD_Tab_ID>1002068</AD_Tab_ID>
+      <IsActive>Y</IsActive>
+      <IsDisplayed>Y</IsDisplayed>
+      <IsReadOnly>Y</IsReadOnly>
+      <IsAdvancedTab>N</IsAdvancedTab>
+      <export_id>VAAPI_20001705</export_id>
+      <Field>
+        <ColumnName>AD_Client_ID</ColumnName>
+        <FieldName>Tenant</FieldName>
+        <FieldSeqNo>10</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>A Client is a company or a legal entity. You cannot share data between Clients. Tenant is a synonym for Client.</Help>
+        <export_id>VAAPI_20030551</export_id>
+      </Field>
+      <Field>
+        <ColumnName>AD_Org_ID</ColumnName>
+        <FieldName>Organization</FieldName>
+        <FieldSeqNo>20</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>An organization is a unit of your Tenant or legal entity - examples are store, department. You can share data between organizations.</Help>
+        <export_id>VAAPI_20030552</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VAAPI_AccessLog_ID</ColumnName>
+        <FieldName>VAAPI_AccessLog_ID</FieldName>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VAAPI_20030557</export_id>
+      </Field>
+      <Field>
+        <ColumnName>IsActive</ColumnName>
+        <FieldName>Active</FieldName>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>There are two methods of making records unavailable in the system: One is to delete the record, the other is to de-activate the record. A de-activated record is not available for selection, but available for reports.
+There are two reasons for de-activating and not deleting records:
+(1) The system requires the record for audit purposes.
+(2) The record is referenced by other records. E.g., you cannot delete a Account, if there are invoices for this Account record existing. You de-activate the Account and prevent that this record is used for future entries.</Help>
+        <export_id>VAAPI_20030553</export_id>
+      </Field>
+      <Field>
+        <ColumnName>Export_ID</ColumnName>
+        <FieldName>Export</FieldName>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VAAPI_20030556</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VAAPI_TokenExpireTime</ColumnName>
+        <FieldName>Token Expire Time</FieldName>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Session Token Expire Time</Help>
+        <export_id>VAAPI_20030555</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VAAPI_Token</ColumnName>
+        <FieldName>VAAPI Token</FieldName>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VAAPI_20030554</export_id>
+      </Field>
+    </Tab>
+    <Tab>
+      <TabSeqNo>20</TabSeqNo>
+      <TabName>Method Log</TabName>
+      <TableName>VAAPI_MethodLog</TableName>
+      <AD_Tab_ID>1002069</AD_Tab_ID>
+      <IsActive>Y</IsActive>
+      <IsDisplayed>Y</IsDisplayed>
+      <IsReadOnly>Y</IsReadOnly>
+      <IsAdvancedTab>N</IsAdvancedTab>
+      <export_id>VAAPI_20001706</export_id>
+      <Field>
+        <ColumnName>AD_Client_ID</ColumnName>
+        <FieldName>Tenant</FieldName>
+        <FieldSeqNo>10</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>A Client is a company or a legal entity. You cannot share data between Clients. Tenant is a synonym for Client.</Help>
+        <export_id>VAAPI_20030559</export_id>
+      </Field>
+      <Field>
+        <ColumnName>AD_Org_ID</ColumnName>
+        <FieldName>Organization</FieldName>
+        <FieldSeqNo>20</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>An organization is a unit of your Tenant or legal entity - examples are store, department. You can share data between organizations.</Help>
+        <export_id>VAAPI_20030562</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VAAPI_MethodLog_ID</ColumnName>
+        <FieldName>VAAPI_MethodLog_ID</FieldName>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VAAPI_20030564</export_id>
+      </Field>
+      <Field>
+        <ColumnName>IsActive</ColumnName>
+        <FieldName>Active</FieldName>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>There are two methods of making records unavailable in the system: One is to delete the record, the other is to de-activate the record. A de-activated record is not available for selection, but available for reports.
+There are two reasons for de-activating and not deleting records:
+(1) The system requires the record for audit purposes.
+(2) The record is referenced by other records. E.g., you cannot delete a Account, if there are invoices for this Account record existing. You de-activate the Account and prevent that this record is used for future entries.</Help>
+        <export_id>VAAPI_20030560</export_id>
+      </Field>
+      <Field>
+        <ColumnName>Export_ID</ColumnName>
+        <FieldName>Export</FieldName>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VAAPI_20030563</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VAAPI_AccessLog_ID</ColumnName>
+        <FieldName>VAAPI_AccessLog_ID</FieldName>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VAAPI_20030558</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VAAPI_MethodName</ColumnName>
+        <FieldName>Method Name</FieldName>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VAAPI_20030561</export_id>
+      </Field>
+    </Tab>
+  </Window>
+  <Window>
+    <WindowDisplayName>Session Token</WindowDisplayName>
+    <WindowName>VAAPI_SessionToken</WindowName>
+    <ad_window_id>1000779</ad_window_id>
+    <export_id>VAAPI_20000718</export_id>
+    <IsActive>Y</IsActive>
+    <Tab>
+      <TabSeqNo>10</TabSeqNo>
+      <TabName>Session Token</TabName>
+      <TableName>VAAPI_SessionToken</TableName>
+      <AD_Tab_ID>1002070</AD_Tab_ID>
+      <IsActive>Y</IsActive>
+      <IsDisplayed>Y</IsDisplayed>
+      <IsReadOnly>Y</IsReadOnly>
+      <IsAdvancedTab>N</IsAdvancedTab>
+      <export_id>VAAPI_20001704</export_id>
+      <Field>
+        <ColumnName>VAAPI_SessionToken_ID</ColumnName>
+        <FieldName>VAAPI_SessionToken_ID</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VAAPI_20030550</export_id>
+      </Field>
+      <Field>
+        <ColumnName>Export_ID</ColumnName>
+        <FieldName>Export</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VAAPI_20030549</export_id>
+      </Field>
+      <Field>
+        <ColumnName>AD_Client_ID</ColumnName>
+        <FieldName>Tenant</FieldName>
+        <FieldSeqNo>10</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>A Client is a company or a legal entity. You cannot share data between Clients. Tenant is a synonym for Client.</Help>
+        <export_id>VAAPI_20030542</export_id>
+      </Field>
+      <Field>
+        <ColumnName>AD_Org_ID</ColumnName>
+        <FieldName>Organization</FieldName>
+        <FieldSeqNo>20</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>An organization is a unit of your Tenant or legal entity - examples are store, department. You can share data between organizations.</Help>
+        <export_id>VAAPI_20030543</export_id>
+      </Field>
+      <Field>
+        <ColumnName>AD_Session_ID</ColumnName>
+        <FieldName>Session</FieldName>
+        <FieldSeqNo>30</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Online or Web Session Information</Help>
+        <export_id>VAAPI_20030548</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VAAPI_IsGeneratedManual</ColumnName>
+        <FieldName>Manually Generated</FieldName>
+        <FieldSeqNo>40</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Setting to identify whether the secret key is generated manually</Help>
+        <export_id>VAAPI_20044424</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VAAPI_SessionToken</ColumnName>
+        <FieldName>Session Token</FieldName>
+        <FieldSeqNo>50</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Token for session, used to call api functions</Help>
+        <export_id>VAAPI_20030547</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VAAPI_HintSessionToken</ColumnName>
+        <FieldName>Session Token Hint</FieldName>
+        <FieldSeqNo>60</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Hint for session token or secret key</Help>
+        <export_id>VAAPI_20044425</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VAAPI_KeyName</ColumnName>
+        <FieldName>Secret Key Name</FieldName>
+        <FieldSeqNo>70</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Alphanumeric field for saving key name information</Help>
+        <export_id>VAAPI_20044422</export_id>
+      </Field>
+      <Field>
+        <ColumnName>AD_User_ID</ColumnName>
+        <FieldName>User/Contact</FieldName>
+        <FieldSeqNo>80</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The User identifies a unique user in the system. This could be an internal user or a Customer/Prospect contact</Help>
+        <export_id>VAAPI_20044421</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VAAPI_Project_ID</ColumnName>
+        <FieldName>API Project</FieldName>
+        <FieldSeqNo>90</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Unique ID for the API Project</Help>
+        <export_id>VAAPI_20044423</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VAAPI_IdleTime</ColumnName>
+        <FieldName>Idle Time</FieldName>
+        <FieldSeqNo>100</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Idle increase time in minutes, in which token expire time will be updated</Help>
+        <export_id>VAAPI_20030546</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VAAPI_TokenExpireTime</ColumnName>
+        <FieldName>Token Expire Time</FieldName>
+        <FieldSeqNo>110</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Session Token Expire Time</Help>
+        <export_id>VAAPI_20030544</export_id>
+      </Field>
+      <Field>
+        <ColumnName>IsActive</ColumnName>
+        <FieldName>Active</FieldName>
+        <FieldSeqNo>120</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>There are two methods of making records unavailable in the system: One is to delete the record, the other is to de-activate the record. A de-activated record is not available for selection, but available for reports.
+There are two reasons for de-activating and not deleting records:
+(1) The system requires the record for audit purposes.
+(2) The record is referenced by other records. E.g., you cannot delete a Account, if there are invoices for this Account record existing. You de-activate the Account and prevent that this record is used for future entries.</Help>
+        <export_id>VAAPI_20030545</export_id>
+      </Field>
+    </Tab>
+  </Window>
+  <Window>
+    <WindowDisplayName>API Logger</WindowDisplayName>
+    <WindowName>VAAPI_APILogger</WindowName>
+    <ad_window_id>1001254</ad_window_id>
+    <export_id>VAAPI_20000964</export_id>
+    <IsActive>Y</IsActive>
+    <Tab>
+      <TabSeqNo>10</TabSeqNo>
+      <TabName>API Log</TabName>
+      <TableName>VAAPI_APILog</TableName>
+      <AD_Tab_ID>1003315</AD_Tab_ID>
+      <IsActive>Y</IsActive>
+      <IsDisplayed>Y</IsDisplayed>
+      <IsReadOnly>N</IsReadOnly>
+      <IsAdvancedTab>N</IsAdvancedTab>
+      <export_id>VAAPI_20002452</export_id>
+      <Field>
+        <ColumnName>VAAPI_APILog_ID</ColumnName>
+        <FieldName>API Log</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VAAPI_20044142</export_id>
+      </Field>
+      <Field>
+        <ColumnName>Export_ID</ColumnName>
+        <FieldName>Export</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VAAPI_20044141</export_id>
+      </Field>
+      <Field>
+        <ColumnName>AD_Client_ID</ColumnName>
+        <FieldName>Tenant</FieldName>
+        <FieldSeqNo>10</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>A Client is a company or a legal entity. You cannot share data between Clients. Tenant is a synonym for Client.</Help>
+        <export_id>VAAPI_20044132</export_id>
+      </Field>
+      <Field>
+        <ColumnName>AD_Org_ID</ColumnName>
+        <FieldName>Organization</FieldName>
+        <FieldSeqNo>20</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>An organization is a unit of your Tenant or legal entity - examples are store, department. You can share data between organizations.</Help>
+        <export_id>VAAPI_20044133</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VAAPI_APIURL</ColumnName>
+        <FieldName>API Server URL</FieldName>
+        <FieldSeqNo>30</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Server URL of the API requested</Help>
+        <export_id>VAAPI_20044134</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VAAPI_GUID</ColumnName>
+        <FieldName>GUID</FieldName>
+        <FieldSeqNo>40</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Globally unique ID for the API log</Help>
+        <export_id>VAAPI_20044135</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VAAPI_ClientRequestIP</ColumnName>
+        <FieldName>Client Request IP</FieldName>
+        <FieldSeqNo>50</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>IP of the Client who request for the API Services</Help>
+        <export_id>VAAPI_20044140</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VAAPI_RequestMethod</ColumnName>
+        <FieldName>Request Method</FieldName>
+        <FieldSeqNo>60</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Requested method name via API</Help>
+        <export_id>VAAPI_20044137</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VAAPI_RequestPayload</ColumnName>
+        <FieldName>Request Payload</FieldName>
+        <FieldSeqNo>80</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Payload of the request</Help>
+        <export_id>VAAPI_20044138</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VAAPI_ResponseData</ColumnName>
+        <FieldName>Response Data</FieldName>
+        <FieldSeqNo>90</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Response data from the requested method</Help>
+        <export_id>VAAPI_20044139</export_id>
+      </Field>
+      <Field>
+        <ColumnName>IsActive</ColumnName>
+        <FieldName>Active</FieldName>
+        <FieldSeqNo>100</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>There are two methods of making records unavailable in the system: One is to delete the record, the other is to de-activate the record. A de-activated record is not available for selection, but available for reports.
+There are two reasons for de-activating and not deleting records:
+(1) The system requires the record for audit purposes.
+(2) The record is referenced by other records. E.g., you cannot delete a Account, if there are invoices for this Account record existing. You de-activate the Account and prevent that this record is used for future entries.</Help>
+        <export_id>VAAPI_20044136</export_id>
+      </Field>
+    </Tab>
+  </Window>
+  <Window>
+    <WindowDisplayName>API Project</WindowDisplayName>
+    <WindowName>VAAPI_Project</WindowName>
+    <ad_window_id>1001262</ad_window_id>
+    <export_id>VAAPI_20000971</export_id>
+    <IsActive>Y</IsActive>
+    <Tab>
+      <TabSeqNo>10</TabSeqNo>
+      <TabName>API Project</TabName>
+      <TableName>VAAPI_Project</TableName>
+      <AD_Tab_ID>1003337</AD_Tab_ID>
+      <IsActive>Y</IsActive>
+      <IsDisplayed>Y</IsDisplayed>
+      <IsReadOnly>N</IsReadOnly>
+      <IsAdvancedTab>N</IsAdvancedTab>
+      <export_id>VAAPI_20002469</export_id>
+      <Field>
+        <ColumnName>VAAPI_Project_ID</ColumnName>
+        <FieldName>API Project</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Unique ID for the API Project</Help>
+        <export_id>VAAPI_20044432</export_id>
+      </Field>
+      <Field>
+        <ColumnName>Export_ID</ColumnName>
+        <FieldName>Export</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VAAPI_20044431</export_id>
+      </Field>
+      <Field>
+        <ColumnName>AD_Client_ID</ColumnName>
+        <FieldName>Tenant</FieldName>
+        <FieldSeqNo>10</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>A Client is a company or a legal entity. You cannot share data between Clients. Tenant is a synonym for Client.</Help>
+        <export_id>VAAPI_20044426</export_id>
+      </Field>
+      <Field>
+        <ColumnName>AD_Org_ID</ColumnName>
+        <FieldName>Organization</FieldName>
+        <FieldSeqNo>20</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>An organization is a unit of your Tenant or legal entity - examples are store, department. You can share data between organizations.</Help>
+        <export_id>VAAPI_20044427</export_id>
+      </Field>
+      <Field>
+        <ColumnName>Name</ColumnName>
+        <FieldName>Name</FieldName>
+        <FieldSeqNo>30</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The name of an entity (record) is used as an default search option in addition to the search key. The name is up to 100 characters in length.</Help>
+        <export_id>VAAPI_20044428</export_id>
+      </Field>
+      <Field>
+        <ColumnName>IsActive</ColumnName>
+        <FieldName>Active</FieldName>
+        <FieldSeqNo>40</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>There are two methods of making records unavailable in the system: One is to delete the record, the other is to de-activate the record. A de-activated record is not available for selection, but available for reports.
+There are two reasons for de-activating and not deleting records:
+(1) The system requires the record for audit purposes.
+(2) The record is referenced by other records. E.g., you cannot delete a Account, if there are invoices for this Account record existing. You de-activate the Account and prevent that this record is used for future entries.</Help>
+        <export_id>VAAPI_20044430</export_id>
+      </Field>
+      <Field>
+        <ColumnName>Description</ColumnName>
+        <FieldName>Description</FieldName>
+        <FieldSeqNo>50</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>A description is limited to 255 characters.</Help>
+        <export_id>VAAPI_20044429</export_id>
+      </Field>
+    </Tab>
+  </Window>
+</Windows>

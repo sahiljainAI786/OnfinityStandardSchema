@@ -1,0 +1,181 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:MainDataTable="VA058_CompClass" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="VA058_CompClass" msprop:SqlHash="2130730545" msprop:BaseTable.0="VA058_COMPCLASS">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="AD_CLIENT_ID" msprop:BaseColumn="AD_CLIENT_ID" msprop:OraDbType="113" type="xs:long" minOccurs="0" />
+                <xs:element name="AD_ORG_ID" msprop:BaseColumn="AD_ORG_ID" msprop:OraDbType="113" type="xs:long" minOccurs="0" />
+                <xs:element name="C_COUNTRY_ID" msprop:BaseColumn="C_COUNTRY_ID" msprop:OraDbType="113" type="xs:long" minOccurs="0" />
+                <xs:element name="CREATED" msprop:BaseColumn="CREATED" msprop:OraDbType="106" type="xs:dateTime" minOccurs="0" />
+                <xs:element name="CREATEDBY" msprop:BaseColumn="CREATEDBY" msprop:OraDbType="113" type="xs:long" minOccurs="0" />
+                <xs:element name="DESCRIPTION" msprop:BaseColumn="DESCRIPTION" msprop:OraDbType="119" type="xs:string" minOccurs="0" />
+                <xs:element name="EXPORT_ID" msprop:BaseColumn="EXPORT_ID" msprop:OraDbType="119" type="xs:string" minOccurs="0" />
+                <xs:element name="ISACTIVE" msprop:BaseColumn="ISACTIVE" msprop:OraDbType="104" type="xs:string" minOccurs="0" />
+                <xs:element name="NAME" msprop:BaseColumn="NAME" msprop:OraDbType="119" type="xs:string" minOccurs="0" />
+                <xs:element name="UPDATED" msprop:BaseColumn="UPDATED" msprop:OraDbType="106" type="xs:dateTime" minOccurs="0" />
+                <xs:element name="UPDATEDBY" msprop:BaseColumn="UPDATEDBY" msprop:OraDbType="113" type="xs:long" minOccurs="0" />
+                <xs:element name="VA058_BALINITFL" msprop:BaseColumn="VA058_BALINITFL" msprop:OraDbType="104" type="xs:string" minOccurs="0" />
+                <xs:element name="VA058_COMPCLASS_ID" msprop:BaseColumn="VA058_COMPCLASS_ID" msprop:OraDbType="113" type="xs:long" minOccurs="0" />
+                <xs:element name="VA058_CSTBLEFL" msprop:BaseColumn="VA058_CSTBLEFL" msprop:OraDbType="104" type="xs:string" minOccurs="0" />
+                <xs:element name="VA058_CSTNGDBTCRDT" msprop:BaseColumn="VA058_CSTNGDBTCRDT" msprop:OraDbType="104" type="xs:string" minOccurs="0" />
+                <xs:element name="VA058_DFLTFL" msprop:BaseColumn="VA058_DFLTFL" msprop:OraDbType="104" type="xs:string" minOccurs="0" />
+                <xs:element name="VA058_DFLTHGHPRTY" msprop:BaseColumn="VA058_DFLTHGHPRTY" msprop:OraDbType="113" type="xs:long" minOccurs="0" />
+                <xs:element name="VA058_DFLTLWPRTY" msprop:BaseColumn="VA058_DFLTLWPRTY" msprop:OraDbType="113" type="xs:long" minOccurs="0" />
+                <xs:element name="VA058_DFLTPRTY" msprop:BaseColumn="VA058_DFLTPRTY" msprop:OraDbType="113" type="xs:long" minOccurs="0" />
+                <xs:element name="VA058_DSTRBLEOVRFL" msprop:BaseColumn="VA058_DSTRBLEOVRFL" msprop:OraDbType="104" type="xs:string" minOccurs="0" />
+                <xs:element name="VA058_FREQRULEENBLD" msprop:BaseColumn="VA058_FREQRULEENBLD" msprop:OraDbType="104" type="xs:string" minOccurs="0" />
+                <xs:element name="VA058_LGSLTNSUBGRP" msprop:BaseColumn="VA058_LGSLTNSUBGRP" msprop:OraDbType="119" type="xs:string" minOccurs="0" />
+                <xs:element name="VA058_NONPYMNTSFL" msprop:BaseColumn="VA058_NONPYMNTSFL" msprop:OraDbType="104" type="xs:string" minOccurs="0" />
+                <xs:element name="VA058_TYPE" msprop:BaseColumn="VA058_TYPE" msprop:OraDbType="104" type="xs:string" minOccurs="0" />
+                <xs:element name="VA058_LABEL" msprop:BaseColumn="VA058_LABEL" msprop:OraDbType="119" type="xs:string" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <VA058_CompClass>
+    <AD_CLIENT_ID>11</AD_CLIENT_ID>
+    <AD_ORG_ID>0</AD_ORG_ID>
+    <C_COUNTRY_ID>100</C_COUNTRY_ID>
+    <CREATED>2024-12-25T11:50:01+05:30</CREATED>
+    <CREATEDBY>1005442</CREATEDBY>
+    <EXPORT_ID>VA096_1000000</EXPORT_ID>
+    <ISACTIVE>Y</ISACTIVE>
+    <NAME>Deduction</NAME>
+    <UPDATED>2024-12-25T11:50:01+05:30</UPDATED>
+    <UPDATEDBY>1005442</UPDATEDBY>
+    <VA058_BALINITFL>N</VA058_BALINITFL>
+    <VA058_COMPCLASS_ID>1000002</VA058_COMPCLASS_ID>
+    <VA058_CSTBLEFL>N</VA058_CSTBLEFL>
+    <VA058_DFLTFL>N</VA058_DFLTFL>
+    <VA058_DFLTHGHPRTY>0</VA058_DFLTHGHPRTY>
+    <VA058_DFLTLWPRTY>0</VA058_DFLTLWPRTY>
+    <VA058_DFLTPRTY>0</VA058_DFLTPRTY>
+    <VA058_DSTRBLEOVRFL>N</VA058_DSTRBLEOVRFL>
+    <VA058_FREQRULEENBLD>N</VA058_FREQRULEENBLD>
+    <VA058_NONPYMNTSFL>N</VA058_NONPYMNTSFL>
+    <VA058_TYPE>D</VA058_TYPE>
+  </VA058_CompClass>
+  <VA058_CompClass>
+    <AD_CLIENT_ID>11</AD_CLIENT_ID>
+    <AD_ORG_ID>0</AD_ORG_ID>
+    <C_COUNTRY_ID>100</C_COUNTRY_ID>
+    <CREATED>2024-07-24T08:43:21+05:30</CREATED>
+    <CREATEDBY>1005385</CREATEDBY>
+    <EXPORT_ID>VA096_1000001</EXPORT_ID>
+    <ISACTIVE>Y</ISACTIVE>
+    <NAME>Earnings</NAME>
+    <UPDATED>2024-12-25T11:49:43+05:30</UPDATED>
+    <UPDATEDBY>1005442</UPDATEDBY>
+    <VA058_BALINITFL>N</VA058_BALINITFL>
+    <VA058_COMPCLASS_ID>1000000</VA058_COMPCLASS_ID>
+    <VA058_CSTBLEFL>N</VA058_CSTBLEFL>
+    <VA058_CSTNGDBTCRDT>C</VA058_CSTNGDBTCRDT>
+    <VA058_DFLTFL>N</VA058_DFLTFL>
+    <VA058_DFLTHGHPRTY>0</VA058_DFLTHGHPRTY>
+    <VA058_DFLTLWPRTY>0</VA058_DFLTLWPRTY>
+    <VA058_DFLTPRTY>0</VA058_DFLTPRTY>
+    <VA058_DSTRBLEOVRFL>N</VA058_DSTRBLEOVRFL>
+    <VA058_FREQRULEENBLD>N</VA058_FREQRULEENBLD>
+    <VA058_NONPYMNTSFL>N</VA058_NONPYMNTSFL>
+    <VA058_TYPE>E</VA058_TYPE>
+  </VA058_CompClass>
+  <VA058_CompClass>
+    <AD_CLIENT_ID>11</AD_CLIENT_ID>
+    <AD_ORG_ID>0</AD_ORG_ID>
+    <C_COUNTRY_ID>322</C_COUNTRY_ID>
+    <CREATED>2024-11-29T14:05:26+05:30</CREATED>
+    <CREATEDBY>1005454</CREATEDBY>
+    <EXPORT_ID>VA096_1000002</EXPORT_ID>
+    <ISACTIVE>Y</ISACTIVE>
+    <NAME>Information</NAME>
+    <UPDATED>2024-12-25T11:49:22+05:30</UPDATED>
+    <UPDATEDBY>1005442</UPDATEDBY>
+    <VA058_BALINITFL>N</VA058_BALINITFL>
+    <VA058_COMPCLASS_ID>1000001</VA058_COMPCLASS_ID>
+    <VA058_CSTBLEFL>N</VA058_CSTBLEFL>
+    <VA058_DFLTFL>N</VA058_DFLTFL>
+    <VA058_DFLTHGHPRTY>0</VA058_DFLTHGHPRTY>
+    <VA058_DFLTLWPRTY>0</VA058_DFLTLWPRTY>
+    <VA058_DFLTPRTY>10</VA058_DFLTPRTY>
+    <VA058_DSTRBLEOVRFL>N</VA058_DSTRBLEOVRFL>
+    <VA058_FREQRULEENBLD>N</VA058_FREQRULEENBLD>
+    <VA058_NONPYMNTSFL>N</VA058_NONPYMNTSFL>
+    <VA058_TYPE>I</VA058_TYPE>
+  </VA058_CompClass>
+  <VA058_CompClass>
+    <AD_CLIENT_ID>11</AD_CLIENT_ID>
+    <AD_ORG_ID>0</AD_ORG_ID>
+    <C_COUNTRY_ID>100</C_COUNTRY_ID>
+    <CREATED>2024-12-25T11:50:32+05:30</CREATED>
+    <CREATEDBY>1005442</CREATEDBY>
+    <EXPORT_ID>VA096_1000003</EXPORT_ID>
+    <ISACTIVE>Y</ISACTIVE>
+    <NAME>Contribution</NAME>
+    <UPDATED>2024-12-25T11:50:32+05:30</UPDATED>
+    <UPDATEDBY>1005442</UPDATEDBY>
+    <VA058_BALINITFL>N</VA058_BALINITFL>
+    <VA058_COMPCLASS_ID>1000003</VA058_COMPCLASS_ID>
+    <VA058_CSTBLEFL>N</VA058_CSTBLEFL>
+    <VA058_DFLTFL>N</VA058_DFLTFL>
+    <VA058_DFLTHGHPRTY>0</VA058_DFLTHGHPRTY>
+    <VA058_DFLTLWPRTY>0</VA058_DFLTLWPRTY>
+    <VA058_DFLTPRTY>0</VA058_DFLTPRTY>
+    <VA058_DSTRBLEOVRFL>N</VA058_DSTRBLEOVRFL>
+    <VA058_FREQRULEENBLD>N</VA058_FREQRULEENBLD>
+    <VA058_NONPYMNTSFL>N</VA058_NONPYMNTSFL>
+    <VA058_TYPE>C</VA058_TYPE>
+  </VA058_CompClass>
+  <VA058_CompClass>
+    <AD_CLIENT_ID>11</AD_CLIENT_ID>
+    <AD_ORG_ID>0</AD_ORG_ID>
+    <C_COUNTRY_ID>100</C_COUNTRY_ID>
+    <CREATED>2025-05-30T09:54:19+05:30</CREATED>
+    <CREATEDBY>1005366</CREATEDBY>
+    <EXPORT_ID>VA058_1000005</EXPORT_ID>
+    <ISACTIVE>Y</ISACTIVE>
+    <NAME>Exemptions</NAME>
+    <UPDATED>2025-05-30T09:54:19+05:30</UPDATED>
+    <UPDATEDBY>1005366</UPDATEDBY>
+    <VA058_BALINITFL>N</VA058_BALINITFL>
+    <VA058_COMPCLASS_ID>1000005</VA058_COMPCLASS_ID>
+    <VA058_CSTBLEFL>N</VA058_CSTBLEFL>
+    <VA058_DFLTFL>N</VA058_DFLTFL>
+    <VA058_DFLTHGHPRTY>0</VA058_DFLTHGHPRTY>
+    <VA058_DFLTLWPRTY>0</VA058_DFLTLWPRTY>
+    <VA058_DFLTPRTY>0</VA058_DFLTPRTY>
+    <VA058_DSTRBLEOVRFL>N</VA058_DSTRBLEOVRFL>
+    <VA058_FREQRULEENBLD>N</VA058_FREQRULEENBLD>
+    <VA058_NONPYMNTSFL>N</VA058_NONPYMNTSFL>
+    <VA058_TYPE>Z</VA058_TYPE>
+  </VA058_CompClass>
+  <VA058_CompClass>
+    <AD_CLIENT_ID>11</AD_CLIENT_ID>
+    <AD_ORG_ID>0</AD_ORG_ID>
+    <C_COUNTRY_ID>100</C_COUNTRY_ID>
+    <CREATED>2025-05-07T14:49:32+05:30</CREATED>
+    <CREATEDBY>1005366</CREATEDBY>
+    <EXPORT_ID>VA058_1000004</EXPORT_ID>
+    <ISACTIVE>Y</ISACTIVE>
+    <NAME>Tax Declaration</NAME>
+    <UPDATED>2025-05-07T14:49:32+05:30</UPDATED>
+    <UPDATEDBY>1005366</UPDATEDBY>
+    <VA058_BALINITFL>N</VA058_BALINITFL>
+    <VA058_COMPCLASS_ID>1000004</VA058_COMPCLASS_ID>
+    <VA058_CSTBLEFL>N</VA058_CSTBLEFL>
+    <VA058_DFLTFL>N</VA058_DFLTFL>
+    <VA058_DFLTHGHPRTY>0</VA058_DFLTHGHPRTY>
+    <VA058_DFLTLWPRTY>0</VA058_DFLTLWPRTY>
+    <VA058_DFLTPRTY>0</VA058_DFLTPRTY>
+    <VA058_DSTRBLEOVRFL>N</VA058_DSTRBLEOVRFL>
+    <VA058_FREQRULEENBLD>N</VA058_FREQRULEENBLD>
+    <VA058_NONPYMNTSFL>N</VA058_NONPYMNTSFL>
+    <VA058_TYPE>Y</VA058_TYPE>
+  </VA058_CompClass>
+</NewDataSet>

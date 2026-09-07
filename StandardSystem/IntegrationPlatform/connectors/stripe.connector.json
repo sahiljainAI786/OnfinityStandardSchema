@@ -1,0 +1,231 @@
+{
+  "$schema": "../schema/connector-manifest.schema.json",
+  "manifestVersion": "1.0",
+  "key": "stripe",
+  "name": "Stripe",
+  "version": "0.1.0",
+  "description": "Payments, customers, and subscriptions. Reference ecommerce/finance connector generated from Stripe's OpenAPI spec.",
+  "vendor": "Stripe, Inc.",
+  "categories": ["ecommerce", "finance"],
+  "homepage": "https://stripe.com",
+  "docsUrl": "https://docs.stripe.com/api",
+
+  "source": {
+    "type": "openapi",
+    "specUrl": "https://raw.githubusercontent.com/stripe/openapi/master/openapi/spec3.json",
+    "specVersion": "3.0.0",
+    "generatedBy": "onfinity-connector-factory@1",
+    "reviewed": false
+  },
+
+  "connection": {
+    "baseUrl": "https://api.stripe.com",
+    "defaultHeaders": {
+      "Stripe-Version": "2024-06-20"
+    }
+  },
+
+  "auth": {
+    "type": "apiKey",
+    "fields": [
+      {
+        "id": "secret_key",
+        "label": "Secret API key",
+        "type": "password",
+        "secret": true,
+        "required": true,
+        "help": "Found in Stripe Dashboard → Developers → API keys. Begins with sk_live_ or sk_test_.",
+        "placeholder": "sk_live_..."
+      }
+    ],
+    "apiKey": {
+      "in": "header",
+      "name": "Authorization",
+      "valueTemplate": "Bearer {{auth.fields.secret_key}}"
+    },
+    "test": {
+      "action": "list_customers",
+      "input": { "limit": 1 }
+    }
+  },
+
+  "rateLimit": {
+    "requests": 90,
+    "perSeconds": 1,
+    "retryOn": [429, 503],
+    "maxRetries": 5,
+    "respectRetryAfterHeader": true
+  },
+
+  "paginators": {
+    "stripe_cursor": {
+      "type": "cursor",
+      "itemsPath": "data",
+      "cursorRequestParam": "starting_after",
+      "cursorResponsePath": "data[-1].id",
+      "hasMorePath": "has_more",
+      "limitParam": "limit",
+      "pageSize": 100,
+      "maxPages": 50
+    }
+  },
+
+  "actions": {
+    "create_customer": {
+      "title": "Create customer",
+      "description": "Create a new Stripe customer.",
+      "request": {
+        "method": "POST",
+        "path": "/v1/customers",
+        "bodyType": "form",
+        "body": {
+          "email": "{{input.email}}",
+          "name": "{{input.name}}",
+          "description": "{{input.description}}"
+        }
+      },
+      "input": {
+        "type": "object",
+        "required": ["email"],
+        "properties": {
+          "email": { "type": "string", "format": "email" },
+          "name": { "type": "string" },
+          "description": { "type": "string" }
+        }
+      },
+      "output": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "email": { "type": "string" },
+          "name": { "type": "string" },
+          "created": { "type": "integer" }
+        }
+      },
+      "errors": [
+        { "whenStatus": [400, 404], "outcome": "fail", "messagePath": "error.message" },
+        { "whenStatus": [401], "outcome": "reauth", "messagePath": "error.message" },
+        { "whenStatus": [429], "outcome": "retry" }
+      ],
+      "sample": {
+        "input": { "email": "ada@example.com", "name": "Ada Lovelace" },
+        "output": { "id": "cus_Nffr...", "email": "ada@example.com", "name": "Ada Lovelace", "created": 1718900000 }
+      }
+    },
+
+    "list_customers": {
+      "title": "List customers",
+      "description": "List customers, newest first, with automatic cursor pagination.",
+      "request": {
+        "method": "GET",
+        "path": "/v1/customers",
+        "query": {
+          "limit": "{{input.limit}}",
+          "email": "{{input.email}}"
+        }
+      },
+      "input": {
+        "type": "object",
+        "properties": {
+          "limit": { "type": "integer", "default": 100, "maximum": 100 },
+          "email": { "type": "string", "description": "Optional exact-match email filter." }
+        }
+      },
+      "output": {
+        "type": "object",
+        "properties": {
+          "data": { "type": "array", "items": { "type": "object" } },
+          "has_more": { "type": "boolean" }
+        }
+      },
+      "pagination": { "$use": "stripe_cursor" }
+    }
+  },
+
+  "triggers": {
+    "payment_succeeded": {
+      "title": "Payment succeeded",
+      "description": "Fires when a PaymentIntent succeeds. Delivered in real time via Stripe webhooks.",
+      "type": "webhook",
+      "input": {
+        "type": "object",
+        "properties": {
+          "events": {
+            "type": "array",
+            "items": { "type": "string" },
+            "default": ["payment_intent.succeeded"]
+          }
+        }
+      },
+      "output": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "type": { "type": "string" },
+          "data": { "type": "object" }
+        }
+      },
+      "dedupeKeyPath": "id",
+      "webhook": {
+        "subscribe": {
+          "method": "POST",
+          "path": "/v1/webhook_endpoints",
+          "bodyType": "form",
+          "body": {
+            "url": "{{webhook.url}}",
+            "enabled_events[]": "{{input.events}}"
+          }
+        },
+        "unsubscribe": {
+          "method": "DELETE",
+          "path": "/v1/webhook_endpoints/{{state.webhook_id}}"
+        },
+        "eventTypePath": "type",
+        "verification": {
+          "type": "signature_header",
+          "header": "Stripe-Signature",
+          "algorithm": "sha256",
+          "secretField": "webhook_signing_secret"
+        }
+      },
+      "sample": {
+        "id": "evt_1P...",
+        "type": "payment_intent.succeeded",
+        "data": { "object": { "id": "pi_3P...", "amount": 4200, "currency": "usd" } }
+      }
+    },
+
+    "new_charge_poll": {
+      "title": "New charge (polling)",
+      "description": "Fallback trigger for environments where webhooks can't be received — polls for charges created since the last run.",
+      "type": "polling",
+      "output": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "amount": { "type": "integer" },
+          "currency": { "type": "string" },
+          "created": { "type": "integer" }
+        }
+      },
+      "dedupeKeyPath": "id",
+      "polling": {
+        "request": {
+          "method": "GET",
+          "path": "/v1/charges",
+          "query": {
+            "created[gte]": "{{cursor.value}}",
+            "limit": "100"
+          }
+        },
+        "itemsPath": "data",
+        "intervalSeconds": 300,
+        "cursor": {
+          "type": "timestamp",
+          "requestParam": "created[gte]",
+          "responsePath": "created"
+        }
+      }
+    }
+  }
+}

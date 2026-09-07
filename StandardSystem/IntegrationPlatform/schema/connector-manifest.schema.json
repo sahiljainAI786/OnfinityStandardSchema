@@ -1,0 +1,409 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://onfinity.dev/integration/connector-manifest.schema.json",
+  "title": "Onfinity Integration Connector Manifest",
+  "description": "Declarative definition of one external application connector. The AI factory PRODUCES this from an OpenAPI spec; the Universal REST Executor CONSUMES it at runtime together with a user's stored credential. No code is generated or deployed per connector — a connector is a row of data conforming to this schema. Onfinity itself is described with the same schema (its actions point at VAAPI, its triggers are outbound event calls).",
+  "type": "object",
+  "required": ["manifestVersion", "key", "name", "auth", "connection"],
+  "additionalProperties": false,
+
+  "properties": {
+    "$schema": {
+      "description": "Optional editor association hint; ignored by the executor.",
+      "type": "string"
+    },
+    "manifestVersion": {
+      "description": "Schema contract version this manifest targets. Lets the executor evolve without breaking older manifests.",
+      "type": "string",
+      "const": "1.0"
+    },
+    "key": {
+      "description": "Stable unique slug for the connector, e.g. 'stripe', 'hubspot', 'onfinity'. Immutable once published.",
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]{1,48}$"
+    },
+    "name": { "description": "Human display name shown in the catalog.", "type": "string" },
+    "version": {
+      "description": "Semver of this connector definition. Bump when actions/triggers/auth change.",
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "default": "0.1.0"
+    },
+    "description": { "type": "string" },
+    "vendor": { "type": "string" },
+    "categories": {
+      "description": "Catalog facets for browsing/filtering.",
+      "type": "array",
+      "items": { "type": "string", "enum": ["crm", "ecommerce", "finance", "support", "marketing", "productivity", "communication", "hr", "erp", "analytics", "developer", "other"] }
+    },
+    "logoUrl": { "type": "string", "format": "uri" },
+    "homepage": { "type": "string", "format": "uri" },
+    "docsUrl": { "type": "string", "format": "uri" },
+
+    "source": {
+      "description": "Provenance — how the AI factory built this manifest. Enables regeneration and review/audit.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "type": { "type": "string", "enum": ["openapi", "docs", "manual"], "default": "openapi" },
+        "specUrl": { "type": "string", "format": "uri", "description": "Location of the source OpenAPI/Swagger document." },
+        "specVersion": { "type": "string", "description": "OpenAPI version of the source, e.g. '3.1.0'." },
+        "specHash": { "type": "string", "description": "Hash of the source spec; if it changes upstream, flag the connector for regeneration." },
+        "generatedBy": { "type": "string", "description": "Model/pipeline id that produced this manifest." },
+        "reviewed": { "type": "boolean", "default": false, "description": "Whether a human verified the AI output before publishing." }
+      }
+    },
+
+    "connection": { "$ref": "#/$defs/connection" },
+    "auth": { "$ref": "#/$defs/auth" },
+
+    "rateLimit": {
+      "description": "Connector-wide default rate limit; an action may override it. The executor enforces this per stored credential, not globally.",
+      "$ref": "#/$defs/rateLimit"
+    },
+
+    "paginators": {
+      "description": "Reusable named pagination strategies referenced by actions via { \"$use\": \"<name>\" }.",
+      "type": "object",
+      "additionalProperties": { "$ref": "#/$defs/pagination" }
+    },
+
+    "actions": {
+      "description": "Operations the platform can INVOKE on the external app (the 'do' side of a workflow step). Map keyed by action slug.",
+      "type": "object",
+      "additionalProperties": { "$ref": "#/$defs/action" }
+    },
+
+    "triggers": {
+      "description": "Events the external app emits INTO the platform (the start of a workflow). Map keyed by trigger slug. Each is either webhook-based or polling-based.",
+      "type": "object",
+      "additionalProperties": { "$ref": "#/$defs/trigger" }
+    }
+  },
+
+  "$defs": {
+
+    "connection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["baseUrl"],
+      "properties": {
+        "baseUrl": {
+          "description": "Base URL for all requests. May contain {{connection.*}} or {{auth.fields.*}} template variables resolved from the user's credential (e.g. a per-tenant subdomain).",
+          "type": "string"
+        },
+        "variables": {
+          "description": "Extra per-credential connection inputs (beyond auth secrets) the user must supply, e.g. region, instance domain. Rendered into the credential form alongside auth fields.",
+          "type": "array",
+          "items": { "$ref": "#/$defs/field" }
+        },
+        "defaultHeaders": {
+          "description": "Headers sent on every request. Values support templating.",
+          "type": "object",
+          "additionalProperties": { "type": "string" }
+        }
+      }
+    },
+
+    "auth": {
+      "description": "How the user's credential is collected, validated, and injected into requests.",
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": { "type": "string", "enum": ["none", "apiKey", "bearer", "basic", "oauth2", "custom"] },
+        "fields": {
+          "description": "Credential-form inputs the user fills when connecting their account. Stored encrypted in the vault, scoped per tenant. Referenced elsewhere as {{auth.fields.<id>}}.",
+          "type": "array",
+          "items": { "$ref": "#/$defs/field" }
+        },
+        "test": {
+          "description": "Cheap action invoked to validate a newly entered credential (the 'Test connection' button). References an action key with a fixed/sample input.",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "action": { "type": "string" },
+            "input": { "type": "object" }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "type": { "const": "apiKey" } } },
+          "then": {
+            "properties": {
+              "apiKey": {
+                "type": "object",
+                "required": ["in", "name", "valueTemplate"],
+                "additionalProperties": false,
+                "properties": {
+                  "in": { "type": "string", "enum": ["header", "query"] },
+                  "name": { "description": "Header or query-param name the key goes into.", "type": "string" },
+                  "valueTemplate": { "description": "How the value is formatted, e.g. 'Bearer {{auth.fields.api_key}}' or just '{{auth.fields.api_key}}'.", "type": "string" }
+                }
+              }
+            },
+            "required": ["apiKey"]
+          }
+        },
+        {
+          "if": { "properties": { "type": { "const": "basic" } } },
+          "then": {
+            "properties": {
+              "basic": {
+                "type": "object",
+                "required": ["usernameField", "passwordField"],
+                "additionalProperties": false,
+                "properties": {
+                  "usernameField": { "type": "string" },
+                  "passwordField": { "type": "string" }
+                }
+              }
+            },
+            "required": ["basic"]
+          }
+        },
+        {
+          "if": { "properties": { "type": { "const": "oauth2" } } },
+          "then": {
+            "properties": {
+              "oauth2": {
+                "type": "object",
+                "required": ["grantType", "tokenUrl"],
+                "additionalProperties": false,
+                "properties": {
+                  "grantType": { "type": "string", "enum": ["authorization_code", "client_credentials"] },
+                  "authUrl": { "description": "Authorization endpoint (authorization_code grant only).", "type": "string" },
+                  "tokenUrl": { "description": "Token endpoint used to exchange/refresh tokens.", "type": "string" },
+                  "refreshUrl": { "description": "Refresh endpoint if different from tokenUrl.", "type": "string" },
+                  "scopes": { "type": "array", "items": { "type": "string" } },
+                  "scopeSeparator": { "type": "string", "default": " " },
+                  "pkce": { "type": "boolean", "default": false },
+                  "clientCredentialsLocation": {
+                    "description": "Where client_id/secret are sent during token exchange.",
+                    "type": "string", "enum": ["basic_auth_header", "request_body"], "default": "request_body"
+                  },
+                  "accessTokenTemplate": {
+                    "description": "How the obtained access token is injected into API calls.",
+                    "type": "string", "default": "Bearer {{auth.tokens.access_token}}"
+                  }
+                }
+              }
+            },
+            "required": ["oauth2"]
+          }
+        }
+      ]
+    },
+
+    "field": {
+      "description": "One input in the credential/connection form.",
+      "type": "object",
+      "required": ["id", "label", "type"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z][a-z0-9_]*$" },
+        "label": { "type": "string" },
+        "type": { "type": "string", "enum": ["string", "password", "number", "boolean", "select", "url"] },
+        "secret": { "description": "If true the value is encrypted at rest and never returned to the UI.", "type": "boolean", "default": false },
+        "required": { "type": "boolean", "default": true },
+        "help": { "type": "string" },
+        "placeholder": { "type": "string" },
+        "default": {},
+        "options": {
+          "description": "Choices for type=select.",
+          "type": "array",
+          "items": { "type": "object", "required": ["value", "label"], "properties": { "value": {}, "label": { "type": "string" } } }
+        }
+      }
+    },
+
+    "request": {
+      "description": "A templated HTTP request. All string values may contain {{...}} expressions resolved against the runtime context: input.*, auth.fields.*, auth.tokens.*, connection.*, cursor.*, item.*.",
+      "type": "object",
+      "required": ["method", "path"],
+      "additionalProperties": false,
+      "properties": {
+        "method": { "type": "string", "enum": ["GET", "POST", "PUT", "PATCH", "DELETE"] },
+        "path": { "description": "Path appended to connection.baseUrl. May contain path params via {{...}}.", "type": "string" },
+        "headers": { "type": "object", "additionalProperties": { "type": "string" } },
+        "query": { "type": "object", "additionalProperties": { "type": "string" } },
+        "bodyType": { "type": "string", "enum": ["json", "form", "none"], "default": "json" },
+        "body": {
+          "description": "Request body template. For bodyType=json this is an object whose values may be templates; the executor renders it to JSON. JSON in-flight — no DB model is required.",
+          "type": ["object", "string", "null"]
+        }
+      }
+    },
+
+    "pagination": {
+      "description": "Strategy for fetching all pages of a list response. Output items are concatenated and passed through as JSON.",
+      "type": "object",
+      "required": ["type", "itemsPath"],
+      "additionalProperties": false,
+      "properties": {
+        "type": { "type": "string", "enum": ["none", "cursor", "page", "offset", "link_header"] },
+        "itemsPath": { "description": "JSONPath-lite to the array of items in the response, e.g. 'data'.", "type": "string" },
+        "cursorRequestParam": { "type": "string", "description": "Query param carrying the next-cursor (type=cursor)." },
+        "cursorResponsePath": { "type": "string", "description": "Path to the next cursor in the response (type=cursor)." },
+        "hasMorePath": { "type": "string", "description": "Boolean path indicating more pages exist." },
+        "pageParam": { "type": "string", "description": "Query param for page number (type=page)." },
+        "limitParam": { "type": "string" },
+        "offsetParam": { "type": "string", "description": "Query param for offset (type=offset)." },
+        "pageSize": { "type": "integer", "default": 100 },
+        "maxPages": { "description": "Safety cap so a runaway list can't loop forever. The executor logs when this truncates.", "type": "integer", "default": 50 }
+      }
+    },
+
+    "rateLimit": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "requests": { "type": "integer" },
+        "perSeconds": { "type": "integer" },
+        "retryOn": { "description": "HTTP status codes that should trigger backoff+retry.", "type": "array", "items": { "type": "integer" }, "default": [429, 503] },
+        "maxRetries": { "type": "integer", "default": 5 },
+        "respectRetryAfterHeader": { "type": "boolean", "default": true }
+      }
+    },
+
+    "errorMap": {
+      "description": "Maps HTTP responses to normalized outcomes so workflows handle failures uniformly across all connectors.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "whenStatus": { "type": "array", "items": { "type": "integer" } },
+          "outcome": { "type": "string", "enum": ["retry", "fail", "ignore", "reauth"] },
+          "messagePath": { "type": "string", "description": "Path to a human message in the error body." }
+        }
+      }
+    },
+
+    "action": {
+      "type": "object",
+      "required": ["title", "request"],
+      "additionalProperties": false,
+      "properties": {
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "request": { "$ref": "#/$defs/request" },
+        "input": {
+          "description": "JSON Schema for the action's inputs. Drives the step-config form AND the mapping UI's source-field picker. The whole payload stays JSON in-flight; nothing is persisted unless the action explicitly writes it (e.g. an Onfinity 'insert record' action).",
+          "type": "object"
+        },
+        "output": {
+          "description": "JSON Schema of the response, so downstream steps can map fields without the data ever touching a relational schema.",
+          "type": "object"
+        },
+        "pagination": {
+          "description": "Inline pagination, or { \"$use\": \"<paginatorName>\" } to reference a connector-level paginator.",
+          "oneOf": [
+            { "$ref": "#/$defs/pagination" },
+            { "type": "object", "required": ["$use"], "properties": { "$use": { "type": "string" } }, "additionalProperties": false }
+          ]
+        },
+        "rateLimit": { "$ref": "#/$defs/rateLimit" },
+        "errors": { "$ref": "#/$defs/errorMap" },
+        "sample": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": { "input": {}, "output": {} }
+        }
+      }
+    },
+
+    "trigger": {
+      "type": "object",
+      "required": ["title", "type"],
+      "additionalProperties": false,
+      "properties": {
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "type": { "type": "string", "enum": ["webhook", "polling"] },
+        "input": {
+          "description": "JSON Schema for trigger configuration (e.g. which event types to subscribe to, which list to poll).",
+          "type": "object"
+        },
+        "output": {
+          "description": "JSON Schema of the event payload delivered to the workflow.",
+          "type": "object"
+        },
+        "dedupeKeyPath": {
+          "description": "Path to a stable id in each event used to suppress duplicate deliveries (at-least-once sources).",
+          "type": "string"
+        },
+        "sample": { "type": "object" },
+        "webhook": {
+          "description": "Present when type=webhook; constrained by the conditional below. Declared here so strict additionalProperties recognizes it.",
+          "type": "object"
+        },
+        "polling": {
+          "description": "Present when type=polling; constrained by the conditional below.",
+          "type": "object"
+        }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "type": { "const": "webhook" } } },
+          "then": {
+            "properties": {
+              "webhook": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "subscribe": {
+                    "description": "Request that registers our delivery URL with the app. The platform's per-subscription inbound URL is available as {{webhook.url}}.",
+                    "$ref": "#/$defs/request"
+                  },
+                  "unsubscribe": { "$ref": "#/$defs/request" },
+                  "eventTypePath": { "description": "Path to the event type within the payload, used to route to the right trigger.", "type": "string" },
+                  "verification": {
+                    "description": "How inbound webhook authenticity is checked before the workflow runs.",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "type": { "type": "string", "enum": ["none", "hmac", "shared_secret", "signature_header"] },
+                      "header": { "type": "string" },
+                      "algorithm": { "type": "string", "enum": ["sha256", "sha1"] },
+                      "secretField": { "description": "Which auth/connection field holds the signing secret.", "type": "string" }
+                    }
+                  }
+                }
+              }
+            },
+            "required": ["webhook"]
+          }
+        },
+        {
+          "if": { "properties": { "type": { "const": "polling" } } },
+          "then": {
+            "properties": {
+              "polling": {
+                "type": "object",
+                "required": ["request", "itemsPath"],
+                "additionalProperties": false,
+                "properties": {
+                  "request": { "$ref": "#/$defs/request" },
+                  "itemsPath": { "type": "string" },
+                  "intervalSeconds": { "type": "integer", "default": 300 },
+                  "cursor": {
+                    "description": "How incremental polling tracks position so each item is emitted once.",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "type": { "type": "string", "enum": ["timestamp", "id"] },
+                      "requestParam": { "description": "Query param carrying the saved cursor on the next poll, e.g. 'created[gte]'.", "type": "string" },
+                      "responsePath": { "description": "Path to the value (per item) advanced into the next cursor.", "type": "string" }
+                    }
+                  }
+                }
+              }
+            },
+            "required": ["polling"]
+          }
+        }
+      ]
+    }
+  }
+}

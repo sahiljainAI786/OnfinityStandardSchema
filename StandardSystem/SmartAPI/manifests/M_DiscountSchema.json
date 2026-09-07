@@ -1,0 +1,21 @@
+{
+  "entity": "DiscountSchema",
+  "table": "M_DiscountSchema",
+  "pk": "M_DiscountSchema_ID",
+  "key": { "api": "key", "column": "Name", "label": "Discount Schema Name" },
+  "identifierColumns": ["Name"],
+  "includeStandardCols": true,
+
+  "_note": "Discount schema = M_DiscountSchema (no Value; keyed by Name; referenced by price-list versions and BP groups). Breaks/lines are set up separately.",
+
+  "fields": [
+    { "api": "key",       "column": "Name",      "type": "string", "required": true, "isKey": true, "maxLen": 60 },
+    { "api": "validFrom", "column": "ValidFrom", "type": "string", "required": true, "help": "ISO date (NN)" },
+    { "api": "isQuantityBased",       "column": "IsQuantityBased",       "type": "boolean", "default": false },
+    { "api": "isBPartnerFlatDiscount","column": "IsBPartnerFlatDiscount","type": "boolean", "default": false },
+    { "api": "isActive",  "column": "IsActive",  "type": "boolean", "default": true },
+
+    { "api": "discountType", "column": "DiscountType", "type": "list", "required": true,
+      "list": { "Pricelist": "P", "Breaks": "B", "Flat Percent": "F" } }
+  ]
+}

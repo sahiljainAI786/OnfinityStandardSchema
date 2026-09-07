@@ -1,0 +1,1254 @@
+<Windows>
+  <Window>
+    <WindowDisplayName>Suspect</WindowDisplayName>
+    <WindowName>VA061_Suspect</WindowName>
+    <ad_window_id>1001292</ad_window_id>
+    <export_id>VA061_20001000</export_id>
+    <IsActive>Y</IsActive>
+    <Tab>
+      <TabSeqNo>10</TabSeqNo>
+      <TabName>Suspect</TabName>
+      <TableName>VA061_Suspect</TableName>
+      <AD_Tab_ID>1003412</AD_Tab_ID>
+      <IsActive>Y</IsActive>
+      <IsDisplayed>Y</IsDisplayed>
+      <IsReadOnly>N</IsReadOnly>
+      <IsAdvancedTab>N</IsAdvancedTab>
+      <export_id>VA061_20002556</export_id>
+      <Field>
+        <ColumnName>AD_Client_ID</ColumnName>
+        <FieldName>Tenant</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>A Client is a company or a legal entity. You cannot share data between Clients. Tenant is a synonym for Client.</Help>
+        <export_id>VA061_20046143</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_LeadUUID</ColumnName>
+        <FieldName>Lead UUID</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA061_20046246</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_CampaignUUID</ColumnName>
+        <FieldName>Campaign UUID</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA061_20046247</export_id>
+      </Field>
+      <Field>
+        <ColumnName>LinkedInID</ColumnName>
+        <FieldName>Linked In ID</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA061_20046161</export_id>
+      </Field>
+      <Field>
+        <ColumnName>ContactName</ColumnName>
+        <FieldName>Contact Person</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>N</IsCentrallyMaintained>
+        <Help>Primary contact name</Help>
+        <export_id>VA061_20046129</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_Suspect_ID</ColumnName>
+        <FieldName>VA061_Suspect_ID</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA061_20046130</export_id>
+      </Field>
+      <Field>
+        <ColumnName>Export_ID</ColumnName>
+        <FieldName>Export</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA061_20046142</export_id>
+      </Field>
+      <Field>
+        <ColumnName>Created</ColumnName>
+        <FieldName>Created Date</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>N</IsCentrallyMaintained>
+        <Help>The Created On field indicates the date that this record was created.</Help>
+        <export_id>VA061_20046176</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_Label</ColumnName>
+        <FieldName>Label</FieldName>
+        <FieldSeqNo>10</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>N</IsCentrallyMaintained>
+        <Help>Suspect</Help>
+        <export_id>VA061_20046144</export_id>
+      </Field>
+      <Field>
+        <ColumnName>AD_Org_ID</ColumnName>
+        <FieldName>Organization</FieldName>
+        <FieldSeqNo>20</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>An organization is a unit of your Tenant or legal entity - examples are store, department. You can share data between organizations.</Help>
+        <export_id>VA061_20046154</export_id>
+      </Field>
+      <Field>
+        <ColumnName>Value</ColumnName>
+        <FieldName>Suspect Code</FieldName>
+        <FieldSeqNo>30</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>N</IsCentrallyMaintained>
+        <Help>A search key allows you a fast method of finding a particular record.
+If you leave the search key empty, the system automatically creates a numeric number.  The document sequence used for this fallback number is defined in the &quot;Maintain Sequence&quot; window with the name &quot;DocumentNo_&lt;TableName&gt;&quot;, where TableName is the actual name of the table (e.g. C_Order).</Help>
+        <export_id>VA061_20046131</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_EngmntDetailsTabBtn</ColumnName>
+        <FieldName>Engagement Details</FieldName>
+        <FieldSeqNo>40</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA061_20046248</export_id>
+      </Field>
+      <Field>
+        <ColumnName>Name</ColumnName>
+        <FieldName>Suspect Name</FieldName>
+        <FieldSeqNo>50</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>N</IsCentrallyMaintained>
+        <Help>The name of an entity (record) is used as an default search option in addition to the search key. The name is up to 100 characters in length.</Help>
+        <export_id>VA061_20046132</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_SuspectType</ColumnName>
+        <FieldName>Suspect Type</FieldName>
+        <FieldSeqNo>60</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA061_20046156</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_InterestArea</ColumnName>
+        <FieldName>Add to Interest Area</FieldName>
+        <FieldSeqNo>70</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA061_20046155</export_id>
+      </Field>
+      <Field>
+        <ColumnName>C_IndustryCode_ID</ColumnName>
+        <FieldName>Industry Type</FieldName>
+        <FieldSeqNo>80</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>N</IsCentrallyMaintained>
+        <Help>Industry category</Help>
+        <export_id>VA061_20046133</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_SuspectSource</ColumnName>
+        <FieldName>Source of Suspect</FieldName>
+        <FieldSeqNo>90</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA061_20046157</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_SuspectDate</ColumnName>
+        <FieldName>Date Identified</FieldName>
+        <FieldSeqNo>100</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA061_20046134</export_id>
+      </Field>
+      <Field>
+        <ColumnName>Status</ColumnName>
+        <FieldName>Status</FieldName>
+        <FieldSeqNo>110</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Status of the transaction document</Help>
+        <export_id>VA061_20046158</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_TargetList</ColumnName>
+        <FieldName>Add to Target List</FieldName>
+        <FieldSeqNo>120</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA061_20046135</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_ContactDetailsLabel</ColumnName>
+        <FieldName>Contact Details</FieldName>
+        <FieldSeqNo>130</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Contact Details</Help>
+        <export_id>VA061_20046159</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_FirstName</ColumnName>
+        <FieldName>First Name</FieldName>
+        <FieldSeqNo>140</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>First Name</Help>
+        <export_id>VA061_20046136</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_LastName</ColumnName>
+        <FieldName>Last Name</FieldName>
+        <FieldSeqNo>150</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Last Name</Help>
+        <export_id>VA061_20046145</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_Company</ColumnName>
+        <FieldName>Company</FieldName>
+        <FieldSeqNo>160</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA061_20046137</export_id>
+      </Field>
+      <Field>
+        <ColumnName>EMail</ColumnName>
+        <FieldName>EMail Address</FieldName>
+        <FieldSeqNo>170</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Email Address is the Electronic Mail ID for this User and should be fully qualified (e.g. joe.smith@company.com). The Email Address is used to access the self service application functionality from the web.</Help>
+        <export_id>VA061_20046146</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_LinkedinProfile</ColumnName>
+        <FieldName>Linkedin Profile</FieldName>
+        <FieldSeqNo>180</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA061_20046138</export_id>
+      </Field>
+      <Field>
+        <ColumnName>Phone</ColumnName>
+        <FieldName>Phone</FieldName>
+        <FieldSeqNo>190</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Phone field identifies a telephone number</Help>
+        <export_id>VA061_20046147</export_id>
+      </Field>
+      <Field>
+        <ColumnName>C_Country_ID</ColumnName>
+        <FieldName>Country</FieldName>
+        <FieldSeqNo>200</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Country defines a Country.  Each Country must be defined before it can be used in any document.</Help>
+        <export_id>VA061_20046148</export_id>
+      </Field>
+      <Field>
+        <ColumnName>City</ColumnName>
+        <FieldName>City Name</FieldName>
+        <FieldSeqNo>210</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The City identifies a unique City for this Country or Region.</Help>
+        <export_id>VA061_20046149</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_IsPersonConnected</ColumnName>
+        <FieldName>Linked in Connected</FieldName>
+        <FieldSeqNo>220</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>N</IsCentrallyMaintained>
+        <export_id>VA061_20046150</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_EngScoreLabel</ColumnName>
+        <FieldName>Engagement &amp; Scoring</FieldName>
+        <FieldSeqNo>230</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Engagement &amp; Scoring</Help>
+        <export_id>VA061_20046151</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_EngagementLevel</ColumnName>
+        <FieldName>Engagement Level</FieldName>
+        <FieldSeqNo>240</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA061_20046152</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_EngagementSetiment</ColumnName>
+        <FieldName>Engagement Sentiment</FieldName>
+        <FieldSeqNo>250</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA061_20046153</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_LastEngagementDate</ColumnName>
+        <FieldName>Last Engagement Date</FieldName>
+        <FieldSeqNo>260</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA061_20046139</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_EngagementNotes</ColumnName>
+        <FieldName>Engagement Notes</FieldName>
+        <FieldSeqNo>270</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA061_20046160</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_Score</ColumnName>
+        <FieldName>Score</FieldName>
+        <FieldSeqNo>280</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA061_20046140</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_IsLeadConverted</ColumnName>
+        <FieldName>Lead Conversion</FieldName>
+        <FieldSeqNo>290</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA061_20046128</export_id>
+      </Field>
+      <Field>
+        <ColumnName>IsActive</ColumnName>
+        <FieldName>Active</FieldName>
+        <FieldSeqNo>300</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>There are two methods of making records unavailable in the system: One is to delete the record, the other is to de-activate the record. A de-activated record is not available for selection, but available for reports.
+There are two reasons for de-activating and not deleting records:
+(1) The system requires the record for audit purposes.
+(2) The record is referenced by other records. E.g., you cannot delete a Account, if there are invoices for this Account record existing. You de-activate the Account and prevent that this record is used for future entries.</Help>
+        <export_id>VA061_20046141</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_InstantlyID</ColumnName>
+        <FieldName>Instantly ID</FieldName>
+        <FieldSeqNo>300</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA061_20046172</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_VisitorID</ColumnName>
+        <FieldName>Visitor ID</FieldName>
+        <FieldSeqNo>310</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA061_20046173</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_GenerateLead</ColumnName>
+        <FieldName>Generate Lead</FieldName>
+        <FieldSeqNo>320</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA061_20046263</export_id>
+      </Field>
+    </Tab>
+    <Tab>
+      <TabSeqNo>20</TabSeqNo>
+      <TabName>Engagement Details</TabName>
+      <TableName>VA061_EngagementDetails</TableName>
+      <AD_Tab_ID>1003416</AD_Tab_ID>
+      <IsActive>Y</IsActive>
+      <IsDisplayed>Y</IsDisplayed>
+      <IsReadOnly>N</IsReadOnly>
+      <IsAdvancedTab>N</IsAdvancedTab>
+      <export_id>VA061_20002560</export_id>
+      <Field>
+        <ColumnName>VA061_EngagementDetails_ID</ColumnName>
+        <FieldName>VA061_EngagementDetails_ID</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA061_20046256</export_id>
+      </Field>
+      <Field>
+        <ColumnName>Export_ID</ColumnName>
+        <FieldName>Export</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA061_20046259</export_id>
+      </Field>
+      <Field>
+        <ColumnName>AD_Client_ID</ColumnName>
+        <FieldName>Tenant</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>A Client is a company or a legal entity. You cannot share data between Clients. Tenant is a synonym for Client.</Help>
+        <export_id>VA061_20046260</export_id>
+      </Field>
+      <Field>
+        <ColumnName>AD_Org_ID</ColumnName>
+        <FieldName>Organization</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>An organization is a unit of your Tenant or legal entity - examples are store, department. You can share data between organizations.</Help>
+        <export_id>VA061_20046255</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_Label</ColumnName>
+        <FieldName>Label</FieldName>
+        <FieldSeqNo>10</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>N</IsCentrallyMaintained>
+        <Help>Engagement Details</Help>
+        <export_id>VA061_20046250</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_Suspect_ID</ColumnName>
+        <FieldName>Suspect</FieldName>
+        <FieldSeqNo>20</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>N</IsCentrallyMaintained>
+        <export_id>VA061_20046257</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_VisitorID</ColumnName>
+        <FieldName>Visitor ID</FieldName>
+        <FieldSeqNo>30</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA061_20046251</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_LocationIP</ColumnName>
+        <FieldName>Location IP</FieldName>
+        <FieldSeqNo>40</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA061_20046254</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_Country</ColumnName>
+        <FieldName>Country</FieldName>
+        <FieldSeqNo>50</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA061_20046252</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_VisitCount</ColumnName>
+        <FieldName>Visit Count</FieldName>
+        <FieldSeqNo>50</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA061_20046261</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_City</ColumnName>
+        <FieldName>City</FieldName>
+        <FieldSeqNo>60</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA061_20046258</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_LastVisit</ColumnName>
+        <FieldName>Last Visit</FieldName>
+        <FieldSeqNo>60</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA061_20046262</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_PageVisit</ColumnName>
+        <FieldName>Page Visited</FieldName>
+        <FieldSeqNo>70</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA061_20046253</export_id>
+      </Field>
+      <Field>
+        <ColumnName>IsActive</ColumnName>
+        <FieldName>Active</FieldName>
+        <FieldSeqNo>80</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>There are two methods of making records unavailable in the system: One is to delete the record, the other is to de-activate the record. A de-activated record is not available for selection, but available for reports.
+There are two reasons for de-activating and not deleting records:
+(1) The system requires the record for audit purposes.
+(2) The record is referenced by other records. E.g., you cannot delete a Account, if there are invoices for this Account record existing. You de-activate the Account and prevent that this record is used for future entries.</Help>
+        <export_id>VA061_20046249</export_id>
+      </Field>
+    </Tab>
+  </Window>
+  <Window>
+    <WindowDisplayName>Company Profile</WindowDisplayName>
+    <WindowName>VA061_CompanyProfile</WindowName>
+    <ad_window_id>1001322</ad_window_id>
+    <export_id>VA061_20001040</export_id>
+    <IsActive>Y</IsActive>
+    <Tab>
+      <TabSeqNo>10</TabSeqNo>
+      <TabName>Company Profile</TabName>
+      <TableName>VA061_CompanyProfile</TableName>
+      <AD_Tab_ID>1003528</AD_Tab_ID>
+      <IsActive>Y</IsActive>
+      <IsDisplayed>Y</IsDisplayed>
+      <IsReadOnly>N</IsReadOnly>
+      <IsAdvancedTab>N</IsAdvancedTab>
+      <export_id>VA061_20002720</export_id>
+      <Field>
+        <ColumnName>Label</ColumnName>
+        <FieldName>Label</FieldName>
+        <FieldSeqNo>10</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>N</IsCentrallyMaintained>
+        <Help>Company Profile</Help>
+        <export_id>VA061_20049904</export_id>
+      </Field>
+      <Field>
+        <ColumnName>AD_Client_ID</ColumnName>
+        <FieldName>Tenant</FieldName>
+        <FieldSeqNo>20</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>A Client is a company or a legal entity. You cannot share data between Clients. Tenant is a synonym for Client.</Help>
+        <export_id>VA061_20049915</export_id>
+      </Field>
+      <Field>
+        <ColumnName>AD_Org_ID</ColumnName>
+        <FieldName>Organization</FieldName>
+        <FieldSeqNo>30</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>An organization is a unit of your Tenant or legal entity - examples are store, department. You can share data between organizations.</Help>
+        <export_id>VA061_20049916</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_CompProfInfoBtn</ColumnName>
+        <FieldName>Company Profile Info</FieldName>
+        <FieldSeqNo>40</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA061_20049921</export_id>
+      </Field>
+      <Field>
+        <ColumnName>IsActive</ColumnName>
+        <FieldName>Active</FieldName>
+        <FieldSeqNo>50</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>There are two methods of making records unavailable in the system: One is to delete the record, the other is to de-activate the record. A de-activated record is not available for selection, but available for reports.
+There are two reasons for de-activating and not deleting records:
+(1) The system requires the record for audit purposes.
+(2) The record is referenced by other records. E.g., you cannot delete a Account, if there are invoices for this Account record existing. You de-activate the Account and prevent that this record is used for future entries.</Help>
+        <export_id>VA061_20049911</export_id>
+      </Field>
+      <Field>
+        <ColumnName>Value</ColumnName>
+        <FieldName>Search Key</FieldName>
+        <FieldSeqNo>60</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>A search key allows you a fast method of finding a particular record.
+If you leave the search key empty, the system automatically creates a numeric number.  The document sequence used for this fallback number is defined in the &quot;Maintain Sequence&quot; window with the name &quot;DocumentNo_&lt;TableName&gt;&quot;, where TableName is the actual name of the table (e.g. C_Order).</Help>
+        <export_id>VA061_20049906</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_CompanyType</ColumnName>
+        <FieldName>Company Type</FieldName>
+        <FieldSeqNo>70</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA061_20049917</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_CompAddressBtn</ColumnName>
+        <FieldName>Company Address Location</FieldName>
+        <FieldSeqNo>80</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA061_20049920</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_CompanyName</ColumnName>
+        <FieldName>Company Name</FieldName>
+        <FieldSeqNo>90</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>N</IsCentrallyMaintained>
+        <export_id>VA061_20049905</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_CompContactBtn</ColumnName>
+        <FieldName>Company Contact</FieldName>
+        <FieldSeqNo>100</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA061_20049907</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_LinkedinProfile</ColumnName>
+        <FieldName>Linkedin Profile</FieldName>
+        <FieldSeqNo>110</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA061_20049908</export_id>
+      </Field>
+      <Field>
+        <ColumnName>Description</ColumnName>
+        <FieldName>Description</FieldName>
+        <FieldSeqNo>120</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>A description is limited to 255 characters.</Help>
+        <export_id>VA061_20049918</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_CompanyWeb</ColumnName>
+        <FieldName>Company Website</FieldName>
+        <FieldSeqNo>130</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA061_20049909</export_id>
+      </Field>
+      <Field>
+        <ColumnName>C_IndustryCode_ID</ColumnName>
+        <FieldName>Industry Type</FieldName>
+        <FieldSeqNo>140</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>N</IsCentrallyMaintained>
+        <Help>Define relevant Industry codes - Examples are SIC or now NAICS in the US</Help>
+        <export_id>VA061_20049910</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_NumOfEmp</ColumnName>
+        <FieldName>No. of Employee</FieldName>
+        <FieldSeqNo>150</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA061_20049912</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_TurnOver</ColumnName>
+        <FieldName>Turn Over</FieldName>
+        <FieldSeqNo>160</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA061_20049913</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_CompanyProfile_ID</ColumnName>
+        <FieldName>VA061_CompanyProfile_ID</FieldName>
+        <FieldSeqNo>170</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA061_20049919</export_id>
+      </Field>
+      <Field>
+        <ColumnName>Export_ID</ColumnName>
+        <FieldName>Export</FieldName>
+        <FieldSeqNo>180</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA061_20049914</export_id>
+      </Field>
+    </Tab>
+    <Tab>
+      <TabSeqNo>20</TabSeqNo>
+      <TabName>Company Profile Info</TabName>
+      <TableName>VA061_CompanyProfileInfo</TableName>
+      <AD_Tab_ID>1003529</AD_Tab_ID>
+      <IsActive>Y</IsActive>
+      <IsDisplayed>Y</IsDisplayed>
+      <IsReadOnly>N</IsReadOnly>
+      <IsAdvancedTab>N</IsAdvancedTab>
+      <export_id>VA061_20002719</export_id>
+      <Field>
+        <ColumnName>Label</ColumnName>
+        <FieldName>Label</FieldName>
+        <FieldSeqNo>10</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>N</IsCentrallyMaintained>
+        <Help>Company Profile Info</Help>
+        <export_id>VA061_20049902</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_InformationSource</ColumnName>
+        <FieldName>Information Source</FieldName>
+        <FieldSeqNo>20</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA061_20049891</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_InfoDate</ColumnName>
+        <FieldName>Info Date</FieldName>
+        <FieldSeqNo>30</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA061_20049897</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_SourceURL</ColumnName>
+        <FieldName>Source URL</FieldName>
+        <FieldSeqNo>40</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA061_20049898</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_InfoType</ColumnName>
+        <FieldName>Info Type</FieldName>
+        <FieldSeqNo>50</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA061_20049892</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_InfoDetails</ColumnName>
+        <FieldName>Information Details</FieldName>
+        <FieldSeqNo>60</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA061_20049899</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_Relevant</ColumnName>
+        <FieldName>Relevant</FieldName>
+        <FieldSeqNo>70</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA061_20049893</export_id>
+      </Field>
+      <Field>
+        <ColumnName>AD_Client_ID</ColumnName>
+        <FieldName>Tenant</FieldName>
+        <FieldSeqNo>80</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>A Client is a company or a legal entity. You cannot share data between Clients. Tenant is a synonym for Client.</Help>
+        <export_id>VA061_20049901</export_id>
+      </Field>
+      <Field>
+        <ColumnName>IsActive</ColumnName>
+        <FieldName>Active</FieldName>
+        <FieldSeqNo>80</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>There are two methods of making records unavailable in the system: One is to delete the record, the other is to de-activate the record. A de-activated record is not available for selection, but available for reports.
+There are two reasons for de-activating and not deleting records:
+(1) The system requires the record for audit purposes.
+(2) The record is referenced by other records. E.g., you cannot delete a Account, if there are invoices for this Account record existing. You de-activate the Account and prevent that this record is used for future entries.</Help>
+        <export_id>VA061_20049900</export_id>
+      </Field>
+      <Field>
+        <ColumnName>AD_Org_ID</ColumnName>
+        <FieldName>Organization</FieldName>
+        <FieldSeqNo>90</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>An organization is a unit of your Tenant or legal entity - examples are store, department. You can share data between organizations.</Help>
+        <export_id>VA061_20049894</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_CompanyProfile_ID</ColumnName>
+        <FieldName>Company Profile</FieldName>
+        <FieldSeqNo>110</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>N</IsCentrallyMaintained>
+        <export_id>VA061_20049895</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_CompanyProfileInfo_ID</ColumnName>
+        <FieldName>VA061_CompanyProfileInfo_ID</FieldName>
+        <FieldSeqNo>120</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA061_20049896</export_id>
+      </Field>
+      <Field>
+        <ColumnName>Export_ID</ColumnName>
+        <FieldName>Export</FieldName>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA061_20049903</export_id>
+      </Field>
+    </Tab>
+    <Tab>
+      <TabSeqNo>30</TabSeqNo>
+      <TabName>Company Address Location</TabName>
+      <TableName>VA061_CompAddressLoc</TableName>
+      <AD_Tab_ID>1003530</AD_Tab_ID>
+      <IsActive>Y</IsActive>
+      <IsDisplayed>Y</IsDisplayed>
+      <IsReadOnly>N</IsReadOnly>
+      <IsAdvancedTab>N</IsAdvancedTab>
+      <export_id>VA061_20002718</export_id>
+      <Field>
+        <ColumnName>Label</ColumnName>
+        <FieldName>Label</FieldName>
+        <FieldSeqNo>10</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>N</IsCentrallyMaintained>
+        <Help>Company Address Location</Help>
+        <export_id>VA061_20049886</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_LocationName</ColumnName>
+        <FieldName>Location Name</FieldName>
+        <FieldSeqNo>20</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA061_20049887</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_Address</ColumnName>
+        <FieldName>Address</FieldName>
+        <FieldSeqNo>30</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA061_20049884</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_Phone</ColumnName>
+        <FieldName>Phone</FieldName>
+        <FieldSeqNo>40</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA061_20049881</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_CompAddressLoc_ID</ColumnName>
+        <FieldName>VA061_CompAddressLoc_ID</FieldName>
+        <FieldSeqNo>50</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA061_20049888</export_id>
+      </Field>
+      <Field>
+        <ColumnName>IsActive</ColumnName>
+        <FieldName>Active</FieldName>
+        <FieldSeqNo>50</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>There are two methods of making records unavailable in the system: One is to delete the record, the other is to de-activate the record. A de-activated record is not available for selection, but available for reports.
+There are two reasons for de-activating and not deleting records:
+(1) The system requires the record for audit purposes.
+(2) The record is referenced by other records. E.g., you cannot delete a Account, if there are invoices for this Account record existing. You de-activate the Account and prevent that this record is used for future entries.</Help>
+        <export_id>VA061_20049883</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_CompanyProfile_ID</ColumnName>
+        <FieldName>Company Profile</FieldName>
+        <FieldSeqNo>60</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>N</IsCentrallyMaintained>
+        <export_id>VA061_20049882</export_id>
+      </Field>
+      <Field>
+        <ColumnName>AD_Org_ID</ColumnName>
+        <FieldName>Organization</FieldName>
+        <FieldSeqNo>80</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>An organization is a unit of your Tenant or legal entity - examples are store, department. You can share data between organizations.</Help>
+        <export_id>VA061_20049885</export_id>
+      </Field>
+      <Field>
+        <ColumnName>AD_Client_ID</ColumnName>
+        <FieldName>Tenant</FieldName>
+        <FieldSeqNo>90</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>A Client is a company or a legal entity. You cannot share data between Clients. Tenant is a synonym for Client.</Help>
+        <export_id>VA061_20049889</export_id>
+      </Field>
+      <Field>
+        <ColumnName>Export_ID</ColumnName>
+        <FieldName>Export</FieldName>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA061_20049890</export_id>
+      </Field>
+    </Tab>
+    <Tab>
+      <TabSeqNo>40</TabSeqNo>
+      <TabName>Company Contact</TabName>
+      <TableName>VA061_CompanyContact</TableName>
+      <AD_Tab_ID>1003531</AD_Tab_ID>
+      <IsActive>Y</IsActive>
+      <IsDisplayed>Y</IsDisplayed>
+      <IsReadOnly>N</IsReadOnly>
+      <IsAdvancedTab>N</IsAdvancedTab>
+      <export_id>VA061_20002721</export_id>
+      <Field>
+        <ColumnName>Label</ColumnName>
+        <FieldName>Label</FieldName>
+        <FieldSeqNo>10</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>N</IsCentrallyMaintained>
+        <Help>Company Contact</Help>
+        <export_id>VA061_20049930</export_id>
+      </Field>
+      <Field>
+        <ColumnName>C_Greeting_ID</ColumnName>
+        <FieldName>Greeting</FieldName>
+        <FieldSeqNo>20</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Greeting identifies the greeting to print on correspondence.</Help>
+        <export_id>VA061_20049924</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_FirstName</ColumnName>
+        <FieldName>First Name</FieldName>
+        <FieldSeqNo>30</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>First Name</Help>
+        <export_id>VA061_20049931</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_LastName</ColumnName>
+        <FieldName>Last Name</FieldName>
+        <FieldSeqNo>40</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Last Name</Help>
+        <export_id>VA061_20049932</export_id>
+      </Field>
+      <Field>
+        <ColumnName>AD_Role_ID</ColumnName>
+        <FieldName>Role</FieldName>
+        <FieldSeqNo>50</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Role determines security and access a user who has this Role will have in the System.</Help>
+        <export_id>VA061_20049933</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_LinkedinProfile</ColumnName>
+        <FieldName>Linkedin Profile</FieldName>
+        <FieldSeqNo>60</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA061_20049934</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_Email</ColumnName>
+        <FieldName>Email</FieldName>
+        <FieldSeqNo>70</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA061_20049928</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_Phone</ColumnName>
+        <FieldName>Phone</FieldName>
+        <FieldSeqNo>80</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA061_20049925</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_Mobile</ColumnName>
+        <FieldName>Mobile</FieldName>
+        <FieldSeqNo>90</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA061_20049922</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_CompanyProfile_ID</ColumnName>
+        <FieldName>Company Profile</FieldName>
+        <FieldSeqNo>100</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>N</IsCentrallyMaintained>
+        <export_id>VA061_20049926</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA061_CompanyContact_ID</ColumnName>
+        <FieldName>VA061_CompanyContact_ID</FieldName>
+        <FieldSeqNo>110</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA061_20049927</export_id>
+      </Field>
+      <Field>
+        <ColumnName>IsActive</ColumnName>
+        <FieldName>Active</FieldName>
+        <FieldSeqNo>120</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>There are two methods of making records unavailable in the system: One is to delete the record, the other is to de-activate the record. A de-activated record is not available for selection, but available for reports.
+There are two reasons for de-activating and not deleting records:
+(1) The system requires the record for audit purposes.
+(2) The record is referenced by other records. E.g., you cannot delete a Account, if there are invoices for this Account record existing. You de-activate the Account and prevent that this record is used for future entries.</Help>
+        <export_id>VA061_20049935</export_id>
+      </Field>
+      <Field>
+        <ColumnName>AD_Org_ID</ColumnName>
+        <FieldName>Organization</FieldName>
+        <FieldSeqNo>130</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>An organization is a unit of your Tenant or legal entity - examples are store, department. You can share data between organizations.</Help>
+        <export_id>VA061_20049923</export_id>
+      </Field>
+      <Field>
+        <ColumnName>AD_Client_ID</ColumnName>
+        <FieldName>Tenant</FieldName>
+        <FieldSeqNo>140</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>A Client is a company or a legal entity. You cannot share data between Clients. Tenant is a synonym for Client.</Help>
+        <export_id>VA061_20049929</export_id>
+      </Field>
+      <Field>
+        <ColumnName>Export_ID</ColumnName>
+        <FieldName>Export</FieldName>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA061_20049936</export_id>
+      </Field>
+    </Tab>
+  </Window>
+</Windows>

@@ -1,0 +1,21 @@
+{
+  "entity": "Organization",
+  "table": "AD_Org",
+  "pk": "AD_Org_ID",
+  "key": { "api": "key", "column": "Value", "label": "Search Key" },
+  "identifierColumns": ["Value", "Name"],
+  "includeStandardCols": true,
+
+  "_note": "Organisation = AD_Org. AD_Client_ID is taken from the calling session (includeStandardCols).",
+
+  "fields": [
+    { "api": "key",         "column": "Value",       "type": "string",  "required": true, "isKey": true, "maxLen": 40 },
+    { "api": "name",        "column": "Name",        "type": "string",  "required": true, "maxLen": 60 },
+    { "api": "description", "column": "Description",  "type": "string",  "maxLen": 255 },
+    { "api": "isSummary",   "column": "IsSummary",   "type": "boolean", "default": false },
+    { "api": "isActive",    "column": "IsActive",    "type": "boolean", "default": true },
+
+    { "api": "salesRegion", "column": "C_SalesRegion_ID", "type": "ref",
+      "ref": { "table": "C_SalesRegion", "matchOn": "Value", "returns": "C_SalesRegion_ID" } }
+  ]
+}

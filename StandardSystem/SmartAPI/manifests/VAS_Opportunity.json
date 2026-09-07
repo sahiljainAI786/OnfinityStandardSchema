@@ -1,0 +1,76 @@
+{
+  "entity": "Opportunity",
+  "table": "VAS_Opportunity",
+  "pk": "VAS_Opportunity_ID",
+  "key": { "api": "key", "column": "Value", "label": "Search Key" },
+  "identifierColumns": ["Value", "Name"],
+  "includeStandardCols": true,
+
+  "_note": "CRM opportunity = VAS_Opportunity (the VAS 'Opportunity' window), child lines = VAS_OppLines. (The C_Opportunity table is an unused 2-column stub; VAS_Opportunity is the real one.) Built from the repo data model. List codes from VAS_Opportunity.md. Line price uses alsoColumns to mirror PlannedPrice->PriceList; line UOM derived from the product.",
+
+  "fields": [
+    { "api": "key",         "column": "Value",       "type": "string",  "required": true, "isKey": true, "maxLen": 30 },
+    { "api": "name",        "column": "Name",        "type": "string",  "required": true, "maxLen": 255 },
+    { "api": "description", "column": "Description", "type": "string",  "maxLen": 255 },
+    { "api": "comments",    "column": "Comments",    "type": "string",  "maxLen": 2000 },
+    { "api": "isActive",    "column": "IsActive",    "type": "boolean", "default": true },
+    { "api": "isOpportunity","column": "IsOpportunity","type": "boolean", "default": true },
+
+    { "api": "probability",     "column": "Probability",            "type": "number", "help": "percent" },
+    { "api": "plannedAmt",      "column": "PlannedAmt",             "type": "number", "help": "total opportunity value" },
+    { "api": "estimatedBudget", "column": "VAS_EstimatedBudgetAmt", "type": "number" },
+
+    { "api": "enquiryDate",  "column": "C_EnquiryRdate",   "type": "string", "help": "ISO date" },
+    { "api": "decisionDate", "column": "VAS_DecisionDate", "type": "string", "help": "ISO date" },
+    { "api": "nextStepDate", "column": "VAS_NextStepDate", "type": "string", "help": "ISO date" },
+
+    { "api": "stage", "column": "VAS_OppStage", "type": "list",
+      "list": { "Prospecting": "10", "Discovery/Design": "11", "Product Evaluation": "12",
+                "Proposal": "13", "Negotiation": "15", "Won": "16", "Lost/Archived": "17" } },
+    { "api": "type", "column": "VAS_OppType", "type": "list",
+      "list": { "New Business": "10", "Renewal": "11", "Upsell": "12", "Cross-sell": "13", "Service Contract": "14" } },
+    { "api": "budget", "column": "VAS_OppBudget", "type": "list",
+      "list": { "Confirmed": "CF", "Constrained": "CN", "No Budget": "NB", "Not Discussed": "ND", "Planned": "PL" } },
+    { "api": "riskLevel", "column": "VAS_RiskLevel", "type": "list",
+      "list": { "Financial Risk": "10", "Technical Risk": "11", "Timeline Risk": "12",
+                "Resource Risk": "13", "Competition Risk": "14", "Approval Risk": "15" } },
+
+    { "api": "businessPartner", "column": "C_BPartner_ID", "type": "ref",
+      "ref": { "table": "C_BPartner", "matchOn": "Value", "returns": "C_BPartner_ID" } },
+    { "api": "campaign", "column": "C_Campaign_ID", "type": "ref",
+      "ref": { "table": "C_Campaign", "matchOn": "Value", "returns": "C_Campaign_ID" } },
+    { "api": "currency", "column": "C_Currency_ID", "type": "ref",
+      "ref": { "table": "C_Currency", "matchOn": "ISO_Code", "returns": "C_Currency_ID" } },
+    { "api": "lead", "column": "C_Lead_ID", "type": "ref",
+      "ref": { "table": "C_Lead", "matchOn": "DocumentNo", "returns": "C_Lead_ID" },
+      "help": "the originating lead, by its external reference" }
+  ],
+
+  "children": {
+    "lines": {
+      "table": "VAS_OppLines",
+      "pk": "VAS_OppLines_ID",
+      "parentLink": "VAS_Opportunity_ID",
+      "fields": [
+        { "api": "product", "column": "M_Product_ID", "type": "ref", "required": true,
+          "ref": { "table": "M_Product", "matchOn": "Value", "returns": "M_Product_ID" } },
+        { "api": "qty",        "column": "PlannedQty",   "type": "number", "required": true, "help": "planned quantity" },
+        { "api": "price",      "column": "PlannedPrice", "type": "number", "alsoColumns": ["PriceList"],
+          "help": "planned unit price" },
+        { "api": "plannedAmt", "column": "PlannedAmt",   "type": "number", "help": "line total (else model computes qty*price)" },
+        { "api": "discount",   "column": "Discount",     "type": "number" },
+        { "api": "lineNo",     "column": "VAS_LineNo",   "type": "number" },
+        { "api": "description","column": "Description",  "type": "string", "maxLen": 255 },
+
+        { "api": "_uom", "column": "C_UOM_ID", "type": "derived",
+          "derived": { "from": "product", "table": "M_Product",
+                       "whereColumn": "M_Product_ID", "selectColumn": "C_UOM_ID" } }
+      ]
+    }
+  },
+
+  "actions": {
+    "generateQuotation": { "searchKey": "GenerateQuotation", "label": "Generate Quotation from the opportunity" },
+    "generateOrder":     { "searchKey": "GenerateOrder",     "label": "Generate Order from the opportunity" }
+  }
+}

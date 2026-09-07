@@ -1,0 +1,20 @@
+{
+  "entity": "UOM",
+  "table": "C_UOM",
+  "pk": "C_UOM_ID",
+  "key": { "api": "key", "column": "Name", "label": "UOM Name" },
+  "identifierColumns": ["Name", "X12DE355"],
+  "includeStandardCols": true,
+
+  "_note": "Unit of measure = C_UOM (no Value; keyed by Name, what 'uom' refs resolve). X12DE355 (EDI UOM code) is NN/required.",
+
+  "fields": [
+    { "api": "key",              "column": "Name",        "type": "string",  "required": true, "isKey": true, "maxLen": 60 },
+    { "api": "uomCode",          "column": "X12DE355",    "type": "string",  "required": true, "maxLen": 4, "help": "EDI X12 UOM code, e.g. EA" },
+    { "api": "symbol",           "column": "UOMSymbol",   "type": "string",  "maxLen": 10 },
+    { "api": "stdPrecision",     "column": "StdPrecision","type": "number",  "default": 0 },
+    { "api": "costingPrecision", "column": "CostingPrecision", "type": "number", "default": 0 },
+    { "api": "isDefault",        "column": "IsDefault",   "type": "boolean", "default": false },
+    { "api": "isActive",         "column": "IsActive",    "type": "boolean", "default": true }
+  ]
+}

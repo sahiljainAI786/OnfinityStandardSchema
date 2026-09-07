@@ -1,0 +1,64 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>VAdvantage</RootNamespace>
+    <AssemblyName>VAModelAD</AssemblyName>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <NoWarn>$(NoWarn);NU1701;CS0618;SYSLIB0;SYSLIB0011;CA1416</NoWarn>
+    <!-- SMTPConfig still uses BinaryFormatter for its stored blobs; keep it working on net8 for
+         data-format compatibility. DEPRECATED — must be replaced (e.g. JSON) before net9. -->
+    <EnableUnsafeBinaryFormatterSerialization>true</EnableUnsafeBinaryFormatterSerialization>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- WS1: Reporting tier carved out to VAModelAD.Reporting (net48/Windows). Excluded from Core. -->
+    <Compile Remove="Print\**\*.cs" />
+    <Compile Remove="CrystalReport\**\*.cs" />
+    <Compile Remove="Report\**\*.cs" />
+    <Compile Remove="ModelAD\MPrintPaper.cs" />
+    <!-- web-only / Windows-only, 0 cascade into core: System.Web.Optimization bundling + MSMQ -->
+    <Compile Remove="**\ModuleBundles.cs" />
+    <Compile Remove="**\EmailMSMQ.cs" />
+    <!-- WS5: duplicate of ModelLibrary's MSysConfig (identical) — keep one copy elsewhere -->
+    <!-- (kept here in Core; ModelLibrary's copy will be removed when that ports) -->
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CoreLibrary\CoreLibrary.csproj" />
+    <ProjectReference Include="..\BaseLibrary\BaseLibrary.csproj" />
+    <ProjectReference Include="..\XModel\XModel.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
+    <PackageReference Include="Npgsql" Version="8.0.6" />
+    <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="23.6.1" />
+    <PackageReference Include="MySql.Data" Version="8.4.0" />
+    <PackageReference Include="BouncyCastle.Cryptography" Version="2.4.0" />
+    <PackageReference Include="SSH.NET" Version="2024.2.0" />
+    <PackageReference Include="SharpZipLib" Version="1.4.2" />
+    <PackageReference Include="PdfSharp" Version="6.1.1" />
+    <PackageReference Include="System.Drawing.Common" Version="8.0.7" />
+    <PackageReference Include="System.DirectoryServices" Version="8.0.0" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.0" />
+    <PackageReference Include="System.Runtime.Serialization.Formatters" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
+    <!-- dropped (dead/UI/Framework-only): IKVM*, CrystalDecisions*, Interop.Excel, Antlr,
+         Google.Apis, Mono.Security, WebGrease, Microsoft.Web.*, Microsoft.AspNet.Web.Optimization,
+         Microsoft.QualityTools.Testing.Fakes -->
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="SecureEngineUtility">
+      <HintPath>_lib\SecureEngineUtility.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

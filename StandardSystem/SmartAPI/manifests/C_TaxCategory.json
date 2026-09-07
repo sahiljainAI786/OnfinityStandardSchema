@@ -1,0 +1,16 @@
+{
+  "entity": "TaxCategory",
+  "table": "C_TaxCategory",
+  "pk": "C_TaxCategory_ID",
+  "key": { "api": "key", "column": "Name", "label": "Tax Category Name" },
+  "identifierColumns": ["Name"],
+  "includeStandardCols": true,
+
+  "_note": "Tax category = C_TaxCategory (no Value; keyed by Name). Groups tax rates (e.g. 'Standard', 'Reduced').",
+
+  "fields": [
+    { "api": "key",       "column": "Name",      "type": "string",  "required": true, "isKey": true, "maxLen": 60 },
+    { "api": "isDefault", "column": "IsDefault", "type": "boolean", "default": false },
+    { "api": "isActive",  "column": "IsActive",  "type": "boolean", "default": true }
+  ]
+}

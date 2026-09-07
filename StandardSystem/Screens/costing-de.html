@@ -1,0 +1,1676 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fertigungskalkulation — Aura ERP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg-blue: #DCEEFF;
+  --bg-green: #E4F2DE;
+  --card-blue: #EAF4FF;
+  --card-green: #EAF5E2;
+  --card-white: #FFFFFF;
+  --text-dark: #1A2332;
+  --text-muted: #5C6B7F;
+  --text-light: #8A98AB;
+  --accent-blue: #1A8FE3;
+  --accent-teal: #0FB58F;
+  --accent-red: #FF3B30;
+  --accent-pink: #E94B7B;
+  --accent-amber: #F5A524;
+  --accent-purple: #8B7FE8;
+  --border-soft: rgba(26, 35, 50, 0.06);
+  --border-medium: rgba(26, 35, 50, 0.1);
+  --shadow-card: 0 1px 3px rgba(26, 35, 50, 0.04), 0 4px 12px rgba(26, 35, 50, 0.04);
+  --bottom-bar: #0E2545;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--text-dark);
+  background: linear-gradient(135deg, var(--bg-blue) 0%, #E8F0F8 50%, var(--bg-green) 100%);
+  overflow: hidden;
+}
+
+.app { display: flex; height: 100vh; position: relative; }
+
+/* ============ SIDEBAR ============ */
+.sidebar {
+  width: 64px;
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-right: 1px solid rgba(255, 255, 255, 0.6);
+  display: flex; flex-direction: column; align-items: center;
+  padding: 20px 0; gap: 8px; z-index: 10;
+}
+.menu-btn {
+  width: 38px; height: 38px;
+  background: var(--accent-blue); border: none; border-radius: 10px;
+  color: white; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 18px;
+  box-shadow: 0 4px 12px rgba(26, 143, 227, 0.3);
+}
+.expand-arrow {
+  width: 26px; height: 26px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--accent-blue); margin-bottom: 14px; cursor: pointer;
+}
+.sidebar-icon {
+  width: 38px; height: 38px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--accent-blue); cursor: pointer; border-radius: 10px;
+  transition: background 0.15s; position: relative;
+}
+.sidebar-icon:hover { background: rgba(26, 143, 227, 0.1); }
+.sidebar-icon.active::before {
+  content: ''; position: absolute; left: -14px; top: 8px; bottom: 8px;
+  width: 3px; background: var(--accent-blue); border-radius: 0 3px 3px 0;
+}
+.sidebar-bottom { margin-top: auto; display: flex; flex-direction: column; gap: 8px; }
+
+/* ============ MAIN ============ */
+.main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+
+.header {
+  height: 72px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 28px; flex-shrink: 0;
+}
+.header-title h1 {
+  font-size: 22px; font-weight: 700; color: var(--text-dark); letter-spacing: -0.4px;
+}
+.header-title p { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
+.header-right { display: flex; align-items: center; gap: 16px; }
+.header-icon-group {
+  display: flex; background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.9); border-radius: 10px;
+  padding: 6px; gap: 4px; box-shadow: var(--shadow-card);
+}
+.header-icon-btn {
+  width: 32px; height: 32px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 7px; color: var(--accent-blue); cursor: pointer;
+}
+.header-icon-btn:hover { background: rgba(26, 143, 227, 0.1); }
+.user-info { display: flex; align-items: center; gap: 12px; }
+.user-text { text-align: right; }
+.user-text .name { font-size: 14px; font-weight: 600; color: var(--text-dark); }
+.user-text .role { font-size: 12px; color: var(--text-muted); }
+.avatar {
+  width: 42px; height: 42px; border-radius: 50%;
+  background: linear-gradient(135deg, #4A90E2, #357ABD);
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-weight: 600; font-size: 15px;
+  border: 2px solid white; box-shadow: 0 2px 8px rgba(26, 35, 50, 0.12);
+}
+
+.content { flex: 1; overflow-y: auto; padding: 0 28px 80px; }
+.content::-webkit-scrollbar { width: 8px; }
+.content::-webkit-scrollbar-track { background: transparent; }
+.content::-webkit-scrollbar-thumb { background: rgba(26, 35, 50, 0.15); border-radius: 4px; }
+
+/* ============ ORDER CONTEXT BAR ============ */
+.order-bar {
+  background: linear-gradient(110deg, rgba(255,255,255,0.75) 0%, rgba(234,244,255,0.8) 55%, rgba(234,245,226,0.6) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 16px;
+  padding: 18px 22px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(8px);
+}
+
+.order-bar-row {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 18px; flex-wrap: wrap;
+}
+.order-product {
+  display: flex; align-items: center; gap: 14px;
+  flex: 1; min-width: 0;
+}
+.order-icon {
+  width: 56px; height: 56px; flex-shrink: 0;
+  background: linear-gradient(135deg, var(--accent-blue), #1376C5);
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  color: white;
+  box-shadow: 0 4px 12px rgba(26, 143, 227, 0.3);
+}
+.order-info { flex: 1; min-width: 0; }
+.order-tagline {
+  font-size: 10px; font-weight: 700;
+  color: var(--accent-blue);
+  text-transform: uppercase; letter-spacing: 0.9px;
+  margin-bottom: 3px;
+}
+.order-title {
+  font-size: 20px; font-weight: 700; color: var(--text-dark);
+  letter-spacing: -0.4px;
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 6px;
+  flex-wrap: wrap;
+}
+.order-meta {
+  display: flex; align-items: center; gap: 14px;
+  font-size: 11px; color: var(--text-muted);
+  flex-wrap: wrap;
+}
+.order-meta-item { display: flex; align-items: center; gap: 5px; font-family: 'SF Mono', Monaco, monospace; }
+.order-meta-item strong { color: var(--text-dark); font-weight: 600; font-family: 'Plus Jakarta Sans'; }
+
+.po-status {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 3px 9px; border-radius: 12px;
+  font-size: 10px; font-weight: 700;
+  background: #DCF3EB; color: #0A5A45;
+  text-transform: uppercase; letter-spacing: 0.4px;
+}
+.po-status .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent-teal); }
+
+.cost-status {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 3px 9px; border-radius: 12px;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.4px;
+}
+.cost-status.over { background: #FFE0DC; color: #8B1A12; }
+.cost-status.under { background: #DCF3EB; color: #0A5A45; }
+
+.order-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.action-btn {
+  background: white; border: 1px solid var(--border-medium); border-radius: 9px;
+  padding: 9px 14px;
+  font-family: inherit; font-size: 12px; font-weight: 600;
+  color: var(--text-dark); cursor: pointer;
+  display: flex; align-items: center; gap: 6px;
+  white-space: nowrap; transition: all 0.15s;
+}
+.action-btn:hover { background: #F1F4F9; }
+.action-btn.primary {
+  background: linear-gradient(135deg, var(--accent-blue), #1376C5);
+  color: white; border-color: transparent;
+  box-shadow: 0 3px 10px rgba(26, 143, 227, 0.3);
+}
+.action-btn.teal {
+  background: var(--accent-teal); color: white; border-color: var(--accent-teal);
+  box-shadow: 0 3px 10px rgba(15, 181, 143, 0.3);
+}
+
+.order-detail-row {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px dashed rgba(26, 35, 50, 0.08);
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 18px;
+}
+.detail-cell { display: flex; flex-direction: column; gap: 3px; }
+.detail-label {
+  font-size: 10px; font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase; letter-spacing: 0.5px;
+}
+.detail-value { font-size: 13px; font-weight: 600; color: var(--text-dark); }
+.detail-value.mono { font-family: 'SF Mono', Monaco, monospace; font-size: 12px; }
+
+/* Progress bar */
+.progress-row {
+  display: flex; align-items: center; gap: 12px;
+  margin-top: 14px;
+}
+.progress-track {
+  flex: 1; height: 8px;
+  background: rgba(26, 35, 50, 0.08);
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+}
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent-teal), #0C9A78); }
+.progress-fill.partial { background: linear-gradient(90deg, var(--accent-amber), #D97706); }
+.progress-meta {
+  font-size: 11px; color: var(--text-muted);
+  font-family: 'SF Mono', Monaco, monospace;
+  white-space: nowrap;
+}
+
+/* ============ KPI ROW (4 cost cards + wide variance card) ============ */
+.kpi-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 2fr;
+  gap: 16px; margin-bottom: 16px;
+}
+.kpi-card {
+  background: var(--card-white); border-radius: 16px;
+  padding: 18px 22px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: var(--shadow-card);
+  position: relative; overflow: hidden;
+}
+.kpi-card .kpi-label {
+  font-size: 13px; font-weight: 600; color: var(--text-dark); line-height: 1.25;
+}
+.kpi-card .kpi-sub { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+.kpi-value-row {
+  display: flex; align-items: baseline; justify-content: space-between;
+  margin-top: 16px; gap: 8px;
+}
+.kpi-planned-actual {
+  display: flex; flex-direction: column; gap: 2px;
+}
+.kpi-planned {
+  font-size: 11px; color: var(--text-muted); font-weight: 500;
+  font-family: 'SF Mono', Monaco, monospace;
+}
+.kpi-actual {
+  font-size: 26px; font-weight: 800; letter-spacing: -0.8px;
+  line-height: 1; color: var(--text-dark);
+  font-family: 'Plus Jakarta Sans';
+}
+.kpi-variance {
+  display: inline-flex; align-items: center; gap: 3px;
+  padding: 3px 8px; border-radius: 10px;
+  font-size: 11px; font-weight: 700;
+  font-family: 'SF Mono', Monaco, monospace;
+  white-space: nowrap;
+}
+.kpi-variance.over { background: #FFE0DC; color: #8B1A12; }
+.kpi-variance.under { background: #DCF3EB; color: #0A5A45; }
+
+/* Wide variance card */
+.kpi-wide {
+  background: linear-gradient(125deg, #E94B7B 0%, #C2185B 100%);
+  color: white;
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: 16px 22px;
+}
+.kpi-wide-title {
+  font-size: 13px; font-weight: 600; opacity: 0.95; margin-bottom: 14px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.kpi-wide-pill {
+  background: rgba(255,255,255,0.18);
+  padding: 3px 9px; border-radius: 10px;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.3px;
+}
+.kpi-wide-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.kpi-wide-stat .lbl { font-size: 11px; font-weight: 500; opacity: 0.85; margin-bottom: 4px; }
+.kpi-wide-stat .val { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; }
+.kpi-wide-stat .sub { font-size: 10px; opacity: 0.8; margin-top: 1px; }
+
+/* ============ TABS ============ */
+.section-tabs {
+  display: flex;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  padding: 4px;
+  gap: 2px;
+  margin-bottom: 16px;
+  width: fit-content;
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(8px);
+}
+.section-tab {
+  background: transparent; border: none;
+  padding: 9px 18px;
+  font-family: inherit; font-size: 13px; font-weight: 600;
+  color: var(--text-muted);
+  border-radius: 8px; cursor: pointer;
+  display: flex; align-items: center; gap: 7px;
+  white-space: nowrap;
+}
+.section-tab.active {
+  background: white; color: var(--text-dark);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+.section-tab .tab-count {
+  background: #E5EAF2; color: var(--text-muted);
+  padding: 1px 7px; border-radius: 8px;
+  font-size: 11px; font-family: 'SF Mono', Monaco, monospace;
+}
+.section-tab.active .tab-count { background: var(--accent-blue); color: white; }
+
+/* ============ DETAIL CARD ============ */
+.detail-card {
+  background: var(--card-white);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+.detail-card-header {
+  padding: 16px 22px;
+  display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 1px solid var(--border-soft);
+  gap: 16px; flex-wrap: wrap;
+}
+.detail-card-title {
+  font-size: 15px; font-weight: 700; color: var(--text-dark);
+  display: flex; align-items: center; gap: 10px;
+}
+.detail-card-title .summary {
+  font-size: 12px; font-weight: 500; color: var(--text-muted);
+  margin-left: 4px;
+}
+.detail-card-actions { display: flex; align-items: center; gap: 8px; }
+
+.icon-btn {
+  width: 32px; height: 32px;
+  background: #F1F4F9; border: none; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: var(--text-muted);
+}
+.icon-btn:hover { background: #E5EAF2; color: var(--text-dark); }
+
+/* ============ TABLE ============ */
+.table-wrap { overflow-x: auto; }
+.table-wrap::-webkit-scrollbar { height: 8px; }
+.table-wrap::-webkit-scrollbar-track { background: transparent; }
+.table-wrap::-webkit-scrollbar-thumb { background: rgba(26, 35, 50, 0.15); border-radius: 4px; }
+
+table.cost {
+  width: 100%; border-collapse: collapse; font-size: 13px;
+}
+table.cost thead th {
+  text-align: left; padding: 11px 14px;
+  font-size: 10px; font-weight: 700; color: var(--text-muted);
+  text-transform: uppercase; letter-spacing: 0.5px;
+  border-bottom: 1px solid var(--border-soft);
+  background: #FAFBFD; white-space: nowrap;
+}
+table.cost thead th.numeric { text-align: right; }
+table.cost thead th.center { text-align: center; }
+
+/* Group header for split planned/actual */
+.colgroup {
+  background: #F4F7FB;
+  font-weight: 700;
+  text-align: center !important;
+  border-right: 1px solid var(--border-soft);
+}
+.colgroup.planned { color: var(--accent-blue); }
+.colgroup.actual { color: var(--text-dark); }
+.colgroup.variance { color: var(--accent-amber); }
+
+table.cost tbody td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border-soft);
+  vertical-align: middle;
+}
+table.cost tbody tr { transition: background 0.12s; }
+table.cost tbody tr:hover { background: rgba(220, 238, 255, 0.3); }
+
+/* Material/operation icon */
+.row-icon {
+  width: 30px; height: 30px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.row-icon.material { background: #FFEDD2; color: #6B3D05; }
+.row-icon.subasy { background: #E5E2FA; color: var(--accent-purple); }
+.row-icon.bought { background: #DCF3EB; color: var(--accent-teal); }
+.row-icon.operation { background: #FDE5EE; color: var(--accent-pink); }
+.row-icon.resource { background: #DCEEFF; color: var(--accent-blue); }
+.row-icon.labor { background: #FFEDD2; color: var(--accent-amber); }
+.row-icon.scrap { background: #FFE0DC; color: var(--accent-red); }
+.row-icon.rework { background: #E5E2FA; color: var(--accent-purple); }
+.row-icon.jobwork { background: #DCEEFF; color: var(--accent-blue); }
+
+.row-cell { display: flex; align-items: center; gap: 10px; min-width: 240px; }
+.row-info { display: flex; flex-direction: column; line-height: 1.25; min-width: 0; }
+.row-code {
+  font-family: 'SF Mono', Monaco, monospace;
+  font-size: 11px; font-weight: 700; color: var(--text-dark);
+}
+.row-desc { font-size: 12px; color: var(--text-muted); margin-top: 2px; font-weight: 500; }
+
+/* Numeric cell */
+.num {
+  font-family: 'SF Mono', Monaco, monospace;
+  font-weight: 600; font-size: 13px;
+  color: var(--text-dark); white-space: nowrap;
+}
+.num.muted { color: var(--text-muted); font-weight: 500; }
+.num.bold { font-weight: 700; }
+.num.cost { color: var(--text-dark); }
+.num.cost.actual { font-weight: 700; }
+.num-unit { font-size: 10px; font-weight: 500; color: var(--text-muted); margin-left: 2px; }
+.num-sub {
+  font-size: 9px; color: var(--text-muted); font-weight: 500;
+  display: block; margin-top: 1px; font-family: 'Plus Jakarta Sans';
+}
+
+/* Variance cell */
+.var-cell {
+  text-align: right;
+  font-family: 'SF Mono', Monaco, monospace;
+  font-weight: 700; font-size: 13px;
+  white-space: nowrap;
+}
+.var-cell.over { color: var(--accent-red); }
+.var-cell.under { color: var(--accent-teal); }
+.var-cell.zero { color: var(--text-muted); font-weight: 500; }
+.var-pct {
+  font-size: 10px; font-weight: 600;
+  padding: 2px 6px; border-radius: 6px;
+  margin-left: 4px;
+}
+.var-pct.over { background: #FFE0DC; color: #8B1A12; }
+.var-pct.under { background: #DCF3EB; color: #0A5A45; }
+.var-pct.zero { background: #EEF0F4; color: #5C6B7F; }
+
+/* Type badge */
+.type-pill {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 3px 8px; border-radius: 6px;
+  font-size: 10px; font-weight: 700;
+  white-space: nowrap; letter-spacing: 0.3px;
+}
+.type-pill.bom { background: #DCEEFF; color: #0E3F66; }
+.type-pill.sub { background: #E5E2FA; color: #2E2966; }
+.type-pill.cons { background: #FFEDD2; color: #6B3D05; }
+.type-pill.scrap { background: #FFE0DC; color: #8B1A12; }
+.type-pill.rework { background: #E5E2FA; color: #2E2966; }
+.type-pill.jobwork { background: #DCEEFF; color: #0E3F66; }
+.type-pill.completed { background: #DCF3EB; color: #0A5A45; }
+.type-pill.in-progress { background: #FFEDD2; color: #6B3D05; }
+
+/* Date cell */
+.date-cell { font-family: 'SF Mono', Monaco, monospace; font-size: 11px; color: var(--text-muted); }
+.date-cell strong { color: var(--text-dark); font-weight: 600; }
+
+/* Operator avatar */
+.operator-cell { display: flex; align-items: center; gap: 7px; }
+.operator-avatar {
+  width: 24px; height: 24px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 9px; font-weight: 700; color: white;
+  flex-shrink: 0;
+}
+.operator-name { font-size: 12px; font-weight: 500; color: var(--text-dark); }
+
+/* Footer summary */
+.table-footer {
+  padding: 12px 22px;
+  display: flex; align-items: center; justify-content: space-between;
+  border-top: 1px solid var(--border-soft);
+  background: #FAFBFD;
+  font-size: 12px; color: var(--text-muted);
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.footer-summary {
+  display: flex; gap: 20px;
+  font-size: 12px; flex-wrap: wrap;
+}
+.footer-summary-item { display: flex; align-items: center; gap: 5px; }
+.footer-summary-item .lbl { color: var(--text-muted); }
+.footer-summary-item .val {
+  font-family: 'SF Mono', Monaco, monospace; font-weight: 700;
+  color: var(--text-dark);
+}
+.footer-summary-item .val.over { color: var(--accent-red); }
+.footer-summary-item .val.under { color: var(--accent-teal); }
+.footer-summary-item .val.actual { color: var(--accent-blue); }
+
+/* ============ HISTORY TIMELINE ============ */
+.timeline-card {
+  background: var(--card-white);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+.timeline-list { padding: 8px 0 16px; }
+
+.timeline-item {
+  display: flex; gap: 14px;
+  padding: 14px 22px;
+  position: relative;
+}
+.timeline-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 36px; top: 50px;
+  bottom: -16px;
+  width: 1.5px;
+  background: var(--border-soft);
+}
+.timeline-dot {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  position: relative; z-index: 1;
+}
+.timeline-dot.start { background: #DCEEFF; color: var(--accent-blue); }
+.timeline-dot.material { background: #FFEDD2; color: #6B3D05; }
+.timeline-dot.operation { background: #FDE5EE; color: var(--accent-pink); }
+.timeline-dot.scrap { background: #FFE0DC; color: var(--accent-red); }
+.timeline-dot.rework { background: #E5E2FA; color: var(--accent-purple); }
+.timeline-dot.complete { background: #DCF3EB; color: var(--accent-teal); }
+.timeline-dot.qc { background: #DCEEFF; color: var(--accent-blue); }
+
+.timeline-content {
+  flex: 1; min-width: 0;
+}
+.timeline-row-1 {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; margin-bottom: 4px;
+  flex-wrap: wrap;
+}
+.timeline-title {
+  font-size: 13px; font-weight: 700; color: var(--text-dark);
+}
+.timeline-time {
+  font-size: 11px; color: var(--text-muted);
+  font-family: 'SF Mono', Monaco, monospace;
+}
+.timeline-desc {
+  font-size: 12px; color: var(--text-muted);
+  line-height: 1.45;
+}
+.timeline-desc strong { color: var(--text-dark); font-weight: 600; }
+.timeline-meta {
+  display: flex; gap: 14px; margin-top: 6px;
+  font-size: 11px; color: var(--text-muted);
+  flex-wrap: wrap;
+}
+.timeline-meta-item { display: flex; align-items: center; gap: 4px; }
+.timeline-meta-item strong { color: var(--text-dark); font-weight: 600; font-family: 'SF Mono', Monaco, monospace; }
+
+.timeline-cost {
+  font-family: 'SF Mono', Monaco, monospace;
+  font-weight: 700; font-size: 13px;
+  color: var(--text-dark);
+  white-space: nowrap;
+}
+.timeline-cost.cost-up { color: var(--accent-red); }
+.timeline-cost.cost-down { color: var(--accent-teal); }
+
+/* ============ BOTTOM BAR ============ */
+.bottom-bar {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: 44px;
+  background: var(--bottom-bar);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 16px 0 76px;
+  z-index: 50;
+}
+.bottom-left { display: flex; align-items: center; gap: 14px; }
+.bottom-home {
+  width: 32px; height: 32px; background: white; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--accent-blue); cursor: pointer;
+}
+.bottom-breadcrumb { font-size: 12px; color: rgba(255,255,255,0.7); }
+.bottom-breadcrumb strong { color: white; font-weight: 600; margin: 0 4px; }
+.bottom-right { display: flex; align-items: center; gap: 10px; }
+.aura-input {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.6);
+  padding: 7px 14px; border-radius: 18px;
+  font-family: inherit; font-size: 12px; width: 220px;
+}
+.aura-input::placeholder { color: rgba(255,255,255,0.5); }
+.aura-bot {
+  width: 30px; height: 30px;
+  background: linear-gradient(135deg, #4FC3F7, #29B6F6);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+.aura-logo {
+  width: 30px; height: 30px;
+  background: linear-gradient(135deg, #66BB6A, #43A047);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-weight: 800; font-size: 13px;
+}
+
+svg { display: block; }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="sidebar">
+    <button class="menu-btn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+    <div class="expand-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg></div>
+    <div class="sidebar-icon" title="Fertigung"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></div>
+    <div class="sidebar-icon" title="Bedarfsplanung"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg></div>
+    <div class="sidebar-icon" title="Stückliste"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div>
+    <div class="sidebar-icon active" title="Kalkulation"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+    <div class="sidebar-icon" title="Kalender"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+    <div class="sidebar-icon" title="Dokumente"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+    <div class="sidebar-bottom">
+      <div class="sidebar-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+      <div class="sidebar-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="header">
+      <div class="header-title">
+        <h1>Fertigungskalkulation</h1>
+        <p>Soll-Ist-Kostenanalyse mit vollständiger Fertigungshistorie</p>
+      </div>
+      <div class="header-right">
+        <div class="header-icon-group">
+          <div class="header-icon-btn" title="Historie"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg></div>
+          <div class="header-icon-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+        </div>
+        <div class="user-info">
+          <div class="user-text">
+            <div class="name">Thomas Weber</div>
+            <div class="role">Fertigungsplaner</div>
+          </div>
+          <div class="avatar">TW</div>
+        </div>
+      </div>
+    </header>
+
+    <div class="content">
+
+      <!-- ============ ORDER CONTEXT BAR ============ -->
+      <div class="order-bar">
+        <div class="order-bar-row">
+          <div class="order-product">
+            <div class="order-icon">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+            <div class="order-info">
+              <div class="order-tagline">Fertigungsauftrag · Kalkulationsblatt</div>
+              <div class="order-title">
+                Hydraulikaggregat 4 kW
+                <span class="po-status"><span class="dot"></span>Abgeschlossen</span>
+                <span class="cost-status over">▲ 7,2 % über Budget</span>
+              </div>
+              <div class="order-meta">
+                <span class="order-meta-item"><strong>FA</strong> FA-2026-0142</span>
+                <span class="order-meta-item"><strong>Artikel</strong> FG-HPP-5HP-V2</span>
+                <span class="order-meta-item"><strong>Menge</strong> 25 Stk</span>
+                <span class="order-meta-item"><strong>Werk</strong> Stuttgart-01</span>
+                <span class="order-meta-item"><strong>Kunde</strong> Liebherr Industrietechnik</span>
+                <span class="order-meta-item"><strong>StüLi</strong> Rev C · Arbeitsplan RTG-HPP-A</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="order-actions">
+            <button class="action-btn">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+              Neu kalkulieren
+            </button>
+            <button class="action-btn">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Exportieren
+            </button>
+            <button class="action-btn primary">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              Abweichungsanalyse
+            </button>
+            <button class="action-btn teal">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Ins Hauptbuch buchen
+            </button>
+          </div>
+        </div>
+
+        <div class="order-detail-row">
+          <div class="detail-cell">
+            <span class="detail-label">Freigegeben</span>
+            <span class="detail-value mono">26.04.2026 · 08:00</span>
+          </div>
+          <div class="detail-cell">
+            <span class="detail-label">Begonnen</span>
+            <span class="detail-value mono">27.04.2026 · 08:14</span>
+          </div>
+          <div class="detail-cell">
+            <span class="detail-label">Abgeschlossen</span>
+            <span class="detail-value mono">02.05.2026 · 16:45</span>
+          </div>
+          <div class="detail-cell">
+            <span class="detail-label">Gutmenge</span>
+            <span class="detail-value">24 Stk <span style="color:var(--text-muted);font-weight:500;font-size:11px">/ 25 Soll</span></span>
+          </div>
+          <div class="detail-cell">
+            <span class="detail-label">Ausschuss</span>
+            <span class="detail-value" style="color:var(--accent-red)">1 Stk</span>
+          </div>
+          <div class="detail-cell">
+            <span class="detail-label">Nacharbeit</span>
+            <span class="detail-value" style="color:var(--accent-purple)">2 Stk</span>
+          </div>
+          <div class="detail-cell">
+            <span class="detail-label">Ausbeute</span>
+            <span class="detail-value" style="color:var(--accent-teal)">96,0 %</span>
+          </div>
+        </div>
+
+        <div class="progress-row">
+          <div class="progress-track">
+            <div class="progress-fill" style="width:96%"></div>
+          </div>
+          <span class="progress-meta">24 / 25 Stk · 100 % fertig · gebucht</span>
+        </div>
+      </div>
+
+      <!-- ============ KPI / VARIANCE ROW ============ -->
+      <div class="kpi-row">
+        <!-- Materials -->
+        <div class="kpi-card">
+          <div class="kpi-label">Material</div>
+          <div class="kpi-sub">Direkte Materialkosten</div>
+          <div class="kpi-value-row">
+            <div class="kpi-planned-actual">
+              <span class="kpi-planned">Soll 21.050 €</span>
+              <span class="kpi-actual">22.180 €</span>
+            </div>
+            <span class="kpi-variance over">▲ 5,4 %</span>
+          </div>
+        </div>
+
+        <!-- Labor -->
+        <div class="kpi-card">
+          <div class="kpi-label">Lohn</div>
+          <div class="kpi-sub">Direktlohn + Rüsten</div>
+          <div class="kpi-value-row">
+            <div class="kpi-planned-actual">
+              <span class="kpi-planned">Soll 3.200 €</span>
+              <span class="kpi-actual">3.850 €</span>
+            </div>
+            <span class="kpi-variance over">▲ 20,3 %</span>
+          </div>
+        </div>
+
+        <!-- Machine / Overhead -->
+        <div class="kpi-card">
+          <div class="kpi-label">Maschine + GK</div>
+          <div class="kpi-sub">Ressourcen-Zuschlag</div>
+          <div class="kpi-value-row">
+            <div class="kpi-planned-actual">
+              <span class="kpi-planned">Soll 4.950 €</span>
+              <span class="kpi-actual">5.120 €</span>
+            </div>
+            <span class="kpi-variance over">▲ 3,4 %</span>
+          </div>
+        </div>
+
+        <!-- Job Work / Subcontract -->
+        <div class="kpi-card">
+          <div class="kpi-label">Lohnarbeit</div>
+          <div class="kpi-sub">Fremdvergabe</div>
+          <div class="kpi-value-row">
+            <div class="kpi-planned-actual">
+              <span class="kpi-planned">Soll 1.000 €</span>
+              <span class="kpi-actual">850 €</span>
+            </div>
+            <span class="kpi-variance under">▼ 15,0 %</span>
+          </div>
+        </div>
+
+        <!-- Wide total cost summary -->
+        <div class="kpi-card kpi-wide">
+          <div class="kpi-wide-title">
+            Gesamte Fertigungskosten
+            <span class="kpi-wide-pill">▲ 2.000 € über Soll</span>
+          </div>
+          <div class="kpi-wide-stats">
+            <div class="kpi-wide-stat">
+              <div class="lbl">Soll</div>
+              <div class="val">30.200 €</div>
+              <div class="sub">1.208 € / Stk</div>
+            </div>
+            <div class="kpi-wide-stat">
+              <div class="lbl">Ist</div>
+              <div class="val">32.000 €</div>
+              <div class="sub">1.333 € / Stk</div>
+            </div>
+            <div class="kpi-wide-stat">
+              <div class="lbl">Abweichung</div>
+              <div class="val">+6,6 %</div>
+              <div class="sub">125 € / Stk ▲</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ SECTION TABS ============ -->
+      <div class="section-tabs">
+        <button class="section-tab active">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+          Kalkulationsblatt
+        </button>
+        <button class="section-tab">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          Material <span class="tab-count">14</span>
+        </button>
+        <button class="section-tab">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Arbeitsgänge <span class="tab-count">06</span>
+        </button>
+        <button class="section-tab">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+          Ressourcen &amp; Lohn <span class="tab-count">12</span>
+        </button>
+        <button class="section-tab">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          Ausschuss, Nacharbeit &amp; Schwund <span class="tab-count">04</span>
+        </button>
+        <button class="section-tab">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/></svg>
+          Lohnarbeit <span class="tab-count">02</span>
+        </button>
+        <button class="section-tab">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+          Historie
+        </button>
+      </div>
+
+      <!-- ============ MATERIAL CONSUMPTION TABLE ============ -->
+      <div class="detail-card">
+        <div class="detail-card-header">
+          <div class="detail-card-title">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent-amber)"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            Materialverbrauch
+            <span class="summary">Soll-Ist-Entnahme laut Stückliste</span>
+          </div>
+          <div class="detail-card-actions">
+            <button class="icon-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg></button>
+            <button class="icon-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></button>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table class="cost">
+            <thead>
+              <tr>
+                <th rowspan="2" style="min-width:240px">Komponente</th>
+                <th rowspan="2">Art</th>
+                <th colspan="2" class="colgroup planned numeric">Soll (StüLi)</th>
+                <th colspan="2" class="colgroup actual numeric">Ist</th>
+                <th colspan="2" class="colgroup variance numeric">Abweichung</th>
+                <th rowspan="2">Entnahme / Bezug</th>
+              </tr>
+              <tr>
+                <th class="numeric">Menge</th>
+                <th class="numeric">Kosten</th>
+                <th class="numeric">Menge</th>
+                <th class="numeric">Kosten</th>
+                <th class="numeric">Menge</th>
+                <th class="numeric">Kosten</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <tr>
+                <td>
+                  <div class="row-cell">
+                    <div class="row-icon subasy"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg></div>
+                    <div class="row-info">
+                      <div class="row-code">SA-PMP-GR-25</div>
+                      <div class="row-desc">Zahnradpumpen-Baugruppe · 25 cm³/U</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="type-pill sub">BAUGR.</span></td>
+                <td style="text-align:right"><span class="num">25</span><span class="num-unit">Stk</span></td>
+                <td style="text-align:right"><span class="num cost">9.625 €</span></td>
+                <td style="text-align:right"><span class="num bold">25</span><span class="num-unit">Stk</span></td>
+                <td style="text-align:right"><span class="num cost actual">9.800 €</span></td>
+                <td style="text-align:right"><span class="var-cell zero">0</span></td>
+                <td style="text-align:right"><span class="var-cell over">+175 €<span class="var-pct over">+1,8 %</span></span></td>
+                <td><span style="color:var(--text-muted);font-size:11px">Baugruppe · rückgemeldet</span></td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div class="row-cell">
+                    <div class="row-icon bought"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><line x1="6" y1="10" x2="6" y2="14"/><line x1="18" y1="10" x2="18" y2="14"/></svg></div>
+                    <div class="row-info">
+                      <div class="row-code">CMP-MOT-5HP-3PH</div>
+                      <div class="row-desc">Elektromotor · 4 kW · 3-phasig 400 V</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="type-pill bom">KAUF</span></td>
+                <td style="text-align:right"><span class="num">25</span><span class="num-unit">Stk</span></td>
+                <td style="text-align:right"><span class="num cost">7.000 €</span></td>
+                <td style="text-align:right"><span class="num bold">25</span><span class="num-unit">Stk</span></td>
+                <td style="text-align:right"><span class="num cost actual">7.250 €</span></td>
+                <td style="text-align:right"><span class="var-cell zero">0</span></td>
+                <td style="text-align:right"><span class="var-cell over">+250 €<span class="var-pct over">+3,6 %</span></span></td>
+                <td><div class="operator-cell"><div class="operator-avatar" style="background:linear-gradient(135deg,#1A8FE3,#0E5BA0)">SI</div><span class="operator-name">Siemens</span></div></td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div class="row-cell">
+                    <div class="row-icon material"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg></div>
+                    <div class="row-info">
+                      <div class="row-code">RM-PLT-S235-3</div>
+                      <div class="row-desc">Stahlblech S235 · 3 mm · 1,25×2,5 m</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="type-pill cons">ROH</span></td>
+                <td style="text-align:right"><span class="num">37,5</span><span class="num-unit">Tfl</span></td>
+                <td style="text-align:right"><span class="num cost">1.800 €</span></td>
+                <td style="text-align:right"><span class="num bold" style="color:var(--accent-red)">42,0</span><span class="num-unit">Tfl</span></td>
+                <td style="text-align:right"><span class="num cost actual">2.016 €</span></td>
+                <td style="text-align:right"><span class="var-cell over">+4,5</span></td>
+                <td style="text-align:right"><span class="var-cell over">+216 €<span class="var-pct over">+12,0 %</span></span></td>
+                <td><div class="operator-cell"><div class="operator-avatar" style="background:linear-gradient(135deg,#1A8FE3,#0E5BA0)">TK</div><span class="operator-name">thyssenkrupp</span></div></td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div class="row-cell">
+                    <div class="row-icon bought"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="8" width="18" height="8" rx="1"/><line x1="9" y1="4" x2="9" y2="8"/><line x1="15" y1="16" x2="15" y2="20"/></svg></div>
+                    <div class="row-info">
+                      <div class="row-code">CMP-VLV-MNF-3W</div>
+                      <div class="row-desc">3-Wege-Regelventilblock</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="type-pill bom">KAUF</span></td>
+                <td style="text-align:right"><span class="num">25</span><span class="num-unit">Stk</span></td>
+                <td style="text-align:right"><span class="num cost">2.375 €</span></td>
+                <td style="text-align:right"><span class="num bold">25</span><span class="num-unit">Stk</span></td>
+                <td style="text-align:right"><span class="num cost actual">2.375 €</span></td>
+                <td style="text-align:right"><span class="var-cell zero">0</span></td>
+                <td style="text-align:right"><span class="var-cell zero">0 €<span class="var-pct zero">0 %</span></span></td>
+                <td><div class="operator-cell"><div class="operator-avatar" style="background:linear-gradient(135deg,#E94B7B,#C2185B)">BR</div><span class="operator-name">Bosch Rexroth</span></div></td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div class="row-cell">
+                    <div class="row-icon material"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg></div>
+                    <div class="row-info">
+                      <div class="row-code">CMP-OIL-ISO46</div>
+                      <div class="row-desc">Hydrauliköl ISO VG 46 · mineralisch</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="type-pill cons">ROH</span></td>
+                <td style="text-align:right"><span class="num">1.200</span><span class="num-unit">l</span></td>
+                <td style="text-align:right"><span class="num cost">2.640 €</span></td>
+                <td style="text-align:right"><span class="num bold">1.180</span><span class="num-unit">l</span></td>
+                <td style="text-align:right"><span class="num cost actual">2.596 €</span></td>
+                <td style="text-align:right"><span class="var-cell under">−20</span></td>
+                <td style="text-align:right"><span class="var-cell under">−44 €<span class="var-pct under">−1,7 %</span></span></td>
+                <td><div class="operator-cell"><div class="operator-avatar" style="background:linear-gradient(135deg,#F5A524,#D97706)">FU</div><span class="operator-name">Fuchs Schmierstoffe</span></div></td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div class="row-cell">
+                    <div class="row-icon bought"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12c0-4.4 3.6-8 8-8s8 3.6 8 8M3 12c0 4.4 3.6 8 8 8h4"/></svg></div>
+                    <div class="row-info">
+                      <div class="row-code">CMP-HSE-12-HP</div>
+                      <div class="row-desc">Hochdruckschlauch · 1/2" · 1,5 m</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="type-pill bom">KAUF</span></td>
+                <td style="text-align:right"><span class="num">50</span><span class="num-unit">Stk</span></td>
+                <td style="text-align:right"><span class="num cost">1.100 €</span></td>
+                <td style="text-align:right"><span class="num bold">52</span><span class="num-unit">Stk</span></td>
+                <td style="text-align:right"><span class="num cost actual">1.144 €</span></td>
+                <td style="text-align:right"><span class="var-cell over">+2</span></td>
+                <td style="text-align:right"><span class="var-cell over">+44 €<span class="var-pct over">+4,0 %</span></span></td>
+                <td><div class="operator-cell"><div class="operator-avatar" style="background:linear-gradient(135deg,#0FB58F,#0C9A78)">PA</div><span class="operator-name">Parker Hannifin</span></div></td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div class="row-cell">
+                    <div class="row-icon bought"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="2" x2="12" y2="22"/><circle cx="12" cy="6" r="3"/></svg></div>
+                    <div class="row-info">
+                      <div class="row-code">PH-KIT-FST-PMP <span style="background:#E5E2FA;color:#2E2966;padding:1px 5px;border-radius:4px;font-size:9px;margin-left:4px">PHANTOM</span></div>
+                      <div class="row-desc">Schraubensatz (aufgerollt: Schrauben, Ringe, O-Ringe)</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="type-pill cons">VERBR</span></td>
+                <td style="text-align:right"><span class="num">25</span><span class="num-unit">Set</span></td>
+                <td style="text-align:right"><span class="num cost">210 €</span></td>
+                <td style="text-align:right"><span class="num bold">26</span><span class="num-unit">Set</span></td>
+                <td style="text-align:right"><span class="num cost actual">218 €</span></td>
+                <td style="text-align:right"><span class="var-cell over">+1</span></td>
+                <td style="text-align:right"><span class="var-cell over">+8 €<span class="var-pct over">+3,8 %</span></span></td>
+                <td><span style="color:var(--text-muted);font-size:11px">rückgemeldet (Nacharbeit)</span></td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+
+        <div class="table-footer">
+          <span>7 von 14 Komponenten</span>
+          <div class="footer-summary">
+            <div class="footer-summary-item"><span class="lbl">Material Soll:</span> <span class="val">24.750 €</span></div>
+            <div class="footer-summary-item"><span class="lbl">Material Ist:</span> <span class="val actual">25.399 €</span></div>
+            <div class="footer-summary-item"><span class="lbl">Abweichung:</span> <span class="val over">+649 € (+2,6 %)</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ OPERATIONS / RESOURCES TABLE ============ -->
+      <div class="detail-card">
+        <div class="detail-card-header">
+          <div class="detail-card-title">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent-pink)"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Arbeitsgänge &amp; Ressourcenzeit
+            <span class="summary">Zeitverbrauch je Arbeitsgang, Ressource und Lohn</span>
+          </div>
+          <div class="detail-card-actions">
+            <button class="icon-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg></button>
+            <button class="icon-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></button>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table class="cost">
+            <thead>
+              <tr>
+                <th rowspan="2" style="min-width:240px">Arbeitsgang / Ressource</th>
+                <th rowspan="2">Status</th>
+                <th colspan="3" class="colgroup planned">Soll</th>
+                <th colspan="3" class="colgroup actual">Ist</th>
+                <th colspan="2" class="colgroup variance numeric">Abweichung</th>
+                <th rowspan="2">Werker</th>
+              </tr>
+              <tr>
+                <th class="numeric">Zeit</th>
+                <th class="numeric">Satz</th>
+                <th class="numeric">Kosten</th>
+                <th class="numeric">Zeit</th>
+                <th class="numeric">Satz</th>
+                <th class="numeric">Kosten</th>
+                <th class="numeric">Zeit</th>
+                <th class="numeric">Kosten</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <tr>
+                <td>
+                  <div class="row-cell">
+                    <div class="row-icon operation"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><line x1="6" y1="10" x2="6" y2="14"/></svg></div>
+                    <div class="row-info">
+                      <div class="row-code">OP10 · Fräsen (CNC-02)</div>
+                      <div class="row-desc">5-Achs-Bearbeitung · Pumpengehäuse</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="type-pill completed">● Abgeschlossen</span></td>
+                <td style="text-align:right"><span class="num">4,0</span><span class="num-unit">Std.</span></td>
+                <td style="text-align:right"><span class="num muted">48 €/Std.</span></td>
+                <td style="text-align:right"><span class="num cost">192 €</span></td>
+                <td style="text-align:right"><span class="num bold">4,5</span><span class="num-unit">Std.</span></td>
+                <td style="text-align:right"><span class="num muted">48 €/Std.</span></td>
+                <td style="text-align:right"><span class="num cost actual">216 €</span></td>
+                <td style="text-align:right"><span class="var-cell over">+0,5 Std.</span></td>
+                <td style="text-align:right"><span class="var-cell over">+24 €<span class="var-pct over">+12,5 %</span></span></td>
+                <td><div class="operator-cell"><div class="operator-avatar" style="background:linear-gradient(135deg,#E94B7B,#C2185B)">MS</div><span class="operator-name">M. Schulz</span></div></td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div class="row-cell">
+                    <div class="row-icon operation"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+                    <div class="row-info">
+                      <div class="row-code">OP20 · Schweißen (WELD-02)</div>
+                      <div class="row-desc">WIG-Schweißen · Tank-Baugruppe</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="type-pill completed">● Abgeschlossen</span></td>
+                <td style="text-align:right"><span class="num">6,0</span><span class="num-unit">Std.</span></td>
+                <td style="text-align:right"><span class="num muted">42 €/Std.</span></td>
+                <td style="text-align:right"><span class="num cost">252 €</span></td>
+                <td style="text-align:right"><span class="num bold">7,5</span><span class="num-unit">Std.</span></td>
+                <td style="text-align:right"><span class="num muted">42 €/Std.</span></td>
+                <td style="text-align:right"><span class="num cost actual">315 €</span></td>
+                <td style="text-align:right"><span class="var-cell over">+1,5 Std.</span></td>
+                <td style="text-align:right"><span class="var-cell over">+63 €<span class="var-pct over">+25,0 %</span></span></td>
+                <td><div class="operator-cell"><div class="operator-avatar" style="background:linear-gradient(135deg,#0FB58F,#0C9A78)">KB</div><span class="operator-name">K. Braun</span></div></td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div class="row-cell">
+                    <div class="row-icon operation"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
+                    <div class="row-info">
+                      <div class="row-code">OP30 · Montage (ASSY-01)</div>
+                      <div class="row-desc">Pumpe + Motor + Ventile auf Grundplatte</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="type-pill completed">● Abgeschlossen</span></td>
+                <td style="text-align:right"><span class="num">9,0</span><span class="num-unit">Std.</span></td>
+                <td style="text-align:right"><span class="num muted">35 €/Std.</span></td>
+                <td style="text-align:right"><span class="num cost">315 €</span></td>
+                <td style="text-align:right"><span class="num bold">9,2</span><span class="num-unit">Std.</span></td>
+                <td style="text-align:right"><span class="num muted">35 €/Std.</span></td>
+                <td style="text-align:right"><span class="num cost actual">322 €</span></td>
+                <td style="text-align:right"><span class="var-cell over">+0,2 Std.</span></td>
+                <td style="text-align:right"><span class="var-cell over">+7 €<span class="var-pct over">+2,2 %</span></span></td>
+                <td><div class="operator-cell"><div class="operator-avatar" style="background:linear-gradient(135deg,#1A8FE3,#0E5BA0)">JF</div><span class="operator-name">J. Fischer +2</span></div></td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div class="row-cell">
+                    <div class="row-icon operation"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 16 14"/></svg></div>
+                    <div class="row-info">
+                      <div class="row-code">OP40 · Befüllen &amp; Prüfen (TEST-01)</div>
+                      <div class="row-desc">Ölbefüllung + Druckprüfung</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="type-pill completed">● Abgeschlossen</span></td>
+                <td style="text-align:right"><span class="num">5,0</span><span class="num-unit">Std.</span></td>
+                <td style="text-align:right"><span class="num muted">38 €/Std.</span></td>
+                <td style="text-align:right"><span class="num cost">190 €</span></td>
+                <td style="text-align:right"><span class="num bold">5,0</span><span class="num-unit">Std.</span></td>
+                <td style="text-align:right"><span class="num muted">38 €/Std.</span></td>
+                <td style="text-align:right"><span class="num cost actual">190 €</span></td>
+                <td style="text-align:right"><span class="var-cell zero">0 Std.</span></td>
+                <td style="text-align:right"><span class="var-cell zero">0 €<span class="var-pct zero">0 %</span></span></td>
+                <td><div class="operator-cell"><div class="operator-avatar" style="background:linear-gradient(135deg,#F5A524,#D97706)">PW</div><span class="operator-name">P. Wagner</span></div></td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div class="row-cell">
+                    <div class="row-icon operation"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div>
+                    <div class="row-info">
+                      <div class="row-code">OP50 · QS-Prüfung (QC-01)</div>
+                      <div class="row-desc">Endprüfung + Dokumentation</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="type-pill completed">● Abgeschlossen</span></td>
+                <td style="text-align:right"><span class="num">2,5</span><span class="num-unit">Std.</span></td>
+                <td style="text-align:right"><span class="num muted">40 €/Std.</span></td>
+                <td style="text-align:right"><span class="num cost">100 €</span></td>
+                <td style="text-align:right"><span class="num bold">3,2</span><span class="num-unit">Std.</span></td>
+                <td style="text-align:right"><span class="num muted">40 €/Std.</span></td>
+                <td style="text-align:right"><span class="num cost actual">128 €</span></td>
+                <td style="text-align:right"><span class="var-cell over">+0,7 Std.</span></td>
+                <td style="text-align:right"><span class="var-cell over">+28 €<span class="var-pct over">+28,0 %</span></span></td>
+                <td><div class="operator-cell"><div class="operator-avatar" style="background:linear-gradient(135deg,#8B7FE8,#6A5FCB)">SK</div><span class="operator-name">S. Koch</span></div></td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+
+        <div class="table-footer">
+          <span>5 Arbeitsgänge · 24,4 Std. Ist vs. 26,5 Std. Soll</span>
+          <div class="footer-summary">
+            <div class="footer-summary-item"><span class="lbl">Lohn Soll:</span> <span class="val">1.049 €</span></div>
+            <div class="footer-summary-item"><span class="lbl">Lohn Ist:</span> <span class="val actual">1.171 €</span></div>
+            <div class="footer-summary-item"><span class="lbl">Abweichung:</span> <span class="val over">+122 € (+11,6 %)</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ SCRAP, REWORK, WASTAGE TABLE ============ -->
+      <div class="detail-card">
+        <div class="detail-card-header">
+          <div class="detail-card-title">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent-red)"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            Ausschuss, Nacharbeit &amp; Schwund
+            <span class="summary">Qualitätsverluste zu diesem Auftrag</span>
+          </div>
+          <div class="detail-card-actions">
+            <button class="icon-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg></button>
+            <button class="icon-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></button>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table class="cost">
+            <thead>
+              <tr>
+                <th>Datum / Erfasst von</th>
+                <th>Art</th>
+                <th>Arbeitsgang</th>
+                <th>Artikel</th>
+                <th class="numeric">Menge</th>
+                <th>Ursache / Fehler</th>
+                <th class="numeric">Materialverlust</th>
+                <th class="numeric">Lohn-/GK-Verlust</th>
+                <th class="numeric">Gesamtkosten</th>
+                <th>Verwendung</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <tr>
+                <td><span class="date-cell"><strong>28.04. · 11:32</strong><br>von M. Schulz</span></td>
+                <td><span class="type-pill scrap">▲ Ausschuss</span></td>
+                <td><span class="num muted">OP10 Fräsen</span></td>
+                <td>
+                  <div class="row-cell">
+                    <div class="row-icon scrap"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg></div>
+                    <div class="row-info">
+                      <div class="row-code">MK-PMP-BDY-CI</div>
+                      <div class="row-desc">Pumpengehäuse, bearbeitet</div>
+                    </div>
+                  </div>
+                </td>
+                <td style="text-align:right"><span class="num bold">1</span><span class="num-unit">Stk</span></td>
+                <td><span style="font-size:12px;color:var(--text-dark)">Werkzeugbruch — Bohrung außer Toleranz (Ø+0,08 mm)</span></td>
+                <td style="text-align:right"><span class="num cost">78 €</span></td>
+                <td style="text-align:right"><span class="num cost">24 €</span></td>
+                <td style="text-align:right"><span class="num cost actual" style="color:var(--accent-red)">102 €</span></td>
+                <td><span style="color:var(--text-muted);font-size:11px">Verschrottet — Recycling verkauft</span></td>
+              </tr>
+
+              <tr>
+                <td><span class="date-cell"><strong>29.04. · 14:18</strong><br>von K. Braun</span></td>
+                <td><span class="type-pill rework">⟲ Nacharbeit</span></td>
+                <td><span class="num muted">OP20 Schweißen</span></td>
+                <td>
+                  <div class="row-cell">
+                    <div class="row-icon rework"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg></div>
+                    <div class="row-info">
+                      <div class="row-code">SA-TNK-50L</div>
+                      <div class="row-desc">Tank-Baugruppe — Schweißfehler</div>
+                    </div>
+                  </div>
+                </td>
+                <td style="text-align:right"><span class="num bold">2</span><span class="num-unit">Stk</span></td>
+                <td><span style="font-size:12px;color:var(--text-dark)">Porosität in Nahtschweißung — nach Schleifen nachgeschweißt</span></td>
+                <td style="text-align:right"><span class="num cost">18 €</span></td>
+                <td style="text-align:right"><span class="num cost">155 €</span></td>
+                <td style="text-align:right"><span class="num cost actual" style="color:var(--accent-purple)">173 €</span></td>
+                <td><span style="color:var(--text-muted);font-size:11px">Nachgearbeitet — Nachprüfung bestanden</span></td>
+              </tr>
+
+              <tr>
+                <td><span class="date-cell"><strong>30.04. · 09:45</strong><br>von J. Fischer</span></td>
+                <td><span class="type-pill scrap">⊘ Schwund</span></td>
+                <td><span class="num muted">OP30 Montage</span></td>
+                <td>
+                  <div class="row-cell">
+                    <div class="row-icon material"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg></div>
+                    <div class="row-info">
+                      <div class="row-code">CMP-OIL-ISO46</div>
+                      <div class="row-desc">Hydrauliköl ISO VG 46</div>
+                    </div>
+                  </div>
+                </td>
+                <td style="text-align:right"><span class="num bold">12</span><span class="num-unit">l</span></td>
+                <td><span style="font-size:12px;color:var(--text-dark)">Verschüttung beim Befüllen — Fassverschluss undicht</span></td>
+                <td style="text-align:right"><span class="num cost">26 €</span></td>
+                <td style="text-align:right"><span class="num cost muted">—</span></td>
+                <td style="text-align:right"><span class="num cost actual" style="color:var(--accent-red)">26 €</span></td>
+                <td><span style="color:var(--text-muted);font-size:11px">Reinigung erfasst · Entsorgungsnachweis</span></td>
+              </tr>
+
+              <tr>
+                <td><span class="date-cell"><strong>01.05. · 13:20</strong><br>von S. Koch</span></td>
+                <td><span class="type-pill scrap">▲ Ausschuss</span></td>
+                <td><span class="num muted">OP50 QS</span></td>
+                <td>
+                  <div class="row-cell">
+                    <div class="row-icon scrap"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg></div>
+                    <div class="row-info">
+                      <div class="row-code">FG-HPP-5HP-V2</div>
+                      <div class="row-desc">Hydraulikaggregat 4 kW — Endprodukt</div>
+                    </div>
+                  </div>
+                </td>
+                <td style="text-align:right"><span class="num bold">1</span><span class="num-unit">Stk</span></td>
+                <td><span style="font-size:12px;color:var(--text-dark)">Druckprüfung nicht bestanden — interne Leckage an Verschraubung</span></td>
+                <td style="text-align:right"><span class="num cost">1.168 €</span></td>
+                <td style="text-align:right"><span class="num cost">87 €</span></td>
+                <td style="text-align:right"><span class="num cost actual" style="color:var(--accent-red)">1.255 €</span></td>
+                <td><span style="color:var(--text-muted);font-size:11px">Demontage · Teile zur Verwertung</span></td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+
+        <div class="table-footer">
+          <span>4 Qualitätsereignisse · Ausschussquote 4,0 % · Nacharbeitsquote 8,0 %</span>
+          <div class="footer-summary">
+            <div class="footer-summary-item"><span class="lbl">Ausschusskosten:</span> <span class="val over">1.383 €</span></div>
+            <div class="footer-summary-item"><span class="lbl">Nacharbeitskosten:</span> <span class="val" style="color:var(--accent-purple)">173 €</span></div>
+            <div class="footer-summary-item"><span class="lbl">Qualitätsverlust gesamt:</span> <span class="val over">1.556 €</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ JOB WORK / SUBCONTRACT TABLE ============ -->
+      <div class="detail-card">
+        <div class="detail-card-header">
+          <div class="detail-card-title">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent-blue)"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/></svg>
+            Lohnarbeit &amp; Fremdvergabe
+            <span class="summary">An externe Lieferanten vergebene Arbeitsgänge</span>
+          </div>
+          <div class="detail-card-actions">
+            <button class="icon-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg></button>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table class="cost">
+            <thead>
+              <tr>
+                <th>Lohnarbeitsauftrag</th>
+                <th>Arbeitsgang</th>
+                <th>Lieferant</th>
+                <th class="numeric">Menge versandt</th>
+                <th class="numeric">Menge erhalten</th>
+                <th>Versandt / Zurück</th>
+                <th class="numeric">Soll-Kosten</th>
+                <th class="numeric">Ist-Kosten</th>
+                <th class="numeric">Abweichung</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <tr>
+                <td>
+                  <div class="row-cell">
+                    <div class="row-icon jobwork"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/></svg></div>
+                    <div class="row-info">
+                      <div class="row-code">JW-2026-0042</div>
+                      <div class="row-desc">Hartverchromung — Pumpenwelle</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="type-pill jobwork">Beschichtung</span></td>
+                <td><div class="operator-cell"><div class="operator-avatar" style="background:linear-gradient(135deg,#0FB58F,#0C9A78)">HM</div><span class="operator-name">Hartchrom Müller</span></div></td>
+                <td style="text-align:right"><span class="num">25</span><span class="num-unit">Stk</span></td>
+                <td style="text-align:right"><span class="num bold">25</span><span class="num-unit">Stk</span></td>
+                <td><span class="date-cell"><strong>27.04.</strong> → <strong>30.04.</strong></span></td>
+                <td style="text-align:right"><span class="num cost">625 €</span><span class="num-sub">25 € / Stk</span></td>
+                <td style="text-align:right"><span class="num cost actual">525 €</span><span class="num-sub">21 € / Stk</span></td>
+                <td style="text-align:right"><span class="var-cell under">−100 €<span class="var-pct under">−16,0 %</span></span></td>
+                <td><span class="type-pill completed">● Erhalten</span></td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div class="row-cell">
+                    <div class="row-icon jobwork"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/></svg></div>
+                    <div class="row-info">
+                      <div class="row-code">JW-2026-0048</div>
+                      <div class="row-desc">Pulverbeschichtung — Tank-Baugruppe</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="type-pill jobwork">Beschichtung</span></td>
+                <td><div class="operator-cell"><div class="operator-avatar" style="background:linear-gradient(135deg,#1A8FE3,#0E5BA0)">BS</div><span class="operator-name">Beschichtung Sauer</span></div></td>
+                <td style="text-align:right"><span class="num">25</span><span class="num-unit">Stk</span></td>
+                <td style="text-align:right"><span class="num bold">25</span><span class="num-unit">Stk</span></td>
+                <td><span class="date-cell"><strong>29.04.</strong> → <strong>01.05.</strong></span></td>
+                <td style="text-align:right"><span class="num cost">375 €</span><span class="num-sub">15 € / Stk</span></td>
+                <td style="text-align:right"><span class="num cost actual">325 €</span><span class="num-sub">13 € / Stk</span></td>
+                <td style="text-align:right"><span class="var-cell under">−50 €<span class="var-pct under">−13,3 %</span></span></td>
+                <td><span class="type-pill completed">● Erhalten</span></td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+
+        <div class="table-footer">
+          <span>2 Lohnarbeitsaufträge · alle erhalten</span>
+          <div class="footer-summary">
+            <div class="footer-summary-item"><span class="lbl">Lohnarbeit Soll:</span> <span class="val">1.000 €</span></div>
+            <div class="footer-summary-item"><span class="lbl">Lohnarbeit Ist:</span> <span class="val actual">850 €</span></div>
+            <div class="footer-summary-item"><span class="lbl">Einsparung:</span> <span class="val under">−150 € (−15,0 %)</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ HISTORY TIMELINE ============ -->
+      <div class="timeline-card">
+        <div class="detail-card-header">
+          <div class="detail-card-title">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent-purple)"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+            Fertigungshistorie
+            <span class="summary">Chronologisches Protokoll aller Kostenbuchungen zu diesem Auftrag</span>
+          </div>
+          <div class="detail-card-actions">
+            <button class="icon-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg></button>
+          </div>
+        </div>
+
+        <div class="timeline-list">
+
+          <div class="timeline-item">
+            <div class="timeline-dot start">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+            <div class="timeline-content">
+              <div class="timeline-row-1">
+                <span class="timeline-title">Auftrag freigegeben</span>
+                <span class="timeline-time">27.04.2026 · 08:14</span>
+              </div>
+              <div class="timeline-desc">FA-2026-0142 durch <strong>T. Weber</strong> in die Fertigung freigegeben · Menge 25 Stk · Soll-Kosten 30.200 €</div>
+            </div>
+            <span class="timeline-cost">—</span>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot material">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div class="timeline-content">
+              <div class="timeline-row-1">
+                <span class="timeline-title">Material entnommen · OP10</span>
+                <span class="timeline-time">27.04.2026 · 08:30</span>
+              </div>
+              <div class="timeline-desc"><strong>25× MK-PMP-BDY-CI</strong> + <strong>30× RM-CST-FE-280</strong> aus Lager WH-A1 kommissioniert · an CNC-02 ausgegeben</div>
+              <div class="timeline-meta">
+                <span class="timeline-meta-item">Werker: <strong>M. Schulz</strong></span>
+                <span class="timeline-meta-item">Beleg: <strong>MTI-7841</strong></span>
+              </div>
+            </div>
+            <span class="timeline-cost">2.925 €</span>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot operation">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div class="timeline-content">
+              <div class="timeline-row-1">
+                <span class="timeline-title">OP10 Fräsen — abgeschlossen</span>
+                <span class="timeline-time">28.04.2026 · 11:45</span>
+              </div>
+              <div class="timeline-desc">CNC-02 · <strong>4,5 Std.</strong> Maschinenzeit (Soll 4,0 Std.) · 24 Gut + 1 Ausschuss · Werker <strong>M. Schulz</strong></div>
+              <div class="timeline-meta">
+                <span class="timeline-meta-item">Rüsten: <strong>0,5 Std.</strong></span>
+                <span class="timeline-meta-item">Laufzeit: <strong>4,0 Std.</strong></span>
+                <span class="timeline-meta-item">Ausbeute: <strong style="color:var(--accent-amber)">96 %</strong></span>
+              </div>
+            </div>
+            <span class="timeline-cost cost-up">+216 €</span>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot scrap">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/></svg>
+            </div>
+            <div class="timeline-content">
+              <div class="timeline-row-1">
+                <span class="timeline-title">Ausschuss gemeldet · OP10</span>
+                <span class="timeline-time">28.04.2026 · 11:32</span>
+              </div>
+              <div class="timeline-desc"><strong>1× MK-PMP-BDY-CI</strong> verschrottet — Werkzeugbruch, Bohrung außer Toleranz Ø+0,08 mm · QS bestätigt durch <strong>S. Koch</strong></div>
+              <div class="timeline-meta">
+                <span class="timeline-meta-item">Ursachencode: <strong>SC-TOOL-01</strong></span>
+                <span class="timeline-meta-item">Verwendung: <strong>Recycling</strong></span>
+              </div>
+            </div>
+            <span class="timeline-cost cost-up">+102 €</span>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot material">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div class="timeline-content">
+              <div class="timeline-row-1">
+                <span class="timeline-title">Lohnarbeit versandt · JW-0042</span>
+                <span class="timeline-time">28.04.2026 · 16:00</span>
+              </div>
+              <div class="timeline-desc"><strong>25× Pumpenwellen</strong> an <strong>Hartchrom Müller</strong> zur Hartverchromung versandt · Rücklauf erwartet 30.04.</div>
+              <div class="timeline-meta">
+                <span class="timeline-meta-item">Lieferschein: <strong>JW-OUT-2118</strong></span>
+                <span class="timeline-meta-item">Bestellbezug: <strong>JW-PO-0042</strong></span>
+              </div>
+            </div>
+            <span class="timeline-cost">—</span>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot rework">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+            </div>
+            <div class="timeline-content">
+              <div class="timeline-row-1">
+                <span class="timeline-title">Nacharbeit erfasst · OP20</span>
+                <span class="timeline-time">29.04.2026 · 14:18</span>
+              </div>
+              <div class="timeline-desc"><strong>2× Tank-Baugruppen</strong> nachgearbeitet — Porosität in Nahtschweißung · nach Schleifen nachgeschweißt durch <strong>K. Braun</strong> · nachgeprüft und bestanden</div>
+              <div class="timeline-meta">
+                <span class="timeline-meta-item">Fehlercode: <strong>WD-POR-02</strong></span>
+                <span class="timeline-meta-item">Mehrzeit: <strong>3,7 Std.</strong></span>
+              </div>
+            </div>
+            <span class="timeline-cost cost-up">+173 €</span>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot material">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            </div>
+            <div class="timeline-content">
+              <div class="timeline-row-1">
+                <span class="timeline-title">Lohnarbeit erhalten · JW-0042</span>
+                <span class="timeline-time">30.04.2026 · 10:45</span>
+              </div>
+              <div class="timeline-desc"><strong>25× verchromte Wellen</strong> von Hartchrom Müller erhalten · QS bestanden · WE-2884 erstellt · Rechnung 525 € (vs. Soll 625 €)</div>
+              <div class="timeline-meta">
+                <span class="timeline-meta-item">Lieferantenrechnung: <strong>HM-INV-3192</strong></span>
+                <span class="timeline-meta-item">Durchlaufzeit: <strong>3 Tage</strong></span>
+              </div>
+            </div>
+            <span class="timeline-cost cost-down">−100 €</span>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot operation">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+            </div>
+            <div class="timeline-content">
+              <div class="timeline-row-1">
+                <span class="timeline-title">OP30 Montage — abgeschlossen</span>
+                <span class="timeline-time">30.04.2026 · 17:00</span>
+              </div>
+              <div class="timeline-desc">ASSY-01 · 9,2 Std. Lohn (3 Werker, Soll 9,0 Std.) · alle 24 Einheiten mit Motor &amp; Ventilen montiert</div>
+              <div class="timeline-meta">
+                <span class="timeline-meta-item">Team: <strong>J. Fischer +2</strong></span>
+                <span class="timeline-meta-item">Material rückgemeldet: <strong>2.375 €</strong></span>
+              </div>
+            </div>
+            <span class="timeline-cost cost-up">+7 €</span>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot qc">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <div class="timeline-content">
+              <div class="timeline-row-1">
+                <span class="timeline-title">QS-Prüfung · 1 Einheit Druckprüfung nicht bestanden</span>
+                <span class="timeline-time">01.05.2026 · 13:20</span>
+              </div>
+              <div class="timeline-desc"><strong>1× FG-HPP-5HP-V2</strong> Enddruckprüfung nicht bestanden — interne Leckage an Verschraubung · durch <strong>S. Koch</strong> zur Teileverwertung demontiert</div>
+              <div class="timeline-meta">
+                <span class="timeline-meta-item">Fehler: <strong>QC-LEAK-01</strong></span>
+                <span class="timeline-meta-item">Maßnahme erstellt: <strong>CAR-0118</strong></span>
+              </div>
+            </div>
+            <span class="timeline-cost cost-up">+1.255 €</span>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot complete">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="timeline-content">
+              <div class="timeline-row-1">
+                <span class="timeline-title">Auftrag abgeschlossen · ins Hauptbuch gebucht</span>
+                <span class="timeline-time">02.05.2026 · 16:45</span>
+              </div>
+              <div class="timeline-desc"><strong>24 Gut-Einheiten</strong> ins Fertigwarenlager gebucht · Fertigungsauftrag durch <strong>T. Weber</strong> abgeschlossen · Abweichungen auf Fertigungsabweichungskonten gebucht</div>
+              <div class="timeline-meta">
+                <span class="timeline-meta-item">Ist gesamt: <strong>32.000 €</strong></span>
+                <span class="timeline-meta-item">Abweichung: <strong style="color:var(--accent-red)">+1.800 €</strong></span>
+                <span class="timeline-meta-item">Stückkosten: <strong>1.333 €</strong></span>
+              </div>
+            </div>
+            <span class="timeline-cost">32.000 €</span>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <div class="bottom-bar">
+    <div class="bottom-left">
+      <div class="bottom-home"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+      <div class="bottom-breadcrumb">Fertigung <strong>›</strong> Produktion <strong>›</strong> <strong style="color:white">Kalkulation</strong></div>
+    </div>
+    <div class="bottom-right">
+      <input type="text" class="aura-input" placeholder="Frage? Aura fragen …">
+      <div class="aura-bot"><svg width="16" height="16" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="0.5"><path d="M12 2a3 3 0 0 0-3 3v1H7a4 4 0 0 0-4 4v6a4 4 0 0 0 4 4h10a4 4 0 0 0 4-4v-6a4 4 0 0 0-4-4h-2V5a3 3 0 0 0-3-3zm-3 9a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm6 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></div>
+      <div class="aura-logo">A</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+document.querySelectorAll('.section-tab').forEach(t => {
+  t.addEventListener('click', () => {
+    document.querySelectorAll('.section-tab').forEach(x => x.classList.remove('active'));
+    t.classList.add('active');
+  });
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,19 @@
+# Onfinity Smart API — single stateless service. No database, no volumes required.
+#   docker compose up -d --build
+services:
+  smartapi:
+    build: .
+    image: onfinity-smartapi:latest
+    container_name: onfinity-smartapi
+    restart: unless-stopped
+    ports:
+      - "8090:8080"          # host:container — reachable on the LAN at <linux-host-ip>:8090
+    environment:
+      # The VAAPI endpoint this Smart API fronts. Point at the Onfinity host's LAN
+      # address for same-network deployment, or keep erplive. NO credentials here —
+      # callers send accessKey/secretKey as request headers (pass-through auth).
+      - Vaapi__BaseUrl=https://erplive.viennaadvantage.com/api/VAAPI/Service
+      - ASPNETCORE_ENVIRONMENT=Production
+    # Manifests are baked into the image. To edit them without rebuilding, mount them:
+    # volumes:
+    #   - ./manifests:/app/manifests:ro

@@ -1,0 +1,127 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Text;
+using VAdvantage.Logging;
+using VAdvantage.Utility;
+
+namespace VAdvantage.Controller
+{
+    public class GridTabPanelVO
+    {
+
+        /** Context - replicated    */
+        private Ctx ctx;
+        /** Window No - replicated  */
+        public int windowNo;
+        /**	Tab	ID			*/
+        public int AD_Tab_ID;
+        /**          */
+        public string Name;
+        /**       */
+        public int SeqNo;
+        /**       */
+        public string IconPath;
+        /***      **/
+        public bool IsDefault;
+        /**         */
+        public string Classname;
+        /**       ***/
+        public int AD_TabPanel_ID;
+
+        /**       ***/
+        public string ExtraInfo;
+
+        public string TabPanelAlignment = "V";
+
+
+
+
+        /// <summary>
+        /// Construtor
+        /// </summary>
+        /// <param name="newCtx">context</param>
+        /// <param name="windowNo">window number</param>
+        private GridTabPanelVO(Ctx newCtx, int windowNm)
+        {
+            ctx = newCtx;
+            windowNo = windowNm;
+        }   //  MTabVO
+
+        public GridTabPanelVO(Ctx newCtx, int windowNm, int AD_Tab_ID)
+        {
+            ctx = newCtx;
+            windowNo = windowNm;
+            this.AD_Tab_ID = AD_Tab_ID;
+        }
+
+
+        /// <summary>
+        ///Return the SQL statement used for the MTabVO.create
+        /// </summary>
+        /// <param name="ctx"></param>
+        /// <param name="AD_UserDef_Win_ID"></param>
+        /// <returns></returns>
+        public static String GetSQL(Ctx ctx)
+        {
+            //  View only returns IsActive='Y'
+            String sql = "SELECT panel.ClassName, panel.Name, panel.IconPath, panel.IsDefault, panel.SeqNo, panel.AD_TabPanel_ID, panel.AD_Tab_ID, panel.ExtraInfo, panel.TabPanelAlignment FROM AD_TabPanel panel WHERE panel.AD_Tab_ID =@tabID ";
+            if (!Env.IsBaseLanguage(ctx, "AD_Window"))
+            {
+                sql = "SELECT panel.ClassName, trl.Name, panel.IconPath, panel.IsDefault, panel.SeqNo, panel.AD_TabPanel_ID, panel.AD_Tab_ID, panel.ExtraInfo, panel.TabPanelAlignment FROM AD_TabPanel panel JOIN AD_TabPanel_Trl  trl ON panel.AD_TabPanel_ID=trl.AD_TabPanel_ID "
+                    + " WHERE panel.AD_Tab_ID =@tabID AND trl.AD_Language='" + Env.GetAD_Language(ctx) + "'";
+            }
+            // vis0008 change done to show tab panles created in System and login tenant only
+            sql += " AND panel.AD_Client_ID IN (0, " + ctx.GetAD_Client_ID() + ") AND panel.IsActive='Y' ORDER BY panel.SeqNo, panel.AD_TabPanel_ID ASC";
+            return sql;
+        }
+
+
+        /// <summary>
+        ///  Create Field Value Object
+        /// </summary>
+        /// <param name="ctx">context</param>
+        /// <param name="AD_Tab_ID">Tab Id</param>
+        /// <param name="AD_TabPanel_ID">Tab Panel ID</param>
+        /// <param name="dr">datarow</param>
+        /// <returns>object of this Class</returns>
+        public static GridTabPanelVO Create(Ctx ctx, int windowNo, int AD_Tab_ID, IDataReader dr)
+        {
+            GridTabPanelVO vo = new GridTabPanelVO(ctx, windowNo, AD_Tab_ID);
+            try
+            {
+                vo.AD_Tab_ID = Convert.ToInt32(dr["AD_Tab_ID"]);
+                vo.AD_TabPanel_ID = Convert.ToInt32(dr["AD_TabPanel_ID"]);
+                vo.Classname = dr["ClassName"].ToString();
+                vo.IconPath = dr["IconPath"].ToString();
+                vo.IsDefault = dr["IsDefault"].Equals("Y") ? true : false;
+                vo.Name = dr["Name"].ToString();
+                vo.SeqNo = Convert.ToInt32(dr["Seqno"]);
+                vo.ExtraInfo = dr["ExtraInfo"].ToString();
+                vo.TabPanelAlignment = dr["TabPanelAlignment"].ToString();
+            }
+            catch (Exception ex)
+            {
+                VLogger.Get().Log(Level.SEVERE, "Exception while getting Tab Pabel info for Tab =" + AD_Tab_ID, ex);
+                return null;
+            }
+            return vo;
+        }
+
+
+        public GridTabPanelVO Clone(Ctx newCtx, int windowNo)
+        {
+            GridTabPanelVO clone = new GridTabPanelVO(newCtx, windowNo, AD_Tab_ID);
+            clone.AD_TabPanel_ID = AD_TabPanel_ID;
+            clone.Classname = Classname;
+            clone.IconPath = IconPath;
+            clone.IsDefault = IsDefault;
+            clone.Name = Name;
+            clone.SeqNo = SeqNo;
+            clone.ExtraInfo = ExtraInfo;
+            clone.TabPanelAlignment = TabPanelAlignment;
+            return clone;
+        }
+    }
+}

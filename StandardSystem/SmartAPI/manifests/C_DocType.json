@@ -1,0 +1,31 @@
+{
+  "entity": "DocType",
+  "table": "C_DocType",
+  "pk": "C_DocType_ID",
+  "key": { "api": "key", "column": "Name", "label": "Document Type Name" },
+  "identifierColumns": ["Name", "Value"],
+  "includeStandardCols": true,
+
+  "_note": "Document type = C_DocType (keyed by Name; this is the value resolved by 'docType' refs elsewhere). DocBaseType (NN) selects the base behaviour; GL_Category (NN) is required.",
+
+  "fields": [
+    { "api": "key",         "column": "Name",  "type": "string", "required": true, "isKey": true, "maxLen": 60 },
+    { "api": "value",       "column": "Value", "type": "string", "maxLen": 30, "help": "optional search key" },
+
+    { "api": "docBaseType", "column": "DocBaseType", "type": "list", "required": true,
+      "list": { "Sales Order": "SOO", "Purchase Order": "POO", "AR Invoice": "ARI", "AP Invoice": "API",
+                "AR Credit Memo": "ARC", "AP Credit Memo": "APC", "AR Receipt": "ARR", "AP Payment": "APP",
+                "Material Shipment": "MMS", "Material Receipt": "MMR", "Material Movement": "MMM",
+                "Physical Inventory": "MMI", "GL Journal": "GLJ", "GL Document": "GLD" } },
+
+    { "api": "isSOTrx",        "column": "IsSOTrx",        "type": "boolean", "default": false },
+    { "api": "documentCopies", "column": "DocumentCopies", "type": "number",  "default": 1 },
+    { "api": "hasCharges",     "column": "HasCharges",     "type": "boolean", "default": false },
+    { "api": "isDefault",      "column": "IsDefault",      "type": "boolean", "default": false },
+    { "api": "isActive",       "column": "IsActive",       "type": "boolean", "default": true },
+
+    { "api": "glCategory", "column": "GL_Category_ID", "type": "ref", "required": true,
+      "ref": { "table": "GL_Category", "matchOn": "Name", "returns": "GL_Category_ID" },
+      "help": "posting category (NN)" }
+  ]
+}

@@ -1,0 +1,168 @@
+﻿/********************************************************
+    * Project Name   : VAdvantage
+    * Class Name     : UserPassword
+    * Purpose        : Reset Password
+    * Class Used     : SvrProcess
+    * Chronological    Development
+    * Karan            24-May-2011
+******************************************************/
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using VAdvantage.Common;
+using VAdvantage.DataBase;
+using VAdvantage.Process;
+using VAdvantage.Classes;
+using VAdvantage.Model;
+using VAdvantage.Utility;
+using VAdvantage.ProcessEngine;
+using System.Reflection;
+using VAdvantage.Logging;
+using System.Data;
+using System.Dynamic;
+
+
+namespace VAdvantage.Process
+{
+    public class UserPassword : SvrProcess
+    {
+        private int p_AD_User_ID = -1;
+        private String p_OldPassword = null;
+        private String p_CurrentPassword = null;
+        private String p_NewPassword = null;
+        private String p_NewEMail = null;
+        private String p_NewEMailUser = null;
+        private String p_NewEMailUserPW = null;
+
+        protected override void Prepare()
+        {
+            ProcessInfoParameter[] para = GetParameter();
+            for (int i = 0; i <= para.Length - 1; i++)
+            {
+                String name = para[i].GetParameterName();
+                if (para[i].GetParameter() == null)
+                {
+                }
+                else if (name.Equals("AD_User_ID"))
+                    p_AD_User_ID = para[i].GetParameterAsInt();
+                else if (name.Equals("OldPassword"))
+                    p_OldPassword = para[i].GetParameter().ToString();
+                else if (name.Equals("CurrentPassword"))
+                    p_CurrentPassword = para[i].GetParameter().ToString();
+                else if (name.Equals("NewPassword"))
+                    p_NewPassword = para[i].GetParameter().ToString();
+                else if (name.Equals("NewEMail"))
+                    p_NewEMail = para[i].GetParameter().ToString();
+                else if (name.Equals("NewEMailUser"))
+                    p_NewEMailUser = para[i].GetParameter().ToString();
+                else if (name.Equals("NewEMailUserPW"))
+                    p_NewEMailUserPW = para[i].GetParameter().ToString();
+
+            }
+        }
+
+        protected override string DoIt()
+        {
+            VLogger log = VLogger.GetVLogger(this.GetType().FullName);
+            log.Log(Level.SEVERE, "UserPassword Change Log=>" + Convert.ToString(p_AD_User_ID));
+            if (p_AD_User_ID == -1)
+                p_AD_User_ID = GetAD_User_ID();
+
+            MUser user = MUser.Get(GetCtx(), p_AD_User_ID);
+            MUser current = MUser.Get(GetCtx(), GetAD_User_ID());
+             
+            //Get Uncashed value of IsEncrypted and IsHashed pf password column
+            DataSet ds = DB.ExecuteDataset("SELECT IsEncrypted,IsHashed from AD_Column WHERE AD_Column_ID=" + 417);
+            dynamic column = new ExpandoObject();
+            column.IsEncrypted = Util.GetValueOfString(ds.Tables[0].Rows[0]["IsEncrypted"]) == "Y";
+            column.IsHashed = Util.GetValueOfString(ds.Tables[0].Rows[0]["IsHashed"]) == "Y";
+
+
+            if (!current.IsAdministrator() && p_AD_User_ID != GetAD_User_ID() && user.HasRole())
+                throw new ArgumentException("@UserCannotUpdate@");
+
+            // SuperUser and System passwords can only be updated by themselves
+            if (user.IsSystemAdministrator() && p_AD_User_ID != GetAD_User_ID() && GetAD_User_ID() != 100)
+                throw new ArgumentException("@UserCannotUpdate@");
+
+            log.Log(Level.SEVERE, "UserPassword Change Log Step Check for valid user=>" + Convert.ToString(p_AD_User_ID));
+            if (string.IsNullOrEmpty(p_CurrentPassword))
+            {
+                if (string.IsNullOrEmpty(p_OldPassword))
+                    throw new ArgumentException("@OldPasswordMandatory@");
+                else if (!p_OldPassword.Equals(user.GetPassword()))
+                {
+                    if (column.IsEncrypted && !SecureEngine.Encrypt(p_OldPassword).Equals(user.GetPassword()))
+                    {
+                        throw new ArgumentException("@OldPasswordNoMatch@");
+                    }
+
+                    else if (column.IsHashed && !SecureEngine.VerifyHash(p_OldPassword, user.GetPassword(), null))
+                    {
+                        throw new ArgumentException("@OldPasswordNoMatch@");
+                    }
+                }
+            }
+
+            else if (!p_CurrentPassword.Equals(current.GetPassword()))
+            {
+                if (column.IsHashed && SecureEngine.VerifyHash(p_CurrentPassword, current.GetPassword(), null))
+                {
+                    ;
+                }
+                else
+                    throw new ArgumentException("@OldPasswordNoMatch@");
+            }
+                
+
+            string validatePwd = Common.Common.ValidatePassword(null, p_NewPassword, p_NewPassword);
+            if (validatePwd.Length > 0)
+                throw new ArgumentException(Msg.GetMsg(GetCtx(), validatePwd));
+
+            log.Log(Level.SEVERE, "UserPassword Change Log Step Password Change=>" + Convert.ToString(p_AD_User_ID));
+            String originalPwd = p_NewPassword;
+
+            // VIS0060: Work done to set Last Password Updated on date when user changed the password.
+            String sql = "UPDATE AD_User SET Updated=SYSDATE, LastPwdUpdatedOn=SYSDATE, FailedloginCount=0, UpdatedBy=" + GetAD_User_ID();
+            if (user.GetAD_User_ID() == current.GetAD_User_ID())
+            {
+                Common.Common.UpdatePasswordAndValidity(p_NewPassword, p_AD_User_ID, GetAD_User_ID(), -1, GetCtx());
+            }
+            else
+            { //reset other user password
+                sql += ", PasswordExpireOn = null";
+                if (!string.IsNullOrEmpty(p_NewPassword))
+                {
+                    if (column.IsEncrypted)
+                        p_NewPassword = SecureEngine.Encrypt(p_NewPassword);
+                    else if(column.IsHashed)
+                        p_NewPassword = SecureEngine.ComputeHash(p_NewPassword);
+
+                    sql += ", Password=" + GlobalVariable.TO_STRING(p_NewPassword);
+                }
+            }
+            
+            if (!string.IsNullOrEmpty(p_NewEMail))
+                sql += ", Email=" + GlobalVariable.TO_STRING(p_NewEMail);
+            if (!string.IsNullOrEmpty(p_NewEMailUser))
+                sql += ", EmailUser=" + GlobalVariable.TO_STRING(p_NewEMailUser);
+            if (!string.IsNullOrEmpty(p_NewEMailUserPW))
+                sql += ", EmailUserPW=" + GlobalVariable.TO_STRING(p_NewEMailUserPW);
+            sql += " WHERE AD_User_ID=" + p_AD_User_ID;
+            log.Log(Level.SEVERE, "UserPassword Change Log=>" + sql);
+            int iRes = DB.ExecuteQuery(sql, null, Get_Trx());
+            if (iRes > 0)
+            {
+                // VIS0008 Send Disconnect request to connected users on mobile app
+                PushNotif.PushNotification.SendNotificationToUser(p_AD_User_ID, 0, 0,
+                    Msg.GetMsg(GetCtx(), "VA074_DisconnectDevices"),
+                    Msg.GetMsg(GetCtx(), "VA074_DisconnectDevices"), "DIS");
+                return "@OK@";
+            }
+            else
+                return "@Error@";
+
+        }
+    }
+}

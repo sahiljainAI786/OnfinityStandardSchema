@@ -1,0 +1,29 @@
+{
+  "entity": "EmployeeWorkInfo",
+  "table": "VA058_EmpWorkInfo",
+  "pk": "VA058_EmpWorkInfo_ID",
+  "key": { "api": "key", "column": "Value", "label": "Search Key" },
+  "keyScope": ["businessPartner"],
+  "includeStandardCols": true,
+  "_note": "Employee work / assignment info (VA058). Anchored to an employee (businessPartner). assignmentStatus + startDate + primary are NN.",
+  "fields": [
+    { "api": "key", "column": "Value", "type": "string", "required": true, "isKey": true, "maxLen": 30, "help": "caller's assignment reference" },
+    { "api": "businessPartner", "column": "C_BPartner_ID", "type": "ref", "required": true,
+      "ref": { "table": "C_BPartner", "matchOn": "Value", "returns": "C_BPartner_ID" } },
+    { "api": "startDate", "column": "VA058_StartDate", "type": "string", "required": true, "help": "ISO date (NN)" },
+    { "api": "endDate", "column": "VA058_EndDate", "type": "string", "help": "ISO date" },
+    { "api": "primary", "column": "VA058_PrimaryFlag", "type": "boolean", "required": true, "default": true },
+    { "api": "assignmentStatus", "column": "VA058_AssgStatus", "type": "list", "required": true,
+      "list": { "Confirmed": "A", "Retirement": "B", "Retrenchment": "C", "Salary On Hold": "H",
+                "Probation": "P", "Resignation": "R", "Suspended": "S", "Terminate": "T" } },
+    { "api": "department", "column": "VA058_Department_ID", "type": "ref",
+      "ref": { "table": "VA058_Department", "matchOn": "Value", "returns": "VA058_Department_ID" } },
+    { "api": "position", "column": "VA058_Position_ID", "type": "ref",
+      "ref": { "table": "VA058_Position", "matchOn": "Value", "returns": "VA058_Position_ID" } },
+    { "api": "job", "column": "VA058_Job_ID", "type": "ref",
+      "ref": { "table": "VA058_Job", "matchOn": "Value", "returns": "VA058_Job_ID" } },
+    { "api": "grade", "column": "VA058_Grade_ID", "type": "ref",
+      "ref": { "table": "VA058_Grade", "matchOn": "Value", "returns": "VA058_Grade_ID" } },
+    { "api": "isActive", "column": "IsActive", "type": "boolean", "default": true }
+  ]
+}

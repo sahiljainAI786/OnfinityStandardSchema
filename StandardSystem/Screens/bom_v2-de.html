@@ -1,0 +1,2144 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stückliste — Aura ERP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg-blue: #DCEEFF;
+  --bg-green: #E4F2DE;
+  --card-blue: #EAF4FF;
+  --card-green: #EAF5E2;
+  --card-white: #FFFFFF;
+  --text-dark: #1A2332;
+  --text-muted: #5C6B7F;
+  --text-light: #8A98AB;
+  --accent-blue: #1A8FE3;
+  --accent-teal: #0FB58F;
+  --accent-red: #FF3B30;
+  --accent-pink: #E94B7B;
+  --accent-amber: #F5A524;
+  --accent-purple: #8B7FE8;
+  --border-soft: rgba(26, 35, 50, 0.06);
+  --border-medium: rgba(26, 35, 50, 0.1);
+  --shadow-card: 0 1px 3px rgba(26, 35, 50, 0.04), 0 4px 12px rgba(26, 35, 50, 0.04);
+  --bottom-bar: #0E2545;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--text-dark);
+  background: linear-gradient(135deg, var(--bg-blue) 0%, #E8F0F8 50%, var(--bg-green) 100%);
+  overflow: hidden;
+}
+
+.app { display: flex; height: 100vh; position: relative; }
+
+/* ============ SIDEBAR ============ */
+.sidebar {
+  width: 64px;
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-right: 1px solid rgba(255, 255, 255, 0.6);
+  display: flex; flex-direction: column; align-items: center;
+  padding: 20px 0; gap: 8px; z-index: 10;
+}
+.menu-btn {
+  width: 38px; height: 38px;
+  background: var(--accent-blue); border: none; border-radius: 10px;
+  color: white; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 18px;
+  box-shadow: 0 4px 12px rgba(26, 143, 227, 0.3);
+}
+.expand-arrow {
+  width: 26px; height: 26px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--accent-blue); margin-bottom: 14px; cursor: pointer;
+}
+.sidebar-icon {
+  width: 38px; height: 38px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--accent-blue); cursor: pointer; border-radius: 10px;
+  transition: background 0.15s; position: relative;
+}
+.sidebar-icon:hover { background: rgba(26, 143, 227, 0.1); }
+.sidebar-icon.active::before {
+  content: ''; position: absolute; left: -14px; top: 8px; bottom: 8px;
+  width: 3px; background: var(--accent-blue); border-radius: 0 3px 3px 0;
+}
+.sidebar-bottom { margin-top: auto; display: flex; flex-direction: column; gap: 8px; }
+
+/* ============ MAIN ============ */
+.main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+
+.header {
+  height: 72px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 28px; flex-shrink: 0;
+}
+.header-title h1 {
+  font-size: 22px; font-weight: 700; color: var(--text-dark); letter-spacing: -0.4px;
+}
+.header-title p { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
+.header-right { display: flex; align-items: center; gap: 16px; }
+.header-icon-group {
+  display: flex; background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.9); border-radius: 10px;
+  padding: 6px; gap: 4px; box-shadow: var(--shadow-card);
+}
+.header-icon-btn {
+  width: 32px; height: 32px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 7px; color: var(--accent-blue); cursor: pointer;
+}
+.header-icon-btn:hover { background: rgba(26, 143, 227, 0.1); }
+.user-info { display: flex; align-items: center; gap: 12px; }
+.user-text { text-align: right; }
+.user-text .name { font-size: 14px; font-weight: 600; color: var(--text-dark); }
+.user-text .role { font-size: 12px; color: var(--text-muted); }
+.avatar {
+  width: 42px; height: 42px; border-radius: 50%;
+  background: linear-gradient(135deg, #4A90E2, #357ABD);
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-weight: 600; font-size: 15px;
+  border: 2px solid white; box-shadow: 0 2px 8px rgba(26, 35, 50, 0.12);
+}
+
+.content {
+  flex: 1; overflow-y: auto; padding: 0 28px 80px;
+}
+.content::-webkit-scrollbar { width: 8px; }
+.content::-webkit-scrollbar-track { background: transparent; }
+.content::-webkit-scrollbar-thumb { background: rgba(26, 35, 50, 0.15); border-radius: 4px; }
+
+/* ============ BOM HEADER BAR ============ */
+.bom-header-bar {
+  background: linear-gradient(110deg, rgba(255,255,255,0.75) 0%, rgba(234,244,255,0.8) 55%, rgba(234,245,226,0.6) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 16px;
+  padding: 18px 22px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(8px);
+}
+
+.bom-header-row {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 18px; flex-wrap: wrap;
+}
+
+.bom-header-product {
+  display: flex; align-items: center; gap: 14px;
+  flex: 1; min-width: 0;
+}
+
+.product-icon {
+  width: 56px; height: 56px; flex-shrink: 0;
+  background: linear-gradient(135deg, var(--accent-blue), #1376C5);
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  color: white;
+  box-shadow: 0 4px 12px rgba(26, 143, 227, 0.3);
+}
+
+.product-info { flex: 1; min-width: 0; }
+.product-tagline {
+  font-size: 10px; font-weight: 700;
+  color: var(--accent-blue);
+  text-transform: uppercase; letter-spacing: 0.9px;
+  margin-bottom: 3px;
+}
+.product-title {
+  font-size: 20px; font-weight: 700;
+  color: var(--text-dark);
+  letter-spacing: -0.4px;
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 6px;
+  flex-wrap: wrap;
+}
+.product-meta {
+  display: flex; align-items: center; gap: 14px;
+  font-size: 11px; color: var(--text-muted);
+  flex-wrap: wrap;
+}
+.product-meta-item {
+  display: flex; align-items: center; gap: 5px;
+  font-family: 'SF Mono', Monaco, monospace;
+}
+.product-meta-item strong {
+  color: var(--text-dark); font-weight: 600;
+  font-family: 'Plus Jakarta Sans';
+}
+
+.product-status {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 3px 9px; border-radius: 12px;
+  font-size: 10px; font-weight: 700;
+  background: #DCF3EB; color: #0A5A45;
+  text-transform: uppercase; letter-spacing: 0.4px;
+  font-family: 'Plus Jakarta Sans';
+}
+.product-status .dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--accent-teal);
+}
+
+.pending-changes {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 10px;
+  background: #FFEDD2;
+  color: #6B3D05;
+  border-radius: 12px;
+  font-size: 11px; font-weight: 600;
+}
+.pending-changes .dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent-amber);
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.bom-header-actions {
+  display: flex; align-items: center; gap: 8px;
+  flex-shrink: 0;
+}
+.action-btn {
+  background: white;
+  border: 1px solid var(--border-medium);
+  border-radius: 9px;
+  padding: 9px 14px;
+  font-family: inherit; font-size: 12px; font-weight: 600;
+  color: var(--text-dark); cursor: pointer;
+  display: flex; align-items: center; gap: 6px;
+  white-space: nowrap;
+  transition: all 0.15s;
+}
+.action-btn:hover { background: #F1F4F9; }
+.action-btn.primary {
+  background: linear-gradient(135deg, var(--accent-blue), #1376C5);
+  color: white; border-color: transparent;
+  box-shadow: 0 3px 10px rgba(26, 143, 227, 0.3);
+}
+.action-btn.primary:hover { opacity: 0.92; }
+.action-btn.teal {
+  background: var(--accent-teal); color: white; border-color: var(--accent-teal);
+  box-shadow: 0 3px 10px rgba(15, 181, 143, 0.3);
+}
+
+/* Header detail row */
+.bom-header-detail {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px dashed rgba(26, 35, 50, 0.08);
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 18px;
+}
+.detail-cell { display: flex; flex-direction: column; gap: 3px; }
+.detail-label {
+  font-size: 10px; font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase; letter-spacing: 0.5px;
+}
+.detail-value {
+  font-size: 13px; font-weight: 600;
+  color: var(--text-dark);
+}
+.detail-value.mono {
+  font-family: 'SF Mono', Monaco, monospace;
+  font-size: 12px;
+}
+
+/* ============ KPI ROW ============ */
+.kpi-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 2fr;
+  gap: 16px; margin-bottom: 16px;
+}
+.kpi-card {
+  background: var(--card-white); border-radius: 16px;
+  padding: 18px 22px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: var(--shadow-card);
+  position: relative; overflow: hidden;
+}
+.kpi-card .kpi-label {
+  font-size: 13px; font-weight: 600; color: var(--text-dark); line-height: 1.25;
+}
+.kpi-card .kpi-sub { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+.kpi-value {
+  font-size: 40px; font-weight: 800; letter-spacing: -1.5px;
+  line-height: 1; margin-top: 18px; color: var(--text-dark);
+}
+.kpi-value.teal { color: var(--accent-teal); }
+.kpi-value.amber { color: var(--accent-amber); }
+.kpi-value.red { color: var(--accent-red); }
+
+.kpi-wide {
+  background: linear-gradient(125deg, #E94B7B 0%, #C2185B 100%);
+  color: white;
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: 16px 22px;
+}
+.kpi-wide .kpi-wide-title {
+  font-size: 13px; font-weight: 600; opacity: 0.95; margin-bottom: 14px;
+}
+.kpi-wide-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.kpi-wide-stat .lbl { font-size: 11px; font-weight: 500; opacity: 0.85; margin-bottom: 4px; }
+.kpi-wide-stat .val { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; }
+
+/* ============ MAIN BOM CARD ============ */
+.bom-card {
+  background: var(--card-white);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.bom-card-header {
+  padding: 16px 22px;
+  display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 1px solid var(--border-soft);
+  gap: 16px; flex-wrap: wrap;
+}
+
+.bom-card-header-left {
+  display: flex; align-items: center; gap: 14px;
+  flex-wrap: wrap;
+}
+
+.bom-card-header h3 {
+  font-size: 15px; font-weight: 700; color: var(--text-dark);
+  display: flex; align-items: center; gap: 8px;
+  white-space: nowrap;
+}
+
+.view-toggle {
+  display: flex; background: #F1F4F9; border-radius: 10px; padding: 3px; gap: 2px;
+}
+.view-toggle button {
+  background: transparent; border: none;
+  padding: 7px 12px;
+  font-family: inherit; font-size: 12px; font-weight: 600;
+  color: var(--text-muted);
+  border-radius: 7px; cursor: pointer;
+  display: flex; align-items: center; gap: 5px;
+  white-space: nowrap;
+}
+.view-toggle button.active {
+  background: white; color: var(--text-dark);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+.tree-controls { display: flex; gap: 6px; }
+.tree-ctrl-btn {
+  background: white; border: 1px solid var(--border-medium); border-radius: 7px;
+  padding: 6px 10px;
+  font-family: inherit; font-size: 11px; font-weight: 600;
+  color: var(--text-muted); cursor: pointer;
+  display: flex; align-items: center; gap: 5px;
+}
+.tree-ctrl-btn:hover { background: #F4F7FB; color: var(--text-dark); }
+
+/* Primary "Add Component" toolbar button */
+.add-component-btn {
+  background: linear-gradient(135deg, var(--accent-blue), #1376C5);
+  color: white;
+  border: none;
+  border-radius: 9px;
+  padding: 8px 14px;
+  font-family: inherit; font-size: 12px; font-weight: 700;
+  cursor: pointer;
+  display: flex; align-items: center; gap: 6px;
+  box-shadow: 0 3px 10px rgba(26, 143, 227, 0.3);
+  white-space: nowrap;
+  transition: all 0.15s;
+}
+.add-component-btn:hover { opacity: 0.92; transform: translateY(-1px); }
+.add-component-btn .plus {
+  width: 16px; height: 16px;
+  background: rgba(255,255,255,0.25);
+  border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.bom-card-header-right { display: flex; align-items: center; gap: 8px; }
+
+.search-input {
+  background: #F1F4F9; border: none; border-radius: 8px;
+  padding: 8px 12px 8px 32px;
+  font-family: inherit; font-size: 12px;
+  color: var(--text-dark); width: 200px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%235C6B7F' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: 10px center;
+}
+
+.icon-btn {
+  width: 32px; height: 32px;
+  background: #F1F4F9; border: none; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: var(--text-muted);
+}
+.icon-btn:hover { background: #E5EAF2; color: var(--text-dark); }
+
+/* ============ BOM TABLE ============ */
+.table-wrap { overflow-x: auto; }
+.table-wrap::-webkit-scrollbar { height: 8px; }
+.table-wrap::-webkit-scrollbar-track { background: transparent; }
+.table-wrap::-webkit-scrollbar-thumb { background: rgba(26, 35, 50, 0.15); border-radius: 4px; }
+
+table.bom {
+  width: 100%; min-width: 1280px;
+  border-collapse: collapse; font-size: 13px;
+}
+
+table.bom thead th {
+  text-align: left; padding: 12px 14px;
+  font-size: 10px; font-weight: 700; color: var(--text-muted);
+  text-transform: uppercase; letter-spacing: 0.5px;
+  border-bottom: 1px solid var(--border-soft);
+  background: #FAFBFD; white-space: nowrap;
+  position: sticky; top: 0;
+}
+
+table.bom tbody td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border-soft);
+  vertical-align: middle;
+}
+
+table.bom tbody tr {
+  transition: background 0.12s;
+}
+table.bom tbody tr:hover { background: rgba(220, 238, 255, 0.3); }
+table.bom tbody tr.selected { background: rgba(220, 238, 255, 0.55); }
+
+/* Reveal hover-only "+" button on parent rows */
+table.bom tbody tr .add-child-btn { opacity: 0; transition: opacity 0.15s; }
+table.bom tbody tr:hover .add-child-btn { opacity: 1; }
+
+/* Level styling */
+.level-0 td:first-child { padding-left: 14px; }
+.level-1 td:first-child { padding-left: 38px; }
+.level-2 td:first-child { padding-left: 62px; }
+.level-3 td:first-child { padding-left: 86px; }
+.level-4 td:first-child { padding-left: 110px; }
+
+/* Tree connector lines */
+.tree-cell {
+  position: relative;
+  display: flex; align-items: center; gap: 10px;
+  min-width: 280px;
+}
+
+/* Level number badge */
+.level-badge {
+  width: 22px; height: 22px;
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; font-weight: 700;
+  font-family: 'SF Mono', Monaco, monospace;
+  flex-shrink: 0;
+}
+.level-badge.l0 { background: linear-gradient(135deg, var(--accent-blue), #1376C5); color: white; }
+.level-badge.l1 { background: #DCEEFF; color: var(--accent-blue); }
+.level-badge.l2 { background: #E5E2FA; color: var(--accent-purple); }
+.level-badge.l3 { background: #DCF3EB; color: var(--accent-teal); }
+.level-badge.l4 { background: #FFEDD2; color: #6B3D05; }
+
+/* Toggle chevron */
+.toggle-chev {
+  width: 18px; height: 18px;
+  border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  transition: transform 0.15s, background 0.12s;
+}
+.toggle-chev:hover { background: #E5EAF2; color: var(--text-dark); }
+.toggle-chev.collapsed { transform: rotate(-90deg); }
+.toggle-chev.leaf { visibility: hidden; }
+
+/* Material icon */
+.mat-icon {
+  width: 30px; height: 30px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.mat-icon.assembly { background: #DCEEFF; color: var(--accent-blue); }
+.mat-icon.subassembly { background: #E5E2FA; color: var(--accent-purple); }
+.mat-icon.make { background: #FDE5EE; color: var(--accent-pink); }
+.mat-icon.buy { background: #DCF3EB; color: var(--accent-teal); }
+.mat-icon.raw { background: #FFEDD2; color: #6B3D05; }
+.mat-icon.phantom {
+  background: white;
+  border: 1.5px dashed var(--accent-purple);
+  color: var(--accent-purple);
+}
+
+.mat-info {
+  display: flex; flex-direction: column; line-height: 1.25;
+  min-width: 0;
+}
+.mat-code {
+  font-family: 'SF Mono', Monaco, monospace;
+  font-size: 11px; font-weight: 700; color: var(--text-dark);
+  display: flex; align-items: center; gap: 6px;
+}
+.mat-rev {
+  background: #F1F4F9;
+  padding: 1px 5px; border-radius: 4px;
+  font-size: 9px; color: var(--text-muted);
+  font-family: 'SF Mono', Monaco, monospace;
+}
+.mat-desc {
+  font-size: 12px; color: var(--text-muted); margin-top: 2px;
+  font-weight: 500;
+}
+
+/* Phantom indicator */
+.phantom-tag {
+  display: inline-flex; align-items: center;
+  padding: 1px 5px; border-radius: 4px;
+  font-size: 9px; font-weight: 700;
+  background: #E5E2FA; color: #2E2966;
+  letter-spacing: 0.4px;
+  margin-left: 6px;
+}
+
+/* Type badge */
+.type-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 3px 8px; border-radius: 6px;
+  font-size: 10px; font-weight: 700;
+  white-space: nowrap;
+  letter-spacing: 0.3px;
+}
+.type-badge.fg { background: #DCEEFF; color: #0E3F66; }
+.type-badge.sa { background: #E5E2FA; color: #2E2966; }
+.type-badge.mk { background: #FDE5EE; color: #8C1A45; }
+.type-badge.bp { background: #DCF3EB; color: #0A5A45; }
+.type-badge.rm { background: #FFEDD2; color: #6B3D05; }
+
+/* Editable cells */
+.cell-input {
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-family: 'SF Mono', Monaco, monospace;
+  font-size: 12px; font-weight: 600;
+  color: var(--text-dark);
+  width: 70px;
+  text-align: right;
+  transition: all 0.12s;
+}
+.cell-input:hover {
+  background: #F4F7FB;
+  border-color: var(--border-medium);
+}
+.cell-input:focus {
+  outline: none;
+  background: white;
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 3px rgba(26, 143, 227, 0.12);
+}
+
+.unit-text {
+  display: inline-block;
+  font-size: 10px; color: var(--text-muted);
+  margin-left: 3px;
+  font-weight: 500;
+  font-family: 'Plus Jakarta Sans';
+}
+
+.scrap-input {
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  padding: 4px 6px;
+  font-family: 'SF Mono', Monaco, monospace;
+  font-size: 12px; font-weight: 500;
+  color: var(--text-dark);
+  width: 50px;
+  text-align: right;
+  transition: all 0.12s;
+}
+.scrap-input:hover { background: #F4F7FB; border-color: var(--border-medium); }
+.scrap-input:focus {
+  outline: none; background: white;
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 3px rgba(26, 143, 227, 0.12);
+}
+
+.scrap-pct {
+  display: inline-flex; align-items: center; gap: 1px;
+}
+.scrap-pct .pct-sym { color: var(--text-muted); font-size: 11px; }
+
+/* UoM selector */
+.uom-select {
+  background: transparent; border: 1px solid transparent;
+  border-radius: 6px;
+  padding: 4px 22px 4px 8px;
+  font-family: inherit; font-size: 11px; font-weight: 600;
+  color: var(--text-dark);
+  cursor: pointer; appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%235C6B7F' stroke-width='2.5' stroke-linecap='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 6px center;
+}
+.uom-select:hover { background-color: #F4F7FB; border-color: var(--border-medium); }
+
+/* Operation reference */
+.op-ref {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 3px 8px;
+  background: rgba(26, 143, 227, 0.08);
+  border-radius: 6px;
+  font-size: 11px; font-weight: 600;
+  color: var(--accent-blue);
+}
+.op-ref .op-num {
+  font-family: 'SF Mono', Monaco, monospace;
+  background: rgba(26, 143, 227, 0.18);
+  padding: 0 4px; border-radius: 3px;
+  font-size: 10px;
+}
+
+/* Source */
+.source-cell { display: flex; align-items: center; gap: 7px; }
+.source-avatar {
+  width: 22px; height: 22px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 9px; font-weight: 700; color: white;
+  flex-shrink: 0;
+}
+.source-name { font-size: 12px; font-weight: 500; color: var(--text-dark); }
+
+/* Cost cell */
+.cost-cell {
+  text-align: right;
+  font-family: 'SF Mono', Monaco, monospace;
+  font-weight: 600; font-size: 13px;
+  color: var(--text-dark);
+}
+.cost-cell.rolled { color: var(--accent-blue); }
+.cost-sub {
+  display: block; font-size: 9px;
+  color: var(--text-muted); font-weight: 500;
+  margin-top: 1px;
+  font-family: 'Plus Jakarta Sans';
+}
+
+/* Status indicators */
+.eco-flag {
+  display: inline-flex; align-items: center; gap: 3px;
+  padding: 2px 6px; border-radius: 5px;
+  font-size: 9px; font-weight: 700;
+  background: #FFEDD2; color: #6B3D05;
+  letter-spacing: 0.3px;
+  margin-left: 6px;
+}
+
+/* Row actions */
+.row-actions { display: flex; gap: 3px; justify-content: flex-end; align-items: center; }
+.row-action-btn {
+  width: 26px; height: 26px;
+  background: transparent; border: none;
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: var(--text-muted);
+}
+.row-action-btn:hover { background: #F1F4F9; color: var(--accent-blue); }
+.row-action-btn.danger:hover { background: #FFE0DC; color: var(--accent-red); }
+.row-action-btn.add-child-btn {
+  background: rgba(26, 143, 227, 0.1);
+  color: var(--accent-blue);
+}
+.row-action-btn.add-child-btn:hover {
+  background: var(--accent-blue);
+  color: white;
+}
+
+/* Add child row (inline at end of each parent's children) */
+.add-row-inline { cursor: pointer; }
+.add-row-inline td {
+  padding: 8px 14px;
+  background: #FAFBFD;
+  transition: background 0.12s;
+}
+.add-row-inline:hover td { background: #EAF4FF; }
+
+.add-row-content {
+  display: flex; align-items: center; gap: 10px;
+  color: var(--accent-blue);
+  font-size: 12px; font-weight: 600;
+}
+.add-row-icon {
+  width: 22px; height: 22px;
+  border-radius: 6px;
+  background: rgba(26, 143, 227, 0.12);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.15s;
+}
+.add-row-inline:hover .add-row-icon {
+  background: var(--accent-blue);
+  color: white;
+}
+.add-row-content .parent-link {
+  color: var(--text-muted);
+  font-weight: 500;
+  font-size: 11px;
+}
+.add-row-content .parent-name {
+  color: var(--text-dark);
+  font-weight: 700;
+  font-family: 'SF Mono', Monaco, monospace;
+  font-size: 11px;
+  background: #F1F4F9;
+  padding: 1px 5px;
+  border-radius: 4px;
+  margin-left: 2px;
+}
+
+/* Indentation for add rows matches the LEVEL OF THE NEW CHILD they create */
+.add-row-inline.add-l1 .add-row-content { padding-left: 24px; }
+.add-row-inline.add-l2 .add-row-content { padding-left: 48px; }
+.add-row-inline.add-l3 .add-row-content { padding-left: 72px; }
+.add-row-inline.add-l4 .add-row-content { padding-left: 96px; }
+
+/* Hidden rows (collapsed) */
+.row-hidden { display: none; }
+
+/* Footer */
+.bom-footer {
+  padding: 12px 22px;
+  display: flex; align-items: center; justify-content: space-between;
+  border-top: 1px solid var(--border-soft);
+  background: #FAFBFD;
+  font-size: 12px; color: var(--text-muted);
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.bom-footer-left { display: flex; align-items: center; gap: 16px; }
+.bom-footer-right { display: flex; align-items: center; gap: 12px; }
+.cost-total {
+  font-size: 13px; font-weight: 600; color: var(--text-dark);
+}
+.cost-total .amt {
+  font-family: 'SF Mono', Monaco, monospace; font-weight: 700;
+  color: var(--accent-blue);
+  font-size: 15px;
+  margin-left: 6px;
+}
+
+/* ============ ADD COMPONENT MODAL ============ */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(14, 37, 69, 0.55);
+  backdrop-filter: blur(6px);
+  display: none;
+  align-items: center; justify-content: center;
+  z-index: 100;
+  padding: 20px;
+}
+.modal-overlay.open { display: flex; }
+.modal {
+  background: white;
+  border-radius: 18px;
+  width: 100%;
+  max-width: 620px;
+  max-height: 88vh;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 24px 70px rgba(14, 37, 69, 0.4);
+}
+.modal-header {
+  padding: 18px 22px;
+  border-bottom: 1px solid var(--border-soft);
+  display: flex; align-items: center; gap: 12px;
+  background: linear-gradient(110deg, rgba(220, 238, 255, 0.5), rgba(220, 238, 255, 0.15));
+}
+.modal-icon {
+  width: 40px; height: 40px;
+  background: linear-gradient(135deg, var(--accent-blue), #1376C5);
+  border-radius: 11px;
+  display: flex; align-items: center; justify-content: center;
+  color: white; flex-shrink: 0;
+  box-shadow: 0 3px 10px rgba(26, 143, 227, 0.3);
+}
+.modal-title-block { flex: 1; }
+.modal-title {
+  font-size: 17px; font-weight: 700; color: var(--text-dark);
+  letter-spacing: -0.2px;
+}
+.modal-subtitle {
+  font-size: 12px; color: var(--text-muted);
+  margin-top: 2px;
+}
+.modal-close {
+  width: 32px; height: 32px;
+  background: white; border: 1px solid var(--border-medium); border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: var(--text-muted);
+}
+.modal-close:hover { background: #F1F4F9; color: var(--text-dark); }
+
+.modal-body {
+  padding: 20px 22px;
+  flex: 1;
+  overflow-y: auto;
+  display: flex; flex-direction: column; gap: 16px;
+}
+.modal-body::-webkit-scrollbar { width: 6px; }
+.modal-body::-webkit-scrollbar-thumb { background: rgba(26, 35, 50, 0.15); border-radius: 3px; }
+
+.field-group { display: flex; flex-direction: column; gap: 6px; }
+.field-label {
+  font-size: 11px; font-weight: 700; color: var(--text-dark);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.field-label .required { color: var(--accent-red); margin-left: 3px; }
+.field-label .hint {
+  font-weight: 500; color: var(--text-muted);
+  font-size: 10px;
+}
+
+/* Tree-style parent select */
+.parent-select-wrap {
+  position: relative;
+}
+.parent-select {
+  background: #FAFBFD;
+  border: 1.5px solid var(--border-medium);
+  border-radius: 10px;
+  padding: 10px 36px 10px 12px;
+  font-family: inherit; font-size: 12px; font-weight: 600;
+  color: var(--text-dark);
+  cursor: pointer; appearance: none;
+  width: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%235C6B7F' stroke-width='2.5' stroke-linecap='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+}
+.parent-select:focus {
+  outline: none; border-color: var(--accent-blue);
+  background-color: white;
+  box-shadow: 0 0 0 3px rgba(26, 143, 227, 0.12);
+}
+
+.parent-path {
+  display: flex; align-items: center; gap: 6px;
+  padding: 8px 12px;
+  background: #EAF4FF;
+  border: 1px solid rgba(26, 143, 227, 0.2);
+  border-radius: 9px;
+  font-size: 11px;
+  font-family: 'SF Mono', Monaco, monospace;
+  color: var(--text-dark);
+  flex-wrap: wrap;
+}
+.parent-path-segment {
+  background: white;
+  padding: 2px 7px;
+  border-radius: 5px;
+  font-weight: 600;
+  border: 1px solid var(--border-soft);
+}
+.parent-path-arrow { color: var(--text-light); }
+.parent-path-current {
+  background: var(--accent-blue);
+  color: white;
+  padding: 2px 7px;
+  border-radius: 5px;
+  font-weight: 700;
+}
+
+/* Component search */
+.search-field {
+  position: relative;
+}
+.search-field input {
+  width: 100%;
+  background: #FAFBFD;
+  border: 1.5px solid var(--border-medium);
+  border-radius: 10px;
+  padding: 10px 12px 10px 38px;
+  font-family: inherit; font-size: 13px;
+  color: var(--text-dark);
+}
+.search-field input:focus {
+  outline: none; border-color: var(--accent-blue);
+  background: white;
+  box-shadow: 0 0 0 3px rgba(26, 143, 227, 0.12);
+}
+.search-field-icon {
+  position: absolute;
+  left: 12px; top: 50%; transform: translateY(-50%);
+  color: var(--text-muted);
+}
+
+/* Component result list */
+.component-results {
+  display: flex; flex-direction: column;
+  border: 1px solid var(--border-medium);
+  border-radius: 10px;
+  max-height: 180px; overflow-y: auto;
+  background: white;
+}
+.component-result {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border-soft);
+  cursor: pointer;
+  transition: background 0.12s;
+}
+.component-result:last-child { border-bottom: none; }
+.component-result:hover { background: #F4F7FB; }
+.component-result.selected { background: #EAF4FF; }
+.component-result-icon {
+  width: 28px; height: 28px; border-radius: 7px;
+  background: #DCF3EB; color: var(--accent-teal);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.component-result-icon.make { background: #FDE5EE; color: var(--accent-pink); }
+.component-result-icon.raw { background: #FFEDD2; color: #6B3D05; }
+.component-result-info { flex: 1; min-width: 0; }
+.component-result-code {
+  font-family: 'SF Mono', Monaco, monospace;
+  font-size: 11px; font-weight: 700; color: var(--text-dark);
+}
+.component-result-desc {
+  font-size: 11px; color: var(--text-muted);
+  margin-top: 1px;
+}
+.component-result-meta {
+  font-size: 10px; color: var(--text-muted);
+  font-family: 'SF Mono', Monaco, monospace;
+}
+
+/* Type chooser */
+.type-chooser {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px;
+}
+.type-chip {
+  padding: 8px 6px;
+  background: #FAFBFD;
+  border: 1.5px solid var(--border-medium);
+  border-radius: 8px;
+  font-size: 10px; font-weight: 700;
+  color: var(--text-muted);
+  cursor: pointer; text-align: center;
+  letter-spacing: 0.3px;
+  transition: all 0.12s;
+}
+.type-chip:hover { background: white; border-color: var(--accent-blue); }
+.type-chip.active { color: white; }
+.type-chip.active[data-type="bom"] { background: var(--accent-teal); border-color: var(--accent-teal); }
+.type-chip.active[data-type="make"] { background: var(--accent-pink); border-color: var(--accent-pink); }
+.type-chip.active[data-type="rm"] { background: var(--accent-amber); border-color: var(--accent-amber); }
+.type-chip.active[data-type="sa"] { background: var(--accent-purple); border-color: var(--accent-purple); }
+.type-chip.active[data-type="ph"] { background: white; border-color: var(--accent-purple); color: var(--accent-purple); border-style: dashed; }
+
+/* 3-column grid for qty/uom/scrap */
+.three-col { display: grid; grid-template-columns: 1.4fr 1fr 0.9fr; gap: 10px; }
+
+.text-input, .num-input, .select-input {
+  background: #FAFBFD;
+  border: 1.5px solid var(--border-medium);
+  border-radius: 9px;
+  padding: 9px 12px;
+  font-family: inherit; font-size: 13px; font-weight: 600;
+  color: var(--text-dark);
+  width: 100%;
+}
+.num-input {
+  font-family: 'SF Mono', Monaco, monospace;
+  text-align: right;
+  font-weight: 700;
+}
+.text-input:focus, .num-input:focus, .select-input:focus {
+  outline: none; border-color: var(--accent-blue);
+  background: white;
+  box-shadow: 0 0 0 3px rgba(26, 143, 227, 0.12);
+}
+.select-input {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%235C6B7F' stroke-width='2.5' stroke-linecap='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 32px;
+  cursor: pointer;
+}
+
+.modal-footer {
+  padding: 14px 22px;
+  border-top: 1px solid var(--border-soft);
+  display: flex; align-items: center; gap: 8px; justify-content: space-between;
+  background: #FAFBFD;
+}
+.modal-footer-left {
+  font-size: 11px; color: var(--text-muted);
+  display: flex; align-items: center; gap: 6px;
+}
+.modal-footer-actions { display: flex; gap: 8px; }
+.modal-btn {
+  background: white; border: 1px solid var(--border-medium); border-radius: 9px;
+  padding: 9px 16px;
+  font-family: inherit; font-size: 13px; font-weight: 600;
+  color: var(--text-dark); cursor: pointer;
+  display: flex; align-items: center; gap: 5px;
+}
+.modal-btn:hover { background: #F1F4F9; }
+.modal-btn.primary {
+  background: linear-gradient(135deg, var(--accent-blue), #1376C5);
+  color: white; border-color: transparent;
+  box-shadow: 0 3px 10px rgba(26, 143, 227, 0.3);
+}
+.modal-btn.teal {
+  background: var(--accent-teal); color: white; border-color: var(--accent-teal);
+  box-shadow: 0 3px 10px rgba(15, 181, 143, 0.3);
+}
+
+/* ============ BOTTOM BAR ============ */
+.bottom-bar {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: 44px;
+  background: var(--bottom-bar);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 16px 0 76px;
+  z-index: 50;
+}
+.bottom-left { display: flex; align-items: center; gap: 14px; }
+.bottom-home {
+  width: 32px; height: 32px; background: white; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--accent-blue); cursor: pointer;
+}
+.bottom-breadcrumb { font-size: 12px; color: rgba(255,255,255,0.7); }
+.bottom-breadcrumb strong { color: white; font-weight: 600; margin: 0 4px; }
+.bottom-right { display: flex; align-items: center; gap: 10px; }
+.aura-input {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.6);
+  padding: 7px 14px; border-radius: 18px;
+  font-family: inherit; font-size: 12px; width: 220px;
+}
+.aura-input::placeholder { color: rgba(255,255,255,0.5); }
+.aura-bot {
+  width: 30px; height: 30px;
+  background: linear-gradient(135deg, #4FC3F7, #29B6F6);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+.aura-logo {
+  width: 30px; height: 30px;
+  background: linear-gradient(135deg, #66BB6A, #43A047);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-weight: 800; font-size: 13px;
+}
+
+svg { display: block; }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="sidebar">
+    <button class="menu-btn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+    <div class="expand-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg></div>
+    <div class="sidebar-icon" title="Fertigung"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></div>
+    <div class="sidebar-icon" title="Bedarfsplanung"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg></div>
+    <div class="sidebar-icon active" title="Stückliste"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div>
+    <div class="sidebar-icon" title="Kalender"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+    <div class="sidebar-icon" title="Lieferanten"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+    <div class="sidebar-bottom">
+      <div class="sidebar-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+      <div class="sidebar-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="header">
+      <div class="header-title">
+        <h1>Stückliste</h1>
+        <p>Mehrstufiger Stücklisten-Editor — Produktstrukturen anzeigen, bearbeiten und versionieren</p>
+      </div>
+      <div class="header-right">
+        <div class="header-icon-group">
+          <div class="header-icon-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg></div>
+          <div class="header-icon-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+        </div>
+        <div class="user-info">
+          <div class="user-text">
+            <div class="name">Thomas Weber</div>
+            <div class="role">Fertigungsplaner</div>
+          </div>
+          <div class="avatar">TW</div>
+        </div>
+      </div>
+    </header>
+
+    <div class="content">
+
+      <!-- BOM HEADER BAR -->
+      <div class="bom-header-bar">
+        <div class="bom-header-row">
+          <div class="bom-header-product">
+            <div class="product-icon">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+            </div>
+            <div class="product-info">
+              <div class="product-tagline">Produkt-Stückliste · Konstruktionsstammdaten</div>
+              <div class="product-title">
+                Hydraulikaggregat 4 kW
+                <span class="product-status"><span class="dot"></span>Aktiv</span>
+                <span class="pending-changes"><span class="dot"></span>3 ungespeicherte Änderungen</span>
+              </div>
+              <div class="product-meta">
+                <span class="product-meta-item"><strong>Nr.</strong> FG-HPP-5HP-V2</span>
+                <span class="product-meta-item"><strong>Rev.</strong> C · 18.04.2026</span>
+                <span class="product-meta-item"><strong>Art</strong> Fertigung</span>
+                <span class="product-meta-item"><strong>ME</strong> 1 Stk</span>
+                <span class="product-meta-item"><strong>Verantw.</strong> M. Schneider (Konstr.)</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="bom-header-actions">
+            <button class="action-btn">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+              Versionen
+            </button>
+            <button class="action-btn">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="9" x2="20" y2="9"/><line x1="4" y1="15" x2="20" y2="15"/><line x1="10" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="14" y2="21"/></svg>
+              Vergleichen
+            </button>
+            <button class="action-btn">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+              Verwendungsnachweis
+            </button>
+            <button class="action-btn primary">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+              Speichern
+            </button>
+            <button class="action-btn teal">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Freigeben
+            </button>
+          </div>
+        </div>
+
+        <div class="bom-header-detail">
+          <div class="detail-cell"><span class="detail-label">Gültig ab</span><span class="detail-value mono">20.04.2026</span></div>
+          <div class="detail-cell"><span class="detail-label">Gültig bis</span><span class="detail-value mono" style="color:var(--text-muted)">unbefristet</span></div>
+          <div class="detail-cell"><span class="detail-label">Werk</span><span class="detail-value">Werk 01 — Stuttgart</span></div>
+          <div class="detail-cell"><span class="detail-label">Arbeitsplan</span><span class="detail-value mono">RTG-HPP-5HP-A</span></div>
+          <div class="detail-cell"><span class="detail-label">Freigabestatus</span><span class="detail-value" style="color:var(--accent-amber)">⏵ QS ausstehend</span></div>
+          <div class="detail-cell"><span class="detail-label">Verknüpfter ÄA</span><span class="detail-value mono" style="color:var(--accent-blue)">ÄA-2026-0184</span></div>
+        </div>
+      </div>
+
+      <!-- KPI ROW -->
+      <div class="kpi-row">
+        <div class="kpi-card"><div class="kpi-label">Komponenten<br>(alle Stufen)</div><div class="kpi-sub">Eindeutige Artikel</div><div class="kpi-value">42</div></div>
+        <div class="kpi-card"><div class="kpi-label">Max. Stücklisten-<br>Stufen</div><div class="kpi-sub">Strukturtiefe</div><div class="kpi-value">4</div></div>
+        <div class="kpi-card"><div class="kpi-label">Eigen-<br>fertigung</div><div class="kpi-sub">Im Haus gefertigt</div><div class="kpi-value amber">11</div></div>
+        <div class="kpi-card"><div class="kpi-label">Fremd-<br>bezug</div><div class="kpi-sub">Zugekaufte Teile</div><div class="kpi-value teal">31</div></div>
+        <div class="kpi-card kpi-wide">
+          <div class="kpi-wide-title">Kalkulierte Kosten</div>
+          <div class="kpi-wide-stats">
+            <div class="kpi-wide-stat"><div class="lbl">Material</div><div class="val">842 €</div></div>
+            <div class="kpi-wide-stat"><div class="lbl">Lohn + GK</div><div class="val">326 €</div></div>
+            <div class="kpi-wide-stat"><div class="lbl">Gesamt / Stk</div><div class="val">1.168 €</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MAIN BOM CARD -->
+      <div class="bom-card">
+
+        <div class="bom-card-header">
+          <div class="bom-card-header-left">
+            <h3>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+              Stücklistenstruktur
+            </h3>
+            <button class="add-component-btn" onclick="openAddModal('root', 'FG-HPP-5HP-V2', 1)">
+              <span class="plus">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </span>
+              Komponente hinzufügen
+            </button>
+            <div class="view-toggle">
+              <button class="active">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+                Eingerückt
+              </button>
+              <button>Einstufig</button>
+              <button>Baum</button>
+              <button>Kalkuliert</button>
+            </div>
+            <div class="tree-controls">
+              <button class="tree-ctrl-btn">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+                Alle ausklappen
+              </button>
+              <button class="tree-ctrl-btn">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="18 15 12 9 6 15"/></svg>
+                Alle einklappen
+              </button>
+            </div>
+          </div>
+          <div class="bom-card-header-right">
+            <input type="text" class="search-input" placeholder="Komponente suchen …">
+            <button class="icon-btn" title="Filtern">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+            </button>
+            <button class="icon-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table class="bom">
+            <thead>
+              <tr>
+                <th style="min-width: 380px">Komponente</th>
+                <th>Art</th>
+                <th style="text-align:right">Menge / Baugr.</th>
+                <th>ME</th>
+                <th style="text-align:right">Ausschuss</th>
+                <th>Arbeitsgang</th>
+                <th>Bezug / Lieferant</th>
+                <th style="text-align:right">Stückkosten</th>
+                <th style="text-align:right">Gesamtkosten</th>
+                <th style="width: 130px; text-align:right">Aktionen</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <!-- LEVEL 0 — FINISHED GOOD (Root) -->
+              <tr class="level-0" data-level="0" data-id="root">
+                <td>
+                  <div class="tree-cell">
+                    <span class="toggle-chev" data-toggle="root">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </span>
+                    <span class="level-badge l0">L0</span>
+                    <div class="mat-icon assembly">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+                    </div>
+                    <div class="mat-info">
+                      <div class="mat-code">FG-HPP-5HP-V2 <span class="mat-rev">REV C</span></div>
+                      <div class="mat-desc">Hydraulikaggregat — 4 kW, 50-l-Tank</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="type-badge fg">FE</span></td>
+                <td style="text-align:right"><span class="cost-cell">1.00</span></td>
+                <td><span class="uom-select" style="font-weight:700">Stk</span></td>
+                <td style="text-align:right"><span class="cost-cell" style="color:var(--text-muted)">—</span></td>
+                <td>—</td>
+                <td><span style="color:var(--text-muted);font-size:11px">Eigenfertigung · Montagelinie A</span></td>
+                <td class="cost-cell rolled">—</td>
+                <td class="cost-cell rolled">1.168,00 €<span class="cost-sub">Kalkuliert</span></td>
+                <td>
+                  <div class="row-actions">
+                    <button class="row-action-btn add-child-btn" title="Komponente zu dieser Baugruppe hinzufügen" onclick="openAddModal('root', 'FG-HPP-5HP-V2', 1)">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    </button>
+                    <button class="row-action-btn" title="Anzeigen"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+                    <button class="row-action-btn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- L1 — Pump assembly (parent) -->
+              <tr class="level-1" data-level="1" data-parent="root" data-id="pump">
+                <td>
+                  <div class="tree-cell">
+                    <span class="toggle-chev" data-toggle="pump">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </span>
+                    <span class="level-badge l1">L1</span>
+                    <div class="mat-icon subassembly"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg></div>
+                    <div class="mat-info">
+                      <div class="mat-code">SA-PMP-GR-25 <span class="mat-rev">REV B</span></div>
+                      <div class="mat-desc">Zahnradpumpen-Baugruppe — 25 cm³/U</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="type-badge sa">BG</span></td>
+                <td style="text-align:right"><input type="text" class="cell-input" value="1.00"></td>
+                <td><select class="uom-select"><option>Stk</option></select></td>
+                <td style="text-align:right"><div class="scrap-pct"><input type="text" class="scrap-input" value="0"><span class="pct-sym">%</span></div></td>
+                <td><span class="op-ref"><span class="op-num">OP30</span>Montage</span></td>
+                <td><div class="source-cell"><div class="source-avatar" style="background:linear-gradient(135deg,#8B7FE8,#6A5FCB)">BG</div><span class="source-name">BG-Linie</span></div></td>
+                <td class="cost-cell rolled">385,00 €</td>
+                <td class="cost-cell">385,00 €<span class="cost-sub">Kalkuliert</span></td>
+                <td>
+                  <div class="row-actions">
+                    <button class="row-action-btn add-child-btn" title="Komponente unter SA-PMP-GR-25 hinzufügen" onclick="openAddModal('pump', 'SA-PMP-GR-25', 2)">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    </button>
+                    <button class="row-action-btn" title="Bearbeiten"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                    <button class="row-action-btn danger"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/></svg></button>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- L2 — Pump body (parent of 1) -->
+              <tr class="level-2" data-level="2" data-parent="pump" data-id="body">
+                <td>
+                  <div class="tree-cell">
+                    <span class="toggle-chev" data-toggle="body">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </span>
+                    <span class="level-badge l2">L2</span>
+                    <div class="mat-icon make"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
+                    <div class="mat-info">
+                      <div class="mat-code">MK-PMP-BDY-CI <span class="mat-rev">REV A</span></div>
+                      <div class="mat-desc">Pumpengehäuse, Grauguss · spanend bearb.</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="type-badge mk">EIGEN</span></td>
+                <td style="text-align:right"><input type="text" class="cell-input" value="1.00"></td>
+                <td><select class="uom-select"><option>Stk</option></select></td>
+                <td style="text-align:right"><div class="scrap-pct"><input type="text" class="scrap-input" value="2"><span class="pct-sym">%</span></div></td>
+                <td><span class="op-ref"><span class="op-num">OP10</span>Fräsen</span></td>
+                <td><div class="source-cell"><div class="source-avatar" style="background:linear-gradient(135deg,#E94B7B,#C2185B)">CN</div><span class="source-name">CNC-02</span></div></td>
+                <td class="cost-cell">78,00 €</td>
+                <td class="cost-cell">78,00 €</td>
+                <td>
+                  <div class="row-actions">
+                    <button class="row-action-btn add-child-btn" title="Komponente unter MK-PMP-BDY-CI hinzufügen" onclick="openAddModal('body', 'MK-PMP-BDY-CI', 3)">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    </button>
+                    <button class="row-action-btn" title="Bearbeiten"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                    <button class="row-action-btn danger"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/></svg></button>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- L3 — Iron casting (leaf) -->
+              <tr class="level-3" data-level="3" data-parent="body">
+                <td>
+                  <div class="tree-cell">
+                    <span class="toggle-chev leaf"></span>
+                    <span class="level-badge l3">L3</span>
+                    <div class="mat-icon raw"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+                    <div class="mat-info">
+                      <div class="mat-code">RM-CST-FE-280 <span class="mat-rev">REV A</span></div>
+                      <div class="mat-desc">Gussrohling, EN-GJL-250</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="type-badge rm">ROH</span></td>
+                <td style="text-align:right"><input type="text" class="cell-input" value="1.20"></td>
+                <td><select class="uom-select"><option>kg</option></select></td>
+                <td style="text-align:right"><div class="scrap-pct"><input type="text" class="scrap-input" value="5"><span class="pct-sym">%</span></div></td>
+                <td>—</td>
+                <td><div class="source-cell"><div class="source-avatar" style="background:linear-gradient(135deg,#0FB58F,#0C9A78)">GB</div><span class="source-name">Gießerei Bauer</span></div></td>
+                <td class="cost-cell">32,50 €</td>
+                <td class="cost-cell">39,00 €</td>
+                <td>
+                  <div class="row-actions">
+                    <button class="row-action-btn" title="Bearbeiten"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                    <button class="row-action-btn danger"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/></svg></button>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- ADD ROW: under MK-PMP-BDY-CI (creates L3 child) -->
+              <tr class="add-row-inline add-l3" data-parent="body" onclick="openAddModal('body', 'MK-PMP-BDY-CI', 3)">
+                <td colspan="10">
+                  <div class="add-row-content">
+                    <span class="add-row-icon">
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    </span>
+                    <span class="parent-link">Komponente hinzufügen zu</span>
+                    <span class="parent-name">MK-PMP-BDY-CI</span>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- L2 — Gear set (leaf) -->
+              <tr class="level-2" data-level="2" data-parent="pump">
+                <td>
+                  <div class="tree-cell">
+                    <span class="toggle-chev leaf"></span>
+                    <span class="level-badge l2">L2</span>
+                    <div class="mat-icon buy"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="9" stroke-dasharray="4 2"/></svg></div>
+                    <div class="mat-info">
+                      <div class="mat-code">CMP-GR-25CC <span class="mat-rev">REV C</span><span class="eco-flag">⚙ ÄA</span></div>
+                      <div class="mat-desc">Zahnradsatz 25 cm³ · schrägverzahnt · gehärteter Stahl</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="type-badge bp">KAUF</span></td>
+                <td style="text-align:right"><input type="text" class="cell-input" value="1.00"></td>
+                <td><select class="uom-select"><option>Satz</option></select></td>
+                <td style="text-align:right"><div class="scrap-pct"><input type="text" class="scrap-input" value="0"><span class="pct-sym">%</span></div></td>
+                <td>—</td>
+                <td><div class="source-cell"><div class="source-avatar" style="background:linear-gradient(135deg,#1A8FE3,#0E5BA0)">ZF</div><span class="source-name">ZF Friedrichshafen</span></div></td>
+                <td class="cost-cell">120,00 €</td>
+                <td class="cost-cell">120,00 €</td>
+                <td>
+                  <div class="row-actions">
+                    <button class="row-action-btn" title="Bearbeiten"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                    <button class="row-action-btn danger"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/></svg></button>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- L2 — Bearing (leaf) -->
+              <tr class="level-2" data-level="2" data-parent="pump">
+                <td>
+                  <div class="tree-cell">
+                    <span class="toggle-chev leaf"></span>
+                    <span class="level-badge l2">L2</span>
+                    <div class="mat-icon buy"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg></div>
+                    <div class="mat-info">
+                      <div class="mat-code">CMP-BRG-6205 <span class="mat-rev">REV B</span></div>
+                      <div class="mat-desc">Rillenkugellager 6205-2RS</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="type-badge bp">KAUF</span></td>
+                <td style="text-align:right"><input type="text" class="cell-input" value="2.00"></td>
+                <td><select class="uom-select"><option>Stk</option></select></td>
+                <td style="text-align:right"><div class="scrap-pct"><input type="text" class="scrap-input" value="0"><span class="pct-sym">%</span></div></td>
+                <td>—</td>
+                <td><div class="source-cell"><div class="source-avatar" style="background:linear-gradient(135deg,#F5A524,#D97706)">SK</div><span class="source-name">SKF Deutschland</span></div></td>
+                <td class="cost-cell">8,50 €</td>
+                <td class="cost-cell">17,00 €</td>
+                <td>
+                  <div class="row-actions">
+                    <button class="row-action-btn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                    <button class="row-action-btn danger"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/></svg></button>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- L2 — Phantom (parent) -->
+              <tr class="level-2" data-level="2" data-parent="pump" data-id="kit">
+                <td>
+                  <div class="tree-cell">
+                    <span class="toggle-chev" data-toggle="kit">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </span>
+                    <span class="level-badge l2">L2</span>
+                    <div class="mat-icon phantom"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" stroke-dasharray="3 2"/></svg></div>
+                    <div class="mat-info">
+                      <div class="mat-code">PH-KIT-FST-PMP <span class="mat-rev">REV A</span><span class="phantom-tag">PHANTOM</span></div>
+                      <div class="mat-desc">Pumpen-Schraubensatz (Planungsstückliste, nicht bevorratet)</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="type-badge sa" style="background:white;border:1px dashed var(--accent-purple);color:var(--accent-purple)">PHAN</span></td>
+                <td style="text-align:right"><input type="text" class="cell-input" value="1.00"></td>
+                <td><select class="uom-select"><option>Set</option></select></td>
+                <td style="text-align:right"><div class="scrap-pct"><input type="text" class="scrap-input" value="0"><span class="pct-sym">%</span></div></td>
+                <td>—</td>
+                <td><span style="color:var(--accent-purple);font-size:11px;font-weight:600;font-style:italic">↳ Durchreiche</span></td>
+                <td class="cost-cell" style="color:var(--text-muted)">—</td>
+                <td class="cost-cell" style="color:var(--accent-purple)">8,40 €<span class="cost-sub">aus Komponenten</span></td>
+                <td>
+                  <div class="row-actions">
+                    <button class="row-action-btn add-child-btn" title="Zu PH-KIT-FST-PMP hinzufügen" onclick="openAddModal('kit', 'PH-KIT-FST-PMP', 3)">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    </button>
+                    <button class="row-action-btn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                    <button class="row-action-btn danger"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/></svg></button>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- L3 children of phantom -->
+              <tr class="level-3" data-level="3" data-parent="kit">
+                <td>
+                  <div class="tree-cell">
+                    <span class="toggle-chev leaf"></span>
+                    <span class="level-badge l3">L3</span>
+                    <div class="mat-icon buy"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="2" x2="12" y2="22"/><circle cx="12" cy="6" r="3"/></svg></div>
+                    <div class="mat-info">
+                      <div class="mat-code">CMP-FST-M8-HX <span class="mat-rev">REV A</span></div>
+                      <div class="mat-desc">Sechskantschraube M8×30 · 8.8 · verzinkt</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="type-badge bp">KAUF</span></td>
+                <td style="text-align:right"><input type="text" class="cell-input" value="8.00"></td>
+                <td><select class="uom-select"><option>Stk</option></select></td>
+                <td style="text-align:right"><div class="scrap-pct"><input type="text" class="scrap-input" value="2"><span class="pct-sym">%</span></div></td>
+                <td>—</td>
+                <td><div class="source-cell"><div class="source-avatar" style="background:linear-gradient(135deg,#E94B7B,#C2185B)">WÜ</div><span class="source-name">Würth</span></div></td>
+                <td class="cost-cell">0,45 €</td>
+                <td class="cost-cell">3,60 €</td>
+                <td>
+                  <div class="row-actions">
+                    <button class="row-action-btn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                    <button class="row-action-btn danger"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/></svg></button>
+                  </div>
+                </td>
+              </tr>
+
+              <tr class="level-3" data-level="3" data-parent="kit">
+                <td>
+                  <div class="tree-cell">
+                    <span class="toggle-chev leaf"></span>
+                    <span class="level-badge l3">L3</span>
+                    <div class="mat-icon buy"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2"/></svg></div>
+                    <div class="mat-info">
+                      <div class="mat-code">CMP-WSH-M8 <span class="mat-rev">REV A</span></div>
+                      <div class="mat-desc">Federring M8 · Federstahl</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="type-badge bp">KAUF</span></td>
+                <td style="text-align:right"><input type="text" class="cell-input" value="8.00"></td>
+                <td><select class="uom-select"><option>Stk</option></select></td>
+                <td style="text-align:right"><div class="scrap-pct"><input type="text" class="scrap-input" value="2"><span class="pct-sym">%</span></div></td>
+                <td>—</td>
+                <td><div class="source-cell"><div class="source-avatar" style="background:linear-gradient(135deg,#E94B7B,#C2185B)">WÜ</div><span class="source-name">Würth</span></div></td>
+                <td class="cost-cell">0,15 €</td>
+                <td class="cost-cell">1,20 €</td>
+                <td>
+                  <div class="row-actions">
+                    <button class="row-action-btn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                    <button class="row-action-btn danger"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/></svg></button>
+                  </div>
+                </td>
+              </tr>
+
+              <tr class="level-3" data-level="3" data-parent="kit">
+                <td>
+                  <div class="tree-cell">
+                    <span class="toggle-chev leaf"></span>
+                    <span class="level-badge l3">L3</span>
+                    <div class="mat-icon buy"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/></svg></div>
+                    <div class="mat-info">
+                      <div class="mat-code">CMP-OR-NBR-44 <span class="mat-rev">REV A</span></div>
+                      <div class="mat-desc">O-Ring NBR · 44×3 mm · 70 Shore</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="type-badge bp">KAUF</span></td>
+                <td style="text-align:right"><input type="text" class="cell-input" value="2.00"></td>
+                <td><select class="uom-select"><option>Stk</option></select></td>
+                <td style="text-align:right"><div class="scrap-pct"><input type="text" class="scrap-input" value="3"><span class="pct-sym">%</span></div></td>
+                <td>—</td>
+                <td><div class="source-cell"><div class="source-avatar" style="background:linear-gradient(135deg,#0FB58F,#0C9A78)">PA</div><span class="source-name">Parker Hannifin</span></div></td>
+                <td class="cost-cell">1,80 €</td>
+                <td class="cost-cell">3,60 €</td>
+                <td>
+                  <div class="row-actions">
+                    <button class="row-action-btn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                    <button class="row-action-btn danger"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/></svg></button>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- ADD ROW: under PH-KIT-FST-PMP (creates L3 child) -->
+              <tr class="add-row-inline add-l3" data-parent="kit" onclick="openAddModal('kit', 'PH-KIT-FST-PMP', 3)">
+                <td colspan="10">
+                  <div class="add-row-content">
+                    <span class="add-row-icon">
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    </span>
+                    <span class="parent-link">Komponente hinzufügen zu</span>
+                    <span class="parent-name">PH-KIT-FST-PMP</span>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- ADD ROW: under SA-PMP-GR-25 (creates L2 child) -->
+              <tr class="add-row-inline add-l2" data-parent="pump" onclick="openAddModal('pump', 'SA-PMP-GR-25', 2)">
+                <td colspan="10">
+                  <div class="add-row-content">
+                    <span class="add-row-icon">
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    </span>
+                    <span class="parent-link">Komponente hinzufügen zu</span>
+                    <span class="parent-name">SA-PMP-GR-25</span>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- L1 — Motor (leaf) -->
+              <tr class="level-1" data-level="1" data-parent="root">
+                <td>
+                  <div class="tree-cell">
+                    <span class="toggle-chev leaf"></span>
+                    <span class="level-badge l1">L1</span>
+                    <div class="mat-icon buy"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><line x1="6" y1="10" x2="6" y2="14"/><line x1="18" y1="10" x2="18" y2="14"/></svg></div>
+                    <div class="mat-info">
+                      <div class="mat-code">CMP-MOT-5HP-3PH <span class="mat-rev">REV A</span></div>
+                      <div class="mat-desc">Elektromotor · 4 kW · 3-phasig 400 V</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="type-badge bp">KAUF</span></td>
+                <td style="text-align:right"><input type="text" class="cell-input" value="1.00"></td>
+                <td><select class="uom-select"><option>Stk</option></select></td>
+                <td style="text-align:right"><div class="scrap-pct"><input type="text" class="scrap-input" value="0"><span class="pct-sym">%</span></div></td>
+                <td><span class="op-ref"><span class="op-num">OP30</span>Montage</span></td>
+                <td><div class="source-cell"><div class="source-avatar" style="background:linear-gradient(135deg,#1A8FE3,#0E5BA0)">SI</div><span class="source-name">Siemens</span></div></td>
+                <td class="cost-cell">280,00 €</td>
+                <td class="cost-cell">280,00 €</td>
+                <td>
+                  <div class="row-actions">
+                    <button class="row-action-btn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                    <button class="row-action-btn danger"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/></svg></button>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- L1 — Tank assembly (parent) -->
+              <tr class="level-1" data-level="1" data-parent="root" data-id="tank">
+                <td>
+                  <div class="tree-cell">
+                    <span class="toggle-chev" data-toggle="tank">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </span>
+                    <span class="level-badge l1">L1</span>
+                    <div class="mat-icon subassembly"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18l-2 13H5L3 6z"/><path d="M3 6L2 2H1"/></svg></div>
+                    <div class="mat-info">
+                      <div class="mat-code">SA-TNK-50L <span class="mat-rev">REV B</span></div>
+                      <div class="mat-desc">Hydrauliktank-Baugruppe · 50 l</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="type-badge sa">BG</span></td>
+                <td style="text-align:right"><input type="text" class="cell-input" value="1.00"></td>
+                <td><select class="uom-select"><option>Stk</option></select></td>
+                <td style="text-align:right"><div class="scrap-pct"><input type="text" class="scrap-input" value="1"><span class="pct-sym">%</span></div></td>
+                <td><span class="op-ref"><span class="op-num">OP20</span>Schweißen</span></td>
+                <td><div class="source-cell"><div class="source-avatar" style="background:linear-gradient(135deg,#0FB58F,#0C9A78)">SL</div><span class="source-name">Schweißlinie</span></div></td>
+                <td class="cost-cell rolled">112,00 €</td>
+                <td class="cost-cell">112,00 €<span class="cost-sub">Kalkuliert</span></td>
+                <td>
+                  <div class="row-actions">
+                    <button class="row-action-btn add-child-btn" title="Zu SA-TNK-50L hinzufügen" onclick="openAddModal('tank', 'SA-TNK-50L', 2)">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    </button>
+                    <button class="row-action-btn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                    <button class="row-action-btn danger"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/></svg></button>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- L2 children of tank -->
+              <tr class="level-2" data-level="2" data-parent="tank">
+                <td>
+                  <div class="tree-cell">
+                    <span class="toggle-chev leaf"></span>
+                    <span class="level-badge l2">L2</span>
+                    <div class="mat-icon raw"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg></div>
+                    <div class="mat-info">
+                      <div class="mat-code">RM-PLT-S235-3 <span class="mat-rev">REV A</span></div>
+                      <div class="mat-desc">Stahlblech S235 · 3 mm · 1,25×2,5 m</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="type-badge rm">ROH</span></td>
+                <td style="text-align:right"><input type="text" class="cell-input" value="1.50"></td>
+                <td><select class="uom-select"><option>Tfl</option></select></td>
+                <td style="text-align:right"><div class="scrap-pct"><input type="text" class="scrap-input" value="8"><span class="pct-sym">%</span></div></td>
+                <td>—</td>
+                <td><div class="source-cell"><div class="source-avatar" style="background:linear-gradient(135deg,#1A8FE3,#0E5BA0)">TK</div><span class="source-name">thyssenkrupp</span></div></td>
+                <td class="cost-cell">48,00 €</td>
+                <td class="cost-cell">72,00 €</td>
+                <td>
+                  <div class="row-actions">
+                    <button class="row-action-btn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                    <button class="row-action-btn danger"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/></svg></button>
+                  </div>
+                </td>
+              </tr>
+
+              <tr class="level-2" data-level="2" data-parent="tank">
+                <td>
+                  <div class="tree-cell">
+                    <span class="toggle-chev leaf"></span>
+                    <span class="level-badge l2">L2</span>
+                    <div class="mat-icon buy"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="2" width="12" height="20" rx="1"/><line x1="9" y1="6" x2="15" y2="6"/></svg></div>
+                    <div class="mat-info">
+                      <div class="mat-code">CMP-LVL-IND-50 <span class="mat-rev">REV A</span></div>
+                      <div class="mat-desc">Schauglas / Füllstandsanzeige · 50-l-Tank</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="type-badge bp">KAUF</span></td>
+                <td style="text-align:right"><input type="text" class="cell-input" value="1.00"></td>
+                <td><select class="uom-select"><option>Stk</option></select></td>
+                <td style="text-align:right"><div class="scrap-pct"><input type="text" class="scrap-input" value="0"><span class="pct-sym">%</span></div></td>
+                <td>—</td>
+                <td><div class="source-cell"><div class="source-avatar" style="background:linear-gradient(135deg,#8B7FE8,#6A5FCB)">BR</div><span class="source-name">Bosch Rexroth</span></div></td>
+                <td class="cost-cell">28,00 €</td>
+                <td class="cost-cell">28,00 €</td>
+                <td>
+                  <div class="row-actions">
+                    <button class="row-action-btn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                    <button class="row-action-btn danger"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/></svg></button>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- ADD ROW: under SA-TNK-50L (creates L2 child) -->
+              <tr class="add-row-inline add-l2" data-parent="tank" onclick="openAddModal('tank', 'SA-TNK-50L', 2)">
+                <td colspan="10">
+                  <div class="add-row-content">
+                    <span class="add-row-icon">
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    </span>
+                    <span class="parent-link">Komponente hinzufügen zu</span>
+                    <span class="parent-name">SA-TNK-50L</span>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- L1 — Hydraulic oil (leaf) -->
+              <tr class="level-1" data-level="1" data-parent="root">
+                <td>
+                  <div class="tree-cell">
+                    <span class="toggle-chev leaf"></span>
+                    <span class="level-badge l1">L1</span>
+                    <div class="mat-icon buy"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg></div>
+                    <div class="mat-info">
+                      <div class="mat-code">CMP-OIL-ISO46 <span class="mat-rev">REV A</span></div>
+                      <div class="mat-desc">Hydrauliköl ISO VG 46 · mineralisch</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="type-badge bp">KAUF</span></td>
+                <td style="text-align:right"><input type="text" class="cell-input" value="48.00"></td>
+                <td><select class="uom-select"><option>l</option></select></td>
+                <td style="text-align:right"><div class="scrap-pct"><input type="text" class="scrap-input" value="0"><span class="pct-sym">%</span></div></td>
+                <td><span class="op-ref"><span class="op-num">OP40</span>Befüllen &amp; Prüfen</span></td>
+                <td><div class="source-cell"><div class="source-avatar" style="background:linear-gradient(135deg,#F5A524,#D97706)">FU</div><span class="source-name">Fuchs Schmierstoffe</span></div></td>
+                <td class="cost-cell">2,20 €</td>
+                <td class="cost-cell">105,60 €</td>
+                <td>
+                  <div class="row-actions">
+                    <button class="row-action-btn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                    <button class="row-action-btn danger"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/></svg></button>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- L1 — Control valve (leaf) -->
+              <tr class="level-1" data-level="1" data-parent="root">
+                <td>
+                  <div class="tree-cell">
+                    <span class="toggle-chev leaf"></span>
+                    <span class="level-badge l1">L1</span>
+                    <div class="mat-icon buy"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="8" width="18" height="8" rx="1"/><line x1="9" y1="4" x2="9" y2="8"/><line x1="15" y1="16" x2="15" y2="20"/></svg></div>
+                    <div class="mat-info">
+                      <div class="mat-code">CMP-VLV-MNF-3W <span class="mat-rev">REV A</span></div>
+                      <div class="mat-desc">3-Wege-Regelventilblock · Magnetventil</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="type-badge bp">KAUF</span></td>
+                <td style="text-align:right"><input type="text" class="cell-input" value="1.00"></td>
+                <td><select class="uom-select"><option>Stk</option></select></td>
+                <td style="text-align:right"><div class="scrap-pct"><input type="text" class="scrap-input" value="0"><span class="pct-sym">%</span></div></td>
+                <td><span class="op-ref"><span class="op-num">OP30</span>Montage</span></td>
+                <td><div class="source-cell"><div class="source-avatar" style="background:linear-gradient(135deg,#E94B7B,#C2185B)">BR</div><span class="source-name">Bosch Rexroth</span></div></td>
+                <td class="cost-cell">95,00 €</td>
+                <td class="cost-cell">95,00 €</td>
+                <td>
+                  <div class="row-actions">
+                    <button class="row-action-btn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                    <button class="row-action-btn danger"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/></svg></button>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- L1 — Hose (leaf) -->
+              <tr class="level-1" data-level="1" data-parent="root">
+                <td>
+                  <div class="tree-cell">
+                    <span class="toggle-chev leaf"></span>
+                    <span class="level-badge l1">L1</span>
+                    <div class="mat-icon buy"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12c0-4.4 3.6-8 8-8s8 3.6 8 8M3 12c0 4.4 3.6 8 8 8h4"/></svg></div>
+                    <div class="mat-info">
+                      <div class="mat-code">CMP-HSE-12-HP <span class="mat-rev">REV A</span></div>
+                      <div class="mat-desc">Hochdruckschlauch · 1/2" · 1,5 m gepresst</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="type-badge bp">KAUF</span></td>
+                <td style="text-align:right"><input type="text" class="cell-input" value="2.00"></td>
+                <td><select class="uom-select"><option>Stk</option></select></td>
+                <td style="text-align:right"><div class="scrap-pct"><input type="text" class="scrap-input" value="0"><span class="pct-sym">%</span></div></td>
+                <td><span class="op-ref"><span class="op-num">OP30</span>Montage</span></td>
+                <td><div class="source-cell"><div class="source-avatar" style="background:linear-gradient(135deg,#0FB58F,#0C9A78)">PA</div><span class="source-name">Parker Hannifin</span></div></td>
+                <td class="cost-cell">22,00 €</td>
+                <td class="cost-cell">44,00 €</td>
+                <td>
+                  <div class="row-actions">
+                    <button class="row-action-btn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                    <button class="row-action-btn danger"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/></svg></button>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- ADD ROW: under root (creates L1 child) -->
+              <tr class="add-row-inline add-l1" data-parent="root" onclick="openAddModal('root', 'FG-HPP-5HP-V2', 1)">
+                <td colspan="10">
+                  <div class="add-row-content">
+                    <span class="add-row-icon">
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    </span>
+                    <span class="parent-link">Komponente auf oberster Ebene hinzufügen</span>
+                    <span class="parent-name">FG-HPP-5HP-V2</span>
+                  </div>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+
+        <div class="bom-footer">
+          <div class="bom-footer-left">
+            <span>15 Positionen angezeigt · 42 Komponenten gesamt (alle Stufen)</span>
+            <span style="color:var(--accent-blue);font-weight:600;cursor:pointer">Inaktive anzeigen →</span>
+          </div>
+          <div class="bom-footer-right">
+            <span class="cost-total">Material gesamt: <span class="amt">842,00 €</span></span>
+            <span style="color:var(--text-light)">·</span>
+            <span class="cost-total">Lohn + GK: <span class="amt" style="color:var(--accent-amber)">326,00 €</span></span>
+            <span style="color:var(--text-light)">·</span>
+            <span class="cost-total">Gesamt / Stk: <span class="amt" style="color:var(--accent-teal)">1.168,00 €</span></span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ============ ADD COMPONENT MODAL ============ -->
+  <div class="modal-overlay" id="addModal">
+    <div class="modal">
+      <div class="modal-header">
+        <div class="modal-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </div>
+        <div class="modal-title-block">
+          <div class="modal-title">Stücklisten-Komponente hinzufügen</div>
+          <div class="modal-subtitle">Neue Komponente auf beliebiger Stufe zur gewählten Baugruppe hinzufügen</div>
+        </div>
+        <button class="modal-close" onclick="closeAddModal()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+
+      <div class="modal-body">
+
+        <!-- Parent selector -->
+        <div class="field-group">
+          <label class="field-label">
+            Übergeordnete Baugruppe <span class="required">*</span>
+            <span class="hint">Wo wird diese Komponente eingefügt?</span>
+          </label>
+          <div class="parent-select-wrap">
+            <select class="parent-select" id="parentSelect">
+              <option value="root" data-name="FG-HPP-5HP-V2" data-level="1">FG-HPP-5HP-V2 — Hydraulikaggregat 4 kW (L0 · Wurzel)</option>
+              <option value="pump" data-name="SA-PMP-GR-25" data-level="2">  ↳ SA-PMP-GR-25 — Zahnradpumpen-Baugruppe (L1)</option>
+              <option value="body" data-name="MK-PMP-BDY-CI" data-level="3">    ↳ MK-PMP-BDY-CI — Pumpengehäuse (L2)</option>
+              <option value="kit" data-name="PH-KIT-FST-PMP" data-level="3">    ↳ PH-KIT-FST-PMP — Schraubensatz · Phantom (L2)</option>
+              <option value="tank" data-name="SA-TNK-50L" data-level="2">  ↳ SA-TNK-50L — Tank-Baugruppe (L1)</option>
+            </select>
+          </div>
+          <div class="parent-path" id="parentPath">
+            <span class="parent-path-segment">FG-HPP-5HP-V2</span>
+            <span class="parent-path-arrow">→</span>
+            <span class="parent-path-current" id="parentPathCurrent">SA-PMP-GR-25</span>
+            <span class="parent-path-arrow">→</span>
+            <span style="color:var(--accent-blue);font-weight:700">[Neue L<span id="parentLevel">2</span>-Komponente]</span>
+          </div>
+        </div>
+
+        <!-- Component search -->
+        <div class="field-group">
+          <label class="field-label">
+            Komponente <span class="required">*</span>
+            <span class="hint">Vorhandene suchen oder neu anlegen</span>
+          </label>
+          <div class="search-field">
+            <span class="search-field-icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </span>
+            <input type="text" placeholder="Nr. oder Bezeichnung eingeben … z. B. CMP-FST-M10">
+          </div>
+
+          <div class="component-results">
+            <div class="component-result selected">
+              <div class="component-result-icon">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="2" x2="12" y2="22"/><circle cx="12" cy="6" r="3"/></svg>
+              </div>
+              <div class="component-result-info">
+                <div class="component-result-code">CMP-FST-M10-HX</div>
+                <div class="component-result-desc">Sechskantschraube M10×35 · 8.8 · verzinkt</div>
+              </div>
+              <div class="component-result-meta">0,65 € · Stk</div>
+            </div>
+            <div class="component-result">
+              <div class="component-result-icon">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="2" x2="12" y2="22"/><circle cx="12" cy="6" r="3"/></svg>
+              </div>
+              <div class="component-result-info">
+                <div class="component-result-code">CMP-FST-M10-CSK</div>
+                <div class="component-result-desc">Senkschraube M10×30 · Edelstahl</div>
+              </div>
+              <div class="component-result-meta">0,85 € · Stk</div>
+            </div>
+            <div class="component-result">
+              <div class="component-result-icon raw">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/></svg>
+              </div>
+              <div class="component-result-info">
+                <div class="component-result-code">CMP-NUT-M10</div>
+                <div class="component-result-desc">Sechskantmutter M10 · 8.8</div>
+              </div>
+              <div class="component-result-meta">0,20 € · Stk</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Type chooser -->
+        <div class="field-group">
+          <label class="field-label">Komponentenart</label>
+          <div class="type-chooser">
+            <button class="type-chip active" data-type="bom">KAUF</button>
+            <button class="type-chip" data-type="make">EIGEN</button>
+            <button class="type-chip" data-type="rm">ROH</button>
+            <button class="type-chip" data-type="sa">BAUGR.</button>
+            <button class="type-chip" data-type="ph">PHANTOM</button>
+          </div>
+        </div>
+
+        <!-- Qty / UoM / Scrap -->
+        <div class="three-col">
+          <div class="field-group">
+            <label class="field-label">Menge je Baugruppe <span class="required">*</span></label>
+            <input type="text" class="num-input" value="1,00">
+          </div>
+          <div class="field-group">
+            <label class="field-label">ME</label>
+            <select class="select-input">
+              <option>Stk</option>
+              <option>Satz</option>
+              <option>kg</option>
+              <option>g</option>
+              <option>l</option>
+              <option>m</option>
+              <option>Tfl</option>
+              <option>Set</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label class="field-label">Ausschuss %</label>
+            <input type="text" class="num-input" value="2">
+          </div>
+        </div>
+
+        <!-- Operation reference + Effectivity -->
+        <div class="three-col" style="grid-template-columns: 1.5fr 1fr 1fr">
+          <div class="field-group">
+            <label class="field-label">Verbraucht bei Arbeitsgang <span class="hint">optional</span></label>
+            <select class="select-input">
+              <option>OP10 — Fräsen</option>
+              <option>OP20 — Schweißen</option>
+              <option selected>OP30 — Montage</option>
+              <option>OP40 — Befüllen &amp; Prüfen</option>
+              <option>OP50 — QS</option>
+              <option>— Keiner —</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label class="field-label">Gültig ab</label>
+            <input type="date" class="text-input" value="2026-04-20">
+          </div>
+          <div class="field-group">
+            <label class="field-label">Gültig bis</label>
+            <input type="date" class="text-input">
+          </div>
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <div class="modal-footer-left">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent-blue)"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          Änderungen werden vorgemerkt, bis Sie die Stückliste speichern
+        </div>
+        <div class="modal-footer-actions">
+          <button class="modal-btn" onclick="closeAddModal()">Abbrechen</button>
+          <button class="modal-btn">Speichern &amp; weitere</button>
+          <button class="modal-btn primary" onclick="closeAddModal()">Komponente speichern</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-bar">
+    <div class="bottom-left">
+      <div class="bottom-home"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+      <div class="bottom-breadcrumb">Konstruktion <strong>›</strong> Stammdaten <strong>›</strong> <strong style="color:white">Stückliste</strong></div>
+    </div>
+    <div class="bottom-right">
+      <input type="text" class="aura-input" placeholder="Frage? Aura fragen …">
+      <div class="aura-bot"><svg width="16" height="16" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="0.5"><path d="M12 2a3 3 0 0 0-3 3v1H7a4 4 0 0 0-4 4v6a4 4 0 0 0 4 4h10a4 4 0 0 0 4-4v-6a4 4 0 0 0-4-4h-2V5a3 3 0 0 0-3-3zm-3 9a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm6 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></div>
+      <div class="aura-logo">A</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function openAddModal(parentId, parentName, newChildLevel) {
+  const modal = document.getElementById('addModal');
+  const sel = document.getElementById('parentSelect');
+  if (sel) sel.value = parentId;
+  const cur = document.getElementById('parentPathCurrent');
+  if (cur) cur.textContent = parentName;
+  const lvl = document.getElementById('parentLevel');
+  if (lvl) lvl.textContent = newChildLevel;
+  modal.classList.add('open');
+}
+function closeAddModal() {
+  document.getElementById('addModal').classList.remove('open');
+}
+
+// Sync parent path when select changes
+document.getElementById('parentSelect').addEventListener('change', function() {
+  const opt = this.options[this.selectedIndex];
+  const cur = document.getElementById('parentPathCurrent');
+  const lvl = document.getElementById('parentLevel');
+  if (cur && opt.dataset.name) cur.textContent = opt.dataset.name;
+  if (lvl && opt.dataset.level) lvl.textContent = opt.dataset.level;
+});
+
+// Close modal on overlay click
+document.getElementById('addModal').addEventListener('click', function(e) {
+  if (e.target === this) closeAddModal();
+});
+
+// Type chooser
+document.querySelectorAll('.type-chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    document.querySelectorAll('.type-chip').forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+  });
+});
+
+// Component result selection
+document.querySelectorAll('.component-result').forEach(r => {
+  r.addEventListener('click', () => {
+    document.querySelectorAll('.component-result').forEach(x => x.classList.remove('selected'));
+    r.classList.add('selected');
+  });
+});
+
+// Tree expand/collapse — recursively hides descendants
+function getDescendants(parentId) {
+  const out = [];
+  const walk = (pid) => {
+    document.querySelectorAll(`tr[data-parent="${pid}"]`).forEach(row => {
+      out.push(row);
+      const tog = row.querySelector('.toggle-chev[data-toggle]');
+      if (tog) walk(tog.dataset.toggle);
+    });
+  };
+  walk(parentId);
+  return out;
+}
+
+document.querySelectorAll('.toggle-chev[data-toggle]').forEach(chev => {
+  chev.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const id = chev.dataset.toggle;
+    chev.classList.toggle('collapsed');
+    const collapsed = chev.classList.contains('collapsed');
+    getDescendants(id).forEach(row => {
+      if (collapsed) {
+        row.classList.add('row-hidden');
+        const childChev = row.querySelector('.toggle-chev[data-toggle]');
+        if (childChev) childChev.classList.add('collapsed');
+      } else {
+        row.classList.remove('row-hidden');
+        const childChev = row.querySelector('.toggle-chev[data-toggle]');
+        if (childChev) childChev.classList.remove('collapsed');
+      }
+    });
+  });
+});
+
+// Expand/collapse all
+document.querySelectorAll('.tree-ctrl-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const isExpand = btn.textContent.trim().includes('ausklappen');
+    document.querySelectorAll('.toggle-chev[data-toggle]').forEach(c => {
+      c.classList.toggle('collapsed', !isExpand);
+    });
+    document.querySelectorAll('tr[data-parent]').forEach(r => {
+      if (!isExpand && r.dataset.parent !== 'root') r.classList.add('row-hidden');
+      else r.classList.remove('row-hidden');
+    });
+  });
+});
+
+// View toggle
+document.querySelectorAll('.view-toggle button').forEach(b => {
+  b.addEventListener('click', () => {
+    document.querySelectorAll('.view-toggle button').forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+  });
+});
+
+// Row select
+document.querySelectorAll('table.bom tbody tr').forEach(row => {
+  row.addEventListener('click', (e) => {
+    if (row.classList.contains('add-row-inline')) return;
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.closest('button') || e.target.closest('.toggle-chev')) return;
+    document.querySelectorAll('table.bom tbody tr').forEach(r => r.classList.remove('selected'));
+    row.classList.add('selected');
+  });
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1192 @@
+<?xml version="1.0"?>
+<Tables>
+  <Table>
+    <Export_ID>VADMS_20000224</Export_ID>
+    <AD_Table_ID>1000687</AD_Table_ID>
+    <TableName>VADMS_Role_Access</TableName>
+    <Columns>
+      <Column>
+        <ColumnName>VADMS_Access</ColumnName>
+        <ReferenceName>VADMS_Access</ReferenceName>
+        <LOVValues>
+          <LOV>
+            <Value>10</Value>
+            <Name>None</Name>
+          </LOV>
+          <LOV>
+            <Value>20</Value>
+            <Name>Read</Name>
+          </LOV>
+          <LOV>
+            <Value>30</Value>
+            <Name>Read/Write</Name>
+          </LOV>
+          <LOV>
+            <Value>40</Value>
+            <Name>Read/Write/Delete</Name>
+          </LOV>
+          <LOV>
+            <Value>99</Value>
+            <Name>Full</Name>
+          </LOV>
+        </LOVValues>
+      </Column>
+    </Columns>
+  </Table>
+  <Table>
+    <Export_ID>VADMS_20000228</Export_ID>
+    <AD_Table_ID>1000688</AD_Table_ID>
+    <TableName>VADMS_User_Access</TableName>
+    <Columns>
+      <Column>
+        <ColumnName>VADMS_Access</ColumnName>
+        <ReferenceName>VADMS_Access</ReferenceName>
+        <LOVValues>
+          <LOV>
+            <Value>10</Value>
+            <Name>None</Name>
+          </LOV>
+          <LOV>
+            <Value>20</Value>
+            <Name>Read</Name>
+          </LOV>
+          <LOV>
+            <Value>30</Value>
+            <Name>Read/Write</Name>
+          </LOV>
+          <LOV>
+            <Value>40</Value>
+            <Name>Read/Write/Delete</Name>
+          </LOV>
+          <LOV>
+            <Value>99</Value>
+            <Name>Full</Name>
+          </LOV>
+        </LOVValues>
+      </Column>
+    </Columns>
+  </Table>
+  <Table>
+    <Export_ID>VADMS_20000240</Export_ID>
+    <AD_Table_ID>1000727</AD_Table_ID>
+    <TableName>VADMS_UserActionLog</TableName>
+    <Columns>
+      <Column>
+        <ColumnName>VADMS_Access</ColumnName>
+        <ReferenceName>VADMS_Access</ReferenceName>
+        <LOVValues>
+          <LOV>
+            <Value>10</Value>
+            <Name>None</Name>
+          </LOV>
+          <LOV>
+            <Value>20</Value>
+            <Name>Read</Name>
+          </LOV>
+          <LOV>
+            <Value>30</Value>
+            <Name>Read/Write</Name>
+          </LOV>
+          <LOV>
+            <Value>40</Value>
+            <Name>Read/Write/Delete</Name>
+          </LOV>
+          <LOV>
+            <Value>99</Value>
+            <Name>Full</Name>
+          </LOV>
+        </LOVValues>
+      </Column>
+      <Column>
+        <ColumnName>VADMS_Action</ColumnName>
+        <ReferenceName>VADMS_Action</ReferenceName>
+        <LOVValues>
+          <LOV>
+            <Value>DAWR</Value>
+            <Name>Attached With Record</Name>
+          </LOV>
+          <LOV>
+            <Value>DCB </Value>
+            <Name>Created </Name>
+          </LOV>
+          <LOV>
+            <Value>DCI </Value>
+            <Name>Check In</Name>
+          </LOV>
+          <LOV>
+            <Value>DCO </Value>
+            <Name>Check Out</Name>
+          </LOV>
+          <LOV>
+            <Value>DCT </Value>
+            <Name>Chat</Name>
+          </LOV>
+          <LOV>
+            <Value>DCY </Value>
+            <Name>Copy</Name>
+          </LOV>
+          <LOV>
+            <Value>DD  </Value>
+            <Name>Deleted</Name>
+          </LOV>
+          <LOV>
+            <Value>DFW </Value>
+            <Name>Forward</Name>
+          </LOV>
+          <LOV>
+            <Value>DIDN</Value>
+            <Name>In Document Number</Name>
+          </LOV>
+          <LOV>
+            <Value>DLD </Value>
+            <Name>Link Deleted</Name>
+          </LOV>
+          <LOV>
+            <Value>DM  </Value>
+            <Name>Move</Name>
+          </LOV>
+          <LOV>
+            <Value>DODN</Value>
+            <Name>Out Document Number</Name>
+          </LOV>
+          <LOV>
+            <Value>DP  </Value>
+            <Name>Permission</Name>
+          </LOV>
+          <LOV>
+            <Value>DPD </Value>
+            <Name>Permission Deleted</Name>
+          </LOV>
+          <LOV>
+            <Value>DRCB</Value>
+            <Name>Document Recycle Bin</Name>
+          </LOV>
+          <LOV>
+            <Value>DS  </Value>
+            <Name>Subscribe</Name>
+          </LOV>
+          <LOV>
+            <Value>DSD </Value>
+            <Name>Digital Signature Declined</Name>
+          </LOV>
+          <LOV>
+            <Value>DUCO</Value>
+            <Name>Undo CheckOut</Name>
+          </LOV>
+          <LOV>
+            <Value>DUP </Value>
+            <Name>Uploaded</Name>
+          </LOV>
+          <LOV>
+            <Value>DVD </Value>
+            <Name>Version Deleted</Name>
+          </LOV>
+          <LOV>
+            <Value>DVRB</Value>
+            <Name>Version Recycle Bin</Name>
+          </LOV>
+          <LOV>
+            <Value>DVRD</Value>
+            <Name>Version Recovered</Name>
+          </LOV>
+          <LOV>
+            <Value>ELD </Value>
+            <Name>External Link Deleted</Name>
+          </LOV>
+          <LOV>
+            <Value>DREC</Value>
+            <Name>Document Recovered</Name>
+          </LOV>
+          <LOV>
+            <Value>DREP</Value>
+            <Name>Replaced</Name>
+          </LOV>
+          <LOV>
+            <Value>DSG </Value>
+            <Name>Digital Signature</Name>
+          </LOV>
+          <LOV>
+            <Value>DUS </Value>
+            <Name>Unsubscribe</Name>
+          </LOV>
+          <LOV>
+            <Value>E   </Value>
+            <Name>EMail</Name>
+          </LOV>
+          <LOV>
+            <Value>ELG </Value>
+            <Name>External Link Generated</Name>
+          </LOV>
+          <LOV>
+            <Value>EWQR</Value>
+            <Name>Email With QR</Name>
+          </LOV>
+          <LOV>
+            <Value>FCB </Value>
+            <Name>Folder Created</Name>
+          </LOV>
+          <LOV>
+            <Value>FD  </Value>
+            <Name>Folder Deleted</Name>
+          </LOV>
+          <LOV>
+            <Value>FM  </Value>
+            <Name>Folder Move</Name>
+          </LOV>
+          <LOV>
+            <Value>FP  </Value>
+            <Name>Folder Permission</Name>
+          </LOV>
+          <LOV>
+            <Value>FPD </Value>
+            <Name>Folder Permission deleted </Name>
+          </LOV>
+          <LOV>
+            <Value>FR  </Value>
+            <Name>Folder Renamed</Name>
+          </LOV>
+          <LOV>
+            <Value>FRCB</Value>
+            <Name>Folder Recycle Bin</Name>
+          </LOV>
+          <LOV>
+            <Value>FREC</Value>
+            <Name>Folder Recovered</Name>
+          </LOV>
+          <LOV>
+            <Value>FS  </Value>
+            <Name>Folder Subscribe</Name>
+          </LOV>
+          <LOV>
+            <Value>FSAO</Value>
+            <Name>Scan App Opened</Name>
+          </LOV>
+          <LOV>
+            <Value>FSFD</Value>
+            <Name>Sub Folder Deleted</Name>
+          </LOV>
+          <LOV>
+            <Value>FUS </Value>
+            <Name>Folder UnSubscribe</Name>
+          </LOV>
+          <LOV>
+            <Value>WFDM</Value>
+            <Name>WF_Move</Name>
+          </LOV>
+          <LOV>
+            <Value>WFDP</Value>
+            <Name>WF_Permission</Name>
+          </LOV>
+          <LOV>
+            <Value>WFDS</Value>
+            <Name>WF_Digital Signature</Name>
+          </LOV>
+          <LOV>
+            <Value>WFEM</Value>
+            <Name>WF_EMail</Name>
+          </LOV>
+          <LOV>
+            <Value>WFFW</Value>
+            <Name>WF_Forward</Name>
+          </LOV>
+          <LOV>
+            <Value>FSFC</Value>
+            <Name>Sub Folder Created</Name>
+          </LOV>
+        </LOVValues>
+      </Column>
+    </Columns>
+  </Table>
+  <Table>
+    <Export_ID>VADMS_20000219</Export_ID>
+    <AD_Table_ID>1000676</AD_Table_ID>
+    <TableName>VADMS_UploadSettings</TableName>
+    <Columns>
+      <Column>
+        <ColumnName>VADMS_EmailKeepVersion</ColumnName>
+        <ReferenceName>VADMS_KeepVersion</ReferenceName>
+        <LOVValues>
+          <LOV>
+            <Value>1</Value>
+            <Name>If Document exists then return </Name>
+          </LOV>
+          <LOV>
+            <Value>2</Value>
+            <Name>If Document exists then create new document</Name>
+          </LOV>
+          <LOV>
+            <Value>3</Value>
+            <Name>If Document exists then create new version</Name>
+          </LOV>
+        </LOVValues>
+      </Column>
+      <Column>
+        <ColumnName>VADMS_KeepVersion</ColumnName>
+        <ReferenceName>VADMS_KeepVersion</ReferenceName>
+        <LOVValues>
+          <LOV>
+            <Value>1</Value>
+            <Name>If Document exists then return </Name>
+          </LOV>
+          <LOV>
+            <Value>2</Value>
+            <Name>If Document exists then create new document</Name>
+          </LOV>
+          <LOV>
+            <Value>3</Value>
+            <Name>If Document exists then create new version</Name>
+          </LOV>
+        </LOVValues>
+      </Column>
+      <Column>
+        <ColumnName>VAI01_LLMProvider</ColumnName>
+        <ReferenceName>VAI01_LLMProvider</ReferenceName>
+        <LOVValues>
+          <LOV>
+            <Value>OA</Value>
+            <Name>Open AI</Name>
+          </LOV>
+        </LOVValues>
+      </Column>
+    </Columns>
+  </Table>
+  <Table>
+    <Export_ID>VADMS_20000215</Export_ID>
+    <AD_Table_ID>1000677</AD_Table_ID>
+    <TableName>VADMS_Document</TableName>
+    <Columns>
+      <Column>
+        <ColumnName>VADMS_DocStatus</ColumnName>
+        <ReferenceName>VADMS_DocStatus</ReferenceName>
+        <LOVValues>
+          <LOV>
+            <Value>CI</Value>
+            <Name>CheckIn</Name>
+          </LOV>
+          <LOV>
+            <Value>DI</Value>
+            <Name>DD InProgress</Name>
+          </LOV>
+          <LOV>
+            <Value>DN </Value>
+            <Name>DD NotProcessed</Name>
+          </LOV>
+          <LOV>
+            <Value>DV</Value>
+            <Name>Deleted Version</Name>
+          </LOV>
+          <LOV>
+            <Value>CL</Value>
+            <Name>Closed</Name>
+          </LOV>
+          <LOV>
+            <Value>CO</Value>
+            <Name>CheckOut</Name>
+          </LOV>
+          <LOV>
+            <Value>DD</Value>
+            <Name>Deleted Document</Name>
+          </LOV>
+          <LOV>
+            <Value>IP</Value>
+            <Name>InProgress</Name>
+          </LOV>
+          <LOV>
+            <Value>LO</Value>
+            <Name>Locked</Name>
+          </LOV>
+          <LOV>
+            <Value>NP</Value>
+            <Name>NotProcessed</Name>
+          </LOV>
+          <LOV>
+            <Value>RB</Value>
+            <Name>RecycleBin</Name>
+          </LOV>
+          <LOV>
+            <Value>VI</Value>
+            <Name>DV InProgress</Name>
+          </LOV>
+          <LOV>
+            <Value>VN</Value>
+            <Name>DV NotProcessed</Name>
+          </LOV>
+        </LOVValues>
+      </Column>
+      <Column>
+        <ColumnName>VADMS_InputType</ColumnName>
+        <ReferenceName>VADMS_InputType</ReferenceName>
+        <LOVValues>
+          <LOV>
+            <Value>A</Value>
+            <Name>Auto Upload</Name>
+          </LOV>
+          <LOV>
+            <Value>E</Value>
+            <Name>Email Upload</Name>
+          </LOV>
+          <LOV>
+            <Value>M</Value>
+            <Name>Manual Upload</Name>
+          </LOV>
+          <LOV>
+            <Value>S</Value>
+            <Name>ScanUpload</Name>
+          </LOV>
+          <LOV>
+            <Value>T</Value>
+            <Name>Telerik RichTextbox</Name>
+          </LOV>
+          <LOV>
+            <Value>W</Value>
+            <Name>Web Service</Name>
+          </LOV>
+        </LOVValues>
+      </Column>
+      <Column>
+        <ColumnName>VADMS_IsAIEnabled</ColumnName>
+        <ReferenceName>VADMS_AIStatus</ReferenceName>
+        <LOVValues>
+          <LOV>
+            <Value>IP</Value>
+            <Name>In Progress</Name>
+          </LOV>
+          <LOV>
+            <Value>DN</Value>
+            <Name>Done</Name>
+          </LOV>
+          <LOV>
+            <Value>ER</Value>
+            <Name>Error</Name>
+          </LOV>
+        </LOVValues>
+      </Column>
+      <Column>
+        <ColumnName>VADMS_PublicAccess</ColumnName>
+        <ReferenceName>VADMS_Access</ReferenceName>
+        <LOVValues>
+          <LOV>
+            <Value>10</Value>
+            <Name>None</Name>
+          </LOV>
+          <LOV>
+            <Value>20</Value>
+            <Name>Read</Name>
+          </LOV>
+          <LOV>
+            <Value>30</Value>
+            <Name>Read/Write</Name>
+          </LOV>
+          <LOV>
+            <Value>40</Value>
+            <Name>Read/Write/Delete</Name>
+          </LOV>
+          <LOV>
+            <Value>99</Value>
+            <Name>Full</Name>
+          </LOV>
+        </LOVValues>
+      </Column>
+    </Columns>
+  </Table>
+  <Table>
+    <Export_ID>VADMS_20000220</Export_ID>
+    <AD_Table_ID>1000679</AD_Table_ID>
+    <TableName>VADMS_Folder</TableName>
+    <Columns>
+      <Column>
+        <ColumnName>VADMS_FolderStatus</ColumnName>
+        <ReferenceName>VADMS_DocStatus</ReferenceName>
+        <LOVValues>
+          <LOV>
+            <Value>CI</Value>
+            <Name>CheckIn</Name>
+          </LOV>
+          <LOV>
+            <Value>CL</Value>
+            <Name>Closed</Name>
+          </LOV>
+          <LOV>
+            <Value>CO</Value>
+            <Name>CheckOut</Name>
+          </LOV>
+          <LOV>
+            <Value>DD</Value>
+            <Name>Deleted Document</Name>
+          </LOV>
+          <LOV>
+            <Value>DI</Value>
+            <Name>DD InProgress</Name>
+          </LOV>
+          <LOV>
+            <Value>DN </Value>
+            <Name>DD NotProcessed</Name>
+          </LOV>
+          <LOV>
+            <Value>DV</Value>
+            <Name>Deleted Version</Name>
+          </LOV>
+          <LOV>
+            <Value>IP</Value>
+            <Name>InProgress</Name>
+          </LOV>
+          <LOV>
+            <Value>LO</Value>
+            <Name>Locked</Name>
+          </LOV>
+          <LOV>
+            <Value>NP</Value>
+            <Name>NotProcessed</Name>
+          </LOV>
+          <LOV>
+            <Value>RB</Value>
+            <Name>RecycleBin</Name>
+          </LOV>
+          <LOV>
+            <Value>VI</Value>
+            <Name>DV InProgress</Name>
+          </LOV>
+          <LOV>
+            <Value>VN</Value>
+            <Name>DV NotProcessed</Name>
+          </LOV>
+        </LOVValues>
+      </Column>
+      <Column>
+        <ColumnName>VADMS_FolderType</ColumnName>
+        <ReferenceName>VADMS_FolderType</ReferenceName>
+        <LOVValues>
+          <LOV>
+            <Value>01</Value>
+            <Name>Inbox</Name>
+          </LOV>
+          <LOV>
+            <Value>02</Value>
+            <Name>Sent</Name>
+          </LOV>
+          <LOV>
+            <Value>03</Value>
+            <Name>Draft</Name>
+          </LOV>
+          <LOV>
+            <Value>04</Value>
+            <Name>Other</Name>
+          </LOV>
+          <LOV>
+            <Value>05</Value>
+            <Name>All</Name>
+          </LOV>
+          <LOV>
+            <Value>06</Value>
+            <Name>Subscribe Document</Name>
+          </LOV>
+          <LOV>
+            <Value>07</Value>
+            <Name>Mobile Upload</Name>
+          </LOV>
+          <LOV>
+            <Value>08</Value>
+            <Name>Recycle Bin</Name>
+          </LOV>
+          <LOV>
+            <Value>10</Value>
+            <Name>Correspondence Inbox</Name>
+          </LOV>
+          <LOV>
+            <Value>11</Value>
+            <Name>Registration Inbox</Name>
+          </LOV>
+          <LOV>
+            <Value>12</Value>
+            <Name>External Inbox</Name>
+          </LOV>
+          <LOV>
+            <Value>13</Value>
+            <Name>Favorite Inbox</Name>
+          </LOV>
+          <LOV>
+            <Value>14</Value>
+            <Name>Popularization and Decisions Inbox</Name>
+          </LOV>
+          <LOV>
+            <Value>15</Value>
+            <Name>Outbound Follow Up Inbox</Name>
+          </LOV>
+          <LOV>
+            <Value>16</Value>
+            <Name>Correspondence</Name>
+          </LOV>
+          <LOV>
+            <Value>17</Value>
+            <Name>Attachments</Name>
+          </LOV>
+        </LOVValues>
+      </Column>
+      <Column>
+        <ColumnName>VADMS_InputType</ColumnName>
+        <ReferenceName>VADMS_InputType</ReferenceName>
+        <LOVValues>
+          <LOV>
+            <Value>A</Value>
+            <Name>Auto Upload</Name>
+          </LOV>
+          <LOV>
+            <Value>E</Value>
+            <Name>Email Upload</Name>
+          </LOV>
+          <LOV>
+            <Value>M</Value>
+            <Name>Manual Upload</Name>
+          </LOV>
+          <LOV>
+            <Value>S</Value>
+            <Name>ScanUpload</Name>
+          </LOV>
+          <LOV>
+            <Value>T</Value>
+            <Name>Telerik RichTextbox</Name>
+          </LOV>
+          <LOV>
+            <Value>W</Value>
+            <Name>Web Service</Name>
+          </LOV>
+        </LOVValues>
+      </Column>
+      <Column>
+        <ColumnName>VADMS_PublicAccess</ColumnName>
+        <ReferenceName>VADMS_Access</ReferenceName>
+        <LOVValues>
+          <LOV>
+            <Value>10</Value>
+            <Name>None</Name>
+          </LOV>
+          <LOV>
+            <Value>20</Value>
+            <Name>Read</Name>
+          </LOV>
+          <LOV>
+            <Value>30</Value>
+            <Name>Read/Write</Name>
+          </LOV>
+          <LOV>
+            <Value>40</Value>
+            <Name>Read/Write/Delete</Name>
+          </LOV>
+          <LOV>
+            <Value>99</Value>
+            <Name>Full</Name>
+          </LOV>
+        </LOVValues>
+      </Column>
+    </Columns>
+  </Table>
+  <Table>
+    <Export_ID>VADMS_20000218</Export_ID>
+    <AD_Table_ID>1000681</AD_Table_ID>
+    <TableName>VADMS_MetaData</TableName>
+    <Columns>
+      <Column>
+        <ColumnName>VADMS_DocStatus</ColumnName>
+        <ReferenceName>VADMS_DocStatus</ReferenceName>
+        <LOVValues>
+          <LOV>
+            <Value>CI</Value>
+            <Name>CheckIn</Name>
+          </LOV>
+          <LOV>
+            <Value>CL</Value>
+            <Name>Closed</Name>
+          </LOV>
+          <LOV>
+            <Value>CO</Value>
+            <Name>CheckOut</Name>
+          </LOV>
+          <LOV>
+            <Value>DD</Value>
+            <Name>Deleted Document</Name>
+          </LOV>
+          <LOV>
+            <Value>DI</Value>
+            <Name>DD InProgress</Name>
+          </LOV>
+          <LOV>
+            <Value>DN </Value>
+            <Name>DD NotProcessed</Name>
+          </LOV>
+          <LOV>
+            <Value>DV</Value>
+            <Name>Deleted Version</Name>
+          </LOV>
+          <LOV>
+            <Value>IP</Value>
+            <Name>InProgress</Name>
+          </LOV>
+          <LOV>
+            <Value>LO</Value>
+            <Name>Locked</Name>
+          </LOV>
+          <LOV>
+            <Value>NP</Value>
+            <Name>NotProcessed</Name>
+          </LOV>
+          <LOV>
+            <Value>RB</Value>
+            <Name>RecycleBin</Name>
+          </LOV>
+          <LOV>
+            <Value>VI</Value>
+            <Name>DV InProgress</Name>
+          </LOV>
+          <LOV>
+            <Value>VN</Value>
+            <Name>DV NotProcessed</Name>
+          </LOV>
+        </LOVValues>
+      </Column>
+      <Column>
+        <ColumnName>VADMS_DocumentType</ColumnName>
+        <ReferenceName>VADMS_DocumentType</ReferenceName>
+        <LOVValues>
+          <LOV>
+            <Value>I</Value>
+            <Name>Image File</Name>
+          </LOV>
+          <LOV>
+            <Value>P</Value>
+            <Name>Pdf File</Name>
+          </LOV>
+          <LOV>
+            <Value>T</Value>
+            <Name>Text File</Name>
+          </LOV>
+        </LOVValues>
+      </Column>
+      <Column>
+        <ColumnName>VADMS_InputType</ColumnName>
+        <ReferenceName>VADMS_InputType</ReferenceName>
+        <LOVValues>
+          <LOV>
+            <Value>A</Value>
+            <Name>Auto Upload</Name>
+          </LOV>
+          <LOV>
+            <Value>E</Value>
+            <Name>Email Upload</Name>
+          </LOV>
+          <LOV>
+            <Value>M</Value>
+            <Name>Manual Upload</Name>
+          </LOV>
+          <LOV>
+            <Value>S</Value>
+            <Name>ScanUpload</Name>
+          </LOV>
+          <LOV>
+            <Value>T</Value>
+            <Name>Telerik RichTextbox</Name>
+          </LOV>
+          <LOV>
+            <Value>W</Value>
+            <Name>Web Service</Name>
+          </LOV>
+        </LOVValues>
+      </Column>
+      <Column>
+        <ColumnName>VADMS_SignStatus</ColumnName>
+        <ReferenceName>VA055_SignatureStatus</ReferenceName>
+        <LOVValues>
+          <LOV>
+            <Value>AA</Value>
+            <Name>Approved</Name>
+          </LOV>
+          <LOV>
+            <Value>AC</Value>
+            <Name>Accepted</Name>
+          </LOV>
+          <LOV>
+            <Value>NA</Value>
+            <Name>Not Approved</Name>
+          </LOV>
+          <LOV>
+            <Value>NO</Value>
+            <Name>Not OK</Name>
+          </LOV>
+          <LOV>
+            <Value>OK</Value>
+            <Name>OK</Name>
+          </LOV>
+          <LOV>
+            <Value>RJ</Value>
+            <Name>Rejected</Name>
+          </LOV>
+        </LOVValues>
+      </Column>
+    </Columns>
+  </Table>
+  <Table>
+    <Export_ID>VADMS_20000221</Export_ID>
+    <AD_Table_ID>1000684</AD_Table_ID>
+    <TableName>VADMS_Settings</TableName>
+    <Columns>
+      <Column>
+        <ColumnName>VADMS_CharacterStored</ColumnName>
+        <ReferenceName>VADMS_CharacterStored</ReferenceName>
+        <LOVValues>
+          <LOV>
+            <Value>1</Value>
+            <Name>1</Name>
+          </LOV>
+          <LOV>
+            <Value>2</Value>
+            <Name>2</Name>
+          </LOV>
+        </LOVValues>
+      </Column>
+    </Columns>
+  </Table>
+  <Table>
+    <Export_ID>VADMS_20000222</Export_ID>
+    <AD_Table_ID>1000685</AD_Table_ID>
+    <TableName>VADMS_UnIndexedDoc</TableName>
+    <Columns>
+      <Column>
+        <ColumnName>VADMS_DocStatus</ColumnName>
+        <ReferenceName>VADMS_DocStatus</ReferenceName>
+        <LOVValues>
+          <LOV>
+            <Value>CI</Value>
+            <Name>CheckIn</Name>
+          </LOV>
+          <LOV>
+            <Value>CL</Value>
+            <Name>Closed</Name>
+          </LOV>
+          <LOV>
+            <Value>CO</Value>
+            <Name>CheckOut</Name>
+          </LOV>
+          <LOV>
+            <Value>DD</Value>
+            <Name>Deleted Document</Name>
+          </LOV>
+          <LOV>
+            <Value>DI</Value>
+            <Name>DD InProgress</Name>
+          </LOV>
+          <LOV>
+            <Value>DN </Value>
+            <Name>DD NotProcessed</Name>
+          </LOV>
+          <LOV>
+            <Value>DV</Value>
+            <Name>Deleted Version</Name>
+          </LOV>
+          <LOV>
+            <Value>IP</Value>
+            <Name>InProgress</Name>
+          </LOV>
+          <LOV>
+            <Value>LO</Value>
+            <Name>Locked</Name>
+          </LOV>
+          <LOV>
+            <Value>NP</Value>
+            <Name>NotProcessed</Name>
+          </LOV>
+          <LOV>
+            <Value>RB</Value>
+            <Name>RecycleBin</Name>
+          </LOV>
+          <LOV>
+            <Value>VI</Value>
+            <Name>DV InProgress</Name>
+          </LOV>
+          <LOV>
+            <Value>VN</Value>
+            <Name>DV NotProcessed</Name>
+          </LOV>
+        </LOVValues>
+      </Column>
+    </Columns>
+  </Table>
+  <Table>
+    <Export_ID>VADMS_20000227</Export_ID>
+    <AD_Table_ID>1000686</AD_Table_ID>
+    <TableName>VADMS_UploadDocumentHistory</TableName>
+    <Columns>
+      <Column>
+        <ColumnName>VADMS_ErrorCount</ColumnName>
+        <ReferenceName>VADMS_ErrorCount</ReferenceName>
+        <LOVValues>
+          <LOV>
+            <Value>1</Value>
+            <Name>1</Name>
+          </LOV>
+          <LOV>
+            <Value>2</Value>
+            <Name>2</Name>
+          </LOV>
+          <LOV>
+            <Value>3</Value>
+            <Name>3</Name>
+          </LOV>
+          <LOV>
+            <Value>4</Value>
+            <Name>4</Name>
+          </LOV>
+        </LOVValues>
+      </Column>
+      <Column>
+        <ColumnName>VADMS_InputType</ColumnName>
+        <ReferenceName>VADMS_InputType</ReferenceName>
+        <LOVValues>
+          <LOV>
+            <Value>A</Value>
+            <Name>Auto Upload</Name>
+          </LOV>
+          <LOV>
+            <Value>E</Value>
+            <Name>Email Upload</Name>
+          </LOV>
+          <LOV>
+            <Value>M</Value>
+            <Name>Manual Upload</Name>
+          </LOV>
+          <LOV>
+            <Value>S</Value>
+            <Name>ScanUpload</Name>
+          </LOV>
+          <LOV>
+            <Value>T</Value>
+            <Name>Telerik RichTextbox</Name>
+          </LOV>
+          <LOV>
+            <Value>W</Value>
+            <Name>Web Service</Name>
+          </LOV>
+        </LOVValues>
+      </Column>
+    </Columns>
+  </Table>
+  <Table>
+    <Export_ID>VADMS_20000732</Export_ID>
+    <AD_Table_ID>1001297</AD_Table_ID>
+    <TableName>VADMS_Team_Access</TableName>
+    <Columns>
+      <Column>
+        <ColumnName>VADMS_Access</ColumnName>
+        <ReferenceName>VADMS_Access</ReferenceName>
+        <LOVValues>
+          <LOV>
+            <Value>10</Value>
+            <Name>None</Name>
+          </LOV>
+          <LOV>
+            <Value>20</Value>
+            <Name>Read</Name>
+          </LOV>
+          <LOV>
+            <Value>30</Value>
+            <Name>Read/Write</Name>
+          </LOV>
+          <LOV>
+            <Value>40</Value>
+            <Name>Read/Write/Delete</Name>
+          </LOV>
+          <LOV>
+            <Value>99</Value>
+            <Name>Full</Name>
+          </LOV>
+        </LOVValues>
+      </Column>
+    </Columns>
+  </Table>
+  <Table>
+    <Export_ID>VADMS_20001134</Export_ID>
+    <AD_Table_ID>1001798</AD_Table_ID>
+    <TableName>VADMS_DriveLink</TableName>
+    <Columns>
+      <Column>
+        <ColumnName>VADMS_Access</ColumnName>
+        <ReferenceName>VADMS_Access</ReferenceName>
+        <LOVValues>
+          <LOV>
+            <Value>10</Value>
+            <Name>None</Name>
+          </LOV>
+          <LOV>
+            <Value>20</Value>
+            <Name>Read</Name>
+          </LOV>
+          <LOV>
+            <Value>30</Value>
+            <Name>Read/Write</Name>
+          </LOV>
+          <LOV>
+            <Value>40</Value>
+            <Name>Read/Write/Delete</Name>
+          </LOV>
+          <LOV>
+            <Value>99</Value>
+            <Name>Full</Name>
+          </LOV>
+        </LOVValues>
+      </Column>
+    </Columns>
+  </Table>
+  <Table>
+    <Export_ID>VADMS_20001711</Export_ID>
+    <AD_Table_ID>1002217</AD_Table_ID>
+    <TableName>VADMS_NotificaionStatus</TableName>
+    <Columns>
+      <Column>
+        <ColumnName>VADMS_NotificationFor</ColumnName>
+        <ReferenceName>VADMS_NotificationFor</ReferenceName>
+        <LOVValues>
+          <LOV>
+            <Value>D</Value>
+            <Name>Document</Name>
+          </LOV>
+          <LOV>
+            <Value>F</Value>
+            <Name>Folder</Name>
+          </LOV>
+          <LOV>
+            <Value>V</Value>
+            <Name>Document Version</Name>
+          </LOV>
+        </LOVValues>
+      </Column>
+    </Columns>
+  </Table>
+  <Table>
+    <Export_ID>VADMS_20001902</Export_ID>
+    <AD_Table_ID>1002474</AD_Table_ID>
+    <TableName>VADMS_RecipientSignatures</TableName>
+    <Columns>
+      <Column>
+        <ColumnName>VADMS_SignatureType</ColumnName>
+        <ReferenceName>VADMS_SignatureType</ReferenceName>
+        <LOVValues>
+          <LOV>
+            <Value>CO</Value>
+            <Name>Comapany</Name>
+          </LOV>
+          <LOV>
+            <Value>DR</Value>
+            <Name>Drawing</Name>
+          </LOV>
+          <LOV>
+            <Value>DT</Value>
+            <Name>Date</Name>
+          </LOV>
+          <LOV>
+            <Value>EM</Value>
+            <Name>Email</Name>
+          </LOV>
+          <LOV>
+            <Value>FN</Value>
+            <Name>First Name</Name>
+          </LOV>
+          <LOV>
+            <Value>IN</Value>
+            <Name>Initials</Name>
+          </LOV>
+          <LOV>
+            <Value>LN</Value>
+            <Name>Last Name</Name>
+          </LOV>
+          <LOV>
+            <Value>SG</Value>
+            <Name>Full Name</Name>
+          </LOV>
+          <LOV>
+            <Value>ST</Value>
+            <Name>Stamp</Name>
+          </LOV>
+          <LOV>
+            <Value>TI</Value>
+            <Name>Title</Name>
+          </LOV>
+          <LOV>
+            <Value>US</Value>
+            <Name>Upload Signature</Name>
+          </LOV>
+          <LOV>
+            <Value>TX</Value>
+            <Name>Text</Name>
+          </LOV>
+          <LOV>
+            <Value>NA</Value>
+            <Name>Name</Name>
+          </LOV>
+        </LOVValues>
+      </Column>
+    </Columns>
+  </Table>
+  <Table>
+    <Export_ID>VADMS_20001898</Export_ID>
+    <AD_Table_ID>1002475</AD_Table_ID>
+    <TableName>VADMS_RecipientSignMapping</TableName>
+    <Columns>
+      <Column>
+        <ColumnName>VADMS_SignatureType</ColumnName>
+        <ReferenceName>VADMS_SignatureType</ReferenceName>
+        <LOVValues>
+          <LOV>
+            <Value>CO</Value>
+            <Name>Comapany</Name>
+          </LOV>
+          <LOV>
+            <Value>DR</Value>
+            <Name>Drawing</Name>
+          </LOV>
+          <LOV>
+            <Value>DT</Value>
+            <Name>Date</Name>
+          </LOV>
+          <LOV>
+            <Value>EM</Value>
+            <Name>Email</Name>
+          </LOV>
+          <LOV>
+            <Value>FN</Value>
+            <Name>First Name</Name>
+          </LOV>
+          <LOV>
+            <Value>IN</Value>
+            <Name>Initials</Name>
+          </LOV>
+          <LOV>
+            <Value>LN</Value>
+            <Name>Last Name</Name>
+          </LOV>
+          <LOV>
+            <Value>SG</Value>
+            <Name>Full Name</Name>
+          </LOV>
+          <LOV>
+            <Value>ST</Value>
+            <Name>Stamp</Name>
+          </LOV>
+          <LOV>
+            <Value>TI</Value>
+            <Name>Title</Name>
+          </LOV>
+          <LOV>
+            <Value>US</Value>
+            <Name>Upload Signature</Name>
+          </LOV>
+          <LOV>
+            <Value>TX</Value>
+            <Name>Text</Name>
+          </LOV>
+          <LOV>
+            <Value>NA</Value>
+            <Name>Name</Name>
+          </LOV>
+        </LOVValues>
+      </Column>
+    </Columns>
+  </Table>
+</Tables>

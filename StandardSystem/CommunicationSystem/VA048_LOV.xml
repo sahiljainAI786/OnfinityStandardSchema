@@ -1,0 +1,122 @@
+<?xml version="1.0"?>
+<Tables>
+  <Table>
+    <Export_ID>VA048_1000578</Export_ID>
+    <AD_Table_ID>1000519</AD_Table_ID>
+    <TableName>VA048_CallProvider</TableName>
+    <Columns>
+      <Column>
+        <ColumnName>VA048_CommChannel</ColumnName>
+        <ReferenceName>VA048_CommChannel</ReferenceName>
+        <LOVValues>
+          <LOV>
+            <Value>APP</Value>
+            <Name>APP</Name>
+          </LOV>
+          <LOV>
+            <Value>RTC</Value>
+            <Name>RTC</Name>
+          </LOV>
+          <LOV>
+            <Value>SIP</Value>
+            <Name>SIP</Name>
+          </LOV>
+        </LOVValues>
+      </Column>
+      <Column>
+        <ColumnName>VA048_Library</ColumnName>
+        <ReferenceName>VA048_Library</ReferenceName>
+        <LOVValues>
+          <LOV>
+            <Value>ASK</Value>
+            <Name>ASK</Name>
+          </LOV>
+          <LOV>
+            <Value>TWI</Value>
+            <Name>TWI</Name>
+          </LOV>
+        </LOVValues>
+      </Column>
+    </Columns>
+  </Table>
+  <Table>
+    <Export_ID>VA048_1000577</Export_ID>
+    <AD_Table_ID>1000521</AD_Table_ID>
+    <TableName>VA048_CallSettings</TableName>
+    <Columns>
+      <Column>
+        <ColumnName>VA048_IncomingCallRecordingPolicy</ColumnName>
+        <ReferenceName>VA048_RecordingPolicy</ReferenceName>
+        <LOVValues>
+          <LOV>
+            <Value>P0</Value>
+            <Name>No Recording</Name>
+          </LOV>
+          <LOV>
+            <Value>P1</Value>
+            <Name>Record without message</Name>
+          </LOV>
+          <LOV>
+            <Value>P2</Value>
+            <Name>Record with message without permission</Name>
+          </LOV>
+          <LOV>
+            <Value>P3</Value>
+            <Name>Record with message and permission</Name>
+          </LOV>
+        </LOVValues>
+      </Column>
+      <Column>
+        <ColumnName>VA048_OutgoingCallRecordingPolicy</ColumnName>
+        <ReferenceName>VA048_RecordingPolicy</ReferenceName>
+        <LOVValues>
+          <LOV>
+            <Value>P0</Value>
+            <Name>No Recording</Name>
+          </LOV>
+          <LOV>
+            <Value>P1</Value>
+            <Name>Record without message</Name>
+          </LOV>
+          <LOV>
+            <Value>P2</Value>
+            <Name>Record with message without permission</Name>
+          </LOV>
+          <LOV>
+            <Value>P3</Value>
+            <Name>Record with message and permission</Name>
+          </LOV>
+        </LOVValues>
+      </Column>
+    </Columns>
+  </Table>
+  <Table>
+    <Export_ID>VA048_1000586</Export_ID>
+    <AD_Table_ID>1000528</AD_Table_ID>
+    <TableName>VA048_CallDetails</TableName>
+    <Columns>
+      <Column>
+        <ColumnName>VA048_CallType</ColumnName>
+        <ReferenceName>VA048_CallType</ReferenceName>
+        <LOVValues>
+          <LOV>
+            <Value>Inc</Value>
+            <Name>Incoming Call</Name>
+          </LOV>
+          <LOV>
+            <Value>Int</Value>
+            <Name>Internal Call</Name>
+          </LOV>
+          <LOV>
+            <Value>Out</Value>
+            <Name>Outgoing Call</Name>
+          </LOV>
+          <LOV>
+            <Value>Ouw</Value>
+            <Name>Outgoing Web Call</Name>
+          </LOV>
+        </LOVValues>
+      </Column>
+    </Columns>
+  </Table>
+</Tables>

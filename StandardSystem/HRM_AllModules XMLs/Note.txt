@@ -1,0 +1,10 @@
+It contains XMLs for these modules.
+
+VA058	Work Force
+VA086	VA Absence Management 
+VA069	Attendance Management
+VA064	Payroll 
+VA072	Claim Management
+VA078	Self Service
+VA065	Performance Management Systems (Private)
+VA062	Recruitment 

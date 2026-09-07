@@ -1,0 +1,1049 @@
+<Windows>
+  <Window>
+    <WindowDisplayName>Communication</WindowDisplayName>
+    <WindowName>VA048_Communication</WindowName>
+    <ad_window_id>1000151</ad_window_id>
+    <export_id>VA048_1000176</export_id>
+    <IsActive>Y</IsActive>
+    <Tab>
+      <TabSeqNo>10</TabSeqNo>
+      <TabName>Provider</TabName>
+      <TableName>VA048_CallProvider</TableName>
+      <AD_Tab_ID>1000424</AD_Tab_ID>
+      <IsActive>Y</IsActive>
+      <IsDisplayed>Y</IsDisplayed>
+      <IsReadOnly>N</IsReadOnly>
+      <IsAdvancedTab>N</IsAdvancedTab>
+      <export_id>VA048_1000466</export_id>
+      <Field>
+        <ColumnName>VA048_CallProvider_ID</ColumnName>
+        <FieldName>Provider Name</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Twilio provider name</Help>
+        <export_id>VA048_10009760</export_id>
+      </Field>
+      <Field>
+        <ColumnName>Export_ID</ColumnName>
+        <FieldName>Export</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA048_10009759</export_id>
+      </Field>
+      <Field>
+        <ColumnName>AD_Client_ID</ColumnName>
+        <FieldName>Tenant</FieldName>
+        <FieldSeqNo>10</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>A Client is a company or a legal entity. You cannot share data between Clients. Tenant is a synonym for Client.</Help>
+        <export_id>VA048_10009749</export_id>
+      </Field>
+      <Field>
+        <ColumnName>AD_Org_ID</ColumnName>
+        <FieldName>Organization</FieldName>
+        <FieldSeqNo>20</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>An organization is a unit of your Tenant or legal entity - examples are store, department. You can share data between organizations.</Help>
+        <export_id>VA048_10009750</export_id>
+      </Field>
+      <Field>
+        <ColumnName>Name</ColumnName>
+        <FieldName>Name</FieldName>
+        <FieldSeqNo>30</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The name of an entity (record) is used as an default search option in addition to the search key. The name is up to 100 characters in length.</Help>
+        <export_id>VA048_10009751</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_ApiKey</ColumnName>
+        <FieldName>Api Key</FieldName>
+        <FieldSeqNo>40</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>ApiKey provider by provider, Your Twilio account ID. It is 34 characters long, and always starts with the letters &apos;AC&apos;.</Help>
+        <export_id>VA048_10009752</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_AccountSID</ColumnName>
+        <FieldName>Account SID</FieldName>
+        <FieldSeqNo>40</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Twilio provider account Sid. It is 34 characters long, and always starts with the letters &apos;AC&apos;.</Help>
+        <export_id>VA048_10011047</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_Token</ColumnName>
+        <FieldName>Token</FieldName>
+        <FieldSeqNo>50</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA048_10009758</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_ApplicationSID</ColumnName>
+        <FieldName>Application SID</FieldName>
+        <FieldSeqNo>55</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Application SID per TwiML App.</Help>
+        <export_id>VA048_10009755</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_CommChannel</ColumnName>
+        <FieldName>Comm Channel</FieldName>
+        <FieldSeqNo>60</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>example sip</Help>
+        <export_id>VA048_10009754</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_VoiceRequestURL</ColumnName>
+        <FieldName>Voice Request URL</FieldName>
+        <FieldSeqNo>80</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA048_10009756</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_Library</ColumnName>
+        <FieldName>Library</FieldName>
+        <FieldSeqNo>90</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA048_10009757</export_id>
+      </Field>
+      <Field>
+        <ColumnName>IsActive</ColumnName>
+        <FieldName>Active</FieldName>
+        <FieldSeqNo>100</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>There are two methods of making records unavailable in the system: One is to delete the record, the other is to de-activate the record. A de-activated record is not available for selection, but available for reports.
+There are two reasons for de-activating and not deleting records:
+(1) The system requires the record for audit purposes.
+(2) The record is referenced by other records. E.g., you cannot delete a Account, if there are invoices for this Account record existing. You de-activate the Account and prevent that this record is used for future entries.</Help>
+        <export_id>VA048_10009753</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_AccountApiKey</ColumnName>
+        <FieldName>Account Api Key</FieldName>
+        <FieldSeqNo>110</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>API Key is revocable credential to authenticate to Twilio REST API. It is 34 characters long and always starts with &apos;SK&apos;.</Help>
+        <export_id>VA048_10011048</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_AccountApiSecret</ColumnName>
+        <FieldName>Account Api Secret</FieldName>
+        <FieldSeqNo>120</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Api Secret for Api Key.</Help>
+        <export_id>VA048_10011049</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_AndroidPushCredentialSID</ColumnName>
+        <FieldName>Android Push Credential SID</FieldName>
+        <FieldSeqNo>130</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>This is used for incoming call notifications on Android devices.</Help>
+        <export_id>VA048_10011050</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_IOSPushCredentialSID</ColumnName>
+        <FieldName>IOS Push Credential SID</FieldName>
+        <FieldSeqNo>140</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>This is used for incoming call notifications on IOS devices.</Help>
+        <export_id>VA048_10011051</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_IncomingRecordNotifyMessage</ColumnName>
+        <FieldName>Incoming Record Notify Message</FieldName>
+        <FieldSeqNo>145</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>This message is played to callers if &apos;Record with Message without Permission&apos; is selected as Incoming Recording Policy in Call Setting window.</Help>
+        <export_id>VA048_10011052</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_IncomingRecordPermissionMessage</ColumnName>
+        <FieldName>Incoming Record Permission Message</FieldName>
+        <FieldSeqNo>150</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>This message is played for callers in the beginning of incoming calls to get permission for recording their voice.</Help>
+        <export_id>VA048_10011053</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_OutgoingRecordNotifyMessage</ColumnName>
+        <FieldName>Outgoing Record Notify Message</FieldName>
+        <FieldSeqNo>155</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>This message is played to callees if &apos;Record with Message without Permission&apos; is selected as Outgoing Recording Policy in Call Setting window.</Help>
+        <export_id>VA048_10011054</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_OutgoingRecordPermissionMessage</ColumnName>
+        <FieldName>Outgoing Record Permission Message</FieldName>
+        <FieldSeqNo>160</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>This message is played for callee in the beginning of outgoing calls to get permission for recording their voice.</Help>
+        <export_id>VA048_10011055</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_VoicemailMessage</ColumnName>
+        <FieldName>Voicemail Message</FieldName>
+        <FieldSeqNo>170</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>This message is played when a call is not answered by callee and caller is forwarded to voicemail.</Help>
+        <export_id>VA048_10011056</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_VoicemailDuration</ColumnName>
+        <FieldName>Voicemail Duration</FieldName>
+        <FieldSeqNo>180</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Maximum duration for recording voicemail messages.</Help>
+        <export_id>VA048_10011057</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_KeyPressTimeout</ColumnName>
+        <FieldName>Key Press Timeout</FieldName>
+        <FieldSeqNo>190</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Number of seconds in which users can press keys on their mobile phones.</Help>
+        <export_id>VA048_10011046</export_id>
+      </Field>
+    </Tab>
+    <Tab>
+      <TabSeqNo>20</TabSeqNo>
+      <TabName>Connection</TabName>
+      <TableName>VA048_CallConnection</TableName>
+      <AD_Tab_ID>1000425</AD_Tab_ID>
+      <IsActive>Y</IsActive>
+      <IsDisplayed>Y</IsDisplayed>
+      <IsReadOnly>N</IsReadOnly>
+      <IsAdvancedTab>N</IsAdvancedTab>
+      <export_id>VA048_1000467</export_id>
+      <Field>
+        <ColumnName>VA048_CallConnection_ID</ColumnName>
+        <FieldName>Connection Name</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>This name will be shown in list of call setting to choose any.</Help>
+        <export_id>VA048_10009768</export_id>
+      </Field>
+      <Field>
+        <ColumnName>Export_ID</ColumnName>
+        <FieldName>Export</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA048_10009767</export_id>
+      </Field>
+      <Field>
+        <ColumnName>AD_Client_ID</ColumnName>
+        <FieldName>Tenant</FieldName>
+        <FieldSeqNo>10</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>A Client is a company or a legal entity. You cannot share data between Clients. Tenant is a synonym for Client.</Help>
+        <export_id>VA048_10009761</export_id>
+      </Field>
+      <Field>
+        <ColumnName>AD_Org_ID</ColumnName>
+        <FieldName>Organization</FieldName>
+        <FieldSeqNo>20</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>An organization is a unit of your Tenant or legal entity - examples are store, department. You can share data between organizations.</Help>
+        <export_id>VA048_10009762</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_CallProvider_ID</ColumnName>
+        <FieldName>Provider Name</FieldName>
+        <FieldSeqNo>30</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Twilio provider name</Help>
+        <export_id>VA048_10009766</export_id>
+      </Field>
+      <Field>
+        <ColumnName>Name</ColumnName>
+        <FieldName>Name</FieldName>
+        <FieldSeqNo>40</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The name of an entity (record) is used as an default search option in addition to the search key. The name is up to 100 characters in length.</Help>
+        <export_id>VA048_10009764</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_Number</ColumnName>
+        <FieldName>Number</FieldName>
+        <FieldSeqNo>50</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA048_10009765</export_id>
+      </Field>
+      <Field>
+        <ColumnName>IsActive</ColumnName>
+        <FieldName>Active</FieldName>
+        <FieldSeqNo>60</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>There are two methods of making records unavailable in the system: One is to delete the record, the other is to de-activate the record. A de-activated record is not available for selection, but available for reports.
+There are two reasons for de-activating and not deleting records:
+(1) The system requires the record for audit purposes.
+(2) The record is referenced by other records. E.g., you cannot delete a Account, if there are invoices for this Account record existing. You de-activate the Account and prevent that this record is used for future entries.</Help>
+        <export_id>VA048_10009763</export_id>
+      </Field>
+    </Tab>
+  </Window>
+  <Window>
+    <WindowDisplayName>Call Setting</WindowDisplayName>
+    <WindowName>VA048_CallSetting</WindowName>
+    <ad_window_id>1000152</ad_window_id>
+    <export_id>VA048_1000175</export_id>
+    <IsActive>Y</IsActive>
+    <Tab>
+      <TabSeqNo>10</TabSeqNo>
+      <TabName>Setting</TabName>
+      <TableName>VA048_CallSettings</TableName>
+      <AD_Tab_ID>1000426</AD_Tab_ID>
+      <IsActive>Y</IsActive>
+      <IsDisplayed>Y</IsDisplayed>
+      <IsReadOnly>N</IsReadOnly>
+      <IsAdvancedTab>N</IsAdvancedTab>
+      <export_id>VA048_1000465</export_id>
+      <Field>
+        <ColumnName>VA048_CallSettings_ID</ColumnName>
+        <FieldName>VA048_CallSettings_ID</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA048_10009748</export_id>
+      </Field>
+      <Field>
+        <ColumnName>Export_ID</ColumnName>
+        <FieldName>Export</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA048_10009747</export_id>
+      </Field>
+      <Field>
+        <ColumnName>AD_Client_ID</ColumnName>
+        <FieldName>Tenant</FieldName>
+        <FieldSeqNo>10</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>A Client is a company or a legal entity. You cannot share data between Clients. Tenant is a synonym for Client.</Help>
+        <export_id>VA048_10009741</export_id>
+      </Field>
+      <Field>
+        <ColumnName>AD_Org_ID</ColumnName>
+        <FieldName>Organization</FieldName>
+        <FieldSeqNo>20</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>An organization is a unit of your Tenant or legal entity - examples are store, department. You can share data between organizations.</Help>
+        <export_id>VA048_10009746</export_id>
+      </Field>
+      <Field>
+        <ColumnName>AD_User_ID</ColumnName>
+        <FieldName>User/Contact</FieldName>
+        <FieldSeqNo>30</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The User identifies a unique user in the system. This could be an internal user or a Customer/Prospect contact</Help>
+        <export_id>VA048_10009744</export_id>
+      </Field>
+      <Field>
+        <ColumnName>IsActive</ColumnName>
+        <FieldName>Active</FieldName>
+        <FieldSeqNo>35</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>There are two methods of making records unavailable in the system: One is to delete the record, the other is to de-activate the record. A de-activated record is not available for selection, but available for reports.
+There are two reasons for de-activating and not deleting records:
+(1) The system requires the record for audit purposes.
+(2) The record is referenced by other records. E.g., you cannot delete a Account, if there are invoices for this Account record existing. You de-activate the Account and prevent that this record is used for future entries.</Help>
+        <export_id>VA048_10009742</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_MakeInternalCalls</ColumnName>
+        <FieldName>Make Internal Calls</FieldName>
+        <FieldSeqNo>40</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>If true, this user can make internal calls.</Help>
+        <export_id>VA048_10011059</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_CallProvider_ID</ColumnName>
+        <FieldName>Provider Name</FieldName>
+        <FieldSeqNo>50</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Twilio provider name</Help>
+        <export_id>VA048_10011060</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_MakeOutgoingCalls</ColumnName>
+        <FieldName>Make Outgoing Calls</FieldName>
+        <FieldSeqNo>60</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>If true, this user is able to make outgoing calls.</Help>
+        <export_id>VA048_10011061</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_AcceptIncomingCalls</ColumnName>
+        <FieldName>Accept Incoming Calls</FieldName>
+        <FieldSeqNo>70</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>If true, this user is able to accept incoming calls</Help>
+        <export_id>VA048_10011062</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_CallConnection_ID</ColumnName>
+        <FieldName>Connection Name</FieldName>
+        <FieldSeqNo>80</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>This name will be shown in list of call setting to choose any.</Help>
+        <export_id>VA048_10009745</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_CountryCode</ColumnName>
+        <FieldName>Country Code</FieldName>
+        <FieldSeqNo>90</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>If the value is 0, this user is able to call any number from any country. If the value is a country code, this user is restricted to call that country only.</Help>
+        <export_id>VA048_10009743</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_OutgoingCallRecordingPolicy</ColumnName>
+        <FieldName>Outgoing Call Recording Policy</FieldName>
+        <FieldSeqNo>100</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The policy for recording outgoing calls.</Help>
+        <export_id>VA048_10011063</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_IncomingCallRecordingPolicy</ColumnName>
+        <FieldName>Incoming Call Recording Policy</FieldName>
+        <FieldSeqNo>110</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The policy for recording incoming calls</Help>
+        <export_id>VA048_10011058</export_id>
+      </Field>
+    </Tab>
+  </Window>
+  <Window>
+    <WindowDisplayName>Call Details</WindowDisplayName>
+    <WindowName>VA048_CallDetails</WindowName>
+    <ad_window_id>1000156</ad_window_id>
+    <export_id>VA048_1000180</export_id>
+    <IsActive>Y</IsActive>
+    <Tab>
+      <TabSeqNo>10</TabSeqNo>
+      <TabName>Call Details</TabName>
+      <TableName>VA048_CallDetails</TableName>
+      <AD_Tab_ID>1000434</AD_Tab_ID>
+      <IsActive>Y</IsActive>
+      <IsDisplayed>Y</IsDisplayed>
+      <IsReadOnly>N</IsReadOnly>
+      <IsAdvancedTab>N</IsAdvancedTab>
+      <export_id>VA048_1000475</export_id>
+      <Field>
+        <ColumnName>Export_ID</ColumnName>
+        <FieldName>Export</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA048_10009980</export_id>
+      </Field>
+      <Field>
+        <ColumnName>Processed</ColumnName>
+        <FieldName>Processed</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Processed checkbox indicates that a document has been processed.</Help>
+        <export_id>VA048_10010025</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_CallDetails_ID</ColumnName>
+        <FieldName>VA048_CallDetails_ID</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <export_id>VA048_10009981</export_id>
+      </Field>
+      <Field>
+        <ColumnName>AD_Client_ID</ColumnName>
+        <FieldName>Tenant</FieldName>
+        <FieldSeqNo>10</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>A Client is a company or a legal entity. You cannot share data between Clients. Tenant is a synonym for Client.</Help>
+        <export_id>VA048_10009951</export_id>
+      </Field>
+      <Field>
+        <ColumnName>AD_Org_ID</ColumnName>
+        <FieldName>Organization</FieldName>
+        <FieldSeqNo>20</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>An organization is a unit of your Tenant or legal entity - examples are store, department. You can share data between organizations.</Help>
+        <export_id>VA048_10009966</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_From</ColumnName>
+        <FieldName>From</FieldName>
+        <FieldSeqNo>30</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The phone number, SIP address, Client identifier or SIM SID that made this Call. Phone numbers are in E.164 format (e.g., +16175551212).</Help>
+        <export_id>VA048_10009969</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_To</ColumnName>
+        <FieldName>To</FieldName>
+        <FieldSeqNo>40</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The phone number, SIP address, Client identifier or SIM SID that received this Call. Phone numbers are in E.164 format (e.g., +16175551212).</Help>
+        <export_id>VA048_10009952</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_Start_Time</ColumnName>
+        <FieldName>Start Time</FieldName>
+        <FieldSeqNo>50</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The start time of the call, given as GMT in RFC 2822 format. Empty if the call has not yet been dialed.</Help>
+        <export_id>VA048_10009975</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_End_Time</ColumnName>
+        <FieldName>End Time</FieldName>
+        <FieldSeqNo>60</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The time the Call ended, given as GMT in RFC 2822 format. Empty if the call did not complete successfully.</Help>
+        <export_id>VA048_10009974</export_id>
+      </Field>
+      <Field>
+        <ColumnName>AD_Table_ID</ColumnName>
+        <FieldName>Table/View</FieldName>
+        <FieldSeqNo>70</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Database Table provides the information of the table definition</Help>
+        <export_id>VA048_10009968</export_id>
+      </Field>
+      <Field>
+        <ColumnName>Record_ID</ColumnName>
+        <FieldName>Record ID</FieldName>
+        <FieldSeqNo>80</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Record ID is the internal unique identifier of a record. Please note that zooming to the record may not be successful for Orders, Invoices and Shipment/Receipts as sometimes the Sales Order type is not known.</Help>
+        <export_id>VA048_10009965</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_RefTable_ID</ColumnName>
+        <FieldName>Ref Table ID</FieldName>
+        <FieldSeqNo>90</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Original table of ref record. From which number is taken for call.</Help>
+        <export_id>VA048_10009988</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_RefRecordID</ColumnName>
+        <FieldName>Ref Record ID</FieldName>
+        <FieldSeqNo>100</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Original record id of number, whose number is used to make call.</Help>
+        <export_id>VA048_10009989</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_Status</ColumnName>
+        <FieldName>Status</FieldName>
+        <FieldSeqNo>110</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>A string representing the status of the Call. May be queued, ringing, in-progress, canceled, completed, failed, busy or no-answer. See Call Status Values below for more information.</Help>
+        <export_id>VA048_10009956</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_Duration</ColumnName>
+        <FieldName>Duration</FieldName>
+        <FieldSeqNo>120</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The length of the Call in seconds. This value is empty for busy, failed, unanswered or ongoing calls.</Help>
+        <export_id>VA048_10009978</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_Price</ColumnName>
+        <FieldName>Price</FieldName>
+        <FieldSeqNo>130</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The charge for this Call, in the currency associated with the account. Populated after the call is completed. May not be immediately available.</Help>
+        <export_id>VA048_10009971</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_Price_Unit</ColumnName>
+        <FieldName>Price Unit</FieldName>
+        <FieldSeqNo>140</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The currency in which Price is measured, in ISO 4127 format (e.g., USD, EUR, JPY). Always capitalized for calls.</Help>
+        <export_id>VA048_10009954</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_SID</ColumnName>
+        <FieldName>SID</FieldName>
+        <FieldSeqNo>150</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>A 34-character string that uniquely identifies the Call resource.</Help>
+        <export_id>VA048_10009973</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_ConferenceSID</ColumnName>
+        <FieldName>ConferenceSID</FieldName>
+        <FieldSeqNo>160</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Every call has unique number to it whether its a conference of simple one to one call.</Help>
+        <export_id>VA048_10009987</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_CallNotes</ColumnName>
+        <FieldName>Call Notes</FieldName>
+        <FieldSeqNo>170</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>User can save note for call, note will be saved on pressing enter or space. On live call or after call note will be saved for record from which call was started.</Help>
+        <export_id>VA048_10009953</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_Recordings</ColumnName>
+        <FieldName>Recordings</FieldName>
+        <FieldSeqNo>180</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The URL of the phone call&apos;s recorded audio. This parameter is included only if Record=true is set on the REST API request and does not include recordings initiated in other ways. RecordingUrl is only present in the completed event.</Help>
+        <export_id>VA048_10009977</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_IsConference</ColumnName>
+        <FieldName>Is Conference</FieldName>
+        <FieldSeqNo>190</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>If Y then call is a conference type otherwise N which means its normal 1 to 1 call.</Help>
+        <export_id>VA048_10009986</export_id>
+      </Field>
+      <Field>
+        <ColumnName>IsActive</ColumnName>
+        <FieldName>Active</FieldName>
+        <FieldSeqNo>200</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>There are two methods of making records unavailable in the system: One is to delete the record, the other is to de-activate the record. A de-activated record is not available for selection, but available for reports.
+There are two reasons for de-activating and not deleting records:
+(1) The system requires the record for audit purposes.
+(2) The record is referenced by other records. E.g., you cannot delete a Account, if there are invoices for this Account record existing. You de-activate the Account and prevent that this record is used for future entries.</Help>
+        <export_id>VA048_10009964</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_Participants</ColumnName>
+        <FieldName>Participants</FieldName>
+        <FieldSeqNo>210</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>This column is of csv (comma separated value) type where more then one participants number is stored along with window, table and record id. below is its pattern.
+Number.AD_Window_ID-AD_Table_ID-RecordID, Number.AD_Window_ID-AD_Table_ID-RecordID
+xxxxxxxxxx.0000000-0000000-0000000, yyyyyyyyyy.0000000-0000000-0000000
+</Help>
+        <export_id>VA048_10009985</export_id>
+      </Field>
+      <Field>
+        <ColumnName>AD_User_ID</ColumnName>
+        <FieldName>User/Contact</FieldName>
+        <FieldSeqNo>220</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The User identifies a unique user in the system. This could be an internal user or a Customer/Prospect contact</Help>
+        <export_id>VA048_10009958</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_Parent_Call_SID</ColumnName>
+        <FieldName>Parent Call SID</FieldName>
+        <FieldSeqNo>230</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>A 34-character string that uniquely identifies the Call that created this leg.</Help>
+        <export_id>VA048_10009959</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_Group_SID</ColumnName>
+        <FieldName>Group SID</FieldName>
+        <FieldSeqNo>240</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>A 34-character Group Sid associated with this Call. Empty if no Group is associated with the Call.</Help>
+        <export_id>VA048_10009979</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_Direction</ColumnName>
+        <FieldName>Direction</FieldName>
+        <FieldSeqNo>250</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>A string describing the direction of the Call. Values are inbound for inbound calls, outbound-api for calls initiated via the REST API or outbound-dial for calls.</Help>
+        <export_id>VA048_10009967</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_Caller_Name</ColumnName>
+        <FieldName>Caller Name</FieldName>
+        <FieldSeqNo>260</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The caller&apos;s name if this Call was an incoming call to a phone number with Caller ID Lookup enabled. Empty otherwise. </Help>
+        <export_id>VA048_10009955</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_Forwarded_From</ColumnName>
+        <FieldName>Forwarded From</FieldName>
+        <FieldSeqNo>270</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The forwarding phone number if this Call was an incoming call forwarded from another number (depends on carrier supporting forwarding). Empty otherwise. </Help>
+        <export_id>VA048_10009957</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_Answered_By</ColumnName>
+        <FieldName>Answered By</FieldName>
+        <FieldSeqNo>280</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Either human or machine if this Call was initiated with answering machine detection. Empty otherwise.</Help>
+        <export_id>VA048_10009976</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_Phone_Number_SID</ColumnName>
+        <FieldName>Phone Number SID</FieldName>
+        <FieldSeqNo>290</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>If the call was inbound, this is the Sid of the IncomingPhoneNumber that received the call. If the call was outbound, it is the Sid of the OutgoingCallerId from which the call was placed.</Help>
+        <export_id>VA048_10009961</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_CallProvider_ID</ColumnName>
+        <FieldName>Provider Name</FieldName>
+        <FieldSeqNo>300</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Twilio provider name</Help>
+        <export_id>VA048_10009970</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_Annotation</ColumnName>
+        <FieldName>Annotation</FieldName>
+        <FieldSeqNo>310</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The annotation provided for the Call.</Help>
+        <export_id>VA048_10009960</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_Api_Version</ColumnName>
+        <FieldName>Api Version</FieldName>
+        <FieldSeqNo>320</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Current version of API which is used in application.</Help>
+        <export_id>VA048_10009972</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_Notifications</ColumnName>
+        <FieldName>Notifications</FieldName>
+        <FieldSeqNo>330</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Url of notification given by call provider where you can see the notifications associated with call.</Help>
+        <export_id>VA048_10009963</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_URI</ColumnName>
+        <FieldName>URI</FieldName>
+        <FieldSeqNo>340</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The URI for this resource, relative to https://api.twilio.com.</Help>
+        <export_id>VA048_10009962</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_From_User_ID</ColumnName>
+        <FieldName>From User</FieldName>
+        <FieldSeqNo>350</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The system user who is the caller of this call.</Help>
+        <export_id>VA048_10011065</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_To_User_ID</ColumnName>
+        <FieldName>To User</FieldName>
+        <FieldSeqNo>360</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The system user who is the receiver of this call.</Help>
+        <export_id>VA048_10011066</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_From_C_BPartner_ID</ColumnName>
+        <FieldName>From Business Partner</FieldName>
+        <FieldSeqNo>370</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Business Partner who is the caller of this call.</Help>
+        <export_id>VA048_10011067</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_To_C_BPartner_ID</ColumnName>
+        <FieldName>To Business Partner</FieldName>
+        <FieldSeqNo>380</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The business partner who is the receiver of this call.</Help>
+        <export_id>VA048_10011068</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_CallType</ColumnName>
+        <FieldName>Call Type</FieldName>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Type of call such as Internal call, Incoming call or Outgoing call.</Help>
+        <export_id>VA048_10011069</export_id>
+      </Field>
+      <Field>
+        <ColumnName>VA048_IsMobileAppCall</ColumnName>
+        <FieldName>Is Mobile App Call</FieldName>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Whether call is made or received by mobile app.</Help>
+        <export_id>VA048_10011064</export_id>
+      </Field>
+    </Tab>
+  </Window>
+</Windows>

@@ -1,0 +1,18 @@
+{
+  "entity": "LeaveType",
+  "table": "VA086_AbsenceType",
+  "pk": "VA086_AbsenceType_ID",
+  "key": { "api": "key", "column": "VA086_Type", "label": "Leave Type" },
+  "includeStandardCols": true,
+  "_note": "Leave / absence type (VA086). Category/units/balance lists omitted (optional) pending codes.",
+  "fields": [
+    { "api": "key", "column": "VA086_Type", "type": "string", "required": true, "isKey": true, "maxLen": 100 },
+    { "api": "startDate", "column": "VA086_StartDate", "type": "string", "help": "ISO date" },
+    { "api": "endDate", "column": "VA086_EndDate", "type": "string", "help": "ISO date" },
+    { "api": "carriedOver", "column": "VA086_IsCarriedOver", "type": "boolean", "default": false },
+    { "api": "halfDayAllowed", "column": "VA086_IsHalfDay", "type": "boolean", "default": false },
+    { "api": "negativeAllowed", "column": "VA086_IsNegtiveLeave", "type": "boolean", "default": false },
+    { "api": "excludeHolidayWeekoff", "column": "VA086_IsExcludeHW", "type": "boolean", "default": false },
+    { "api": "isActive", "column": "IsActive", "type": "boolean", "default": true }
+  ]
+}

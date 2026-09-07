@@ -1,0 +1,40 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:MainDataTable="FRPT_LocAcct" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="FRPT_LocAcct" msprop:SqlHash="69023898" msprop:BaseTable.0="FRPT_LOCACCT">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="AD_CLIENT_ID" msprop:BaseColumn="AD_CLIENT_ID" msprop:OraDbType="113" type="xs:long" minOccurs="0" />
+                <xs:element name="AD_ORG_ID" msprop:BaseColumn="AD_ORG_ID" msprop:OraDbType="113" type="xs:long" minOccurs="0" />
+                <xs:element name="CREATED" msprop:BaseColumn="CREATED" msprop:OraDbType="106" type="xs:dateTime" minOccurs="0" />
+                <xs:element name="CREATEDBY" msprop:BaseColumn="CREATEDBY" msprop:OraDbType="113" type="xs:long" minOccurs="0" />
+                <xs:element name="EXPORT_ID" msprop:BaseColumn="EXPORT_ID" msprop:OraDbType="119" type="xs:string" minOccurs="0" />
+                <xs:element name="FRPT_DESCRIPTION" msprop:BaseColumn="FRPT_DESCRIPTION" msprop:OraDbType="119" type="xs:string" minOccurs="0" />
+                <xs:element name="FRPT_LOCACCT_ID" msprop:BaseColumn="FRPT_LOCACCT_ID" msprop:OraDbType="113" type="xs:long" minOccurs="0" />
+                <xs:element name="FRPT_NAME" msprop:BaseColumn="FRPT_NAME" msprop:OraDbType="119" type="xs:string" minOccurs="0" />
+                <xs:element name="ISACTIVE" msprop:BaseColumn="ISACTIVE" msprop:OraDbType="104" type="xs:string" minOccurs="0" />
+                <xs:element name="UPDATED" msprop:BaseColumn="UPDATED" msprop:OraDbType="106" type="xs:dateTime" minOccurs="0" />
+                <xs:element name="UPDATEDBY" msprop:BaseColumn="UPDATEDBY" msprop:OraDbType="113" type="xs:long" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <FRPT_LocAcct>
+    <AD_CLIENT_ID>0</AD_CLIENT_ID>
+    <AD_ORG_ID>0</AD_ORG_ID>
+    <CREATED>2024-10-21T12:42:27+05:30</CREATED>
+    <CREATEDBY>1005369</CREATEDBY>
+    <EXPORT_ID>VA116_1000001</EXPORT_ID>
+    <FRPT_LOCACCT_ID>1000003</FRPT_LOCACCT_ID>
+    <FRPT_NAME>Account Localization (New Screens)</FRPT_NAME>
+    <ISACTIVE>Y</ISACTIVE>
+    <UPDATED>2024-10-25T12:33:00+05:30</UPDATED>
+    <UPDATEDBY>1005369</UPDATEDBY>
+  </FRPT_LocAcct>
+</NewDataSet>

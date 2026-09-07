@@ -1,0 +1,13 @@
+{
+  "entity": "Department",
+  "table": "VA058_Department",
+  "pk": "VA058_Department_ID",
+  "key": { "api": "key", "column": "Value", "label": "Search Key" },
+  "includeStandardCols": true,
+  "_note": "HR department (VA058).",
+  "fields": [
+    { "api": "key", "column": "Value", "type": "string", "required": true, "isKey": true, "maxLen": 50 },
+    { "api": "name", "column": "Name", "type": "string", "required": true, "maxLen": 150 },
+    { "api": "isActive", "column": "IsActive", "type": "boolean", "default": true }
+  ]
+}

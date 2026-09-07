@@ -1,0 +1,2061 @@
+<Windows>
+  <Window>
+    <WindowDisplayName>Post Dated Check</WindowDisplayName>
+    <WindowName>VA027_PostDatedCheck</WindowName>
+    <ad_window_id>1000311</ad_window_id>
+    <export_id>VA027_20000191</export_id>
+    <IsActive>Y</IsActive>
+    <Tab>
+      <TabSeqNo>10</TabSeqNo>
+      <TabName>Post Dated Check</TabName>
+      <TableName>VA027_PostDatedCheck</TableName>
+      <AD_Tab_ID>1000890</AD_Tab_ID>
+      <IsActive>Y</IsActive>
+      <IsDisplayed>Y</IsDisplayed>
+      <IsReadOnly>N</IsReadOnly>
+      <IsAdvancedTab>N</IsAdvancedTab>
+      <Field>
+        <ColumnName>IsActive</ColumnName>
+        <FieldName>Active</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>There are two methods of making records unavailable in the system: One is to delete the record, the other is to de-activate the record. A de-activated record is not available for selection, but available for reports.
+There are two reasons for de-activating and not deleting records:
+(1) The system requires the record for audit purposes.
+(2) The record is referenced by other records. E.g., you cannot delete a Account, if there are invoices for this Account record existing. You de-activate the Account and prevent that this record is used for future entries.</Help>
+      </Field>
+      <Field>
+        <ColumnName>IsSOTrx</ColumnName>
+        <FieldName>Sales Transaction</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Sales Transaction checkbox indicates if this item is a Sales Transaction.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA009_ReadOnly</ColumnName>
+        <FieldName>Read Only</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>N</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA009_IsCancelled</ColumnName>
+        <FieldName>Cancelled</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA009_Printed</ColumnName>
+        <FieldName>Check Printed</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Check Printed</Help>
+      </Field>
+      <Field>
+        <ColumnName>CurrencyRate</ColumnName>
+        <FieldName>Rate</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Currency Conversion Rate indicates the rate to use when converting the source currency to the accounting currency</Help>
+      </Field>
+      <Field>
+        <ColumnName>Processing</ColumnName>
+        <FieldName>Process Now</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA027_PostDatedCheck_ID</ColumnName>
+        <FieldName>Post Dated Check</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA027_IsPrepayment</ColumnName>
+        <FieldName>Prepayment</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA027_AccountDate</ColumnName>
+        <FieldName>Account Date</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>N</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Account Date indicates the date to be used on the General Ledger account entries generated from this document. It is also used for any currency conversion.</Help>
+      </Field>
+      <Field>
+        <ColumnName>Export_ID</ColumnName>
+        <FieldName>Export</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>AD_Client_ID</ColumnName>
+        <FieldName>Tenant</FieldName>
+        <FieldSeqNo>10</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>A Client is a company or a legal entity. You cannot share data between Clients. Tenant is a synonym for Client.</Help>
+      </Field>
+      <Field>
+        <ColumnName>AD_Org_ID</ColumnName>
+        <FieldName>Organization</FieldName>
+        <FieldSeqNo>20</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>An organization is a unit of your Tenant or legal entity - examples are store, department. You can share data between organizations.</Help>
+      </Field>
+      <Field>
+        <ColumnName>DocumentNo</ColumnName>
+        <FieldName>Document No.</FieldName>
+        <FieldSeqNo>30</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Document number is usually automatically generated by the system and determined by the document type of the document. If the document is not saved, the preliminary number is displayed between greater than and less than symbols
+
+If the document type of your document has no automatic document sequence defined, the field is empty if you create a new document. This is for documents which usually have an external number (like vendor invoice).  If you leave the field empty, the system will generate a document number for you. The document sequence used for this fallback number is defined in the &quot;Maintain Sequence&quot; window with the name &quot;DocumentNo_&lt;TableName&gt;&quot;, where TableName is the actual name of the table (e.g. C_Order).</Help>
+      </Field>
+      <Field>
+        <ColumnName>C_DocType_ID</ColumnName>
+        <FieldName>Document Type</FieldName>
+        <FieldSeqNo>40</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Document Type determines document sequence and processing rules</Help>
+      </Field>
+      <Field>
+        <ColumnName>C_BankAccount_ID</ColumnName>
+        <FieldName>Bank Account</FieldName>
+        <FieldSeqNo>50</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Bank Account identifies an account at this Bank.</Help>
+      </Field>
+      <Field>
+        <ColumnName>PDCType</ColumnName>
+        <FieldName>PDC Type</FieldName>
+        <FieldSeqNo>60</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA027_Ref_Payment_ID</ColumnName>
+        <FieldName>Reference PDC</FieldName>
+        <FieldSeqNo>70</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA027_MultiCheque</ColumnName>
+        <FieldName>Multi Cheque</FieldName>
+        <FieldSeqNo>80</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA027_Description</ColumnName>
+        <FieldName>Description</FieldName>
+        <FieldSeqNo>90</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA027_TrxDate</ColumnName>
+        <FieldName>Transaction Date</FieldName>
+        <FieldSeqNo>100</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>DateAcct</ColumnName>
+        <FieldName>Account Date</FieldName>
+        <FieldSeqNo>110</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Account Date indicates the date to be used on the General Ledger account entries generated from this document. It is also used for any currency conversion.</Help>
+      </Field>
+      <Field>
+        <ColumnName>C_BPartner_ID</ColumnName>
+        <FieldName>Business Partner</FieldName>
+        <FieldSeqNo>120</FieldSeqNo>
+        <DisplayLogic>@PDCType@!&apos;D&apos;</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>A Customer/Prospect is anyone with whom you transact.  This can include Vendor, Customer, Employee or Salesperson</Help>
+      </Field>
+      <Field>
+        <ColumnName>C_BPartner_Location_ID</ColumnName>
+        <FieldName>Location</FieldName>
+        <FieldSeqNo>130</FieldSeqNo>
+        <DisplayLogic>@PDCType@!&apos;D&apos;</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>This field identifies the address of the Account/Prospect.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA027_Payee</ColumnName>
+        <FieldName>Payee</FieldName>
+        <FieldSeqNo>140</FieldSeqNo>
+        <DisplayLogic>@PDCType@!&apos;N&apos;</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>C_Invoice_ID</ColumnName>
+        <FieldName>Invoice</FieldName>
+        <FieldSeqNo>150</FieldSeqNo>
+        <DisplayLogic>@PDCType@!&apos;D&apos; &amp; @VA027_MultiCheque@=&apos;N&apos;</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Invoice Document.</Help>
+      </Field>
+      <Field>
+        <ColumnName>C_InvoicePaySchedule_ID</ColumnName>
+        <FieldName>Invoice Payment Schedule</FieldName>
+        <FieldSeqNo>160</FieldSeqNo>
+        <DisplayLogic>@PDCType@!&apos;D&apos; &amp; @VA027_MultiCheque@=&apos;N&apos;</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Invoice Payment Schedule determines when partial payments are due.</Help>
+      </Field>
+      <Field>
+        <ColumnName>C_Order_ID</ColumnName>
+        <FieldName>Order</FieldName>
+        <FieldSeqNo>170</FieldSeqNo>
+        <DisplayLogic>@PDCType@!&apos;D&apos; &amp; @VA027_MultiCheque@=&apos;N&apos;</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Order is a control document.  The  Order is complete when the quantity ordered is the same as the quantity invoiced.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA009_OrderPaySchedule_ID</ColumnName>
+        <FieldName>Order Payment Schedule</FieldName>
+        <FieldSeqNo>180</FieldSeqNo>
+        <DisplayLogic>@PDCType@!&apos;D&apos; &amp; @VA027_MultiCheque@=&apos;N&apos;</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>C_Charge_ID</ColumnName>
+        <FieldName>Charge</FieldName>
+        <FieldSeqNo>190</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Charge indicates a type of Charge (Handling, Shipping, Restocking)</Help>
+      </Field>
+      <Field>
+        <ColumnName>C_Tax_ID</ColumnName>
+        <FieldName>Tax</FieldName>
+        <FieldSeqNo>200</FieldSeqNo>
+        <DisplayLogic>@C_Charge_ID@&gt;0</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Tax indicates the type of tax used in document line.</Help>
+      </Field>
+      <Field>
+        <ColumnName>TaxAmount</ColumnName>
+        <FieldName>TaxAmount</FieldName>
+        <FieldSeqNo>210</FieldSeqNo>
+        <DisplayLogic>@C_Charge_ID@&gt;0</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>SurchargeAmt</ColumnName>
+        <FieldName>Surcharge Amount</FieldName>
+        <FieldSeqNo>220</FieldSeqNo>
+        <DisplayLogic>@C_Charge_ID@&gt;0</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Surcharge Amount displays the total surcharge amount for a document line.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA009_PaymentMethod_ID</ColumnName>
+        <FieldName>Payment Method</FieldName>
+        <FieldSeqNo>230</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>C_Currency_ID</ColumnName>
+        <FieldName>Currency</FieldName>
+        <FieldSeqNo>240</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Indicates the Currency to be used when processing or reporting on this record</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA027_PayAmt</ColumnName>
+        <FieldName>Payment Amount</FieldName>
+        <FieldSeqNo>250</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA027_ConvertedAmount</ColumnName>
+        <FieldName>Converted Amount</FieldName>
+        <FieldSeqNo>260</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA027_DiscountAmt</ColumnName>
+        <FieldName>Discount Amount</FieldName>
+        <FieldSeqNo>270</FieldSeqNo>
+        <DisplayLogic> @C_Invoice_ID@!0 | @C_Order_ID@!0 | @VA027_MultiCheque@=&apos;Y&apos;</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA027_WriteoffAmt</ColumnName>
+        <FieldName>Write Off Amount</FieldName>
+        <FieldSeqNo>280</FieldSeqNo>
+        <DisplayLogic>@C_Invoice_ID@!0 | @C_Order_ID@!0 | @VA027_MultiCheque@=&apos;Y&apos;</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA027_AccountNo</ColumnName>
+        <FieldName>Account Number</FieldName>
+        <FieldSeqNo>290</FieldSeqNo>
+        <DisplayLogic>@VA027_MultiCheque@=&apos;N&apos;</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA027_AccountName</ColumnName>
+        <FieldName>Account Name</FieldName>
+        <FieldSeqNo>300</FieldSeqNo>
+        <DisplayLogic>@VA027_MultiCheque@=&apos;N&apos;</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA027_CheckNo</ColumnName>
+        <FieldName>Check No</FieldName>
+        <FieldSeqNo>310</FieldSeqNo>
+        <DisplayLogic>@VA027_MultiCheque@=&apos;N&apos;</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA027_CheckDate</ColumnName>
+        <FieldName>Check Date</FieldName>
+        <FieldSeqNo>320</FieldSeqNo>
+        <DisplayLogic>@VA027_MultiCheque@=&apos;N&apos;</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA027_ValidMonth</ColumnName>
+        <FieldName>Valid Month</FieldName>
+        <FieldSeqNo>330</FieldSeqNo>
+        <DisplayLogic>@VA027_MultiCheque@=&apos;N&apos;</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA027_MICR</ColumnName>
+        <FieldName>MICR</FieldName>
+        <FieldSeqNo>340</FieldSeqNo>
+        <DisplayLogic>@VA027_MultiCheque@=&apos;N&apos;</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>DocStatus</ColumnName>
+        <FieldName>Document Status</FieldName>
+        <FieldSeqNo>350</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Document Status indicates the status of a document at this time.  If you want to change the document status, use the Document Action field</Help>
+      </Field>
+      <Field>
+        <ColumnName>AsOnDate</ColumnName>
+        <FieldName>As on Date</FieldName>
+        <FieldSeqNo>360</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>OutStandingAmount</ColumnName>
+        <FieldName>Outstanding Amount</FieldName>
+        <FieldSeqNo>370</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>C_Payment_ID</ColumnName>
+        <FieldName>Payment</FieldName>
+        <FieldSeqNo>380</FieldSeqNo>
+        <DisplayLogic>@VA027_MultiCheque@=&apos;N&apos;</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Payment is a unique identifier of this payment.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA027_PaymentStatus</ColumnName>
+        <FieldName>Payment Status</FieldName>
+        <FieldSeqNo>390</FieldSeqNo>
+        <DisplayLogic>@VA027_MultiCheque@=&apos;N&apos;</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>DocAction</ColumnName>
+        <FieldName>Document Action</FieldName>
+        <FieldSeqNo>400</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>You find the current status in the Document Status field. The options are listed in a popup</Help>
+      </Field>
+      <Field>
+        <ColumnName>Posted</ColumnName>
+        <FieldName>Posted</FieldName>
+        <FieldSeqNo>410</FieldSeqNo>
+        <DisplayLogic>@Processed@=&apos;Y&apos;</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Posted field indicates the status of the Generation of General Ledger Accounting Lines </Help>
+      </Field>
+      <Field>
+        <ColumnName>VA027_GeneratePayment</ColumnName>
+        <FieldName>Generate Payment</FieldName>
+        <FieldSeqNo>420</FieldSeqNo>
+        <DisplayLogic>@VA027_GeneratePayment@=&apos;N&apos; &amp; @Processed@=&apos;Y&apos;</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA027_PaymentGenerated</ColumnName>
+        <FieldName>Payment Generated</FieldName>
+        <FieldSeqNo>430</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>Processed</ColumnName>
+        <FieldName>Processed</FieldName>
+        <FieldSeqNo>440</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Processed checkbox indicates that a document has been processed.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA027_DiscountingPDC</ColumnName>
+        <FieldName>Discounting PDC</FieldName>
+        <FieldSeqNo>450</FieldSeqNo>
+        <DisplayLogic>@VA027_MultiCheque@=&apos;N&apos; &amp; @IsSOTrx@=Y &amp; @C_Payment_ID@=0</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>IsApproved</ColumnName>
+        <FieldName>Approved</FieldName>
+        <FieldSeqNo>460</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Approved checkbox indicates if this document requires approval before it can be processed.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA009_PrintCheck</ColumnName>
+        <FieldName>Print Check</FieldName>
+        <FieldSeqNo>470</FieldSeqNo>
+        <DisplayLogic>@DocStatus@=&apos;CO&apos; &amp; @VA009_Printed@=&apos;N&apos;</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Print Check</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA009_RePrintCheck</ColumnName>
+        <FieldName>Re-Print Check</FieldName>
+        <FieldSeqNo>480</FieldSeqNo>
+        <DisplayLogic>@DocStatus@=&apos;CO&apos; &amp; @VA009_Printed@=&apos;Y&apos;</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Re-Print Check</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA009_CancelCheck</ColumnName>
+        <FieldName>Cancel Check</FieldName>
+        <FieldSeqNo>490</FieldSeqNo>
+        <DisplayLogic>@DocStatus@=&apos;RE&apos; | @DocStatus@=&apos;VO&apos; &amp; @VA009_IsCancelled@=&apos;N&apos;</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Cancel Check</Help>
+      </Field>
+    </Tab>
+    <Tab>
+      <TabSeqNo>20</TabSeqNo>
+      <TabName>Check Details</TabName>
+      <TableName>VA027_ChequeDetails</TableName>
+      <AD_Tab_ID>1000894</AD_Tab_ID>
+      <IsActive>Y</IsActive>
+      <IsDisplayed>Y</IsDisplayed>
+      <IsReadOnly>N</IsReadOnly>
+      <DisplayLogic>@VA027_MultiCheque@=&apos;Y&apos;</DisplayLogic>
+      <IsAdvancedTab>N</IsAdvancedTab>
+      <Field>
+        <ColumnName>VA027_ChequeDetails_ID</ColumnName>
+        <FieldName>Cheque Detail</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA027_IsCheckAllocated</ColumnName>
+        <FieldName>IsCheckAllocated</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>It indicates that data is available on allocate tab</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA009_IsCancelled</ColumnName>
+        <FieldName>Cancelled</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA009_Printed</ColumnName>
+        <FieldName>Check Printed</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Check Printed</Help>
+      </Field>
+      <Field>
+        <ColumnName>Export_ID</ColumnName>
+        <FieldName>Export</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>IsActive</ColumnName>
+        <FieldName>Active</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>There are two methods of making records unavailable in the system: One is to delete the record, the other is to de-activate the record. A de-activated record is not available for selection, but available for reports.
+There are two reasons for de-activating and not deleting records:
+(1) The system requires the record for audit purposes.
+(2) The record is referenced by other records. E.g., you cannot delete a Account, if there are invoices for this Account record existing. You de-activate the Account and prevent that this record is used for future entries.</Help>
+      </Field>
+      <Field>
+        <ColumnName>AD_Client_ID</ColumnName>
+        <FieldName>Tenant</FieldName>
+        <FieldSeqNo>10</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>A Client is a company or a legal entity. You cannot share data between Clients. Tenant is a synonym for Client.</Help>
+      </Field>
+      <Field>
+        <ColumnName>AD_Org_ID</ColumnName>
+        <FieldName>Organization</FieldName>
+        <FieldSeqNo>20</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>An organization is a unit of your Tenant or legal entity - examples are store, department. You can share data between organizations.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA027_PostDatedCheck_ID</ColumnName>
+        <FieldName>Post Dated Check</FieldName>
+        <FieldSeqNo>30</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>LineNo</ColumnName>
+        <FieldName>Line</FieldName>
+        <FieldSeqNo>40</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA027_CheckNo</ColumnName>
+        <FieldName>Check No</FieldName>
+        <FieldSeqNo>50</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA027_CheckDate</ColumnName>
+        <FieldName>Check Date</FieldName>
+        <FieldSeqNo>60</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA027_ChequeAmount</ColumnName>
+        <FieldName>Cheque Amount</FieldName>
+        <FieldSeqNo>70</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA027_ValidMonth</ColumnName>
+        <FieldName>Valid Month</FieldName>
+        <FieldSeqNo>80</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA027_MICR</ColumnName>
+        <FieldName>MICR</FieldName>
+        <FieldSeqNo>90</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA027_AccountNo</ColumnName>
+        <FieldName>Account Number</FieldName>
+        <FieldSeqNo>100</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA027_AccountName</ColumnName>
+        <FieldName>Account Name</FieldName>
+        <FieldSeqNo>110</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA027_PaymentStatus</ColumnName>
+        <FieldName>Payment Status</FieldName>
+        <FieldSeqNo>120</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>C_Payment_ID</ColumnName>
+        <FieldName>Payment</FieldName>
+        <FieldSeqNo>130</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Payment is a unique identifier of this payment.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA027_DiscountingPDC</ColumnName>
+        <FieldName>Discounting PDC</FieldName>
+        <FieldSeqNo>140</FieldSeqNo>
+        <DisplayLogic>@IsSOTrx@=Y</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>Processed</ColumnName>
+        <FieldName>Processed</FieldName>
+        <FieldSeqNo>150</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Processed checkbox indicates that a document has been processed.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA009_PrintCheck</ColumnName>
+        <FieldName>Print Check</FieldName>
+        <FieldSeqNo>160</FieldSeqNo>
+        <DisplayLogic>@DocStatus@=&apos;CO&apos; &amp; @VA009_Printed@=&apos;N&apos;</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Print Check</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA009_RePrintCheck</ColumnName>
+        <FieldName>Re-Print Check</FieldName>
+        <FieldSeqNo>170</FieldSeqNo>
+        <DisplayLogic>@DocStatus@=&apos;CO&apos; &amp; @VA009_Printed@=&apos;Y&apos;</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Re-Print Check</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA009_CancelCheck</ColumnName>
+        <FieldName>Cancel Check</FieldName>
+        <FieldSeqNo>180</FieldSeqNo>
+        <DisplayLogic>@DocStatus@=&apos;RE&apos; | @DocStatus@=&apos;VO&apos; &amp; @VA009_IsCancelled@=&apos;N&apos;</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Cancel Check</Help>
+      </Field>
+    </Tab>
+    <Tab>
+      <TabSeqNo>30</TabSeqNo>
+      <TabName>Allocate</TabName>
+      <TableName>VA027_CheckAllocate</TableName>
+      <AD_Tab_ID>1001216</AD_Tab_ID>
+      <IsActive>Y</IsActive>
+      <IsDisplayed>Y</IsDisplayed>
+      <IsReadOnly>N</IsReadOnly>
+      <DisplayLogic>@VA027_MultiCheque@=&apos;Y&apos; &amp; @C_Charge_ID@=0</DisplayLogic>
+      <IsAdvancedTab>N</IsAdvancedTab>
+      <Field>
+        <ColumnName>VA027_CheckAllocate_ID</ColumnName>
+        <FieldName>VA027_CheckAllocate_ID</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>Export_ID</ColumnName>
+        <FieldName>Export</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>IsActive</ColumnName>
+        <FieldName>Active</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>There are two methods of making records unavailable in the system: One is to delete the record, the other is to de-activate the record. A de-activated record is not available for selection, but available for reports.
+There are two reasons for de-activating and not deleting records:
+(1) The system requires the record for audit purposes.
+(2) The record is referenced by other records. E.g., you cannot delete a Account, if there are invoices for this Account record existing. You de-activate the Account and prevent that this record is used for future entries.</Help>
+      </Field>
+      <Field>
+        <ColumnName>AD_Client_ID</ColumnName>
+        <FieldName>Tenant</FieldName>
+        <FieldSeqNo>10</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>A Client is a company or a legal entity. You cannot share data between Clients. Tenant is a synonym for Client.</Help>
+      </Field>
+      <Field>
+        <ColumnName>AD_Org_ID</ColumnName>
+        <FieldName>Organization</FieldName>
+        <FieldSeqNo>20</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>An organization is a unit of your Tenant or legal entity - examples are store, department. You can share data between organizations.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA027_ChequeDetails_ID</ColumnName>
+        <FieldName>Cheque Detail</FieldName>
+        <FieldSeqNo>30</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>C_Invoice_ID</ColumnName>
+        <FieldName>Invoice</FieldName>
+        <FieldSeqNo>40</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Invoice Document.</Help>
+      </Field>
+      <Field>
+        <ColumnName>C_InvoicePaySchedule_ID</ColumnName>
+        <FieldName>Invoice Payment Schedule</FieldName>
+        <FieldSeqNo>50</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Invoice Payment Schedule determines when partial payments are due.</Help>
+      </Field>
+      <Field>
+        <ColumnName>Amount</ColumnName>
+        <FieldName>Amount</FieldName>
+        <FieldSeqNo>60</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Amount indicates the amount for this document line.</Help>
+      </Field>
+      <Field>
+        <ColumnName>InvoiceAmt</ColumnName>
+        <FieldName>Invoice Amt</FieldName>
+        <FieldSeqNo>70</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>WriteOffAmt</ColumnName>
+        <FieldName>Write-off Amount</FieldName>
+        <FieldSeqNo>80</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Write Off Amount indicates the amount to be written off as uncollectible.</Help>
+      </Field>
+      <Field>
+        <ColumnName>DiscountAmt</ColumnName>
+        <FieldName>Discount Amount</FieldName>
+        <FieldSeqNo>90</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Discount Amount indicates the discount amount for a document or line.</Help>
+      </Field>
+    </Tab>
+  </Window>
+  <Window>
+    <WindowDisplayName>Post Dated Check</WindowDisplayName>
+    <WindowName>VA027_PostDateCheck</WindowName>
+    <ad_window_id>1001048</ad_window_id>
+    <export_id>VA027_20000818</export_id>
+    <IsActive>Y</IsActive>
+    <Tab>
+      <TabSeqNo>10</TabSeqNo>
+      <TabName>Post Dated Check</TabName>
+      <TableName>VA027_PostDatedCheck</TableName>
+      <AD_Tab_ID>1002808</AD_Tab_ID>
+      <IsActive>Y</IsActive>
+      <IsDisplayed>Y</IsDisplayed>
+      <IsReadOnly>N</IsReadOnly>
+      <IsAdvancedTab>N</IsAdvancedTab>
+      <Field>
+        <ColumnName>AD_Client_ID</ColumnName>
+        <FieldName>Tenant</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>A Client is a company or a legal entity. You cannot share data between Clients. Tenant is a synonym for Client.</Help>
+      </Field>
+      <Field>
+        <ColumnName>ReversalDoc_ID</ColumnName>
+        <FieldName>Reversal Document</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>This field will be update once document is reversed. This is keep the reference of its original document. </Help>
+      </Field>
+      <Field>
+        <ColumnName>IsReversal</ColumnName>
+        <FieldName>Reversal</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Reversal check box indicates if this is a reversal of a prior transaction.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VAS_ReversedDate</ColumnName>
+        <FieldName>Reversed Date</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>IsSOTrx</ColumnName>
+        <FieldName>Sales Transaction</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Sales Transaction checkbox indicates if this item is a Sales Transaction.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA009_ReadOnly</ColumnName>
+        <FieldName>Read Only</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA009_IsCancelled</ColumnName>
+        <FieldName>Cancelled</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA009_Printed</ColumnName>
+        <FieldName>Check Printed</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Check Printed</Help>
+      </Field>
+      <Field>
+        <ColumnName>OutStandingAmount</ColumnName>
+        <FieldName>Outstanding Amount</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>AsOnDate</ColumnName>
+        <FieldName>As on Date</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>CurrencyRate</ColumnName>
+        <FieldName>Rate</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Currency Conversion Rate indicates the rate to use when converting the source currency to the accounting currency</Help>
+      </Field>
+      <Field>
+        <ColumnName>Processing</ColumnName>
+        <FieldName>Process Now</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA027_PostDatedCheck_ID</ColumnName>
+        <FieldName>VA027_PostDatedCheck_ID</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA027_IsPrepayment</ColumnName>
+        <FieldName>Prepayment</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA027_AccountDate</ColumnName>
+        <FieldName>Account Date</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>Export_ID</ColumnName>
+        <FieldName>Export</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA027_Label</ColumnName>
+        <FieldName>Label</FieldName>
+        <FieldSeqNo>10</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>N</IsCentrallyMaintained>
+        <Help>Post Dated Check</Help>
+      </Field>
+      <Field>
+        <ColumnName>AD_Org_ID</ColumnName>
+        <FieldName>Organization</FieldName>
+        <FieldSeqNo>20</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>An organization is a unit of your Tenant or legal entity - examples are store, department. You can share data between organizations.</Help>
+      </Field>
+      <Field>
+        <ColumnName>DocumentNo</ColumnName>
+        <FieldName>Document No.</FieldName>
+        <FieldSeqNo>30</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Document number is usually automatically generated by the system and determined by the document type of the document. If the document is not saved, the preliminary number is displayed between greater than and less than symbols
+
+If the document type of your document has no automatic document sequence defined, the field is empty if you create a new document. This is for documents which usually have an external number (like vendor invoice).  If you leave the field empty, the system will generate a document number for you. The document sequence used for this fallback number is defined in the &quot;Maintain Sequence&quot; window with the name &quot;DocumentNo_&lt;TableName&gt;&quot;, where TableName is the actual name of the table (e.g. C_Order).</Help>
+      </Field>
+      <Field>
+        <ColumnName>DocAction</ColumnName>
+        <FieldName>Complete</FieldName>
+        <FieldSeqNo>40</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>N</IsCentrallyMaintained>
+        <Help>You find the current status in the Document Status field. The options are listed in a popup</Help>
+      </Field>
+      <Field>
+        <ColumnName>C_DocType_ID</ColumnName>
+        <FieldName>Document Type</FieldName>
+        <FieldSeqNo>50</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Document Type determines document sequence and processing rules</Help>
+      </Field>
+      <Field>
+        <ColumnName>C_BankAccount_ID</ColumnName>
+        <FieldName>Bank Account</FieldName>
+        <FieldSeqNo>60</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Bank Account identifies an account at this Bank.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA027_CheckBtn</ColumnName>
+        <FieldName> Check Details</FieldName>
+        <FieldSeqNo>70</FieldSeqNo>
+        <DisplayLogic>@VA027_MultiCheque@=&apos;Y&apos;</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA027_GeneratePayment</ColumnName>
+        <FieldName>Generate Payment</FieldName>
+        <FieldSeqNo>80</FieldSeqNo>
+        <DisplayLogic>@DocStatus@=&apos;CO&apos; | @DocStatus@=&apos;CL&apos;	</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>PDCType</ColumnName>
+        <FieldName>PDC Type</FieldName>
+        <FieldSeqNo>90</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA027_Ref_Payment_ID</ColumnName>
+        <FieldName>Reference PDC</FieldName>
+        <FieldSeqNo>100</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>Posted</ColumnName>
+        <FieldName>Posted</FieldName>
+        <FieldSeqNo>105</FieldSeqNo>
+        <DisplayLogic>@Processed@=&apos;Y&apos;</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Posted field indicates the status of the Generation of General Ledger Accounting Lines </Help>
+      </Field>
+      <Field>
+        <ColumnName>VA027_Description</ColumnName>
+        <FieldName>Description</FieldName>
+        <FieldSeqNo>110</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA027_TrxDate</ColumnName>
+        <FieldName>Transaction Date</FieldName>
+        <FieldSeqNo>120</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>DateAcct</ColumnName>
+        <FieldName>Account Date</FieldName>
+        <FieldSeqNo>130</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Account Date indicates the date to be used on the General Ledger account entries generated from this document. It is also used for any currency conversion.</Help>
+      </Field>
+      <Field>
+        <ColumnName>C_BPartner_ID</ColumnName>
+        <FieldName>Business Partner</FieldName>
+        <FieldSeqNo>140</FieldSeqNo>
+        <DisplayLogic>@PDCType@!&apos;D&apos;</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>A Customer/Prospect is anyone with whom you transact.  This can include Vendor, Customer, Employee or Salesperson</Help>
+      </Field>
+      <Field>
+        <ColumnName>C_BPartner_Location_ID</ColumnName>
+        <FieldName>Location</FieldName>
+        <FieldSeqNo>150</FieldSeqNo>
+        <DisplayLogic>@PDCType@!&apos;D&apos;</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>This field identifies the address of the Account/Prospect.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA027_MultiCheque</ColumnName>
+        <FieldName>Multi Cheque</FieldName>
+        <FieldSeqNo>160</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA027_Payee</ColumnName>
+        <FieldName>Payee</FieldName>
+        <FieldSeqNo>170</FieldSeqNo>
+        <DisplayLogic>@PDCType@!&apos;N&apos;</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>C_Invoice_ID</ColumnName>
+        <FieldName>Invoice</FieldName>
+        <FieldSeqNo>180</FieldSeqNo>
+        <DisplayLogic>@PDCType@!&apos;D&apos; &amp; @VA027_MultiCheque@=&apos;N&apos;</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Invoice Document.</Help>
+      </Field>
+      <Field>
+        <ColumnName>C_InvoicePaySchedule_ID</ColumnName>
+        <FieldName>Invoice Payment Schedule</FieldName>
+        <FieldSeqNo>190</FieldSeqNo>
+        <DisplayLogic>@PDCType@!&apos;D&apos; &amp; @VA027_MultiCheque@=&apos;N&apos;</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Invoice Payment Schedule determines when partial payments are due.</Help>
+      </Field>
+      <Field>
+        <ColumnName>C_Order_ID</ColumnName>
+        <FieldName>Order</FieldName>
+        <FieldSeqNo>200</FieldSeqNo>
+        <DisplayLogic>@PDCType@!&apos;D&apos; &amp; @VA027_MultiCheque@=&apos;N&apos;</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Order is a control document.  The  Order is complete when the quantity ordered is the same as the quantity invoiced.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA009_OrderPaySchedule_ID</ColumnName>
+        <FieldName>Order Payment Schedule</FieldName>
+        <FieldSeqNo>210</FieldSeqNo>
+        <DisplayLogic>@PDCType@!&apos;D&apos; &amp; @VA027_MultiCheque@=&apos;N&apos;</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>C_Charge_ID</ColumnName>
+        <FieldName>Charge</FieldName>
+        <FieldSeqNo>220</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Charge indicates a type of Charge (Handling, Shipping, Restocking)</Help>
+      </Field>
+      <Field>
+        <ColumnName>C_Tax_ID</ColumnName>
+        <FieldName>Tax</FieldName>
+        <FieldSeqNo>230</FieldSeqNo>
+        <DisplayLogic>@C_Charge_ID@&gt;0</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Tax indicates the type of tax used in document line.</Help>
+      </Field>
+      <Field>
+        <ColumnName>TaxAmount</ColumnName>
+        <FieldName>TaxAmount</FieldName>
+        <FieldSeqNo>240</FieldSeqNo>
+        <DisplayLogic>@C_Charge_ID@&gt;0</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>SurchargeAmt</ColumnName>
+        <FieldName>Surcharge Amount</FieldName>
+        <FieldSeqNo>250</FieldSeqNo>
+        <DisplayLogic>@C_Charge_ID@&gt;0</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Surcharge Amount displays the total surcharge amount for a document line.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA009_PaymentMethod_ID</ColumnName>
+        <FieldName>Payment Method</FieldName>
+        <FieldSeqNo>260</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>C_Currency_ID</ColumnName>
+        <FieldName>Currency</FieldName>
+        <FieldSeqNo>270</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Indicates the Currency to be used when processing or reporting on this record</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA027_PayAmt</ColumnName>
+        <FieldName>Payment Amount</FieldName>
+        <FieldSeqNo>280</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA027_ConvertedAmount</ColumnName>
+        <FieldName>Converted Amount</FieldName>
+        <FieldSeqNo>290</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA027_DiscountAmt</ColumnName>
+        <FieldName>Discount Amount</FieldName>
+        <FieldSeqNo>300</FieldSeqNo>
+        <DisplayLogic> @C_Invoice_ID@!0 | @C_Order_ID@!0 | @VA027_MultiCheque@=&apos;Y&apos;</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA027_WriteoffAmt</ColumnName>
+        <FieldName>Write Off Amount</FieldName>
+        <FieldSeqNo>310</FieldSeqNo>
+        <DisplayLogic>@C_Invoice_ID@!0 | @C_Order_ID@!0 | @VA027_MultiCheque@=&apos;Y&apos;</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA027_AccountNo</ColumnName>
+        <FieldName>Account Number</FieldName>
+        <FieldSeqNo>320</FieldSeqNo>
+        <DisplayLogic>@VA027_MultiCheque@=&apos;N&apos;</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA027_AccountName</ColumnName>
+        <FieldName>Account Name</FieldName>
+        <FieldSeqNo>330</FieldSeqNo>
+        <DisplayLogic>@VA027_MultiCheque@=&apos;N&apos;</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA027_CheckNo</ColumnName>
+        <FieldName>Check No</FieldName>
+        <FieldSeqNo>340</FieldSeqNo>
+        <DisplayLogic>@VA027_MultiCheque@=&apos;N&apos;</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA027_CheckDate</ColumnName>
+        <FieldName>Check Date</FieldName>
+        <FieldSeqNo>350</FieldSeqNo>
+        <DisplayLogic>@VA027_MultiCheque@=&apos;N&apos;</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA027_ValidMonth</ColumnName>
+        <FieldName>Valid Month</FieldName>
+        <FieldSeqNo>360</FieldSeqNo>
+        <DisplayLogic>@VA027_MultiCheque@=&apos;N&apos;</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA027_MICR</ColumnName>
+        <FieldName>MICR</FieldName>
+        <FieldSeqNo>370</FieldSeqNo>
+        <DisplayLogic>@VA027_MultiCheque@=&apos;N&apos;</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>DocStatus</ColumnName>
+        <FieldName>Document Status</FieldName>
+        <FieldSeqNo>380</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Document Status indicates the status of a document at this time.  If you want to change the document status, use the Document Action field</Help>
+      </Field>
+      <Field>
+        <ColumnName>C_Payment_ID</ColumnName>
+        <FieldName>Payment</FieldName>
+        <FieldSeqNo>390</FieldSeqNo>
+        <DisplayLogic>@VA027_MultiCheque@=&apos;N&apos;</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Payment is a unique identifier of this payment.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA027_PaymentStatus</ColumnName>
+        <FieldName>Payment Status</FieldName>
+        <FieldSeqNo>400</FieldSeqNo>
+        <DisplayLogic>@VA027_MultiCheque@=&apos;N&apos;</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA027_PaymentGenerated</ColumnName>
+        <FieldName>Payment Generated</FieldName>
+        <FieldSeqNo>410</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA027_DiscountingPDC</ColumnName>
+        <FieldName>Discounting PDC</FieldName>
+        <FieldSeqNo>420</FieldSeqNo>
+        <DisplayLogic>@VA027_MultiCheque@=&apos;N&apos; &amp; @IsSOTrx@=Y &amp; @C_Payment_ID@=0</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>Processed</ColumnName>
+        <FieldName>Processed</FieldName>
+        <FieldSeqNo>430</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Processed checkbox indicates that a document has been processed.</Help>
+      </Field>
+      <Field>
+        <ColumnName>IsApproved</ColumnName>
+        <FieldName>Approved</FieldName>
+        <FieldSeqNo>440</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Approved checkbox indicates if this document requires approval before it can be processed.</Help>
+      </Field>
+      <Field>
+        <ColumnName>IsActive</ColumnName>
+        <FieldName>Active</FieldName>
+        <FieldSeqNo>450</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>There are two methods of making records unavailable in the system: One is to delete the record, the other is to de-activate the record. A de-activated record is not available for selection, but available for reports.
+There are two reasons for de-activating and not deleting records:
+(1) The system requires the record for audit purposes.
+(2) The record is referenced by other records. E.g., you cannot delete a Account, if there are invoices for this Account record existing. You de-activate the Account and prevent that this record is used for future entries.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA009_PrintCheck</ColumnName>
+        <FieldName>Print Check</FieldName>
+        <FieldSeqNo>460</FieldSeqNo>
+        <DisplayLogic>@DocStatus@=&apos;CO&apos; &amp; @VA009_Printed@=&apos;N&apos;</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Print Check</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA009_RePrintCheck</ColumnName>
+        <FieldName>Re-Print Check</FieldName>
+        <FieldSeqNo>470</FieldSeqNo>
+        <DisplayLogic>@DocStatus@=&apos;CO&apos; &amp; @VA009_Printed@=&apos;Y&apos;</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Re-Print Check</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA009_CancelCheck</ColumnName>
+        <FieldName>Cancel Check</FieldName>
+        <FieldSeqNo>480</FieldSeqNo>
+        <DisplayLogic>@DocStatus@=&apos;RE&apos; | @DocStatus@=&apos;VO&apos; &amp; @VA009_IsCancelled@=&apos;N&apos;</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Cancel Check</Help>
+      </Field>
+    </Tab>
+    <Tab>
+      <TabSeqNo>20</TabSeqNo>
+      <TabName>Check Details</TabName>
+      <TableName>VA027_ChequeDetails</TableName>
+      <AD_Tab_ID>1002809</AD_Tab_ID>
+      <IsActive>Y</IsActive>
+      <IsDisplayed>Y</IsDisplayed>
+      <IsReadOnly>N</IsReadOnly>
+      <DisplayLogic>@VA027_MultiCheque@=&apos;Y&apos;</DisplayLogic>
+      <IsAdvancedTab>N</IsAdvancedTab>
+      <Field>
+        <ColumnName>VA027_ChequeDetails_ID</ColumnName>
+        <FieldName>Cheque Detail</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA027_IsCheckAllocated</ColumnName>
+        <FieldName>IsCheckAllocated</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>It indicates that data is available on allocate tab</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA009_IsCancelled</ColumnName>
+        <FieldName>Cancelled</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA009_Printed</ColumnName>
+        <FieldName>Check Printed</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Check Printed</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA027_PostDatedCheck_ID</ColumnName>
+        <FieldName>VA027_PostDatedCheck_ID</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>Export_ID</ColumnName>
+        <FieldName>Export</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>AD_Client_ID</ColumnName>
+        <FieldName>Tenant</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>A Client is a company or a legal entity. You cannot share data between Clients. Tenant is a synonym for Client.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA027_Label</ColumnName>
+        <FieldName>Label</FieldName>
+        <FieldSeqNo>10</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>N</IsCentrallyMaintained>
+        <Help>Check Details</Help>
+      </Field>
+      <Field>
+        <ColumnName>AD_Org_ID</ColumnName>
+        <FieldName>Organization</FieldName>
+        <FieldSeqNo>20</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>An organization is a unit of your Tenant or legal entity - examples are store, department. You can share data between organizations.</Help>
+      </Field>
+      <Field>
+        <ColumnName>LineNo</ColumnName>
+        <FieldName>Line</FieldName>
+        <FieldSeqNo>30</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA027_AllocateBtn</ColumnName>
+        <FieldName>Allocate</FieldName>
+        <FieldSeqNo>40</FieldSeqNo>
+        <DisplayLogic>@VA027_MultiCheque@=&apos;Y&apos; &amp; @C_Charge_ID@=0</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA027_CheckNo</ColumnName>
+        <FieldName>Check No</FieldName>
+        <FieldSeqNo>50</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA027_CheckDate</ColumnName>
+        <FieldName>Check Date</FieldName>
+        <FieldSeqNo>60</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA027_ChequeAmount</ColumnName>
+        <FieldName>Check Amount</FieldName>
+        <FieldSeqNo>70</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>N</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA027_ValidMonth</ColumnName>
+        <FieldName>Valid Month</FieldName>
+        <FieldSeqNo>80</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA027_MICR</ColumnName>
+        <FieldName>MICR</FieldName>
+        <FieldSeqNo>90</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA027_AccountNo</ColumnName>
+        <FieldName>Account Number</FieldName>
+        <FieldSeqNo>100</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA027_AccountName</ColumnName>
+        <FieldName>Account Name</FieldName>
+        <FieldSeqNo>110</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>VA027_PaymentStatus</ColumnName>
+        <FieldName>Payment Status</FieldName>
+        <FieldSeqNo>120</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>C_Payment_ID</ColumnName>
+        <FieldName>Payment</FieldName>
+        <FieldSeqNo>130</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Payment is a unique identifier of this payment.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA027_DiscountingPDC</ColumnName>
+        <FieldName>Discounting PDC</FieldName>
+        <FieldSeqNo>140</FieldSeqNo>
+        <DisplayLogic>@IsSOTrx@=Y</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>Processed</ColumnName>
+        <FieldName>Processed</FieldName>
+        <FieldSeqNo>150</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Processed checkbox indicates that a document has been processed.</Help>
+      </Field>
+      <Field>
+        <ColumnName>IsActive</ColumnName>
+        <FieldName>Active</FieldName>
+        <FieldSeqNo>160</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>There are two methods of making records unavailable in the system: One is to delete the record, the other is to de-activate the record. A de-activated record is not available for selection, but available for reports.
+There are two reasons for de-activating and not deleting records:
+(1) The system requires the record for audit purposes.
+(2) The record is referenced by other records. E.g., you cannot delete a Account, if there are invoices for this Account record existing. You de-activate the Account and prevent that this record is used for future entries.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA009_PrintCheck</ColumnName>
+        <FieldName>Print Check</FieldName>
+        <FieldSeqNo>170</FieldSeqNo>
+        <DisplayLogic>@DocStatus@=&apos;CO&apos; &amp; @VA009_Printed@=&apos;N&apos;</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Print Check</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA009_RePrintCheck</ColumnName>
+        <FieldName>Re-Print Check</FieldName>
+        <FieldSeqNo>180</FieldSeqNo>
+        <DisplayLogic>@DocStatus@=&apos;CO&apos; &amp; @VA009_Printed@=&apos;Y&apos;</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Re-Print Check</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA009_CancelCheck</ColumnName>
+        <FieldName>Cancel Check</FieldName>
+        <FieldSeqNo>190</FieldSeqNo>
+        <DisplayLogic>@DocStatus@=&apos;RE&apos; | @DocStatus@=&apos;VO&apos; &amp; @VA009_IsCancelled@=&apos;N&apos;</DisplayLogic>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>Cancel Check</Help>
+      </Field>
+    </Tab>
+    <Tab>
+      <TabSeqNo>30</TabSeqNo>
+      <TabName>Allocate</TabName>
+      <TableName>VA027_CheckAllocate</TableName>
+      <AD_Tab_ID>1002810</AD_Tab_ID>
+      <IsActive>Y</IsActive>
+      <IsDisplayed>Y</IsDisplayed>
+      <IsReadOnly>N</IsReadOnly>
+      <IsAdvancedTab>N</IsAdvancedTab>
+      <Field>
+        <ColumnName>VA027_CheckAllocate_ID</ColumnName>
+        <FieldName>VA027_CheckAllocate_ID</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>Export_ID</ColumnName>
+        <FieldName>Export</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>AD_Client_ID</ColumnName>
+        <FieldName>Tenant</FieldName>
+        <FieldSeqNo>0</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>N</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>A Client is a company or a legal entity. You cannot share data between Clients. Tenant is a synonym for Client.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA027_Label</ColumnName>
+        <FieldName>Label</FieldName>
+        <FieldSeqNo>10</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>N</IsCentrallyMaintained>
+        <Help>Allocate</Help>
+      </Field>
+      <Field>
+        <ColumnName>AD_Org_ID</ColumnName>
+        <FieldName>Organization</FieldName>
+        <FieldSeqNo>20</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>An organization is a unit of your Tenant or legal entity - examples are store, department. You can share data between organizations.</Help>
+      </Field>
+      <Field>
+        <ColumnName>VA027_ChequeDetails_ID</ColumnName>
+        <FieldName>Check Detail</FieldName>
+        <FieldSeqNo>30</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>N</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>C_Invoice_ID</ColumnName>
+        <FieldName>Invoice</FieldName>
+        <FieldSeqNo>40</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Invoice Document.</Help>
+      </Field>
+      <Field>
+        <ColumnName>C_InvoicePaySchedule_ID</ColumnName>
+        <FieldName>Invoice Payment Schedule</FieldName>
+        <FieldSeqNo>50</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Invoice Payment Schedule determines when partial payments are due.</Help>
+      </Field>
+      <Field>
+        <ColumnName>Amount</ColumnName>
+        <FieldName>Amount</FieldName>
+        <FieldSeqNo>60</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Amount indicates the amount for this document line.</Help>
+      </Field>
+      <Field>
+        <ColumnName>InvoiceAmt</ColumnName>
+        <FieldName>Invoice Amt</FieldName>
+        <FieldSeqNo>70</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>Y</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+      </Field>
+      <Field>
+        <ColumnName>WriteOffAmt</ColumnName>
+        <FieldName>Write-off Amount</FieldName>
+        <FieldSeqNo>80</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Write Off Amount indicates the amount to be written off as uncollectible.</Help>
+      </Field>
+      <Field>
+        <ColumnName>DiscountAmt</ColumnName>
+        <FieldName>Discount Amount</FieldName>
+        <FieldSeqNo>90</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>The Discount Amount indicates the discount amount for a document or line.</Help>
+      </Field>
+      <Field>
+        <ColumnName>IsActive</ColumnName>
+        <FieldName>Active</FieldName>
+        <FieldSeqNo>100</FieldSeqNo>
+        <IsActive>Y</IsActive>
+        <IsDisplayed>Y</IsDisplayed>
+        <IsReadOnly>N</IsReadOnly>
+        <IsCentrallyMaintained>Y</IsCentrallyMaintained>
+        <Help>There are two methods of making records unavailable in the system: One is to delete the record, the other is to de-activate the record. A de-activated record is not available for selection, but available for reports.
+There are two reasons for de-activating and not deleting records:
+(1) The system requires the record for audit purposes.
+(2) The record is referenced by other records. E.g., you cannot delete a Account, if there are invoices for this Account record existing. You de-activate the Account and prevent that this record is used for future entries.</Help>
+      </Field>
+    </Tab>
+  </Window>
+</Windows>

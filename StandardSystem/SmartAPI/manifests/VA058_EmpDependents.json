@@ -1,0 +1,31 @@
+{
+  "entity": "EmployeeDependent",
+  "table": "VA058_EmpDependents",
+  "pk": "VA058_EmpDependents_ID",
+  "key": { "api": "key", "column": "Name", "label": "Dependent Name" },
+  "keyScope": ["businessPartner"],
+  "includeStandardCols": true,
+  "_note": "Employee dependent (VA058), 1:N per employee. Dependent qualifications are children.",
+  "fields": [
+    { "api": "key", "column": "Name", "type": "string", "required": true, "isKey": true, "maxLen": 150 },
+    { "api": "businessPartner", "column": "C_BPartner_ID", "type": "ref", "required": true,
+      "ref": { "table": "C_BPartner", "matchOn": "Value", "returns": "C_BPartner_ID" } },
+    { "api": "relationType", "column": "VA058_RelationType", "type": "list",
+      "list": { "Brother": "BR", "Child": "CH", "Father": "FA", "Grandfather": "GF", "Grandmother": "GM",
+                "In-Law": "IL", "Mother": "MO", "Spouse": "S1", "Sister": "SS" } },
+    { "api": "gender", "column": "VA058_Gender", "type": "list",
+      "list": { "Female": "F", "Male": "M" } },
+    { "api": "dateOfBirth", "column": "VA058_DOB", "type": "string", "help": "ISO date" },
+    { "api": "isActive", "column": "IsActive", "type": "boolean", "default": true }
+  ],
+  "children": {
+    "qualifications": {
+      "table": "VA058_EmpDepQualif",
+      "pk": "VA058_EmpDepQualif_ID",
+      "parentLink": "VA058_EmpDependents_ID",
+      "fields": [
+        { "api": "name", "column": "Name", "type": "string", "required": true, "maxLen": 150 }
+      ]
+    }
+  }
+}
