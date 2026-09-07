@@ -1,0 +1,117 @@
+{
+  "entity": "BusinessPartner",
+  "table": "C_BPartner",
+  "pk": "C_BPartner_ID",
+  "key": { "api": "key", "column": "Value", "label": "Search Key" },
+  "identifierColumns": ["Value", "Name"],
+  "includeStandardCols": true,
+
+  "_note": "v1 curated subset of C_BPartner (420 cols total). Generated from Wiki/Tables/C_BPartner.md. 'ref.matchOn' values are the assumed business key of each referenced table — VERIFY against each table's IsIdentifier column before go-live (see README open item 3). 'list' maps are human-label -> stored code; DeliveryRule/InvoiceRule codes are confirmed from the table doc, others marked TODO to populate from the LOV.",
+
+  "fields": [
+    { "api": "key",          "column": "Value",        "type": "string",  "required": true, "isKey": true, "maxLen": 80 },
+    { "api": "name",         "column": "Name",         "type": "string",  "required": true, "maxLen": 80 },
+    { "api": "name2",        "column": "Name2",        "type": "string",  "maxLen": 60 },
+    { "api": "description",  "column": "Description",  "type": "string",  "maxLen": 255 },
+    { "api": "isActive",     "column": "IsActive",     "type": "boolean", "default": true },
+
+    { "api": "isCustomer",   "column": "IsCustomer",   "type": "boolean", "default": false },
+    { "api": "isVendor",     "column": "IsVendor",     "type": "boolean", "default": false },
+    { "api": "isProspect",   "column": "IsProspect",   "type": "boolean", "default": false },
+    { "api": "isEmployee",   "column": "IsEmployee",   "type": "boolean", "default": false },
+    { "api": "isSalesRep",   "column": "IsSalesRep",   "type": "boolean", "default": false },
+
+    { "api": "taxId",        "column": "TaxID",        "type": "string",  "maxLen": 20 },
+    { "api": "duns",         "column": "DUNS",         "type": "string",  "maxLen": 12 },
+    { "api": "referenceNo",  "column": "ReferenceNo",  "type": "string",  "maxLen": 40 },
+    { "api": "url",          "column": "URL",          "type": "string",  "maxLen": 120 },
+    { "api": "email",        "column": "EMail",        "type": "string",  "maxLen": 50 },
+    { "api": "phone",        "column": "Phone",        "type": "string",  "maxLen": 40 },
+    { "api": "mobile",       "column": "Mobile",       "type": "string",  "maxLen": 25 },
+    { "api": "fax",          "column": "Fax",          "type": "string",  "maxLen": 50 },
+
+    { "api": "creditLimit",  "column": "SO_CreditLimit", "type": "number", "default": 0 },
+    { "api": "flatDiscount", "column": "FlatDiscount",   "type": "number" },
+
+    { "api": "group", "column": "C_BP_Group_ID", "type": "ref", "required": true,
+      "ref": { "table": "C_BP_Group", "matchOn": "Value", "returns": "C_BP_Group_ID" },
+      "help": "Customer/Prospect Category (NN in C_BPartner)" },
+
+    { "api": "priceList", "column": "M_PriceList_ID", "type": "ref",
+      "ref": { "table": "M_PriceList", "matchOn": "Name", "returns": "M_PriceList_ID" } },
+
+    { "api": "paymentTerm", "column": "C_PaymentTerm_ID", "type": "ref",
+      "ref": { "table": "C_PaymentTerm", "matchOn": "Value", "returns": "C_PaymentTerm_ID" } },
+
+    { "api": "greeting", "column": "C_Greeting_ID", "type": "ref",
+      "ref": { "table": "C_Greeting", "matchOn": "Name", "returns": "C_Greeting_ID" } },
+
+    { "api": "country", "column": "C_Country_ID", "type": "ref",
+      "ref": { "table": "C_Country", "matchOn": "CountryCode", "returns": "C_Country_ID" },
+      "help": "ISO 3166 alpha-2, e.g. DE, US" },
+
+    { "api": "salesRegion", "column": "C_SalesRegion_ID", "type": "ref",
+      "ref": { "table": "C_SalesRegion", "matchOn": "Value", "returns": "C_SalesRegion_ID" } },
+
+    { "api": "deliveryRule", "column": "DeliveryRule", "type": "list",
+      "list": { "Availability": "A", "Force": "F", "Complete Line": "L", "Manual": "M", "Complete Order": "O" } },
+
+    { "api": "invoiceRule", "column": "InvoiceRule", "type": "list",
+      "list": { "After Partial Delivery": "D", "Immediate": "I", "After Full Order Delivery": "O", "Customer Schedule after Delivery": "S" } },
+
+    { "api": "paymentRule", "column": "PaymentRule", "type": "list",
+      "list": { "_TODO": "populate 9 codes from C_BPartner.md > List values > PaymentRule" } }
+  ],
+
+  "children": {
+    "contacts": {
+      "table": "AD_User",
+      "pk": "AD_User_ID",
+      "parentLink": "C_BPartner_ID",
+      "fields": [
+        { "api": "key",   "column": "Value", "type": "string", "maxLen": 80, "help": "contact search key (model auto-generates if omitted)" },
+        { "api": "name",  "column": "Name",  "type": "string", "required": true, "maxLen": 60 },
+        { "api": "email", "column": "EMail", "type": "string", "required": true, "maxLen": 100, "help": "NN in AD_User" },
+        { "api": "phone", "column": "Phone", "type": "string", "maxLen": 21 }
+      ]
+    },
+
+    "locations": {
+      "table": "C_BPartner_Location",
+      "pk": "C_BPartner_Location_ID",
+      "parentLink": "C_BPartner_ID",
+      "fields": [
+        { "api": "name",     "column": "Name",      "type": "string",  "required": true, "maxLen": 500, "help": "location label, e.g. 'Main'" },
+        { "api": "isBillTo", "column": "IsBillTo",  "type": "boolean", "default": true },
+        { "api": "isShipTo", "column": "IsShipTo",  "type": "boolean", "default": true },
+        { "api": "isPayFrom","column": "IsPayFrom", "type": "boolean", "default": false },
+        { "api": "isRemitTo","column": "IsRemitTo", "type": "boolean", "default": false },
+        { "api": "phone",    "column": "Phone",     "type": "string",  "maxLen": 40 },
+
+        { "api": "address", "column": "C_Location_ID", "type": "ownedRef",
+          "help": "the physical address (creates a C_Location, NN in C_BPartner_Location)",
+          "owned": {
+            "table": "C_Location",
+            "pk": "C_Location_ID",
+            "fields": [
+              { "api": "address1",   "column": "Address1",   "type": "string", "maxLen": 60 },
+              { "api": "address2",   "column": "Address2",   "type": "string", "maxLen": 60 },
+              { "api": "city",       "column": "City",       "type": "string", "maxLen": 60 },
+              { "api": "postal",     "column": "Postal",     "type": "string", "maxLen": 10 },
+              { "api": "regionName", "column": "RegionName", "type": "string", "maxLen": 40 },
+              { "api": "country", "column": "C_Country_ID", "type": "ref", "required": true,
+                "ref": { "table": "C_Country", "matchOn": "CountryCode", "returns": "C_Country_ID" },
+                "help": "ISO alpha-2, e.g. DE (NN in C_Location)" }
+            ]
+          }
+        }
+      ]
+    }
+  },
+
+  "actions": {
+    "generateOpportunity": { "searchKey": "Prospect to Opportunity", "label": "Generate Opportunity (from a prospect)" },
+    "generateCustomer":    { "searchKey": "GenerateAccount",         "label": "Generate Customer" },
+    "addToTargetList":     { "searchKey": "Create Target List",      "label": "Add To Target List" }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "entity": "AccountGroup",
+  "table": "C_AccountGroup",
+  "pk": "C_AccountGroup_ID",
+  "key": { "api": "key", "column": "Name", "label": "Account Group Name" },
+  "identifierColumns": ["Name", "Value"],
+  "includeStandardCols": true,
+
+  "_note": "Account group = C_AccountGroup (keyed by Name; groups chart-of-accounts values for reporting).",
+
+  "fields": [
+    { "api": "key",      "column": "Name",  "type": "string",  "required": true, "isKey": true, "maxLen": 200 },
+    { "api": "value",    "column": "Value", "type": "string",  "maxLen": 50, "help": "optional search key" },
+    { "api": "isActive", "column": "IsActive", "type": "boolean", "default": true }
+  ]
+}

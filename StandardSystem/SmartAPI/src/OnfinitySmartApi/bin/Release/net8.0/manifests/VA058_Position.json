@@ -1,0 +1,31 @@
+{
+  "entity": "Position",
+  "table": "VA058_Position",
+  "pk": "VA058_Position_ID",
+  "key": { "api": "key", "column": "Value", "label": "Search Key" },
+  "includeStandardCols": true,
+  "_note": "HR position (VA058), with linked grades as children. job is required; grade/qualification optional.",
+  "fields": [
+    { "api": "key", "column": "Value", "type": "string", "required": true, "isKey": true, "maxLen": 100 },
+    { "api": "name", "column": "Name", "type": "string", "required": true, "maxLen": 150 },
+    { "api": "startDate", "column": "VA058_StartDate", "type": "string", "required": true, "help": "ISO date (NN)" },
+    { "api": "job", "column": "VA058_Job_ID", "type": "ref", "required": true,
+      "ref": { "table": "VA058_Job", "matchOn": "Value", "returns": "VA058_Job_ID" } },
+    { "api": "grade", "column": "VA058_Grade_ID", "type": "ref",
+      "ref": { "table": "VA058_Grade", "matchOn": "Value", "returns": "VA058_Grade_ID" } },
+    { "api": "qualification", "column": "VA058_Qualification_ID", "type": "ref",
+      "ref": { "table": "VA058_Qualification", "matchOn": "Name", "returns": "VA058_Qualification_ID" } },
+    { "api": "isActive", "column": "IsActive", "type": "boolean", "default": true }
+  ],
+  "children": {
+    "linkedGrades": {
+      "table": "VA058_PosLinkedGrades",
+      "pk": "VA058_PosLinkedGrades_ID",
+      "parentLink": "VA058_Position_ID",
+      "fields": [
+        { "api": "grade", "column": "VA058_Grade_ID", "type": "ref", "required": true,
+          "ref": { "table": "VA058_Grade", "matchOn": "Value", "returns": "VA058_Grade_ID" } }
+      ]
+    }
+  }
+}

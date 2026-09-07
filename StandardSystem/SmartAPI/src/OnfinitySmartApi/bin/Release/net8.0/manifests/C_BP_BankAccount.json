@@ -1,0 +1,20 @@
+{
+  "entity": "PartnerBankAccount",
+  "table": "C_BP_BankAccount",
+  "pk": "C_BP_BankAccount_ID",
+  "key": { "api": "accountNo", "column": "AccountNo", "label": "Account No" },
+  "keyScope": ["businessPartner"],
+  "includeStandardCols": true,
+  "_note": "Bank account of a business partner / employee (C_BP_BankAccount). Keyed by account no per partner. C_Bank must already exist (Bank entity).",
+  "fields": [
+    { "api": "accountNo", "column": "AccountNo", "type": "string", "required": true, "isKey": true, "maxLen": 20 },
+    { "api": "businessPartner", "column": "C_BPartner_ID", "type": "ref", "required": true,
+      "ref": { "table": "C_BPartner", "matchOn": "Value", "returns": "C_BPartner_ID" } },
+    { "api": "bank", "column": "C_Bank_ID", "type": "ref",
+      "ref": { "table": "C_Bank", "matchOn": "Name", "returns": "C_Bank_ID" } },
+    { "api": "accountName", "column": "A_Name", "type": "string", "maxLen": 60 },
+    { "api": "bban", "column": "BBAN", "type": "string", "maxLen": 40 },
+    { "api": "isACH", "column": "IsACH", "type": "boolean", "default": false },
+    { "api": "isActive", "column": "IsActive", "type": "boolean", "default": true }
+  ]
+}

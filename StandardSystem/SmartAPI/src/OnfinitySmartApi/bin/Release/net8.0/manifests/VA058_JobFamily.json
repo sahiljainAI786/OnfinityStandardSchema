@@ -1,0 +1,14 @@
+{
+  "entity": "JobFamily",
+  "table": "VA058_JobFamily",
+  "pk": "VA058_JobFamily_ID",
+  "key": { "api": "key", "column": "Value", "label": "Search Key" },
+  "includeStandardCols": true,
+  "_note": "HR job family (VA058). Part of the Workday payroll integration org-structure set.",
+  "fields": [
+    { "api": "key", "column": "Value", "type": "string", "required": true, "isKey": true, "maxLen": 100 },
+    { "api": "name", "column": "Name", "type": "string", "required": true, "maxLen": 60 },
+    { "api": "startDate", "column": "VA058_StartDate", "type": "string", "required": true, "help": "ISO date (NN)" },
+    { "api": "isActive", "column": "IsActive", "type": "boolean", "default": true }
+  ]
+}

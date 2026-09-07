@@ -1,0 +1,13 @@
+{
+  "entity": "Channel",
+  "table": "C_Channel",
+  "pk": "C_Channel_ID",
+  "key": { "api": "key", "column": "Name", "label": "Channel Name" },
+  "identifierColumns": ["Name"],
+  "includeStandardCols": true,
+  "_note": "Sales channel = C_Channel (no Value; keyed by Name; what Campaign 'channel' resolves).",
+  "fields": [
+    { "api": "key", "column": "Name", "type": "string", "required": true, "isKey": true, "maxLen": 60 },
+    { "api": "isActive", "column": "IsActive", "type": "boolean", "default": true }
+  ]
+}

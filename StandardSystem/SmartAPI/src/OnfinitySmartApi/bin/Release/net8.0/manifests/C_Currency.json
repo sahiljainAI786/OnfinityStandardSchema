@@ -1,0 +1,21 @@
+{
+  "entity": "Currency",
+  "table": "C_Currency",
+  "pk": "C_Currency_ID",
+  "key": { "api": "key", "column": "ISO_Code", "label": "ISO Currency Code" },
+  "identifierColumns": ["ISO_Code"],
+  "includeStandardCols": true,
+
+  "_note": "Currency = C_Currency, keyed by the 3-letter ISO code (the same value used as a ref elsewhere). Usually system/shared data.",
+
+  "fields": [
+    { "api": "key",              "column": "ISO_Code",         "type": "string",  "required": true, "isKey": true, "maxLen": 3 },
+    { "api": "description",      "column": "Description",      "type": "string",  "required": true, "maxLen": 255 },
+    { "api": "symbol",           "column": "CurSymbol",        "type": "string",  "maxLen": 10 },
+    { "api": "stdPrecision",     "column": "StdPrecision",     "type": "number",  "default": 2, "help": "decimal places for amounts" },
+    { "api": "costingPrecision", "column": "CostingPrecision", "type": "number",  "default": 4 },
+    { "api": "isEuro",           "column": "IsEuro",           "type": "boolean", "default": false },
+    { "api": "isEMUMember",      "column": "IsEMUMember",      "type": "boolean", "default": false },
+    { "api": "isActive",         "column": "IsActive",         "type": "boolean", "default": true }
+  ]
+}

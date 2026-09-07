@@ -1,0 +1,50 @@
+{
+  "entity": "FiscalYear",
+  "table": "C_Year",
+  "pk": "C_Year_ID",
+  "key": { "api": "key", "column": "FiscalYear", "label": "Fiscal Year" },
+  "identifierColumns": ["FiscalYear"],
+  "keyScope": ["calendar"],
+  "includeStandardCols": true,
+
+  "_note": "Fiscal/accounting year = C_Year, with its periods as children (C_Period). Keyed by FiscalYear (the year string, e.g. '2026') - unique per calendar, so if multiple calendars share a year value the key is ambiguous (use a single calendar, or filter). 'calendar' is the parent C_Calendar (required). Periods can be created here, or auto-generated in Onfinity via the Create Periods process.",
+
+  "fields": [
+    { "api": "key",         "column": "FiscalYear",  "type": "string",  "required": true, "isKey": true, "maxLen": 10,
+      "help": "the year, e.g. '2026'" },
+    { "api": "description", "column": "Description",  "type": "string",  "maxLen": 255 },
+    { "api": "isActive",    "column": "IsActive",    "type": "boolean", "default": true },
+
+    { "api": "calendar", "column": "C_Calendar_ID", "type": "ref", "required": true,
+      "ref": { "table": "C_Calendar", "matchOn": "Name", "returns": "C_Calendar_ID" },
+      "help": "the accounting calendar this year belongs to" }
+  ],
+
+  "children": {
+    "periods": {
+      "table": "C_Period",
+      "pk": "C_Period_ID",
+      "parentLink": "C_Year_ID",
+      "fields": [
+        { "api": "name",       "column": "Name",       "type": "string", "required": true, "maxLen": 60, "help": "e.g. 'Jan-26'" },
+        { "api": "periodNo",   "column": "PeriodNo",   "type": "number", "required": true, "help": "1-12 (NN)" },
+        { "api": "startDate",  "column": "StartDate",  "type": "string", "required": true, "help": "ISO date (NN)" },
+        { "api": "endDate",    "column": "EndDate",    "type": "string", "help": "ISO date" },
+        { "api": "periodType", "column": "PeriodType", "type": "list", "required": true,
+          "list": { "Standard": "S", "Adjustment": "A" } }
+      ]
+    }
+  },
+
+  "actions": {
+    "createPeriods": {
+      "searchKey": "C_Year Create Periods",
+      "label": "Create the calendar periods for this year (auto-generates the standard monthly periods)",
+      "params": [
+        { "name": "Month_ID", "api": "month", "type": "string", "required": false,
+          "help": "optional specific month; omit to create the full set of periods" }
+      ],
+      "_note": "Record-bound process on C_Year. For this keyScoped entity, pass 'calendar' in the body so the right year is selected, e.g. POST /v1/FiscalYear/2026/actions/createPeriods { \"calendar\": \"OMEGO Calendar\" }."
+    }
+  }
+}

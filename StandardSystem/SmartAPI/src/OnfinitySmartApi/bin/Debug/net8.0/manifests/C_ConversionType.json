@@ -1,0 +1,17 @@
+{
+  "entity": "ConversionType",
+  "table": "C_ConversionType",
+  "pk": "C_ConversionType_ID",
+  "key": { "api": "key", "column": "Value", "label": "Search Key" },
+  "identifierColumns": ["Value", "Name"],
+  "includeStandardCols": true,
+
+  "_note": "Currency rate type = C_ConversionType (Spot, Corporate, ...). Referenced by CurrencyRate.",
+
+  "fields": [
+    { "api": "key",       "column": "Value",     "type": "string",  "required": true, "isKey": true, "maxLen": 40 },
+    { "api": "name",      "column": "Name",      "type": "string",  "required": true, "maxLen": 60 },
+    { "api": "isDefault", "column": "IsDefault", "type": "boolean", "default": false },
+    { "api": "isActive",  "column": "IsActive",  "type": "boolean", "default": true }
+  ]
+}

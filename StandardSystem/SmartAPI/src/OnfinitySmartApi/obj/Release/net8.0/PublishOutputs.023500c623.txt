@@ -1,0 +1,13 @@
+C:\VA Standard\StandardSystem\SmartAPI\publish\OnfinitySmartApi.exe
+C:\VA Standard\StandardSystem\SmartAPI\publish\appsettings.json
+C:\VA Standard\StandardSystem\SmartAPI\publish\appsettings.Production.json
+C:\VA Standard\StandardSystem\SmartAPI\publish\manifests\C_BPartner.json
+C:\VA Standard\StandardSystem\SmartAPI\publish\manifests\M_Product.json
+C:\VA Standard\StandardSystem\SmartAPI\publish\OnfinitySmartApi.dll
+C:\VA Standard\StandardSystem\SmartAPI\publish\OnfinitySmartApi.deps.json
+C:\VA Standard\StandardSystem\SmartAPI\publish\OnfinitySmartApi.runtimeconfig.json
+C:\VA Standard\StandardSystem\SmartAPI\publish\OnfinitySmartApi.pdb
+C:\VA Standard\StandardSystem\SmartAPI\publish\Microsoft.OpenApi.dll
+C:\VA Standard\StandardSystem\SmartAPI\publish\Swashbuckle.AspNetCore.Swagger.dll
+C:\VA Standard\StandardSystem\SmartAPI\publish\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\VA Standard\StandardSystem\SmartAPI\publish\Swashbuckle.AspNetCore.SwaggerUI.dll

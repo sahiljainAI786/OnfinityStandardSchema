@@ -1,0 +1,16 @@
+{
+  "entity": "Calendar",
+  "table": "C_Calendar",
+  "pk": "C_Calendar_ID",
+  "key": { "api": "key", "column": "Name", "label": "Calendar Name" },
+  "identifierColumns": ["Name"],
+  "includeStandardCols": true,
+
+  "_note": "Accounting calendar = C_Calendar (no Value; keyed by Name). Years (C_Year) reference it; create those via the FiscalYear entity.",
+
+  "fields": [
+    { "api": "key",         "column": "Name",        "type": "string",  "required": true, "isKey": true, "maxLen": 60 },
+    { "api": "description", "column": "Description",  "type": "string",  "maxLen": 255 },
+    { "api": "isActive",    "column": "IsActive",    "type": "boolean", "default": true }
+  ]
+}

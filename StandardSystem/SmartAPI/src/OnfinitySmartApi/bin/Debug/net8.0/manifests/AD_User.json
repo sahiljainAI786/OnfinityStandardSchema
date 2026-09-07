@@ -1,0 +1,26 @@
+{
+  "entity": "User",
+  "table": "AD_User",
+  "pk": "AD_User_ID",
+  "key": { "api": "key", "column": "Value", "label": "Search Key" },
+  "identifierColumns": ["Value", "Name", "EMail"],
+  "includeStandardCols": true,
+
+  "_note": "System user / contact = AD_User (keyed by Value). EMail is NN. Can be a standalone user or linked to a partner (businessPartner). Login enabling / password are handled separately.",
+
+  "fields": [
+    { "api": "key",         "column": "Value",       "type": "string", "required": true, "isKey": true, "maxLen": 40 },
+    { "api": "name",        "column": "Name",        "type": "string", "required": true, "maxLen": 60 },
+    { "api": "email",       "column": "EMail",       "type": "string", "required": true, "maxLen": 100 },
+    { "api": "phone",       "column": "Phone",       "type": "string", "maxLen": 40 },
+    { "api": "description", "column": "Description",  "type": "string", "maxLen": 255 },
+    { "api": "isActive",    "column": "IsActive",    "type": "boolean", "default": true },
+
+    { "api": "role", "column": "AD_Role_ID", "type": "ref",
+      "ref": { "table": "AD_Role", "matchOn": "Name", "returns": "AD_Role_ID" } },
+    { "api": "businessPartner", "column": "C_BPartner_ID", "type": "ref",
+      "ref": { "table": "C_BPartner", "matchOn": "Value", "returns": "C_BPartner_ID" } },
+    { "api": "greeting", "column": "C_Greeting_ID", "type": "ref",
+      "ref": { "table": "C_Greeting", "matchOn": "Name", "returns": "C_Greeting_ID" } }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "entity": "Bank",
+  "table": "C_Bank",
+  "pk": "C_Bank_ID",
+  "key": { "api": "key", "column": "Name", "label": "Bank Name" },
+  "identifierColumns": ["Name", "RoutingNo"],
+  "includeStandardCols": true,
+
+  "_note": "Bank = C_Bank (no Value; keyed by Name). Its accounts are children (C_BankAccount).",
+
+  "fields": [
+    { "api": "key",       "column": "Name",      "type": "string",  "required": true, "isKey": true, "maxLen": 60 },
+    { "api": "routingNo", "column": "RoutingNo", "type": "string",  "required": true, "maxLen": 20, "help": "ABA / routing number (NN)" },
+    { "api": "isOwnBank", "column": "IsOwnBank", "type": "boolean", "default": true, "help": "own bank vs a partner's bank" },
+    { "api": "isActive",  "column": "IsActive",  "type": "boolean", "default": true }
+  ],
+
+  "children": {
+    "bankAccounts": {
+      "table": "C_BankAccount",
+      "pk": "C_BankAccount_ID",
+      "parentLink": "C_Bank_ID",
+      "fields": [
+        { "api": "accountNo",   "column": "AccountNo",   "type": "string", "required": true, "maxLen": 250 },
+        { "api": "accountType", "column": "BankAccountType", "type": "list", "required": true,
+          "list": { "Checking": "C", "Savings": "S" } },
+        { "api": "currency", "column": "C_Currency_ID", "type": "ref",
+          "ref": { "table": "C_Currency", "matchOn": "ISO_Code", "returns": "C_Currency_ID" } },
+        { "api": "creditLimit",  "column": "CreditLimit",    "type": "number",  "default": 0 },
+        { "api": "currentBalance","column": "CurrentBalance", "type": "number", "default": 0 },
+        { "api": "isDefault",    "column": "IsDefault",      "type": "boolean", "default": false }
+      ]
+    }
+  }
+}

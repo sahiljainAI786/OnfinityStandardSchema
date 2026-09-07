@@ -1,0 +1,26 @@
+{
+  "entity": "Tax",
+  "table": "C_Tax",
+  "pk": "C_Tax_ID",
+  "key": { "api": "key", "column": "Name", "label": "Tax Name" },
+  "identifierColumns": ["Name"],
+  "includeStandardCols": true,
+
+  "_note": "Tax rate = C_Tax (keyed by Name). Rate is a percentage (NN). taxCategory/country resolved by identifier.",
+
+  "fields": [
+    { "api": "key",            "column": "Name",          "type": "string",  "required": true, "isKey": true, "maxLen": 60 },
+    { "api": "rate",           "column": "Rate",          "type": "number",  "required": true, "help": "percentage, e.g. 19" },
+    { "api": "isSalesTax",     "column": "IsSalesTax",    "type": "boolean", "default": false },
+    { "api": "isDocumentLevel","column": "IsDocumentLevel","type": "boolean", "default": false },
+    { "api": "isTaxExempt",    "column": "IsTaxExempt",   "type": "boolean", "default": false },
+    { "api": "isDefault",      "column": "IsDefault",     "type": "boolean", "default": false },
+    { "api": "isSummary",      "column": "IsSummary",     "type": "boolean", "default": false },
+    { "api": "isActive",       "column": "IsActive",      "type": "boolean", "default": true },
+
+    { "api": "taxCategory", "column": "C_TaxCategory_ID", "type": "ref",
+      "ref": { "table": "C_TaxCategory", "matchOn": "Name", "returns": "C_TaxCategory_ID" } },
+    { "api": "country", "column": "C_Country_ID", "type": "ref",
+      "ref": { "table": "C_Country", "matchOn": "CountryCode", "returns": "C_Country_ID" } }
+  ]
+}

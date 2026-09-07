@@ -1,0 +1,24 @@
+{
+  "entity": "Charge",
+  "table": "C_Charge",
+  "pk": "C_Charge_ID",
+  "key": { "api": "key", "column": "Name", "label": "Charge Name" },
+  "identifierColumns": ["Name"],
+  "includeStandardCols": true,
+
+  "_note": "Charge = C_Charge (keyed by Name). E.g. Handling, Shipping, Restocking. C_TaxCategory is NN/required.",
+
+  "fields": [
+    { "api": "key",       "column": "Name",      "type": "string",  "required": true, "isKey": true, "maxLen": 60 },
+    { "api": "chargeAmt", "column": "ChargeAmt", "type": "number",  "default": 0 },
+    { "api": "isSameTax",      "column": "IsSameTax",      "type": "boolean", "default": true },
+    { "api": "isSameCurrency", "column": "IsSameCurrency", "type": "boolean", "default": true },
+    { "api": "isTaxIncluded",  "column": "IsTaxIncluded",  "type": "boolean", "default": false },
+    { "api": "isActive",       "column": "IsActive",       "type": "boolean", "default": true },
+
+    { "api": "taxCategory", "column": "C_TaxCategory_ID", "type": "ref", "required": true,
+      "ref": { "table": "C_TaxCategory", "matchOn": "Name", "returns": "C_TaxCategory_ID" } },
+    { "api": "activity", "column": "C_Activity_ID", "type": "ref",
+      "ref": { "table": "C_Activity", "matchOn": "Value", "returns": "C_Activity_ID" } }
+  ]
+}

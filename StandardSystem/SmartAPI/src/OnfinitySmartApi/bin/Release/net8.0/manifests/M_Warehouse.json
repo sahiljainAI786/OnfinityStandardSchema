@@ -1,0 +1,54 @@
+{
+  "entity": "Warehouse",
+  "table": "M_Warehouse",
+  "pk": "M_Warehouse_ID",
+  "key": { "api": "key", "column": "Value", "label": "Search Key" },
+  "identifierColumns": ["Value", "Name"],
+  "includeStandardCols": true,
+
+  "_note": "Warehouse = M_Warehouse (keyed by Value; what 'warehouse' refs resolve). C_Location_ID (address) is NN -> created as an owned C_Location. Locators are children (M_Locator).",
+
+  "fields": [
+    { "api": "key",       "column": "Value", "type": "string",  "required": true, "isKey": true, "maxLen": 40 },
+    { "api": "name",      "column": "Name",  "type": "string",  "required": true, "maxLen": 60 },
+    { "api": "separator", "column": "Separator", "type": "string", "default": "-", "maxLen": 1 },
+    { "api": "isDisallowNegativeInv", "column": "IsDisallowNegativeInv", "type": "boolean", "default": false },
+    { "api": "isWMSEnabled", "column": "IsWMSEnabled", "type": "boolean", "default": false },
+    { "api": "isActive",  "column": "IsActive", "type": "boolean", "default": true },
+
+    { "api": "address", "column": "C_Location_ID", "type": "ownedRef",
+      "help": "the warehouse address (creates a C_Location, NN)",
+      "owned": {
+        "table": "C_Location",
+        "pk": "C_Location_ID",
+        "fields": [
+          { "api": "address1",   "column": "Address1",   "type": "string", "maxLen": 60 },
+          { "api": "city",       "column": "City",       "type": "string", "maxLen": 60 },
+          { "api": "postal",     "column": "Postal",     "type": "string", "maxLen": 10 },
+          { "api": "country", "column": "C_Country_ID", "type": "ref", "required": true,
+            "ref": { "table": "C_Country", "matchOn": "CountryCode", "returns": "C_Country_ID" } }
+        ]
+      }
+    }
+  ],
+
+  "children": {
+    "locators": {
+      "table": "M_Locator",
+      "pk": "M_Locator_ID",
+      "parentLink": "M_Warehouse_ID",
+      "fields": [
+        { "api": "value",      "column": "Value", "type": "string", "required": true, "maxLen": 40, "help": "locator key, e.g. 'A-01-01'" },
+        { "api": "x",          "column": "X",     "type": "string", "maxLen": 60, "help": "aisle" },
+        { "api": "y",          "column": "Y",     "type": "string", "maxLen": 60, "help": "bin" },
+        { "api": "z",          "column": "Z",     "type": "string", "maxLen": 60, "help": "level" },
+        { "api": "isDefault",  "column": "IsDefault",  "type": "boolean", "default": false },
+        { "api": "priorityNo", "column": "PriorityNo", "type": "number", "default": 50 },
+        { "api": "pickingSeqNo","column": "PickingSeqNo","type": "number", "default": 0 },
+        { "api": "putawaySeqNo","column": "PutawaySeqNo","type": "number", "default": 0 },
+        { "api": "isAvailableForAllocation", "column": "IsAvailableForAllocation", "type": "boolean", "default": true },
+        { "api": "isAvailableToPromise",     "column": "IsAvailableToPromise",     "type": "boolean", "default": true }
+      ]
+    }
+  }
+}

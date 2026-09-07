@@ -1,7 +1,0 @@
-# secrets — never commit
-.erplive.env
-*.secret
-
-# build output
-src/**/bin/
-src/**/obj/

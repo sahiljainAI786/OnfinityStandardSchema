@@ -1,0 +1,16 @@
+{
+  "entity": "Job",
+  "table": "VA058_Job",
+  "pk": "VA058_Job_ID",
+  "key": { "api": "key", "column": "Value", "label": "Search Key" },
+  "includeStandardCols": true,
+  "_note": "HR job / role master (VA058). References a job family.",
+  "fields": [
+    { "api": "key", "column": "Value", "type": "string", "required": true, "isKey": true, "maxLen": 30 },
+    { "api": "name", "column": "Name", "type": "string", "required": true, "maxLen": 100 },
+    { "api": "startDate", "column": "VA058_StartDate", "type": "string", "required": true, "help": "ISO date (NN)" },
+    { "api": "jobFamily", "column": "VA058_JobFamily_ID", "type": "ref", "required": true,
+      "ref": { "table": "VA058_JobFamily", "matchOn": "Value", "returns": "VA058_JobFamily_ID" } },
+    { "api": "isActive", "column": "IsActive", "type": "boolean", "default": true }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "entity": "HolidayCalendar",
+  "table": "VA058_HolidayCalndr",
+  "pk": "VA058_HolidayCalndr_ID",
+  "key": { "api": "key", "column": "VA058_HolidayCalendarName", "label": "Holiday Calendar Name" },
+  "includeStandardCols": true,
+  "_note": "HR holiday calendar (VA058). Its days are the separate HolidayDay entity (which refs this calendar).",
+  "fields": [
+    { "api": "key", "column": "VA058_HolidayCalendarName", "type": "string", "required": true, "isKey": true, "maxLen": 150 },
+    { "api": "startDate", "column": "VA058_StartDate", "type": "string", "help": "ISO date" },
+    { "api": "endDate", "column": "VA058_EndDate", "type": "string", "help": "ISO date" },
+    { "api": "isActive", "column": "IsActive", "type": "boolean", "default": true }
+  ]
+}

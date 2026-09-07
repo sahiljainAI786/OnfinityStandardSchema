@@ -1,0 +1,53 @@
+{
+  "entity": "Lead",
+  "table": "C_Lead",
+  "pk": "C_Lead_ID",
+  "key": { "api": "key", "column": "DocumentNo", "label": "External reference (Document No)" },
+  "identifierColumns": ["DocumentNo", "Name"],
+  "includeStandardCols": true,
+
+  "_note": "CRM lead (C_Lead). No Value/search-key column on this table -> keyed by DocumentNo, which the caller supplies as their external lead reference (idempotency / dedupe). Refs source/qualification resolve by Name; campaign/businessPartner/salesRegion by Value; country by CountryCode.",
+
+  "fields": [
+    { "api": "key",        "column": "DocumentNo", "type": "string", "required": true, "isKey": true, "maxLen": 30,
+      "help": "your external lead reference; reused for upsert/dedupe" },
+    { "api": "name",       "column": "Name",        "type": "string", "required": true, "maxLen": 60 },
+    { "api": "company",    "column": "BPName",      "type": "string", "maxLen": 60 },
+    { "api": "firstName",  "column": "FirstName",   "type": "string", "maxLen": 60 },
+    { "api": "lastName",   "column": "LastName",    "type": "string", "maxLen": 60 },
+    { "api": "contactName","column": "ContactName", "type": "string", "maxLen": 60 },
+    { "api": "email",      "column": "EMail",       "type": "string", "maxLen": 60 },
+    { "api": "phone",      "column": "Phone",       "type": "string", "maxLen": 40 },
+    { "api": "mobile",     "column": "Mobile",      "type": "string", "maxLen": 50 },
+    { "api": "title",      "column": "Title",       "type": "string", "maxLen": 40 },
+    { "api": "url",        "column": "URL",         "type": "string", "maxLen": 120 },
+    { "api": "description","column": "Description", "type": "string", "maxLen": 1000 },
+    { "api": "numberEmployees", "column": "NumberEmployees", "type": "number" },
+    { "api": "salesVolume",     "column": "SalesVolume",     "type": "number" },
+    { "api": "isQualified",     "column": "IsQualified",     "type": "boolean", "default": false },
+
+    { "api": "leadTarget", "column": "C_Lead_Target", "type": "list",
+      "list": { "Customer": "CO", "Partnership": "PS" } },
+
+    { "api": "source", "column": "R_Source_ID", "type": "ref",
+      "ref": { "table": "R_Source", "matchOn": "Name", "returns": "R_Source_ID" } },
+    { "api": "qualification", "column": "C_LeadQualification_ID", "type": "ref",
+      "ref": { "table": "C_LeadQualification", "matchOn": "Name", "returns": "C_LeadQualification_ID" } },
+    { "api": "campaign", "column": "C_Campaign_ID", "type": "ref",
+      "ref": { "table": "C_Campaign", "matchOn": "Value", "returns": "C_Campaign_ID" } },
+    { "api": "businessPartner", "column": "C_BPartner_ID", "type": "ref",
+      "ref": { "table": "C_BPartner", "matchOn": "Value", "returns": "C_BPartner_ID" },
+      "help": "link to an existing partner by its key" },
+    { "api": "country", "column": "C_Country_ID", "type": "ref",
+      "ref": { "table": "C_Country", "matchOn": "CountryCode", "returns": "C_Country_ID" } },
+    { "api": "salesRegion", "column": "C_SalesRegion_ID", "type": "ref",
+      "ref": { "table": "C_SalesRegion", "matchOn": "Value", "returns": "C_SalesRegion_ID" } }
+  ],
+
+  "actions": {
+    "generateProspect":    { "searchKey": "C_Lead BPartner",    "label": "Generate Prospect (convert lead to a business partner)" },
+    "generateOpportunity": { "searchKey": "Lead to Opportunity", "label": "Generate Opportunity" },
+    "createRequest":       { "searchKey": "C_Lead Request",      "label": "Create Request" },
+    "addToTargetList":     { "searchKey": "Lead to Target",      "label": "Add To Target List" }
+  }
+}

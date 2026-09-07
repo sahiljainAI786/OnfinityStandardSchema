@@ -1,0 +1,51 @@
+{
+  "entity": "Element",
+  "table": "C_Element",
+  "pk": "C_Element_ID",
+  "key": { "api": "key", "column": "Name", "label": "Element Name" },
+  "identifierColumns": ["Name"],
+  "includeStandardCols": true,
+
+  "_note": "Accounting element (chart of accounts) = C_Element. Its account values are children (C_ElementValue). AD_Tree is NN/required (a tree normally exists from Initial Client Setup). The full chart of accounts is usually created by Initial Client Setup; use this to add/maintain accounts.",
+
+  "fields": [
+    { "api": "key",  "column": "Name", "type": "string", "required": true, "isKey": true, "maxLen": 60 },
+    { "api": "elementType", "column": "ElementType", "type": "list", "required": true,
+      "list": { "Account": "A", "User defined": "U" } },
+    { "api": "isNaturalAccount", "column": "IsNaturalAccount", "type": "boolean", "default": true },
+    { "api": "isBalancing",      "column": "IsBalancing",      "type": "boolean", "default": false },
+    { "api": "vformat",          "column": "VFormat",          "type": "string",  "maxLen": 40, "help": "value format mask" },
+    { "api": "isActive",         "column": "IsActive",         "type": "boolean", "default": true },
+
+    { "api": "tree", "column": "AD_Tree_ID", "type": "ref", "required": true,
+      "ref": { "table": "AD_Tree", "matchOn": "Name", "returns": "AD_Tree_ID" },
+      "help": "the account tree (NN)" }
+  ],
+
+  "children": {
+    "accounts": {
+      "table": "C_ElementValue",
+      "pk": "C_ElementValue_ID",
+      "parentLink": "C_Element_ID",
+      "treeNode": {
+        "nodeTable": "AD_TreeNode_EV",
+        "treeFrom": "tree",
+        "parentField": "parent",
+        "scopeColumn": "C_Element_ID",
+        "parentRef": { "table": "C_ElementValue", "matchOn": "Value", "returns": "C_ElementValue_ID" }
+      },
+      "_treeNodeHelp": "An account is auto-added to the element's tree at the root. To nest it, send 'parent' = the parent account's Value (code) in the same element; its tree node is then moved under that parent.",
+      "fields": [
+        { "api": "value", "column": "Value", "type": "string", "required": true, "maxLen": 40, "help": "account number/code" },
+        { "api": "name",  "column": "Name",  "type": "string", "required": true, "maxLen": 60 },
+        { "api": "accountType", "column": "AccountType", "type": "list", "required": true,
+          "list": { "Asset": "A", "Expense": "E", "Liability": "L", "Owner's Equity": "O", "Revenue": "R", "Memo": "M" } },
+        { "api": "accountSign", "column": "AccountSign", "type": "list",
+          "list": { "Natural": "N", "Debit": "D", "Credit": "C" } },
+        { "api": "isSummary", "column": "IsSummary", "type": "boolean", "default": false },
+        { "api": "accountGroup", "column": "C_AccountGroup_ID", "type": "ref",
+          "ref": { "table": "C_AccountGroup", "matchOn": "Name", "returns": "C_AccountGroup_ID" } }
+      ]
+    }
+  }
+}

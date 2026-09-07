@@ -1,0 +1,30 @@
+{
+  "entity": "AccountingSchema",
+  "table": "C_AcctSchema",
+  "pk": "C_AcctSchema_ID",
+  "key": { "api": "key", "column": "Name", "label": "Accounting Schema Name" },
+  "identifierColumns": ["Name"],
+  "includeStandardCols": true,
+
+  "_note": "CAVEAT: an accounting schema is normally created by Initial Client Setup, which ALSO builds its account elements, default accounts and GL categories. A raw insert here creates only the C_AcctSchema header - it is NOT a usable schema on its own. Provided for completeness / read + header maintenance. Many NN config flags use model defaults.",
+
+  "fields": [
+    { "api": "key",         "column": "Name",        "type": "string",  "required": true, "isKey": true, "maxLen": 60 },
+    { "api": "description", "column": "Description",  "type": "string",  "maxLen": 255 },
+    { "api": "isActive",    "column": "IsActive",     "type": "boolean", "default": true },
+
+    { "api": "autoPeriodControl", "column": "AutoPeriodControl", "type": "boolean", "default": true },
+    { "api": "isAccrual",         "column": "IsAccrual",         "type": "boolean", "default": true },
+
+    { "api": "costingMethod", "column": "CostingMethod", "type": "list",
+      "list": { "Standard Costing": "S", "Average PO": "A", "Average Invoice": "I", "Fifo": "F", "Lifo": "L",
+                "Weighted Average Cost": "W", "Last Invoice": "i", "Last PO Price": "p" } },
+    { "api": "costingLevel", "column": "CostingLevel", "type": "list",
+      "list": { "Client": "C", "Organization": "O", "Warehouse": "W", "Batch/Lot": "B" } },
+    { "api": "gaap", "column": "GAAP", "type": "list",
+      "list": { "International GAAP": "UN", "German HGB": "DE", "French Accounting Standard": "FR" } },
+
+    { "api": "currency", "column": "C_Currency_ID", "type": "ref", "required": true,
+      "ref": { "table": "C_Currency", "matchOn": "ISO_Code", "returns": "C_Currency_ID" } }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "entity": "Role",
+  "table": "AD_Role",
+  "pk": "AD_Role_ID",
+  "key": { "api": "key", "column": "Name", "label": "Role Name" },
+  "identifierColumns": ["Name"],
+  "includeStandardCols": true,
+
+  "_note": "Security role = AD_Role (no Value; keyed by Name). NOTE: a raw insert creates the role row only - window/tab/process access, org access and user assignment are separate records (normally set up in the role window or by Initial Client Setup).",
+
+  "fields": [
+    { "api": "key",              "column": "Name",              "type": "string",  "required": true, "isKey": true, "maxLen": 60 },
+    { "api": "userLevel",        "column": "UserLevel",         "type": "string",  "maxLen": 4, "help": "level mask, e.g. ' CO' (model defaults if omitted)" },
+    { "api": "isAccessAllOrgs",  "column": "IsAccessAllOrgs",   "type": "boolean", "default": false },
+    { "api": "isAdministrator",  "column": "IsAdministrator",   "type": "boolean", "default": false },
+    { "api": "isCanExport",      "column": "IsCanExport",       "type": "boolean", "default": true },
+    { "api": "isCanReport",      "column": "IsCanReport",       "type": "boolean", "default": true },
+    { "api": "isCanApproveOwnDoc","column": "IsCanApproveOwnDoc","type": "boolean", "default": true },
+    { "api": "confirmQueryRecords","column": "ConfirmQueryRecords","type": "number", "default": 0 },
+    { "api": "isActive",         "column": "IsActive",          "type": "boolean", "default": true }
+  ]
+}

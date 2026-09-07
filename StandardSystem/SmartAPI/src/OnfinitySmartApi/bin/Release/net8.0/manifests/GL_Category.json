@@ -1,0 +1,19 @@
+{
+  "entity": "GLCategory",
+  "table": "GL_Category",
+  "pk": "GL_Category_ID",
+  "key": { "api": "key", "column": "Name", "label": "Posting Category Name" },
+  "identifierColumns": ["Name"],
+  "includeStandardCols": true,
+
+  "_note": "GL posting category = GL_Category (no Value; keyed by Name; what DocType 'glCategory' resolves).",
+
+  "fields": [
+    { "api": "key",       "column": "Name", "type": "string",  "required": true, "isKey": true, "maxLen": 60 },
+    { "api": "isDefault", "column": "IsDefault", "type": "boolean", "default": false },
+    { "api": "isActive",  "column": "IsActive", "type": "boolean", "default": true },
+
+    { "api": "categoryType", "column": "CategoryType", "type": "list", "required": true,
+      "list": { "Document": "D", "Manual": "M", "Imported": "I", "Greeting": "G" } }
+  ]
+}

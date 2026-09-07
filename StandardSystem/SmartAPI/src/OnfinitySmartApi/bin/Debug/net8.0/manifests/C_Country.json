@@ -1,0 +1,33 @@
+{
+  "entity": "Country",
+  "table": "C_Country",
+  "pk": "C_Country_ID",
+  "key": { "api": "key", "column": "CountryCode", "label": "ISO Country Code" },
+  "identifierColumns": ["CountryCode", "Name"],
+  "includeStandardCols": true,
+
+  "_note": "Country = C_Country (keyed by the ISO 2-letter code; what 'country' refs resolve). Usually system/shared data. Regions are children (C_Region).",
+
+  "fields": [
+    { "api": "key",         "column": "CountryCode", "type": "string",  "required": true, "isKey": true, "maxLen": 2, "help": "ISO alpha-2, e.g. DE" },
+    { "api": "name",        "column": "Name",        "type": "string",  "required": true, "maxLen": 60 },
+    { "api": "regionName",  "column": "RegionName",  "type": "string",  "maxLen": 60, "help": "label for 'region', e.g. 'State'" },
+    { "api": "isSummary",   "column": "IsSummary",   "type": "boolean", "default": false },
+    { "api": "isActive",    "column": "IsActive",    "type": "boolean", "default": true },
+
+    { "api": "salesRegion", "column": "C_SalesRegion_ID", "type": "ref",
+      "ref": { "table": "C_SalesRegion", "matchOn": "Value", "returns": "C_SalesRegion_ID" } }
+  ],
+
+  "children": {
+    "regions": {
+      "table": "C_Region",
+      "pk": "C_Region_ID",
+      "parentLink": "C_Country_ID",
+      "fields": [
+        { "api": "name",      "column": "Name",      "type": "string",  "required": true, "maxLen": 60 },
+        { "api": "isDefault", "column": "IsDefault", "type": "boolean", "default": false }
+      ]
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "entity": "GradeRate",
+  "table": "VA058_GradeRate",
+  "pk": "VA058_GradeRate_ID",
+  "key": { "api": "key", "column": "Value", "label": "Search Key" },
+  "includeStandardCols": true,
+  "_note": "HR grade rate (VA058). Grade-rate values (min/mid/max per grade) are children.",
+  "fields": [
+    { "api": "key", "column": "Value", "type": "string", "required": true, "isKey": true, "maxLen": 100 },
+    { "api": "name", "column": "Name", "type": "string", "required": true, "maxLen": 100 },
+    { "api": "isActive", "column": "IsActive", "type": "boolean", "default": true }
+  ],
+  "children": {
+    "gradeValues": {
+      "table": "VA058_GradeRtValue",
+      "pk": "VA058_GradeRtValue_ID",
+      "parentLink": "VA058_GradeRate_ID",
+      "fields": [
+        { "api": "grade", "column": "VA058_Grade_ID", "type": "ref", "required": true,
+          "ref": { "table": "VA058_Grade", "matchOn": "Value", "returns": "VA058_Grade_ID" } },
+        { "api": "minimum", "column": "VA058_Minimum", "type": "number", "required": true },
+        { "api": "midValue", "column": "VA058_MidValue", "type": "number", "required": true },
+        { "api": "maximum", "column": "VA058_Maximum", "type": "number", "required": true },
+        { "api": "userVal", "column": "VA058_UserVal", "type": "number" }
+      ]
+    }
+  }
+}

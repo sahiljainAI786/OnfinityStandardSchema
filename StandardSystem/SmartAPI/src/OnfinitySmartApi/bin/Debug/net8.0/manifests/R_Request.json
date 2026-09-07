@@ -1,0 +1,53 @@
+{
+  "entity": "Request",
+  "table": "R_Request",
+  "pk": "R_Request_ID",
+  "key": { "api": "key", "column": "DocumentNo", "label": "External reference (Document No)" },
+  "identifierColumns": ["DocumentNo"],
+  "includeStandardCols": true,
+
+  "_note": "CRM request / case / ticket (R_Request). Keyed by DocumentNo (caller's external reference). Summary + requestType are NN/required. Other NN columns (ConfidentialType, DueType, RequestAmt, Priority, Processed flags) are left to the Onfinity model defaults. requestType/status/category/source resolve by Name; businessPartner/campaign by Value.",
+
+  "fields": [
+    { "api": "key",     "column": "DocumentNo", "type": "string", "required": true, "isKey": true, "maxLen": 30,
+      "help": "your external ticket reference; reused for upsert/dedupe" },
+    { "api": "summary", "column": "Summary", "type": "string", "required": true, "maxLen": 2000, "help": "the request text (NN)" },
+
+    { "api": "requestType", "column": "R_RequestType_ID", "type": "ref", "required": true,
+      "ref": { "table": "R_RequestType", "matchOn": "Name", "returns": "R_RequestType_ID" },
+      "help": "e.g. Request | Question | Issue | Suggestion (NN)" },
+
+    { "api": "priority", "column": "Priority", "type": "list",
+      "list": { "Urgent": "1", "High": "3", "Medium": "5", "Low": "7", "Minor": "9" } },
+
+    { "api": "requestAmt", "column": "RequestAmt", "type": "number", "default": 0 },
+    { "api": "comment",    "column": "Help",       "type": "string", "maxLen": 2000 },
+
+    { "api": "status", "column": "R_Status_ID", "type": "ref",
+      "ref": { "table": "R_Status", "matchOn": "Name", "returns": "R_Status_ID" } },
+    { "api": "category", "column": "R_Category_ID", "type": "ref",
+      "ref": { "table": "R_Category", "matchOn": "Name", "returns": "R_Category_ID" } },
+    { "api": "source", "column": "R_Source_ID", "type": "ref",
+      "ref": { "table": "R_Source", "matchOn": "Name", "returns": "R_Source_ID" } },
+    { "api": "businessPartner", "column": "C_BPartner_ID", "type": "ref",
+      "ref": { "table": "C_BPartner", "matchOn": "Value", "returns": "C_BPartner_ID" } },
+    { "api": "campaign", "column": "C_Campaign_ID", "type": "ref",
+      "ref": { "table": "C_Campaign", "matchOn": "Value", "returns": "C_Campaign_ID" } }
+  ],
+
+  "children": {
+    "updates": {
+      "table": "R_RequestUpdate",
+      "pk": "R_RequestUpdate_ID",
+      "parentLink": "R_Request_ID",
+      "fields": [
+        { "api": "result", "column": "Result", "type": "string", "required": true, "maxLen": 2000,
+          "help": "the note / update / reply text on the ticket" },
+        { "api": "confidentiality", "column": "ConfidentialTypeEntry", "type": "list",
+          "list": { "Public": "A", "Partner Confidential": "C", "Internal": "I" } },
+        { "api": "startTime", "column": "StartTime", "type": "string", "help": "ISO datetime" },
+        { "api": "endTime",   "column": "EndTime",   "type": "string", "help": "ISO datetime" }
+      ]
+    }
+  }
+}

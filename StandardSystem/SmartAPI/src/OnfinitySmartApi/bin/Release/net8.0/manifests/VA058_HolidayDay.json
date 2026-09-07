@@ -1,0 +1,29 @@
+{
+  "entity": "HolidayDay",
+  "table": "VA058_HolidayDay",
+  "pk": "VA058_HolidayDay_ID",
+  "key": { "api": "key", "column": "Name", "label": "Holiday Name" },
+  "keyScope": ["calendar"],
+  "includeStandardCols": true,
+  "_note": "HR holiday day (VA058). Belongs to a holiday calendar (pass 'calendar'); per-region overrides are children.",
+  "fields": [
+    { "api": "key", "column": "Name", "type": "string", "required": true, "isKey": true, "maxLen": 80 },
+    { "api": "calendar", "column": "VA058_HolidayCalndr_ID", "type": "ref", "required": true,
+      "ref": { "table": "VA058_HolidayCalndr", "matchOn": "VA058_HolidayCalendarName", "returns": "VA058_HolidayCalndr_ID" } },
+    { "api": "date", "column": "Date1", "type": "string", "help": "ISO date" },
+    { "api": "hours", "column": "VA058_HolidayHrs", "type": "number" },
+    { "api": "hasRegion", "column": "VA058_HasRegion", "type": "boolean", "default": false },
+    { "api": "isActive", "column": "IsActive", "type": "boolean", "default": true }
+  ],
+  "children": {
+    "regions": {
+      "table": "VA058_HolidayCalndrRegion",
+      "pk": "VA058_HolidayCalndrRegion_ID",
+      "parentLink": "VA058_HolidayDay_ID",
+      "fields": [
+        { "api": "country", "column": "C_Country_ID", "type": "ref",
+          "ref": { "table": "C_Country", "matchOn": "CountryCode", "returns": "C_Country_ID" } }
+      ]
+    }
+  }
+}

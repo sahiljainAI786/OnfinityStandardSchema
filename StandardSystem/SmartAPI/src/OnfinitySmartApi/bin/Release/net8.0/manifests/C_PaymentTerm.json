@@ -1,0 +1,23 @@
+{
+  "entity": "PaymentTerm",
+  "table": "C_PaymentTerm",
+  "pk": "C_PaymentTerm_ID",
+  "key": { "api": "key", "column": "Value", "label": "Search Key" },
+  "identifierColumns": ["Value", "Name"],
+  "includeStandardCols": true,
+
+  "_note": "Payment term = C_PaymentTerm (keyed by Value; this is what 'paymentTerm' refs resolve). NN discount/grace day fields default to 0.",
+
+  "fields": [
+    { "api": "key",          "column": "Value",        "type": "string",  "required": true, "isKey": true, "maxLen": 40 },
+    { "api": "name",         "column": "Name",         "type": "string",  "required": true, "maxLen": 60 },
+    { "api": "netDays",      "column": "NetDays",      "type": "number",  "default": 0, "help": "days until due" },
+    { "api": "discount",     "column": "Discount",     "type": "number",  "default": 0 },
+    { "api": "discountDays", "column": "DiscountDays", "type": "number",  "default": 0 },
+    { "api": "graceDays",    "column": "GraceDays",    "type": "number",  "default": 0 },
+    { "api": "afterDelivery","column": "AfterDelivery","type": "boolean", "default": false },
+    { "api": "isDueFixed",   "column": "IsDueFixed",   "type": "boolean", "default": false },
+    { "api": "isDefault",    "column": "IsDefault",    "type": "boolean", "default": false },
+    { "api": "isActive",     "column": "IsActive",     "type": "boolean", "default": true }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "entity": "Campaign",
+  "table": "C_Campaign",
+  "pk": "C_Campaign_ID",
+  "key": { "api": "key", "column": "Value", "label": "Search Key" },
+  "identifierColumns": ["Value", "Name"],
+  "includeStandardCols": true,
+
+  "_note": "CRM marketing campaign (C_Campaign). Costs is NN -> defaulted to 0. Dates are ISO strings (YYYY-MM-DD). Channel/CampaignType resolved by Name (verify per install).",
+
+  "fields": [
+    { "api": "key",         "column": "Value",       "type": "string",  "required": true, "isKey": true, "maxLen": 40 },
+    { "api": "name",        "column": "Name",        "type": "string",  "required": true, "maxLen": 60 },
+    { "api": "description", "column": "Description", "type": "string",  "maxLen": 255 },
+    { "api": "isActive",    "column": "IsActive",    "type": "boolean", "default": true },
+    { "api": "costs",       "column": "Costs",       "type": "number",  "default": 0, "help": "campaign cost (NN)" },
+
+    { "api": "startDate",   "column": "StartDate",   "type": "string", "help": "ISO date YYYY-MM-DD" },
+    { "api": "endDate",     "column": "EndDate",     "type": "string", "help": "ISO date YYYY-MM-DD" },
+
+    { "api": "expectedRevenue",   "column": "ExpectedRevenue",   "type": "number" },
+    { "api": "expectedLeads",     "column": "ExpectedLeads",     "type": "number" },
+    { "api": "expectedCustomers", "column": "ExpectedCustomers", "type": "number" },
+    { "api": "actualRevenue",     "column": "ActualRevenue",     "type": "number" },
+    { "api": "actualLeads",       "column": "ActualLeads",       "type": "number" },
+
+    { "api": "channel", "column": "C_Channel_ID", "type": "ref",
+      "ref": { "table": "C_Channel", "matchOn": "Name", "returns": "C_Channel_ID" } },
+    { "api": "campaignType", "column": "C_CampaignType_ID", "type": "ref",
+      "ref": { "table": "C_CampaignType", "matchOn": "Name", "returns": "C_CampaignType_ID" } }
+  ]
+}

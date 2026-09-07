@@ -1,0 +1,25 @@
+{
+  "entity": "Tree",
+  "table": "AD_Tree",
+  "pk": "AD_Tree_ID",
+  "key": { "api": "key", "column": "Name", "label": "Tree Name" },
+  "identifierColumns": ["Name"],
+  "includeStandardCols": true,
+
+  "_note": "Hierarchy tree = AD_Tree (keyed by Name; what Element 'tree' resolves). treeType picks the area (EV = account/element-value tree for the chart of accounts). 'table' is the underlying table for the tree's nodes. NOTE: records of tree-supported tables (C_ElementValue, AD_Org, M_Product, C_BP_Group, C_Activity, C_Campaign, C_SalesRegion) are AUTOMATICALLY added as nodes to their tree by the model on insert - so creating an account (Element.accounts) attaches it to the element's tree with no extra step. Placing a node under a specific parent in the hierarchy is a separate tree-node operation.",
+
+  "fields": [
+    { "api": "key",  "column": "Name", "type": "string", "required": true, "isKey": true, "maxLen": 60 },
+    { "api": "treeType", "column": "TreeType", "type": "list", "required": true,
+      "list": { "Element Value": "EV", "Organization": "OO", "BPartner": "BP", "Product": "PR",
+                "Campaign": "MC", "Activity": "AY", "Sales Region": "SR", "Project": "PJ",
+                "Menu": "MM", "User 1": "U1", "User 2": "U2", "Other": "XX" } },
+    { "api": "isAllNodes", "column": "IsAllNodes", "type": "boolean", "default": false, "help": "all records must be in the tree" },
+    { "api": "isDefault",  "column": "IsDefault",  "type": "boolean", "default": false },
+    { "api": "isActive",   "column": "IsActive",   "type": "boolean", "default": true },
+
+    { "api": "table", "column": "AD_Table_ID", "type": "ref", "required": true,
+      "ref": { "table": "AD_Table", "matchOn": "TableName", "returns": "AD_Table_ID" },
+      "help": "node table, e.g. C_ElementValue for an account tree" }
+  ]
+}
